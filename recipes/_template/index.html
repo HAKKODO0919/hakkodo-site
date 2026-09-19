@@ -1,0 +1,39 @@
+<!-- ============================================================
+     レシピ詳細ページのひな形です。このファイル自体はどこからも
+     リンクされておらず、公開されません。
+
+     新しいレシピを追加するときは、このフォルダごとコピーして
+     recipes/レシピ名/ という名前に変え、下の2箇所を書き換えます。
+     1. <script src="../../data/recipes/_template.js"> のファイル名
+     2. recipes/index.html の initRecipeList([...]) に1行追加する
+     ============================================================ -->
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>レシピ</title>
+<link rel="stylesheet" href="../../assets/style.css">
+</head>
+<body>
+  <div id="global-nav-root"></div>
+  <header class="site-header">
+    <a href="../index.html" class="recipe-btn" data-i18n="recipeBackLink">← レシピ一覧にもどる</a>
+    <div id="lang-switcher-root" class="lang-switcher"></div>
+  </header>
+
+  <main class="page">
+    <div id="recipe-root">...</div>
+  </main>
+
+  <script src="../../data/recipes/_template.js"></script>
+  <script src="../../assets/i18n.js"></script>
+  <script src="../../assets/product.js"></script>
+  <script src="../../assets/recipe.js"></script>
+  <script src="../../assets/nav.js"></script>
+  <script>
+    renderGlobalNav(document.getElementById("global-nav-root"), "../../", "recipes");
+    initRecipePage(window.RECIPE_DATA, "../../");
+  </script>
+</body>
+</html>

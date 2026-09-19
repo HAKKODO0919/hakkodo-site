@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>レシピ</title>
+<link rel="stylesheet" href="../../assets/style.css">
+</head>
+<body>
+  <div id="global-nav-root"></div>
+  <header class="site-header">
+    <a href="../index.html" class="recipe-btn" data-i18n="recipeBackLink">← レシピ一覧にもどる</a>
+    <div id="lang-switcher-root" class="lang-switcher"></div>
+  </header>
+
+  <main class="page">
+    <div id="recipe-root">...</div>
+  </main>
+
+  <script src="../../data/recipes/miso-dressing.js"></script>
+  <script src="../../assets/i18n.js"></script>
+  <script src="../../assets/product.js"></script>
+  <script src="../../assets/recipe.js"></script>
+  <script src="../../assets/nav.js"></script>
+  <script>
+    renderGlobalNav(document.getElementById("global-nav-root"), "../../", "recipes");
+    initRecipePage(window.RECIPE_DATA, "../../");
+  </script>
+</body>
+</html>

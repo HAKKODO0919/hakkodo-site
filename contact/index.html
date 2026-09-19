@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>お問い合わせ</title>
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+  <div id="global-nav-root"></div>
+  <header class="site-header">
+    <a href="../index.html" class="recipe-btn" data-i18n="homeLink">← トップにもどる</a>
+    <div id="lang-switcher-root" class="lang-switcher"></div>
+  </header>
+
+  <main class="page">
+    <div class="intro" style="padding-top: 100px;">
+      <p data-i18n="contactIntro"></p>
+    </div>
+
+    <div class="creator-brand" style="margin-top: 0;">
+      <p class="creator-brand-email"><a href="mailto:hakkodo.arigato@gmail.com">✉ hakkodo.arigato@gmail.com</a></p>
+    </div>
+  </main>
+
+  <script src="../assets/i18n.js"></script>
+  <script src="../assets/product.js"></script>
+  <script src="../assets/nav.js"></script>
+  <script>
+    function render() {
+      const lang = getCurrentLang();
+      applyUiStrings(lang);
+      document.title = t("contactTitle", lang);
+    }
+    renderGlobalNav(document.getElementById("global-nav-root"), "../", "contact");
+    renderLangSwitcher(document.getElementById("lang-switcher-root"), render);
+    render();
+  </script>
+</body>
+</html>

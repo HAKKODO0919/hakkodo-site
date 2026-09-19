@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>商品一覧</title>
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+  <div id="global-nav-root"></div>
+  <header class="site-header lang-only">
+    <div id="lang-switcher-root" class="lang-switcher"></div>
+  </header>
+
+  <main class="page">
+    <div id="product-list-root" class="card-list">...</div>
+  </main>
+
+  <script src="../data/aka-miso.js"></script>
+  <script>window.PRODUCT_AKA_MISO = window.PRODUCT_DATA;</script>
+  <script src="../assets/i18n.js"></script>
+  <script src="../assets/product.js"></script>
+  <script src="../assets/nav.js"></script>
+  <script>
+    renderGlobalNav(document.getElementById("global-nav-root"), "../", "products");
+    // 商品を1件追加したら、ここに
+    // { href: "商品名/index.html", data: window.PRODUCT_DATA相当 }
+    // の形で1行増やしていきます。
+    initProductList([
+      { href: "aka-miso/index.html", data: window.PRODUCT_AKA_MISO }
+    ], "../");
+  </script>
+</body>
+</html>

@@ -1,0 +1,1293 @@
+/* ========================================================
+   共通デザイン(全ページで読み込みます)
+   ここを編集すると全ページの見た目が一括で変わります。
+   商品ごとの文章・写真はこのファイルではなく
+   data/aka-miso.js のようなファイルを編集してください。
+   ======================================================== */
+
+:root {
+  --color-bg: #faf9f6;
+  --color-surface: #ffffff;
+  --color-text: #2b2b2b;
+  --color-muted: #6b6b6b;
+  --color-accent: #b5651d;
+  --color-border: #e7e2da;
+  --radius: 14px;
+  --max-width: 640px;
+  /* トップページの試作デザイン専用。深いブラウン系の見出し色
+     (既存の --color-accent や --color-text は他ページで使用中のため変更しない)。 */
+  --color-heading: #2b2320;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: "Hiragino Sans", "Yu Gothic", "Noto Sans JP", system-ui, -apple-system, sans-serif;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+.page {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 0 48px;
+}
+
+/* ---- サイト全体の共通ナビゲーション ---- */
+#global-nav-root {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px 16px;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 14px 20px 10px;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.global-nav-brand {
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: 0.06em;
+  color: var(--color-text);
+  text-decoration: none;
+}
+
+.global-nav-brand:visited {
+  color: var(--color-text);
+}
+
+.global-nav-brand:hover,
+.global-nav-brand:focus-visible,
+.global-nav-brand.active {
+  color: var(--color-accent);
+}
+
+.global-nav-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.global-nav-link {
+  display: inline-block;
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  color: var(--color-muted);
+  text-decoration: none;
+  transition: color 0.15s ease, background-color 0.15s ease;
+}
+
+.global-nav-link:visited {
+  color: var(--color-muted);
+}
+
+.global-nav-link:hover,
+.global-nav-link:focus-visible {
+  color: var(--color-accent);
+  background: var(--color-bg);
+}
+
+.global-nav-link.active {
+  color: var(--color-accent);
+  font-weight: 700;
+}
+
+/* トップページのセクション導線(.recipe-btn を縦に並べるだけ) */
+.home-nav {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 20px 40px;
+}
+
+/* ---- ヘッダー ---- */
+.site-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 16px 20px 12px;
+}
+
+.site-header.lang-only {
+  justify-content: flex-end;
+}
+
+.site-header a,
+.pill-link {
+  display: inline-flex;
+  align-items: center;
+  color: var(--color-text);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.85rem;
+  letter-spacing: 0.02em;
+  padding: 6px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  transition: border-color 0.15s ease, color 0.15s ease;
+}
+
+/* 訪問済みリンクでもブラウザ既定の紫色にならないよう、文字色を固定する */
+.site-header a:visited,
+.pill-link:visited {
+  color: var(--color-text);
+}
+
+.site-header a:hover,
+.site-header a:focus-visible,
+.pill-link:hover,
+.pill-link:focus-visible {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+}
+
+/* 熟成生味噌ページの「商品一覧にもどる」だけ、同じページ内の
+   「レシピを見る」(.recipe-btn)と見た目を完全にそろえる。
+   他ページの「戻る」リンクには影響しない。 */
+.site-header a.recipe-btn {
+  font-weight: 500;
+  font-size: 0.9rem;
+  letter-spacing: normal;
+}
+
+.lang-switcher {
+  flex: none;
+}
+
+.lang-select {
+  font-family: inherit;
+  font-size: 0.85rem;
+  padding: 6px 12px;
+  border-radius: 999px;
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  color: var(--color-text);
+}
+
+/* ---- 言語切り替え(旗 + 言語名 + ▼) ---- */
+.lang-switcher-dropdown {
+  position: relative;
+}
+
+.lang-current {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: inherit;
+  font-size: 0.85rem;
+  padding: 6px 12px;
+  border-radius: 999px;
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  color: var(--color-text);
+  cursor: pointer;
+}
+
+.lang-flag {
+  flex: none;
+  width: 18px;
+  height: 13px;
+  border-radius: 2px;
+  display: block;
+}
+
+.lang-flag-emoji {
+  width: auto;
+  height: auto;
+  font-size: 1rem;
+  line-height: 1;
+}
+
+.lang-caret {
+  font-size: 0.6rem;
+  color: var(--color-muted);
+}
+
+.lang-options {
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  z-index: 20;
+  margin: 0;
+  padding: 6px;
+  list-style: none;
+  min-width: 170px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+.lang-options[hidden] {
+  display: none;
+}
+
+.lang-option-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: inherit;
+  font-size: 0.9rem;
+  padding: 9px 10px;
+  border: none;
+  background: none;
+  color: var(--color-text);
+  border-radius: 8px;
+  cursor: pointer;
+  text-align: left;
+}
+
+.lang-option-btn:hover,
+.lang-option-btn:focus-visible {
+  background: var(--color-bg);
+}
+
+/* ---- ヒーロー(メイン写真) ---- */
+.hero {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: #eee;
+  overflow: hidden;
+  border-radius: 0;
+}
+
+.hero img,
+.hero .placeholder {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 75%;
+  display: block;
+}
+
+/* レシピ詳細ページの写真。商品ページのheroより控えめな高さに固定し、
+   スマートフォンで写真が画面を占領しすぎないようにする。 */
+.recipe-hero {
+  width: 100%;
+  height: 220px;
+  background: #eee;
+  overflow: hidden;
+}
+
+.recipe-hero img,
+.recipe-hero .placeholder {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-muted);
+  background: repeating-linear-gradient(
+    45deg,
+    #eeeae2,
+    #eeeae2 12px,
+    #e6e1d6 12px,
+    #e6e1d6 24px
+  );
+  font-size: 0.9rem;
+  text-align: center;
+  padding: 12px;
+}
+
+/* ---- 商品タイトル部分 ---- */
+.product-head {
+  padding: 20px 20px 8px;
+}
+
+.product-head h1 {
+  margin: 0 0 6px;
+  font-size: 1.6rem;
+}
+
+.tagline {
+  color: var(--color-muted);
+  margin: 0;
+  font-size: 1rem;
+}
+
+.price-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.price {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 999px;
+  background: var(--color-accent);
+  color: #fff;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.net-weight {
+  font-size: 0.85rem;
+  color: var(--color-muted);
+}
+
+/* 「レシピを見る」の配置(商品詳細ページでは中央揃え、上下の余白)。
+   ボタン自体の見た目は .recipe-btn に切り出し、「原材料」タグと統一する。 */
+.recipe-link {
+  margin: 14px 0 0;
+  text-align: center;
+}
+
+/* 「原材料」のタグ(.tag-list li)と同じ見た目のボタン。
+   商品一覧の「レシピを見る」・商品詳細の「レシピを見る」で共通利用する。 */
+.recipe-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  color: var(--color-text);
+  font-size: 0.9rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: border-color 0.15s ease, color 0.15s ease;
+}
+
+/* 訪問済みリンクでもブラウザ既定の紫色にならないよう、文字色を固定する */
+.recipe-btn:visited {
+  color: var(--color-text);
+}
+
+.recipe-btn:hover,
+.recipe-btn:focus-visible {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+}
+
+/* ---- セクション共通 ---- */
+.section {
+  padding: 20px;
+  border-top: 1px solid var(--color-border);
+}
+
+.section h2 {
+  font-size: 1.05rem;
+  margin: 0 0 12px;
+  color: var(--color-accent);
+}
+
+/* 「こだわり」の締め→写真、写真→原材料 の間は、線ではなく余白で区切る */
+.gallery-section,
+.ingredients-section {
+  border-top: none;
+  padding-top: 36px;
+}
+
+.description p {
+  margin: 0 0 1em;
+  white-space: pre-line;
+}
+
+.tag-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tag-list li {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  padding: 6px 14px;
+  font-size: 0.9rem;
+}
+
+/* レシピ一覧の「目次」。存在するカテゴリーだけがピルとして並ぶ。 */
+.recipe-toc {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 4px 20px 20px;
+}
+
+.recipe-toc a {
+  display: inline-block;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  padding: 6px 14px;
+  font-size: 0.9rem;
+  color: var(--color-text);
+  text-decoration: none;
+}
+
+.recipe-toc a:hover,
+.recipe-toc a:focus-visible {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+}
+
+.notes {
+  font-size: 0.9rem;
+  color: var(--color-muted);
+}
+
+.notes-strong {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--color-text);
+  margin: 0 0 0.6em;
+}
+
+/* 「賞味期限」セクションだけの調整: 太字部分を少し大きく、文章間の余白をなくす */
+.best-before .notes-strong {
+  font-size: 1.1rem;
+  margin: 0;
+}
+
+.best-before .notes {
+  margin: 0;
+  white-space: pre-line;
+}
+
+/* 「保存方法」セクションだけの調整: 太字の文字サイズを他の太字にそろえ、行間を詰める */
+.storage-info .notes-strong {
+  font-size: 1.05rem;
+  margin: 0;
+}
+
+.storage-info .notes-strong + .notes {
+  margin-top: 0.8em;
+}
+
+.allergens {
+  font-size: 0.95rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+/* ---- こだわり(ストーリー)セクション ---- */
+.story-section {
+  padding-bottom: 8px;
+}
+
+.story-block {
+  margin-bottom: 32px;
+}
+
+.story-block:last-of-type {
+  margin-bottom: 24px;
+}
+
+.story-block h3 {
+  color: var(--color-accent);
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin: 0 0 10px;
+}
+
+.story-block p {
+  margin: 0 0 0.6em;
+}
+
+.story-block p:not(.story-emphasis) {
+  color: var(--color-muted);
+  font-size: 0.9rem;
+}
+
+.story-block p:last-child {
+  margin-bottom: 0;
+}
+
+.story-emphasis {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.story-closing {
+  margin: 28px 0 0;
+  padding: 24px 20px;
+  background: #f4eee1;
+  border-radius: 6px;
+  text-align: center;
+}
+
+.story-closing-main {
+  margin: 0 0 6px;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--color-accent);
+  line-height: 1.6;
+  /* 日本語の短い文章を想定してnowrapにしていたが、Català/Español/English
+     など長い翻訳文だと画面幅からはみ出すため、自然な折り返しに変更する。 */
+  white-space: normal;
+}
+
+.story-closing-sub {
+  margin: 0;
+  font-size: 0.9rem;
+  font-weight: 400;
+  color: var(--color-muted);
+  line-height: 1.6;
+}
+
+/* ---- 作り手について(賞味期限から十分な余白を空けたうえで、
+   独立したプロフィールカードとして表示する) ---- */
+.creator-outer {
+  padding-top: 80px;
+  border-top: none;
+}
+
+.creator-card {
+  background: var(--color-surface);
+  border-radius: var(--radius);
+  box-shadow: 0 2px 14px rgba(0, 0, 0, 0.06);
+  padding: 28px 22px;
+}
+
+/* 「作り手について」ページ単体に .creator-card を置くときの余白
+   (商品ページの .creator-outer のような80pxの区切り用余白は不要なため) */
+.about-creator {
+  padding: 64px 20px 60px;
+}
+
+/* 商品ページの .section h2 と同じ見出しの見た目(オレンジ色)を
+   このページの見出しにもそろえる(.section クラス自体は使わないため) */
+.about-creator h2 {
+  font-size: 1.05rem;
+  margin: 0 0 12px;
+  color: var(--color-accent);
+}
+
+.creator-bio::after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+.creator-avatar {
+  float: left;
+  width: 64px;
+  height: 64px;
+  margin: 0 14px 8px 0;
+  border-radius: 50%;
+  overflow: hidden;
+  background: #eee;
+}
+
+.creator-avatar img,
+.creator-avatar .placeholder {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.creator-avatar .placeholder {
+  font-size: 0.55rem;
+  border-radius: 50%;
+}
+
+.creator-bio p {
+  margin: 0;
+}
+
+.creator-bio p:not(.creator-emphasis) {
+  font-size: 0.9rem;
+  color: var(--color-muted);
+}
+
+.creator-emphasis + p {
+  margin-top: 0.8em;
+}
+
+.creator-bio p:not(.creator-emphasis) + p {
+  margin-top: 0.3em;
+}
+
+.creator-emphasis {
+  font-weight: 700;
+}
+
+.creator-brand {
+  clear: both;
+  margin-top: 32px;
+  text-align: center;
+}
+
+.creator-brand-logo {
+  height: 20px;
+  width: auto;
+  margin: 0 0 10px;
+}
+
+.creator-brand-tagline {
+  margin: 0 0 4px;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+
+.creator-brand-email {
+  margin: 0;
+  font-size: 0.8rem;
+  color: var(--color-muted);
+}
+
+.creator-brand-email a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.creator-brand-email a:visited {
+  color: inherit;
+}
+
+.creator-brand-email a:hover,
+.creator-brand-email a:focus-visible {
+  color: var(--color-accent);
+}
+
+/* ---- ギャラリー ---- */
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+.gallery .thumb {
+  aspect-ratio: 1 / 1;
+  border-radius: 10px;
+  overflow: hidden;
+  background: #eee;
+}
+
+.gallery .thumb img,
+.gallery .thumb .placeholder {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.gallery .thumb .placeholder {
+  font-size: 0.65rem;
+  border-radius: 10px;
+}
+
+/* ---- フッター ---- */
+.updated {
+  padding: 16px 20px 0;
+  font-size: 0.8rem;
+  color: var(--color-muted);
+  text-align: right;
+}
+
+.site-footer {
+  text-align: center;
+  padding: 32px 20px 12px;
+  font-size: 0.8rem;
+  color: var(--color-muted);
+}
+
+.site-footer a {
+  color: var(--color-muted);
+}
+
+/* ---- トップページのカード一覧 ---- */
+.card-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 8px 20px 20px;
+}
+
+.card {
+  display: flex;
+  /* 画像の縦横サイズ・位置は言語に関わらず固定のまま、テキストの行数が
+     言語によって変わっても画像とテキストの上下バランスが崩れないよう、
+     画像をテキストの高さに対して中央ぞろえにする。 */
+  align-items: center;
+  gap: 14px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 12px;
+  text-decoration: none;
+  color: inherit;
+}
+
+.card .thumb {
+  width: 84px;
+  height: 84px;
+  flex: none;
+  border-radius: 10px;
+  overflow: hidden;
+  background: #eee;
+}
+
+.card .thumb img,
+.card .thumb .placeholder {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  font-size: 0.6rem;
+}
+
+.card .card-body h2 {
+  margin: 0 0 4px;
+  font-size: 1.1rem;
+}
+
+.card .card-body p {
+  margin: 0;
+  color: var(--color-muted);
+  font-size: 0.9rem;
+}
+
+/* ---- レシピ一覧カードの見た目調整 ----
+   .card / .thumb / .card-body は商品一覧と共通のクラスなので、
+   ここでは .recipe-card / .recipe-category を付けた要素だけに絞って
+   温かみのある色・広めの余白を追加する(商品一覧の見た目は変更しない)。 */
+.recipe-category {
+  padding: 24px 20px;
+}
+
+.recipe-category h2 {
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.recipe-category .card-list {
+  gap: 20px;
+}
+
+.recipe-card {
+  padding: 14px;
+}
+
+.recipe-card .thumb {
+  width: 96px;
+  height: 96px;
+  border-radius: 12px;
+}
+
+.recipe-card .card-body h2 {
+  color: var(--color-accent);
+}
+
+.intro {
+  padding: 28px 20px 4px;
+  text-align: center;
+}
+
+.intro h1 {
+  margin: 0 0 8px;
+  font-size: 1.4rem;
+}
+
+.intro p {
+  margin: 0;
+  color: var(--color-muted);
+}
+
+/* レシピ一覧のキャッチフレーズ。装飾は加えず、本文より少し
+   はっきりした文字色・太さだけで控えめに目立たせる。 */
+.intro p.recipes-catchphrase {
+  margin: 0 0 6px;
+  color: var(--color-text);
+  font-size: 1.05rem;
+  font-weight: 600;
+}
+
+.load-error {
+  margin: 20px;
+  padding: 16px;
+  border-radius: var(--radius);
+  background: #fdecea;
+  color: #7a2b1f;
+  font-size: 0.9rem;
+}
+
+/* ---- レシピ一覧 ---- */
+.empty-state {
+  margin: 20px;
+  padding: 24px 16px;
+  border-radius: var(--radius);
+  background: var(--color-surface);
+  border: 1px dashed var(--color-border);
+  color: var(--color-muted);
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+/* ---- レシピの手順 ---- */
+.step-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.step {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.step-number {
+  flex: none;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--color-accent);
+  color: #fff;
+  font-size: 0.85rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.step-text {
+  margin: 0;
+  padding-top: 2px;
+  white-space: pre-line;
+}
+
+/* 写真が付いている手順は画像を先に大きく見せるレイアウトになる */
+.step.has-image {
+  flex-direction: column;
+  gap: 8px;
+}
+
+.step.has-image .step-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.step-image {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: #eee;
+}
+
+.step-image img,
+.step-image .placeholder {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* 「作り方」(手順)と「保存期間」を別ブロックとして見せるための
+   薄い区切り線(既存のセクション境界と同じ --color-border を使用)。 */
+.step-list + .notes-strong {
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid var(--color-border);
+}
+
+/* 「保存期間」「ポイント」を見出し+説明文の1グループに見せる調整。
+   見出し→説明文は近く、「保存期間」→「ポイント」は区切り線なしで
+   少し詰めた間隔にし、補足情報として同じまとまりに見せる。 */
+.step-list ~ .notes-strong {
+  margin-bottom: 2px;
+}
+
+.step-list ~ .notes-strong + .notes {
+  margin: 0 0 14px;
+  white-space: pre-line;
+}
+
+/* ---- ワークショップ ---- */
+.workshop-card + .workshop-card {
+  border-top: 1px solid var(--color-border);
+}
+
+.workshop-meta {
+  list-style: none;
+  margin: 12px 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 0.9rem;
+  color: var(--color-muted);
+}
+
+.workshop-meta strong {
+  color: var(--color-text);
+  font-weight: 600;
+}
+
+/* ---- 新着情報 ---- */
+.news-list {
+  list-style: none;
+  margin: 0;
+  padding: 8px 20px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.news-item {
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.news-item:last-child {
+  border-bottom: none;
+}
+
+.news-item h2 {
+  margin: 0 0 6px;
+  font-size: 1.05rem;
+}
+
+.news-item p {
+  margin: 0;
+  color: var(--color-muted);
+  font-size: 0.9rem;
+}
+
+.news-date {
+  margin: 0 0 4px;
+  font-size: 0.8rem;
+  color: var(--color-muted);
+}
+
+/* ---- トップページだけ: ロゴ・ナビ・言語切替を控えめな1つのヘッダーにする ----
+   #global-nav-root / .site-header / .lang-switcher は全ページ共通の部品なので、
+   body.home-page 配下だけを上書きし、他ページの見た目は変えない。 */
+body.home-page #global-nav-root {
+  padding: 16px 20px 8px;
+  border-bottom: none;
+}
+
+body.home-page .global-nav-brand {
+  display: inline-flex;
+  align-items: center;
+}
+
+/* ヘッダーの本来のHAKKODOロゴ(画像)。ブランドとして認識できるが
+   写真の邪魔をしない程度の小さめサイズにする。 */
+.home-header-logo {
+  height: 21px;
+  width: auto;
+  display: block;
+}
+
+body.home-page .global-nav-link {
+  font-size: 0.74rem;
+  letter-spacing: 0.03em;
+  padding: 4px 8px;
+  color: #4d4941;
+}
+
+body.home-page .global-nav-link:hover,
+body.home-page .global-nav-link:focus-visible,
+body.home-page .global-nav-link.active {
+  color: var(--color-heading);
+}
+
+body.home-page .site-header.lang-only {
+  padding: 0 20px 10px;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  border-bottom: 1px solid var(--color-border);
+}
+
+body.home-page .lang-current {
+  padding: 3px 4px;
+  border-color: transparent;
+  background: transparent;
+  font-size: 0.74rem;
+  color: #4d4941;
+}
+
+/* ========================================================
+   トップページ(index.html)デザイン
+   ------------------------------------------------------
+   ここから下のクラスは index.html だけで使用しています。
+   他のページのHTMLにはこれらのクラス名が登場しないため、
+   ここを編集しても他のページの見た目は変わりません。
+
+   方向性: 「高級感のある小さな職人ブランド」だが高級すぎず、
+   手仕事の温かさを残す(高級感6:温かさ4)。
+   「メニューを並べるサイト」ではなく、写真とブランドの世界観を
+   順番に見せる縦長の1本道の構成にする。
+   ヒーロー写真 → ブランド紹介 → 味噌・こだわり → ワークショップ
+   → レシピ → お問い合わせ、の順に大きな余白を取って見せる。
+   ======================================================== */
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Shippori+Mincho:wght@500;700&display=swap');
+
+.home {
+  padding-bottom: 0;
+}
+
+/* ---- 1. ヒーロー写真: 画面の主役として大きく見せる ---- */
+.home-hero {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  background: #eee;
+}
+
+@media (min-width: 640px) {
+  .home-hero {
+    /* 横幅は画面いっぱいに使いつつ、表示高さだけをさらに抑える。
+       object-position(下の.home-hero-img)で、瓶・ラベル・木の台が
+       切れないよう、余白になりやすい上部の背景側を優先的に詰める。 */
+    aspect-ratio: 2.65 / 1;
+  }
+
+  .home-hero-img {
+    object-position: center 63%;
+  }
+}
+
+.home-hero-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 40%;
+  display: block;
+}
+
+/* ---- 2. ブランド紹介 ---- */
+.home-intro {
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 52px 24px 64px;
+  text-align: center;
+}
+
+/* Catalàのキャッチコピーが2行に折り返さないよう、PC表示だけ
+   このセクションの最大幅を少し広げる(文字サイズ・他言語・
+   スマホ表示には影響しない)。 */
+@media (min-width: 640px) {
+  .home-intro {
+    max-width: 640px;
+  }
+}
+
+.home-intro .home-logo {
+  height: 22px;
+  width: auto;
+  margin: 0 0 16px;
+}
+
+.home-intro-tagline {
+  margin: 0 auto;
+  padding-bottom: 18px;
+  display: inline-block;
+  border-bottom: 1px solid var(--color-border);
+  font-family: "Cormorant Garamond", "Shippori Mincho", serif;
+  font-style: italic;
+  font-size: 1.05rem;
+  letter-spacing: 0.05em;
+  color: var(--color-heading);
+}
+
+.home-intro-lead {
+  margin: 22px 0 0;
+  font-family: "Shippori Mincho", serif;
+  font-size: 1.35rem;
+  line-height: 1.9;
+  letter-spacing: 0.04em;
+  color: var(--color-heading);
+  white-space: pre-line;
+}
+
+/* ---- 3〜5. 味噌・こだわり / ワークショップ / レシピ:
+   写真とテキストを大きな余白で交互に並べる導線セクション ---- */
+.home-feature {
+  display: grid;
+  grid-template-columns: 1fr;
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: 0 0 96px;
+}
+
+.home-feature-media {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background: #eee;
+}
+
+.home-feature-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.home-feature-body {
+  padding: 40px 24px 0;
+  text-align: center;
+}
+
+.home-feature-title {
+  margin: 0 0 20px;
+  font-family: "Shippori Mincho", serif;
+  font-weight: 700;
+  font-size: 1.5rem;
+  letter-spacing: 0.12em;
+  color: var(--color-heading);
+}
+
+.home-feature-text {
+  margin: 0 auto;
+  max-width: 32em;
+  font-size: 0.98rem;
+  line-height: 2;
+  color: var(--color-text);
+  white-space: pre-line;
+}
+
+/* 「商品を見る」などの案内リンク。レシピの材料チップ(.tag-list li)の
+   楕円形をヒントにしつつ、背景は塗りつぶさず、線も細く控えめにして、
+   「押すボタン」ではなく「静かな案内」に見えるようにする。 */
+.home-feature-link {
+  display: inline-block;
+  margin-top: 26px;
+  padding: 5px 20px;
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  background: none;
+  font-family: "Shippori Mincho", serif;
+  font-weight: 500;
+  font-size: 0.78rem;
+  letter-spacing: 0.1em;
+  color: var(--color-heading);
+  text-decoration: none;
+}
+
+.home-feature-link:hover,
+.home-feature-link:focus-visible {
+  color: var(--color-heading);
+  border-color: var(--color-heading);
+}
+
+@media (min-width: 800px) {
+  .home-feature {
+    grid-template-columns: 1.1fr 1fr;
+    align-items: center;
+    column-gap: 56px;
+    padding: 0 40px 128px;
+  }
+
+  .home-feature-media {
+    aspect-ratio: 5 / 4;
+  }
+
+  .home-feature-body {
+    padding: 0;
+    text-align: left;
+  }
+
+  .home-feature-text {
+    margin: 0;
+  }
+
+  .home-feature--reverse .home-feature-media {
+    order: 2;
+  }
+
+  .home-feature--reverse .home-feature-body {
+    order: 1;
+  }
+}
+
+/* ---- 5.5 新着情報: 大きなカードにせず、静かで控えめな案内として置く ---- */
+.home-news {
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 0 24px 96px;
+  text-align: center;
+}
+
+.home-news-title {
+  margin: 0 0 16px;
+  font-family: "Shippori Mincho", serif;
+  font-weight: 700;
+  /* 「ワークショップ」「レシピ」の見出し(.home-feature-title)と同じ大きさに揃える */
+  font-size: 1.5rem;
+  letter-spacing: 0.12em;
+  color: var(--color-heading);
+}
+
+.home-news-empty {
+  margin: 0 0 26px;
+  font-size: 0.88rem;
+  color: var(--color-muted);
+}
+
+/* ---- 6. 締め: シンプルなフッター(お問い合わせ関連のみ) ---- */
+.home-closing {
+  max-width: 420px;
+  margin: 0 auto;
+  padding: 56px 24px 64px;
+  text-align: center;
+  border-top: 1px solid var(--color-border);
+}
+
+.home-closing-heading {
+  margin: 0 0 14px;
+  font-family: "Shippori Mincho", serif;
+  font-weight: 500;
+  font-size: 0.85rem;
+  letter-spacing: 0.12em;
+  color: var(--color-muted);
+}
+
+.home-closing-email {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--color-muted);
+}
+
+.home-closing-email a {
+  color: var(--color-heading);
+  text-decoration: none;
+}
+
+.home-closing-copyright {
+  margin: 24px 0 0;
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  color: var(--color-muted);
+}

@@ -1,0 +1,7 @@
+# Claude Codeのローカル設定(このパソコン専用の情報のため公開不要)
+.claude/
+
+# OSが自動生成するファイル
+.DS_Store
+Thumbs.db
+desktop.ini
