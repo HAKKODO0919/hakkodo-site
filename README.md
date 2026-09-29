@@ -31,7 +31,6 @@ TOP (index.html)
 │   ├─ ワークショップ紹介 (workshops/index.html)
 │   └─ 開催スケジュール (workshops/schedule/)
 ├─ 新着情報 (news/)
-├─ 作り手について (about/)
 └─ お問い合わせ (contact/)
 ```
 
@@ -39,6 +38,14 @@ TOP (index.html)
 現在はサイト全体の入口(ブランド紹介+各セクションへの導線)専用の
 ページになりました。商品一覧は `products/index.html` に移動しています
 (内容・デザインは以前のトップページのままです)。
+
+【追記】現在は商品が「熟成味噌(赤味噌)」の1点だけのため、ヘッダーの
+「商品」リンクは `products/index.html`(一覧)を経由せず、
+`products/aka-miso/index.html`(商品詳細)に直接つなげています
+(`assets/nav.js` の `NAV_ITEMS`)。`products/index.html` 自体や
+`initProductList` の仕組みはそのまま残してあるので、商品が2点以上に
+増えたら、`NAV_ITEMS` のhrefを `products/index.html` に戻すだけで
+一覧ページが復活します。
 
 **全ページ共通のナビゲーションについて**
 
@@ -57,10 +64,9 @@ TOP (index.html)
 
 **作り手について / お問い合わせについて**
 
-`about/index.html` は、ナビゲーションから独立してアクセスできる
-「作り手について」ページの土台です(現在は準備中の表示のみ)。
-商品ページ(`products/aka-miso/`)内にもともとある「作り手について」の
-セクションは、内容を変更せずそのまま残しています。
+独立した「作り手について」ページは廃止し、ナビゲーションからも
+削除しました。商品ページ(`products/aka-miso/`)内にもともとある
+「作り手について」のセクションは、内容を変更せずそのまま残しています。
 
 `contact/index.html` は、商品ページの「作り手について」で既に
 公開されているメールアドレスを使ったシンプルな連絡先ページです。
@@ -102,7 +108,6 @@ assets/workshop.js            … ワークショップスケジュールを読�
 news/index.html                … 新着情報一覧
 data/news/                     … お知らせごとの内容データを置くフォルダ(_template.js はひな形)
 assets/news.js                 … 新着情報を読み込んで表示する仕組み
-about/index.html                … 作り手についてページ(現在は準備中の表示のみ)
 contact/index.html              … お問い合わせページ
 ```
 

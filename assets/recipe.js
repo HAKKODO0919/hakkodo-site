@@ -78,13 +78,13 @@ function renderRecipeContent(data, siteRoot, lang) {
   // 保存期間・ポイントは共通フォーマットの正式なセクションではなく、
   // データにあるレシピだけ「作り方」の下に補足として表示する任意項目。
   const storageNoteHtml = tr.storage
-    ? `<p class="notes-strong">${escapeHtml(t("recipeStorageLabel", lang))}</p><p class="notes">${escapeHtml(tr.storage)}</p>`
+    ? `<p class="recipe-subheading">${escapeHtml(t("recipeStorageLabel", lang))}</p><p class="notes">${escapeHtml(tr.storage)}</p>`
     : "";
   // tipsLabel を指定すると、この位置の見出しをレシピごとに差し替えられる
   // (指定が無ければ従来どおり共通の「ポイント」になる)。
   const tipsLabel = tr.tipsLabel || t("recipeTipsLabel", lang);
   const tipsNoteHtml = tr.tips
-    ? `<p class="notes-strong">${escapeHtml(tipsLabel)}</p><p class="notes">${escapeHtml(tr.tips)}</p>`
+    ? `<p class="recipe-subheading">${escapeHtml(tipsLabel)}</p><p class="notes">${escapeHtml(tr.tips)}</p>`
     : "";
 
   const stepsHtml = tr.steps && tr.steps.length
@@ -137,20 +137,24 @@ function initRecipePage(data, siteRoot) {
   render();
 }
 
-// レシピを1件分のカードHTMLに変換する
-function renderRecipeCard(href, data, siteRoot, lang) {
+// レシピを1件分のカードHTMLに変換する。index は一覧内の並び順(0始まり)で、
+// 雑誌のような小さな通し番号(01, 02...)の表示に使う。
+function renderRecipeCard(href, data, siteRoot, lang, index) {
   const tr = data && data.translations && (data.translations[lang] || data.translations.ja);
   if (!tr) return "";
   const images = (data && data.images) || {};
   // listIntro を指定すると、詳細ページのタグライン(intro)は変えずに
   // 一覧カードの説明文だけを差し替えられる。
   const cardIntro = tr.listIntro || tr.intro || "";
+  const number = String(index + 1).padStart(2, "0");
   return `
     <a class="card recipe-card" href="${escapeHtml(href)}">
       <div class="thumb">${imageOrPlaceholder(images.hero, tr.heroAlt, "thumb-img", siteRoot, lang)}</div>
       <div class="card-body">
+        <p class="recipe-card-number">${number}</p>
         <h2>${escapeHtml(tr.title || "")}</h2>
         <p>${escapeHtml(cardIntro)}</p>
+        <span class="home-feature-link">${escapeHtml(t("viewRecipesLink", lang))}</span>
       </div>
     </a>`;
 }
@@ -170,7 +174,7 @@ function renderRecipeListContent(recipes, siteRoot, lang) {
 
   listRoot.innerHTML = `
     <div class="card-list">
-      ${recipes.map(({ href, data }) => renderRecipeCard(href, data, siteRoot, lang)).join("")}
+      ${recipes.map(({ href, data }, i) => renderRecipeCard(href, data, siteRoot, lang, i)).join("")}
     </div>`;
 }
 

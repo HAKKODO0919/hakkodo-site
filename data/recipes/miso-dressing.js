@@ -1,13 +1,11 @@
 // ============================================================
 // 味噌ドレッシングのレシピです。
-// 写真は確認用の仮画像(images/aka-miso/photo1.pngのコピー)を
-// そのまま使用しています。
 // 日本語(ja) / Català(ca) / Español(es) / English(en) の4言語分を用意しています。
 // ============================================================
 window.RECIPE_DATA = {
   category: { slug: "dressing", label: "万能調味料" },
   images: {
-    hero: "images/recipes/miso-dressing/main.jpg"
+    hero: "images/recipes/miso-dressing/main-v2.webp"
   },
   updatedAt: "2026-09-03",
   translations: {
@@ -19,7 +17,7 @@ window.RECIPE_DATA = {
         "オリーブオイル 24g",
         "酢 7g",
         "レモン汁 7g",
-        "砂糖 3g",
+        "はちみつ 2g",
         "味噌 18g",
         "黒こしょう 少々"
       ],
@@ -38,16 +36,16 @@ window.RECIPE_DATA = {
         "Oli d'oliva 24 g",
         "Vinagre 7 g",
         "Suc de llimona 7 g",
-        "Sucre 3 g",
+        "Mel 2 g",
         "Miso 18 g",
         "Pebre negre, al gust"
       ],
       steps: [
-        { text: "Poseu tots els ingredients excepte l'oli d'oliva en un bol i barregeu-los." },
-        { text: "Afegiu l'oli d'oliva a poc a poc fins acabar." }
+        { text: "Posar tots els ingredients excepte l'oli d'oliva en un bol i barrejar-los." },
+        { text: "Afegir l'oli d'oliva a poc a poc fins acabar." }
       ],
-      storage: "Conserveu-la en un recipient hermètic a la nevera. Es pot conservar durant 2 dies.",
-      tips: "Si afegiu l'oli d'oliva a poc a poc mentre remeneu, costarà menys que es separi."
+      storage: "Conservar-la en un recipient hermètic a la nevera. Es pot conservar durant 2 dies.",
+      tips: "Afegir l'oli d'oliva a poc a poc mentre es remena n'evita la separació."
     },
     es: {
       title: "Vinagreta de miso",
@@ -57,16 +55,16 @@ window.RECIPE_DATA = {
         "Aceite de oliva 24 g",
         "Vinagre 7 g",
         "Zumo de limón 7 g",
-        "Azúcar 3 g",
+        "Miel 2 g",
         "Miso 18 g",
         "Pimienta negra, al gusto"
       ],
       steps: [
-        { text: "Pon todos los ingredientes excepto el aceite de oliva en un bol y mézclalos." },
-        { text: "Añade el aceite de oliva poco a poco hasta terminar." }
+        { text: "Poner todos los ingredientes excepto el aceite de oliva en un bol y mezclarlos." },
+        { text: "Añadir el aceite de oliva poco a poco hasta terminar." }
       ],
-      storage: "Consérvala en un recipiente hermético en el refrigerador. Se conserva durante 2 días.",
-      tips: "Si añades el aceite de oliva poco a poco mientras remueves, costará menos que se separe."
+      storage: "Conservarla en un recipiente hermético en el refrigerador. Se conserva durante 2 días.",
+      tips: "Añadir el aceite de oliva poco a poco mientras se remueve evita que se separe."
     },
     en: {
       title: "Miso Dressing",
@@ -76,7 +74,7 @@ window.RECIPE_DATA = {
         "Olive oil 24g",
         "Vinegar 7g",
         "Lemon juice 7g",
-        "Sugar 3g",
+        "Honey 2g",
         "Miso 18g",
         "Black pepper, to taste"
       ],

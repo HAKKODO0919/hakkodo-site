@@ -40,7 +40,11 @@ function renderWorkshopScheduleContent(workshops, lang) {
   if (!root) return;
 
   if (!workshops || workshops.length === 0) {
-    root.innerHTML = `<div class="empty-state">${escapeHtml(t("workshopsScheduleEmpty", lang))}</div>`;
+    // 開催が決まるまでの案内文。枠やボタンは付けず、他ページの案内文
+    // (.intro)と同じ静かな見た目にする。
+    // 開催予定が決まったら、initWorkshopSchedule([...]) に1件渡すだけで
+    // 自動的にこの案内文から一覧表示へ切り替わる(このifごと変更不要)。
+    root.innerHTML = `<div class="intro"><p style="white-space: pre-line;">${escapeHtml(t("workshopsScheduleEmpty", lang))}</p></div>`;
     return;
   }
 

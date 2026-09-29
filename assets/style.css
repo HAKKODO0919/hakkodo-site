@@ -28,83 +28,154 @@ html, body {
   padding: 0;
 }
 
+/* ページの内容が短くスクロールバーが出ないページと、内容が長く
+   スクロールバーが出るページとで実質の横幅が変わり、中央ぞろえの
+   ヘッダー/フッターの位置がわずかにずれてしまうのを防ぐため、
+   スクロールバー分の余白を全ページで常に確保しておく。
+   (scrollbar-gutterはoverflowがvisibleのままだと効かないため、
+   auto を明示する。挙動自体はブラウザ標準のまま変えない) */
+html {
+  overflow-y: auto;
+  scrollbar-gutter: stable;
+}
+
 body {
-  background: var(--color-bg);
+  background-color: var(--color-bg);
+  min-height: 100vh;
   color: var(--color-text);
   font-family: "Hiragino Sans", "Yu Gothic", "Noto Sans JP", system-ui, -apple-system, sans-serif;
   line-height: 1.7;
   -webkit-font-smoothing: antialiased;
+  /* フッター(© HAKKODO)を、本文が短いページでも常に画面の下端に
+     そろえるための「sticky footer」構成。body を縦のflexにして
+     本文(main)側にだけ伸びる余白を持たせることで、本文が短い
+     ワークショップ・新着情報などのページでも、フッターが本文の
+     すぐ下に来て見えるのではなく、背景の山のあたり(画面の下端)
+     まで自然に下がるようになる。本文が画面より長いページでは
+     このflexは何もしない(伸ばす余白が無いため、従来どおり本文の
+     直後にフッターが続く)。 */
+  display: flex;
+  flex-direction: column;
 }
 
+/* 本文側(header/footerを除いた<main>)だけを伸ばし、フッターは
+   自分の高さのままでよい。width: 100%を明示しないと、.page側の
+   margin: 0 autoによる中央寄せとflexのstretchが干渉し、本文の
+   横幅が中身の幅まで縮んでしまうため、ここで明示的に指定する。 */
+body > main {
+  flex: 1 0 auto;
+  width: 100%;
+}
+
+/* ヘッダーから本文までの余白を全ページ共通にする唯一の基準にする
+   (以前はページごとに0px〜100pxとバラバラで、詰まって見えるページと
+   空きすぎるページが混在していた)。各ページの最初の要素(見出し・
+   写真・カード一覧など)自体の上余白は0にそろえ、個別のmargin/padding
+   ではなくここだけで本文開始位置を管理する。 */
 .page {
   max-width: var(--max-width);
   margin: 0 auto;
-  padding: 0 0 48px;
+  padding: 56px 0 48px;
 }
 
-/* ---- サイト全体の共通ナビゲーション ---- */
-#global-nav-root {
+/* ---- サイト全体の共通ヘッダー(ブランド＋ナビ＋言語切替) ----
+   全ページで同じ構成・大きさ・余白にする(以前はトップページだけ
+   別の見た目だったが、公開前の最終調整で全ページ共通にした)。
+   構成: [HAKKODO+顔ロゴ(ブランド)]  余白  [ナビ6項目(すべて同じ
+   太さ・控えめ)]  余白  [言語切替(さらに控えめ)] を1行に。
+   画面が狭い場合は自然に折り返す。 */
+.home-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
-  gap: 8px 16px;
-  max-width: var(--max-width);
+  gap: 16px 24px;
+  max-width: 1100px;
+  /* bodyがflexコンテナのため、widthを明示しないと横方向の
+     auto marginによる中央ぞろえでstretchが効かず、内容の幅
+     まで縮んでしまう(→ max-width:1100pxまで広がらない)。 */
+  width: 100%;
   margin: 0 auto;
-  padding: 14px 20px 10px;
+  /* 顔ロゴを大きくした分だけ上下のpaddingを詰め、ヘッダー全体の
+     高さ(左右の余白・ナビ・言語選択の位置はそのまま)を、
+     ロゴを拡大する前と同じ高さに保つ。 */
+  padding: 26px 28px;
   border-bottom: 1px solid var(--color-border);
 }
 
+/* ブランド・ナビ・言語選択の3グループを、このラッパー(#global-nav-root)
+   自体は箱を作らせず(display: contents)、.home-header の直接の
+   flexアイテムとして並べる。こうすることで .home-header 側の
+   justify-content: space-between が、3グループの間の2つの隙間を
+   均等に配分してくれるため、「ブランドとナビの間」「ナビと言語選択の
+   間」が同じ幅の、余白のある独立したグループに見えるようになる。 */
+#global-nav-root {
+  display: contents;
+}
+
 .global-nav-brand {
-  font-weight: 700;
-  font-size: 0.95rem;
-  letter-spacing: 0.06em;
-  color: var(--color-text);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
   text-decoration: none;
-}
-
-.global-nav-brand:visited {
-  color: var(--color-text);
-}
-
-.global-nav-brand:hover,
-.global-nav-brand:focus-visible,
-.global-nav-brand.active {
-  color: var(--color-accent);
 }
 
 .global-nav-list {
   display: flex;
   flex-wrap: wrap;
-  gap: 2px;
+  gap: 4px 16px;
   list-style: none;
   margin: 0;
   padding: 0;
 }
 
+/* ナビゲーション6項目はすべて同じ太さ・同じ大きさにし、
+   ブランドより控えめな存在感にする。項目ごとの太字化はしない。 */
 .global-nav-link {
   display: inline-block;
-  padding: 6px 10px;
+  padding: 4px 9px;
   border-radius: 999px;
-  font-size: 0.8rem;
-  color: var(--color-muted);
+  font-size: 0.83rem;
+  font-weight: 400;
+  letter-spacing: 0.03em;
+  color: #524d45;
   text-decoration: none;
   transition: color 0.15s ease, background-color 0.15s ease;
 }
 
 .global-nav-link:visited {
-  color: var(--color-muted);
+  color: #524d45;
 }
 
 .global-nav-link:hover,
-.global-nav-link:focus-visible {
-  color: var(--color-accent);
-  background: var(--color-bg);
+.global-nav-link:focus-visible,
+.global-nav-link.active {
+  color: var(--color-heading);
 }
 
-.global-nav-link.active {
-  color: var(--color-accent);
-  font-weight: 700;
+/* ヘッダーの本来のHAKKODOロゴ(画像)。ナビゲーションより一段
+   存在感のあるブランド要素にする。 */
+.home-header-logo {
+  height: 32px;
+  width: auto;
+  display: block;
+}
+
+/* HAKKODOの公式な顔ロゴ。HAKKODOの正式なブランドシンボルとして
+   自然に見える大きさにする(HAKKODOの文字サイズ自体は変えない)。 */
+.home-header-face-logo {
+  height: 43px;
+  width: auto;
+  display: block;
+}
+
+/* 各ページの「戻る」リンク。以前はヘッダー内に置いていたが、
+   ヘッダーを全ページ共通にするため本文側(.page の先頭)に移動した。
+   見た目(.recipe-btn)自体は変更せず、ヘッダーとの間の余白だけを
+   ここで確保する。 */
+.page-back-link {
+  margin: 0;
+  padding: 0 20px 20px;
 }
 
 /* トップページのセクション導線(.recipe-btn を縦に並べるだけ) */
@@ -116,14 +187,18 @@ body {
   padding: 8px 20px 40px;
 }
 
-/* ---- ヘッダー ---- */
+/* ---- ヘッダー ----
+   #global-nav-root(ロゴ＋ナビ)と同じ640pxの内容幅・中央ぞろえにして、
+   2段目(戻るリンク・言語切替)の位置がナビの行とずれないようにする。 */
 .site-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
   gap: 10px;
-  padding: 16px 20px 12px;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 16px 20px 14px;
 }
 
 .site-header.lang-only {
@@ -188,17 +263,20 @@ body {
   position: relative;
 }
 
+/* ナビゲーションよりさらに控えめにし、独立した操作要素に見せる
+   (ヘッダー統一に伴い、以前はトップページだけだったこの見た目を
+   全ページ共通にした)。 */
 .lang-current {
   display: inline-flex;
   align-items: center;
   gap: 6px;
   font-family: inherit;
-  font-size: 0.85rem;
-  padding: 6px 12px;
+  font-size: 0.68rem;
+  padding: 3px 4px;
   border-radius: 999px;
-  border: 1px solid var(--color-border);
-  background: var(--color-surface);
-  color: var(--color-text);
+  border: 1px solid transparent;
+  background: transparent;
+  color: #7a766c;
   cursor: pointer;
 }
 
@@ -271,6 +349,28 @@ body {
   border-radius: 0;
 }
 
+/* 商品ページの冒頭の写真だけ、デスクトップ幅では.pageの640px幅より
+   少し外へ広げ、商品写真がページの主役として見えるようにする
+   (TOPページのヒーローほど大きくはしない)。モバイル〜中間幅では
+   今までどおり.pageの640px幅いっぱいのまま変更しない。
+   写真自体・トリミング(.hero側の設定)は一切変更しない。 */
+.product-hero-frame {
+  display: flex;
+  justify-content: center;
+}
+
+@media (min-width: 1000px) {
+  .product-hero-frame {
+    width: 100vw;
+    margin-left: calc(-50vw + 50%);
+  }
+
+  .product-hero-frame .hero {
+    width: 65vw;
+    max-width: 900px;
+  }
+}
+
 .hero img,
 .hero .placeholder {
   width: 100%;
@@ -324,6 +424,27 @@ body {
   font-size: 1.6rem;
 }
 
+/* 商品詳細ページ(products/aka-miso)だけの余白微調整。
+   .product-head はレシピページ(assets/recipe.js)とも共有しているため、
+   商品詳細ページに付く .product-detail-head の範囲だけに限定する。 */
+.product-detail-head h1 {
+  margin-bottom: 10px;
+}
+
+.product-detail-head {
+  padding-bottom: 30px;
+}
+
+/* 商品名の直下のキャッチコピー。説明文(.tagline)より少し目立たせるが、
+   商品名より控えめなサイズに留める。 */
+.product-catchphrase {
+  margin: 0 0 8px;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--color-heading);
+  line-height: 1.6;
+}
+
 .tagline {
   color: var(--color-muted);
   margin: 0;
@@ -335,7 +456,7 @@ body {
   align-items: center;
   flex-wrap: wrap;
   gap: 10px;
-  margin-top: 12px;
+  margin-top: 18px;
 }
 
 .price {
@@ -356,12 +477,21 @@ body {
 /* 「レシピを見る」の配置(商品詳細ページでは中央揃え、上下の余白)。
    ボタン自体の見た目は .recipe-btn に切り出し、「原材料」タグと統一する。 */
 .recipe-link {
-  margin: 14px 0 0;
+  margin: 30px 0 0;
   text-align: center;
 }
 
+/* .home-feature-link はTOPページ等と共通のボタンスタイルで、
+   margin-top: 26px を持つ。商品詳細ページでは .recipe-link 側の
+   margin-top: 30pxだけで余白を管理したいため、ここだけ打ち消す。 */
+.product-detail-head .recipe-link .home-feature-link {
+  margin-top: 0;
+}
+
 /* 「原材料」のタグ(.tag-list li)と同じ見た目のボタン。
-   商品一覧の「レシピを見る」・商品詳細の「レシピを見る」で共通利用する。 */
+   「戻る」リンクなど、.home-feature-link と同じ役割の小さな案内リンクで
+   共通利用する。配色は .home-feature-link と揃え、紙面にそっと
+   置かれた控えめなラベルに見えるようにする。 */
 .recipe-btn {
   display: inline-flex;
   align-items: center;
@@ -370,7 +500,7 @@ body {
   border-radius: 999px;
   border: 1px solid var(--color-border);
   background: var(--color-surface);
-  color: var(--color-text);
+  color: var(--color-muted);
   font-size: 0.9rem;
   font-weight: 500;
   text-decoration: none;
@@ -379,23 +509,27 @@ body {
 
 /* 訪問済みリンクでもブラウザ既定の紫色にならないよう、文字色を固定する */
 .recipe-btn:visited {
-  color: var(--color-text);
+  color: var(--color-muted);
 }
 
 .recipe-btn:hover,
 .recipe-btn:focus-visible {
-  border-color: var(--color-accent);
-  color: var(--color-accent);
+  border-color: var(--color-muted);
+  color: var(--color-heading);
 }
 
 /* ---- セクション共通 ---- */
 .section {
-  padding: 20px;
+  padding: 32px 20px;
   border-top: 1px solid var(--color-border);
 }
 
-.section h2 {
+/* レシピ詳細ページの「保存期間」「ポイント」も、「材料」「作り方」と
+   同じ見出しスタイル(.recipe-subheading)として共通化する。 */
+.section h2,
+.recipe-subheading {
   font-size: 1.05rem;
+  font-weight: 700;
   margin: 0 0 12px;
   color: var(--color-accent);
 }
@@ -493,24 +627,44 @@ body {
   margin: 0;
 }
 
+/* 「アレルギー」は独立したセクションにせず、原材料セクションの
+   補足情報として、少しの余白だけで自然に続ける。 */
+.ingredients-section .allergens {
+  margin-top: 12px;
+}
+
+/* 保存方法の上には、原材料セクション内の「アレルギー」の下の
+   区切りとして、他と同じ.sectionの区切り線をそのまま使う。 */
+.storage-info {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+/* 保存方法・賞味期限は、内容は別でも「後半の情報」として
+   ひとつながりに読めるよう、間の区切り線を外し余白だけで軽くつなげる。 */
+.best-before {
+  border-top: none;
+  padding-top: 20px;
+}
+
 /* ---- こだわり(ストーリー)セクション ---- */
 .story-section {
   padding-bottom: 8px;
 }
 
 .story-block {
-  margin-bottom: 32px;
+  margin-bottom: 24px;
 }
 
 .story-block:last-of-type {
-  margin-bottom: 24px;
+  margin-bottom: 16px;
 }
 
 .story-block h3 {
   color: var(--color-accent);
   font-size: 1.05rem;
   font-weight: 700;
-  margin: 0 0 10px;
+  margin: 0 0 8px;
 }
 
 .story-block p {
@@ -532,59 +686,70 @@ body {
   color: var(--color-text);
 }
 
-.story-closing {
-  margin: 28px 0 0;
-  padding: 24px 20px;
-  background: #f4eee1;
-  border-radius: 6px;
-  text-align: center;
-}
-
-.story-closing-main {
-  margin: 0 0 6px;
-  font-size: 1.15rem;
-  font-weight: 700;
-  color: var(--color-accent);
-  line-height: 1.6;
-  /* 日本語の短い文章を想定してnowrapにしていたが、Català/Español/English
-     など長い翻訳文だと画面幅からはみ出すため、自然な折り返しに変更する。 */
-  white-space: normal;
-}
-
-.story-closing-sub {
-  margin: 0;
-  font-size: 0.9rem;
-  font-weight: 400;
-  color: var(--color-muted);
-  line-height: 1.6;
-}
-
-/* ---- 作り手について(賞味期限から十分な余白を空けたうえで、
-   独立したプロフィールカードとして表示する) ---- */
+/* ---- 作り手について(賞味期限までの商品情報とはっきり区切ったうえで、
+   独立したプロフィールカードとして表示する)。
+   商品ページの一部として自然に収まるよう、以前よりはっきりと
+   コンパクトにしている(枠・影は増やさず、余白と行間だけを整理)。 ---- */
+/* 他の.sectionと同じ細い区切り線(border-top)を使い、賞味期限までの
+   商品情報から「作り手について」へ切り替わったことが分かるようにする。
+   線の下にはpadding-topでゆとりを持たせ、見出しが詰まって見えないようにする。 */
 .creator-outer {
-  padding-top: 80px;
-  border-top: none;
+  padding-top: 48px;
 }
 
 .creator-card {
-  background: var(--color-surface);
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 26px 18px;
+  border: 1px solid var(--color-border);
   border-radius: var(--radius);
-  box-shadow: 0 2px 14px rgba(0, 0, 0, 0.06);
-  padding: 28px 22px;
 }
 
-/* 「作り手について」ページ単体に .creator-card を置くときの余白
-   (商品ページの .creator-outer のような80pxの区切り用余白は不要なため) */
-.about-creator {
-  padding: 64px 20px 60px;
+/* 見出しは箱の横幅に対して中央揃え。顔アイコンとの間は少しだけ
+   余白を取る(離れすぎない範囲)。 */
+.creator-outer h2 {
+  margin: 0 0 14px;
+  text-align: center;
 }
 
-/* 商品ページの .section h2 と同じ見出しの見た目(オレンジ色)を
-   このページの見出しにもそろえる(.section クラス自体は使わないため) */
-.about-creator h2 {
-  font-size: 1.05rem;
-  margin: 0 0 12px;
-  color: var(--color-accent);
+/* 「見出し→アイコン→本文」を縦に積み、アイコンは中央揃え、
+   本文だけ左揃えにする。本文の最大幅を絞ってひとまとまりの
+   プロフィールに見せつつ、箱の左右には余白を残す。 */
+.creator-outer .creator-bio {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 420px;
+  margin: 0 auto;
+}
+
+/* 商品ページ側の顔ロゴだけ、少し小さくして中央に置く。
+   本文との間も少しだけ余白を取り、アイコンだけが浮いて
+   見えないようにする(.creator-avatar自体の基本スタイルは変更しない)。 */
+.creator-outer .creator-avatar {
+  float: none;
+  width: 46px;
+  height: 46px;
+  margin: 0 0 14px;
+}
+
+/* アイコンの形はそのまま、本文と同じ落ち着いたグレーに近づけて
+   目立たせないようにする。 */
+.creator-outer .creator-avatar img {
+  filter: grayscale(1) opacity(60%);
+}
+
+.creator-outer .creator-bio p {
+  align-self: stretch;
+  text-align: left;
+}
+
+.creator-outer .creator-emphasis + p {
+  margin-top: 0.4em;
+}
+
+.creator-outer .creator-bio p:not(.creator-emphasis) + p {
+  margin-top: 0.2em;
 }
 
 .creator-bio::after {
@@ -636,46 +801,6 @@ body {
   font-weight: 700;
 }
 
-.creator-brand {
-  clear: both;
-  margin-top: 32px;
-  text-align: center;
-}
-
-.creator-brand-logo {
-  height: 20px;
-  width: auto;
-  margin: 0 0 10px;
-}
-
-.creator-brand-tagline {
-  margin: 0 0 4px;
-  font-size: 0.75rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--color-muted);
-}
-
-.creator-brand-email {
-  margin: 0;
-  font-size: 0.8rem;
-  color: var(--color-muted);
-}
-
-.creator-brand-email a {
-  color: inherit;
-  text-decoration: none;
-}
-
-.creator-brand-email a:visited {
-  color: inherit;
-}
-
-.creator-brand-email a:hover,
-.creator-brand-email a:focus-visible {
-  color: var(--color-accent);
-}
-
 /* ---- ギャラリー ---- */
 .gallery {
   display: grid;
@@ -683,9 +808,13 @@ body {
   gap: 8px;
 }
 
+/* 塩の写真(3枚目)のお皿の横幅は、正方形(1:1)の切り抜きだと
+   画像の高さより広く、どうしても左右が切れてしまう比率のため、
+   3枚とも少しだけ横長(7:6)にして、cover(切り抜き)のままお皿が
+   ぎりぎり切れないようにする(見た目はほぼ正方形のまま)。 */
 .gallery .thumb {
-  aspect-ratio: 1 / 1;
-  border-radius: 10px;
+  aspect-ratio: 7 / 6;
+  border-radius: 0;
   overflow: hidden;
   background: #eee;
 }
@@ -699,7 +828,15 @@ body {
 
 .gallery .thumb .placeholder {
   font-size: 0.65rem;
-  border-radius: 10px;
+  border-radius: 0;
+}
+
+/* 塩の写真はお皿が画像の中央よりわずかに左寄りにあるため、
+   中央基準(50%)のままだと左側だけ少し切れてしまう。
+   基準位置を左に少しずらし、左右均等な余白でお皿全体が
+   収まるようにする(他の2枚の切り抜き位置は変更しない)。 */
+.gallery .thumb:nth-child(3) img {
+  object-position: 45% center;
 }
 
 /* ---- フッター ---- */
@@ -721,12 +858,13 @@ body {
   color: var(--color-muted);
 }
 
-/* ---- トップページのカード一覧 ---- */
+/* ---- 商品・レシピ一覧: 角丸の箱に情報を詰め込むのではなく、
+   写真と余白を中心にした雑誌的な並びにする。項目同士は枠で
+   囲わず、細い1本の罫線だけで区切る。 ---- */
 .card-list {
   display: flex;
   flex-direction: column;
-  gap: 16px;
-  padding: 8px 20px 20px;
+  padding: 0 20px 20px;
 }
 
 .card {
@@ -735,20 +873,25 @@ body {
      言語によって変わっても画像とテキストの上下バランスが崩れないよう、
      画像をテキストの高さに対して中央ぞろえにする。 */
   align-items: center;
-  gap: 14px;
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius);
-  padding: 12px;
+  gap: 20px;
+  padding: 24px 0;
+  border-bottom: 1px solid var(--color-border);
   text-decoration: none;
   color: inherit;
 }
 
+/* 一覧の最後の項目だけ、下の区切り線を消す(何も続かない線は
+   不要なため)。件数が増えて最後の項目が入れ替わっても、その
+   時点の最後の項目に自動的に適用される。 */
+.card-list > .card:last-child {
+  border-bottom: none;
+}
+
 .card .thumb {
-  width: 84px;
-  height: 84px;
+  width: 96px;
+  height: 96px;
   flex: none;
-  border-radius: 10px;
+  border-radius: 6px;
   overflow: hidden;
   background: #eee;
 }
@@ -762,49 +905,221 @@ body {
 }
 
 .card .card-body h2 {
-  margin: 0 0 4px;
-  font-size: 1.1rem;
+  margin: 0 0 6px;
+  font-size: 1.05rem;
+  font-weight: 600;
 }
 
 .card .card-body p {
   margin: 0;
   color: var(--color-muted);
-  font-size: 0.9rem;
+  font-size: 0.88rem;
+  line-height: 1.6;
 }
 
 /* ---- レシピ一覧カードの見た目調整 ----
    .card / .thumb / .card-body は商品一覧と共通のクラスなので、
-   ここでは .recipe-card / .recipe-category を付けた要素だけに絞って
-   温かみのある色・広めの余白を追加する(商品一覧の見た目は変更しない)。 */
+   ここでは .recipe-card を付けた要素だけに絞って、写真を少し
+   大きく・余白をゆったりめにする(商品一覧の構成は変えない)。 */
 .recipe-category {
-  padding: 24px 20px;
+  padding: 24px 0;
 }
 
 .recipe-category h2 {
   font-size: 1.25rem;
   font-weight: 700;
-}
-
-.recipe-category .card-list {
-  gap: 20px;
+  padding: 0 20px;
 }
 
 .recipe-card {
-  padding: 14px;
+  padding: 32px 0;
+  gap: 18px;
 }
 
 .recipe-card .thumb {
-  width: 96px;
-  height: 96px;
-  border-radius: 12px;
+  width: 187px;
+  height: 187px;
+  border-radius: 0;
+}
+
+/* レシピ画像の拡大は「レシピ一覧ページ」だけに限定する
+   (商品一覧ページも同じ .recipe-card クラスを使い回しているため)。 */
+#recipe-list-root .recipe-card .thumb {
+  width: 210px;
+  height: 210px;
+}
+
+/* レシピ一覧だけ、区切り線を画像の下まで伸ばさず、文章・リンク側の
+   幅だけに合わせる。線の縦位置(カード下端)は変えず、開始位置だけを
+   画像+隙間の分(210px+18px)右にずらす。商品一覧側の .recipe-card は
+   このIDスコープの外なので、これまでどおり画像の下にも線が入る。 */
+#recipe-list-root .recipe-card {
+  position: relative;
+  border-bottom: none;
+}
+
+#recipe-list-root .recipe-card::after {
+  content: "";
+  position: absolute;
+  left: 228px;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  background: var(--color-border);
+}
+
+#recipe-list-root .card-list > .recipe-card:last-child::after {
+  display: none;
+}
+
+/* レシピ一覧のコンテンツ部分だけ、.page(640px)より少し幅を広げる。
+   ページタイトル・説明文(.intro)は.pageの幅のまま変更しない。
+   .pageが確実に640px幅になる640px以上でだけ、左右対称のマイナス
+   マージンで外側にはみ出させる(中央のバランスは維持される)。 */
+@media (min-width: 640px) {
+  #recipe-list-root {
+    max-width: 720px;
+    margin-left: -40px;
+    margin-right: -40px;
+  }
+}
+
+/* 商品一覧も、レシピ一覧と同じ幅・同じ画像サイズにそろえ、
+   写真と商品情報の存在感を揃える(ページタイトル・説明文の幅は
+   .page(640px)のまま変更しない)。番号は付けないため
+   .recipe-card-number 相当の要素はJS側でも出力していない。 */
+#product-list-root .recipe-card .thumb {
+  width: 210px;
+  height: 210px;
+}
+
+@media (min-width: 640px) {
+  #product-list-root {
+    max-width: 720px;
+    margin-left: -40px;
+    margin-right: -40px;
+  }
+}
+
+/* 商品一覧の区切り線も、レシピ一覧と同じ考え方(画像の下には伸ばさず
+   文章側の幅だけに合わせる)にそろえる。太さ・色はレシピ一覧と同じ
+   var(--color-border)の1px。画像とgapの幅も同じ(210px+18px)なので
+   同じオフセット値を使う。レシピ一覧側(#recipe-list-root)のCSSは
+   変更していない。
+   レシピ一覧とは違い、最後の項目でも線を非表示にはしない
+   (商品一覧は現在1件のみのため、非表示にすると常に線が消えてしまう)。 */
+#product-list-root .recipe-card {
+  position: relative;
+  border-bottom: none;
+}
+
+#product-list-root .recipe-card::after {
+  content: "";
+  position: absolute;
+  left: 228px;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  background: var(--color-border);
+}
+
+@media (max-width: 480px) {
+  #product-list-root .recipe-card::after {
+    left: 146px;
+  }
+}
+
+/* 雑誌のような小さな通し番号。料理名や説明文とは別の、
+   控えめな飾りとして使う(番号自体はJS側で自動生成)。
+   番号の右に短い横線を添えて、その下にタイトルが続く形にする。 */
+.recipe-card-number {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 4px;
+  font-size: 0.86rem;
+  letter-spacing: 0.08em;
+  color: var(--color-muted);
+}
+
+.recipe-card-number::after {
+  content: "";
+  flex: none;
+  width: 28px;
+  height: 1px;
+  background: #cdc7ba;
 }
 
 .recipe-card .card-body h2 {
   color: var(--color-accent);
+  font-size: 1.53rem;
+}
+
+.recipe-card .card-body p {
+  font-size: 1rem;
+}
+
+/* 「レシピを見る」を大きなボタンにせず、小さな文字＋矢印の
+   控えめなリンクとして見せる。カード全体がすでにリンクなので、
+   これは案内のための表示。 */
+.recipe-card-link {
+  display: inline-block;
+  margin-top: 12px;
+  font-size: 0.85rem;
+  font-weight: 400;
+  color: var(--color-muted);
+}
+
+.recipe-card:hover .recipe-card-link,
+.recipe-card:focus-visible .recipe-card-link {
+  color: var(--color-text);
+}
+
+/* レシピ一覧の「レシピを見る」だけ、商品ページと同じ楕円ボタン
+   (.home-feature-link)を再利用する。ボタン自体の見た目はそちらの
+   定義のままにし、ここでは元のレイアウト(余白)を保つための
+   margin-topだけ上書きする。 */
+.recipe-card .home-feature-link {
+  margin-top: 12px;
+}
+
+.recipe-card:hover .home-feature-link,
+.recipe-card:focus-visible .home-feature-link {
+  border-color: var(--color-heading);
+}
+
+/* 狭い画面では、写真とテキストの隙間・写真サイズをほんの少しだけ
+   抑えて、レシピ名が単語の途中で折り返さないようにする。 */
+@media (max-width: 480px) {
+  .recipe-card {
+    gap: 8px;
+  }
+
+  .recipe-card .card-body h2 {
+    font-size: 1.46rem;
+  }
+
+  .recipe-card .thumb {
+    width: 138px;
+    height: 138px;
+  }
+
+  /* 640px幅以上向けの拡大(210px)はIDセレクタで指定しているため、
+     ここで上書きし直さないと、この画面幅でも210pxのままになって
+     しまう。 */
+  #recipe-list-root .recipe-card .thumb,
+  #product-list-root .recipe-card .thumb {
+    width: 138px;
+    height: 138px;
+  }
+
+  #recipe-list-root .recipe-card::after {
+    left: 146px;
+  }
 }
 
 .intro {
-  padding: 28px 20px 4px;
+  padding: 0 20px 4px;
   text-align: center;
 }
 
@@ -816,6 +1131,28 @@ body {
 .intro p {
   margin: 0;
   color: var(--color-muted);
+}
+
+/* お問い合わせページだけ、メールアドレスを本文の下に添える。
+   ボタンにはせず、本文より少しだけ目立つ程度の控えめな文字にする。 */
+.contact-email {
+  margin-top: 16px;
+  font-size: 0.95rem;
+}
+
+.contact-email a {
+  color: var(--color-heading);
+  text-decoration: none;
+}
+
+/* ワークショップ・新着情報・お問い合わせのように、本文がこの
+   説明文だけのページでは、上に寄りすぎないよう少し下に置く
+   (文字サイズ・色・.introの他の見た目は変更しない)。
+   フッター(山の背景・© HAKKODO)の位置は全ページ共通のsticky
+   footer構成(body / body > main)だけで決まるため、ページごとに
+   個別のCSSは持たせない。 */
+.intro-mid {
+  margin-top: 16vh;
 }
 
 /* レシピ一覧のキャッチフレーズ。装飾は加えず、本文より少し
@@ -846,6 +1183,14 @@ body {
   color: var(--color-muted);
   text-align: center;
   font-size: 0.9rem;
+}
+
+/* レシピ紹介文(.tagline)だけ、他の本文(材料・保存期間・ポイントの
+   説明文、作り方本文)と同じ文字サイズ・色に揃える。商品ページの
+   .taglineは別の調整をしているため、#recipe-root配下だけに限定する。 */
+#recipe-root .tagline {
+  font-size: 0.9rem;
+  color: var(--color-muted);
 }
 
 /* ---- レシピの手順 ---- */
@@ -882,6 +1227,9 @@ body {
   margin: 0;
   padding-top: 2px;
   white-space: pre-line;
+  font-size: 0.9rem;
+  color: var(--color-muted);
+  font-weight: 400;
 }
 
 /* 写真が付いている手順は画像を先に大きく見せるレイアウトになる */
@@ -913,22 +1261,26 @@ body {
 
 /* 「作り方」(手順)と「保存期間」を別ブロックとして見せるための
    薄い区切り線(既存のセクション境界と同じ --color-border を使用)。 */
-.step-list + .notes-strong {
+.step-list + .recipe-subheading {
   margin-top: 20px;
   padding-top: 16px;
   border-top: 1px solid var(--color-border);
 }
 
 /* 「保存期間」「ポイント」を見出し+説明文の1グループに見せる調整。
-   見出し→説明文は近く、「保存期間」→「ポイント」は区切り線なしで
-   少し詰めた間隔にし、補足情報として同じまとまりに見せる。 */
-.step-list ~ .notes-strong {
+   見出し→説明文は近く保ちつつ、「保存期間」の説明文→「ポイント」の
+   見出しには、近づきすぎないよう適度な余白を入れる。 */
+.step-list ~ .recipe-subheading {
   margin-bottom: 2px;
 }
 
-.step-list ~ .notes-strong + .notes {
+.step-list ~ .recipe-subheading + .notes {
   margin: 0 0 14px;
   white-space: pre-line;
+}
+
+.notes + .recipe-subheading {
+  margin-top: 20px;
 }
 
 /* ---- ワークショップ ---- */
@@ -956,7 +1308,7 @@ body {
 .news-list {
   list-style: none;
   margin: 0;
-  padding: 8px 20px 20px;
+  padding: 0 20px 20px;
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -988,55 +1340,6 @@ body {
   color: var(--color-muted);
 }
 
-/* ---- トップページだけ: ロゴ・ナビ・言語切替を控えめな1つのヘッダーにする ----
-   #global-nav-root / .site-header / .lang-switcher は全ページ共通の部品なので、
-   body.home-page 配下だけを上書きし、他ページの見た目は変えない。 */
-body.home-page #global-nav-root {
-  padding: 16px 20px 8px;
-  border-bottom: none;
-}
-
-body.home-page .global-nav-brand {
-  display: inline-flex;
-  align-items: center;
-}
-
-/* ヘッダーの本来のHAKKODOロゴ(画像)。ブランドとして認識できるが
-   写真の邪魔をしない程度の小さめサイズにする。 */
-.home-header-logo {
-  height: 21px;
-  width: auto;
-  display: block;
-}
-
-body.home-page .global-nav-link {
-  font-size: 0.74rem;
-  letter-spacing: 0.03em;
-  padding: 4px 8px;
-  color: #4d4941;
-}
-
-body.home-page .global-nav-link:hover,
-body.home-page .global-nav-link:focus-visible,
-body.home-page .global-nav-link.active {
-  color: var(--color-heading);
-}
-
-body.home-page .site-header.lang-only {
-  padding: 0 20px 10px;
-  max-width: var(--max-width);
-  margin: 0 auto;
-  border-bottom: 1px solid var(--color-border);
-}
-
-body.home-page .lang-current {
-  padding: 3px 4px;
-  border-color: transparent;
-  background: transparent;
-  font-size: 0.74rem;
-  color: #4d4941;
-}
-
 /* ========================================================
    トップページ(index.html)デザイン
    ------------------------------------------------------
@@ -1057,33 +1360,28 @@ body.home-page .lang-current {
   padding-bottom: 0;
 }
 
-/* ---- 1. ヒーロー写真: 画面の主役として大きく見せる ---- */
+/* ---- 1. ヒーロー写真: 横幅いっぱいの表示を保ったまま横長の帯
+   (1600:515)に切り抜く。現在の写真(お皿に盛った味噌)は、
+   お皿が画像の上のほうにあり、下は木のテーブルが広く続くため、
+   上端(center top)を基準に切り抜き、お皿の頭が欠けないように
+   しつつ、下のテーブルを余白として見せる。
+   縦の引き伸ばしはしない(object-fit: cover で常に等倍にトリミング)。 ---- */
 .home-hero {
   width: 100%;
-  aspect-ratio: 4 / 5;
+  background: var(--color-bg);
   overflow: hidden;
-  background: #eee;
-}
-
-@media (min-width: 640px) {
-  .home-hero {
-    /* 横幅は画面いっぱいに使いつつ、表示高さだけをさらに抑える。
-       object-position(下の.home-hero-img)で、瓶・ラベル・木の台が
-       切れないよう、余白になりやすい上部の背景側を優先的に詰める。 */
-    aspect-ratio: 2.65 / 1;
-  }
-
-  .home-hero-img {
-    object-position: center 63%;
-  }
 }
 
 .home-hero-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center 40%;
   display: block;
+  width: 100%;
+  aspect-ratio: 1600 / 515;
+  object-fit: cover;
+  object-position: center top;
+}
+
+.home-hero-img-jars {
+  object-position: center 31%;
 }
 
 /* ---- 2. ブランド紹介 ---- */
@@ -1114,8 +1412,7 @@ body.home-page .lang-current {
   padding-bottom: 18px;
   display: inline-block;
   border-bottom: 1px solid var(--color-border);
-  font-family: "Cormorant Garamond", "Shippori Mincho", serif;
-  font-style: italic;
+  font-family: "Hiragino Sans", "Yu Gothic", "Noto Sans JP", system-ui, -apple-system, sans-serif;
   font-size: 1.05rem;
   letter-spacing: 0.05em;
   color: var(--color-heading);
@@ -1178,28 +1475,35 @@ body.home-page .lang-current {
   white-space: pre-line;
 }
 
-/* 「商品を見る」などの案内リンク。レシピの材料チップ(.tag-list li)の
-   楕円形をヒントにしつつ、背景は塗りつぶさず、線も細く控えめにして、
-   「押すボタン」ではなく「静かな案内」に見えるようにする。 */
+/* 「味噌・こだわり」欄の説明文だけ、見出しより明らかに小さいサイズを
+   保ったまま少し読みやすくする(他のhome-feature-textには影響させない)。 */
+#home-feature-miso-text {
+  font-size: 1.05rem;
+}
+
+/* 「商品を見る」などの案内リンク。紙面にそっと置かれた控えめな
+   ラベルに見えるよう、白〜オフホワイトの背景・非常に薄い枠線・
+   落ち着いた薄めのグレー文字にする(「押すボタン」感を出さない)。
+   同じ役割の .recipe-btn とも配色を共通化している。 */
 .home-feature-link {
   display: inline-block;
   margin-top: 26px;
   padding: 5px 20px;
   border: 1px solid var(--color-border);
   border-radius: 999px;
-  background: none;
+  background: var(--color-surface);
   font-family: "Shippori Mincho", serif;
   font-weight: 500;
   font-size: 0.78rem;
   letter-spacing: 0.1em;
-  color: var(--color-heading);
+  color: var(--color-muted);
   text-decoration: none;
 }
 
 .home-feature-link:hover,
 .home-feature-link:focus-visible {
   color: var(--color-heading);
-  border-color: var(--color-heading);
+  border-color: var(--color-muted);
 }
 
 @media (min-width: 800px) {
@@ -1252,42 +1556,77 @@ body.home-page .lang-current {
 
 .home-news-empty {
   margin: 0 0 26px;
-  font-size: 0.88rem;
+  /* 「ワークショップ」「レシピ」の説明文(.home-feature-text)と
+     同じ大きさに揃え、TOPページ全体でのバランスを合わせる */
+  font-size: 0.98rem;
   color: var(--color-muted);
 }
 
-/* ---- 6. 締め: シンプルなフッター(お問い合わせ関連のみ) ---- */
-.home-closing {
+/* ---- サイト全体で共通のフッター。背景の山・植物イラストなどの
+   装飾は使わず、"© HAKKODO" だけを控えめに置いた最小限の構成
+   (assets/nav.js の renderGlobalFooter が全ページ共通でこの
+   HTML構造を出力する)。お問い合わせ・メールはヘッダーの
+   「お問い合わせ」リンクにすでにあるため、ここには置かない。
+   本文からフッターまでの余白は、.pageの下側padding(48px)と
+   このpadding-topの合計で、十分にゆったりした間隔にしている。 ---- */
+.global-footer {
   max-width: 420px;
+  /* .home-headerと同じ理由(bodyがflexコンテナ)で、幅を明示して
+     常にmax-widthを基準に中央ぞろえされるようにする。 */
+  width: 100%;
   margin: 0 auto;
-  padding: 56px 24px 64px;
+  padding: 96px 24px 72px;
   text-align: center;
-  border-top: 1px solid var(--color-border);
 }
 
-.home-closing-heading {
-  margin: 0 0 14px;
-  font-family: "Shippori Mincho", serif;
-  font-weight: 500;
-  font-size: 0.85rem;
-  letter-spacing: 0.12em;
-  color: var(--color-muted);
-}
-
-.home-closing-email {
+.global-footer-copyright {
   margin: 0;
-  font-size: 0.9rem;
-  color: var(--color-muted);
+  /* ヘッダーナビ「商品」(.global-nav-link)と同じフォント・サイズ・
+     字間・文字色に統一する(font-familyはbodyから共通で継承済み)。 */
+  font-size: 0.83rem;
+  font-weight: 400;
+  letter-spacing: 0.03em;
+  color: #524d45;
 }
 
-.home-closing-email a {
-  color: var(--color-heading);
+/* 「©」と「HAKKODO」が離れて見えないよう、文字の字間ではなく
+   この2要素の間隔(margin)だけを詰める。
+   親のletter-spacingが「©」の後ろにも余分な空きを足してしまうため、
+   ここだけletter-spacingを打ち消し、marginだけで間隔を決める
+   (「HAKKODO」自体のletter-spacingはそのまま)。 */
+.global-footer-copyright-mark {
+  letter-spacing: normal;
+}
+
+.global-footer-copyright-name {
+  margin-left: 2px;
+}
+
+/* "© HAKKODO" とInstagramアイコンを横に並べるだけの行。
+   .global-footer自体の余白・高さは変えない。 */
+.global-footer-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+/* 区切り線「｜」も、ヘッダーナビ「商品」と同じフォントサイズ・文字色に
+   統一する。位置(margin-left)・太さは変更しない。 */
+.global-footer-divider {
+  font-size: 0.83rem;
+  margin-left: -2px;
+  color: #524d45;
+}
+
+.global-footer-instagram {
+  display: inline-flex;
+  color: var(--color-muted);
+  line-height: 0;
   text-decoration: none;
 }
 
-.home-closing-copyright {
-  margin: 24px 0 0;
-  font-size: 0.7rem;
-  letter-spacing: 0.06em;
-  color: var(--color-muted);
+a.global-footer-instagram:hover,
+a.global-footer-instagram:focus-visible {
+  color: var(--color-heading);
 }

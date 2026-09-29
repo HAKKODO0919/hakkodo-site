@@ -36,10 +36,10 @@ window.RECIPE_DATA = {
         "Romaní"
       ],
       steps: [
-        { text: "Poseu formatge Camembert i miso sobre la galeta salada, i acabeu-ho amb una branca de romaní per decorar." }
+        { text: "Posar formatge Camembert i miso sobre la galeta salada, i acabar-ho amb una branca de romaní per decorar." }
       ],
       tipsLabel: "Variants",
-      tips: "・També és deliciós si canvieu el formatge pel que més us agradi.\n・Un raig de mel per sobre també hi queda molt bé."
+      tips: "・També és deliciós si es canvia el formatge pel que més agradi.\n・Un raig de mel per sobre també hi queda molt bé."
     },
     es: {
       title: "Galletas saladas con miso",
@@ -51,10 +51,10 @@ window.RECIPE_DATA = {
         "Romero"
       ],
       steps: [
-        { text: "Coloca queso Camembert y miso sobre la galleta salada, y termina con una ramita de romero para decorar." }
+        { text: "Colocar queso Camembert y miso sobre la galleta salada, y terminar con una ramita de romero para decorar." }
       ],
       tipsLabel: "Variantes",
-      tips: "・También está delicioso si cambias el queso por el que más te guste.\n・Un chorrito de miel por encima también queda muy bien."
+      tips: "・También está delicioso si se cambia el queso por el que más guste.\n・Un chorrito de miel por encima también queda muy bien."
     },
     en: {
       title: "Crackers with Miso",

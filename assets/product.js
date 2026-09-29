@@ -45,7 +45,7 @@ function renderCreatorProfile(creator, siteRoot, lang) {
         .map((part) =>
           part.bold
             ? `<p class="creator-emphasis">${escapeHtml(part.text)}</p>`
-            : `<p>${escapeHtml(part.text)}</p>`
+            : `<p class="notes">${escapeHtml(part.text)}</p>`
         )
         .join("")}
     </div>`;
@@ -115,24 +115,6 @@ function renderProductContent(data, siteRoot, lang) {
           </div>`
           )
           .join("")}
-        ${tr.story.closing
-          ? typeof tr.story.closing === "string"
-            ? `<p class="story-closing">${escapeHtml(tr.story.closing)}</p>`
-            : `<div class="story-closing">
-                ${tr.story.closing.main ? `<p class="story-closing-main">${escapeHtml(tr.story.closing.main)}</p>` : ""}
-                ${tr.story.closing.sub ? `<p class="story-closing-sub">${escapeHtml(tr.story.closing.sub)}</p>` : ""}
-              </div>`
-          : ""}
-      </div>`
-    : "";
-
-  const creatorBrandHtml = tr.creator && tr.creator.brand
-    ? `<div class="creator-brand">
-        ${tr.creator.brand.logo && tr.creator.brand.logo.src
-          ? `<img class="creator-brand-logo" src="${escapeHtml(siteRoot + tr.creator.brand.logo.src)}" alt="${escapeHtml(tr.creator.brand.logo.alt || "")}">`
-          : ""}
-        ${tr.creator.brand.tagline ? `<p class="creator-brand-tagline">${escapeHtml(tr.creator.brand.tagline)}</p>` : ""}
-        ${tr.creator.brand.email ? `<p class="creator-brand-email">✉ ${escapeHtml(tr.creator.brand.email)}</p>` : ""}
       </div>`
     : "";
 
@@ -142,7 +124,6 @@ function renderProductContent(data, siteRoot, lang) {
           <h2>${t("sectionCreator", lang)}</h2>
           ${renderCreatorProfile(tr.creator, siteRoot, lang)}
         </div>
-        ${creatorBrandHtml}
       </div>`
     : "";
 
@@ -158,17 +139,16 @@ function renderProductContent(data, siteRoot, lang) {
       </div>`
     : "";
 
+  const allergensLineHtml = (tr.allergens && tr.allergens.length)
+    ? `<p class="allergens">${escapeHtml(t("allergensLabel", lang))}${escapeHtml(tr.allergens.join(t("listSeparator", lang)))}</p>`
+    : "";
+
   const ingredientsHtml = (tr.ingredients && tr.ingredients.length)
     ? `<div class="section ingredients-section">
         <h2>${t("sectionIngredients", lang)}</h2>
         ${renderTagList(tr.ingredients)}
         ${tr.ingredientsNote ? `<p class="notes">${escapeHtml(tr.ingredientsNote)}</p>` : ""}
-      </div>`
-    : "";
-
-  const allergensHtml = (tr.allergens && tr.allergens.length)
-    ? `<div class="section">
-        <p class="allergens">${escapeHtml(t("allergensLabel", lang))}${escapeHtml(tr.allergens.join(t("listSeparator", lang)))}</p>
+        ${allergensLineHtml}
       </div>`
     : "";
 
@@ -202,28 +182,26 @@ function renderProductContent(data, siteRoot, lang) {
     ? `<span class="net-weight">${escapeHtml(t("netWeightLabel", lang))}${escapeHtml(tr.netWeight)}</span>`
     : "";
 
-  const updatedHtml = data.updatedAt
-    ? `<p class="updated">${escapeHtml(t("updatedLabel", lang))}${escapeHtml(data.updatedAt)}</p>`
-    : "";
-
   root.innerHTML = `
-    <div class="hero">${imageOrPlaceholder(images.hero, tr.heroAlt, "hero-img", siteRoot, lang)}</div>
-    <div class="product-head">
+    <div class="product-hero-frame">
+      <div class="hero">${imageOrPlaceholder(images.hero, tr.heroAlt, "hero-img", siteRoot, lang)}</div>
+    </div>
+    <div class="product-head product-detail-head">
       <h1>${escapeHtml(tr.name || "")}</h1>
-      ${tr.tagline ? `<p class="tagline">${escapeHtml(tr.tagline)}</p>` : ""}
+      ${tr.descriptionLine1 || tr.descriptionLine2
+        ? `${tr.descriptionLine1 ? `<p class="product-catchphrase">${escapeHtml(tr.descriptionLine1)}</p>` : ""}${tr.descriptionLine2 ? `<p class="tagline">${escapeHtml(tr.descriptionLine2)}</p>` : ""}`
+        : tr.tagline ? `<p class="tagline">${escapeHtml(tr.tagline)}</p>` : ""}
       ${(priceHtml || netWeightHtml) ? `<div class="price-row">${priceHtml}${netWeightHtml}</div>` : ""}
-      <p class="recipe-link"><a href="${escapeHtml(siteRoot)}recipes/index.html" class="recipe-btn">${escapeHtml(t("viewRecipesLink", lang))} →</a></p>
+      <p class="recipe-link"><a href="${escapeHtml(siteRoot)}recipes/index.html" class="home-feature-link">${escapeHtml(t("viewRecipesLink", lang))}</a></p>
     </div>
     ${tr.description ? `<div class="section description"><h2>${t("sectionDescription", lang)}</h2><p>${escapeHtml(tr.description)}</p></div>` : ""}
     ${storyHtml}
     ${galleryHtml}
     ${ingredientsHtml}
-    ${allergensHtml}
     ${storageHtml}
     ${bestBeforeHtml}
     ${creatorHtml}
     ${notesHtml}
-    ${updatedHtml}
   `;
 }
 
@@ -262,7 +240,7 @@ function renderProductListContent(items, siteRoot, lang) {
       const tr = data && data.translations && (data.translations[lang] || data.translations.ja);
       if (!tr) {
         return `
-          <a class="card" href="${escapeHtml(href)}">
+          <a class="card recipe-card" href="${escapeHtml(href)}">
             <div class="thumb"><div class="thumb-img placeholder">${escapeHtml(t("photoPending", lang))}</div></div>
             <div class="card-body">
               <h2>${escapeHtml(t("productLoadError", lang))}</h2>
@@ -271,11 +249,12 @@ function renderProductListContent(items, siteRoot, lang) {
       }
       const images = data.images || {};
       return `
-        <a class="card" href="${escapeHtml(href)}">
+        <a class="card recipe-card" href="${escapeHtml(href)}">
           <div class="thumb">${imageOrPlaceholder(images.hero, tr.heroAlt, "thumb-img", siteRoot, lang)}</div>
           <div class="card-body">
             <h2>${escapeHtml(tr.name || "")}</h2>
             <p>${escapeHtml(tr.tagline || "")}</p>
+            <span class="home-feature-link">${escapeHtml(t("homeMisoLink", lang))}</span>
           </div>
         </a>`;
     })

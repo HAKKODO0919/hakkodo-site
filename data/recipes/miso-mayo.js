@@ -7,7 +7,7 @@
 window.RECIPE_DATA = {
   category: { slug: "dressing", label: "万能調味料" },
   images: {
-    hero: "images/recipes/miso-mayo/main.jpg"
+    hero: "images/recipes/miso-mayo/main-v2.webp"
   },
   updatedAt: "2026-09-14",
   translations: {
@@ -18,14 +18,14 @@ window.RECIPE_DATA = {
       ingredients: [
         "マヨネーズ：30g",
         "味噌：8g",
-        "砂糖：2g",
+        "はちみつ：少々",
         "黒こしょう：少々"
       ],
       steps: [
         { text: "ボウルに材料を全て入れ、ダマがなくなるまでしっかりと混ぜ合わせたら出来上がり。" }
       ],
       tipsLabel: "アレンジ",
-      tips: "・味噌と砂糖の分量を微調整してお好みの味にしてもＯＫ。\n・使用するマヨネーズに酸味が足りない場合はお酢を加えると全体の味のバランスが良くなります。"
+      tips: "・味噌とはちみつの分量を微調整してお好みの味にしてもＯＫ。\n・使用するマヨネーズに酸味が足りない場合はお酢を加えると全体の味のバランスが良くなります。"
     },
     ca: {
       title: "Maionesa de miso",
@@ -34,14 +34,14 @@ window.RECIPE_DATA = {
       ingredients: [
         "Maionesa: 30 g",
         "Miso: 8 g",
-        "Sucre: 2 g",
+        "Mel: al gust",
         "Pebre negre: al gust"
       ],
       steps: [
-        { text: "Poseu tots els ingredients en un bol i barregeu bé fins que no quedin grumolls. Llest!" }
+        { text: "Posar tots els ingredients en un bol i barrejar bé fins que no quedin grumolls. Llest!" }
       ],
       tipsLabel: "Variants",
-      tips: "・Podeu ajustar la quantitat de miso i sucre al vostre gust.\n・Si la maionesa que feu servir no té prou acidesa, afegir-hi una mica de vinagre millora l'equilibri general del sabor."
+      tips: "・Es pot ajustar la quantitat de miso i mel al gust.\n・Si la maionesa que s'utilitza no té prou acidesa, afegir-hi una mica de vinagre millora l'equilibri general del sabor."
     },
     es: {
       title: "Mayonesa de miso",
@@ -50,14 +50,14 @@ window.RECIPE_DATA = {
       ingredients: [
         "Mayonesa: 30 g",
         "Miso: 8 g",
-        "Azúcar: 2 g",
+        "Miel: al gusto",
         "Pimienta negra: al gusto"
       ],
       steps: [
-        { text: "Pon todos los ingredientes en un bol y mezcla bien hasta que no queden grumos. ¡Listo!" }
+        { text: "Poner todos los ingredientes en un bol y mezclar bien hasta que no queden grumos. ¡Listo!" }
       ],
       tipsLabel: "Variantes",
-      tips: "・Puedes ajustar la cantidad de miso y azúcar a tu gusto.\n・Si la mayonesa que usas no tiene suficiente acidez, añadir un poco de vinagre mejora el equilibrio general del sabor."
+      tips: "・Se puede ajustar la cantidad de miso y miel al gusto.\n・Si la mayonesa que se utiliza no tiene suficiente acidez, añadir un poco de vinagre mejora el equilibrio general del sabor."
     },
     en: {
       title: "Miso Mayonnaise",
@@ -66,14 +66,14 @@ window.RECIPE_DATA = {
       ingredients: [
         "Mayonnaise: 30g",
         "Miso: 8g",
-        "Sugar: 2g",
+        "Honey: to taste",
         "Black pepper: to taste"
       ],
       steps: [
         { text: "Put all the ingredients in a bowl and mix well until smooth. That's it!" }
       ],
       tipsLabel: "Variations",
-      tips: "・Feel free to adjust the amount of miso and sugar to your taste.\n・If your mayonnaise isn't tangy enough, adding a little vinegar improves the overall balance of flavor."
+      tips: "・Feel free to adjust the amount of miso and honey to your taste.\n・If your mayonnaise isn't tangy enough, adding a little vinegar improves the overall balance of flavor."
     }
   }
 };

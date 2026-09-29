@@ -7,27 +7,27 @@
 <link rel="stylesheet" href="assets/style.css">
 </head>
 <body class="home-page">
-  <div id="global-nav-root"></div>
-  <header class="site-header lang-only">
+  <header class="home-header">
+    <div id="global-nav-root"></div>
     <div id="lang-switcher-root" class="lang-switcher"></div>
   </header>
 
   <main class="home">
     <!-- 1. 大きなヒーロー写真 -->
     <div class="home-hero">
-      <img class="home-hero-img" src="images/aka-miso/main.jpg" alt="">
+      <img class="home-hero-img home-hero-img-jars" src="images/aka-miso/main-v6.jpg" alt="">
     </div>
 
     <!-- 2. ブランド紹介(HAKKODOのロゴ名はヘッダーにあるため、ここでは表示しない) -->
     <section class="home-intro">
-      <p class="home-intro-tagline">Japanese Food / Fermentation / Miso</p>
+      <p class="home-intro-tagline" data-i18n="homeIntroTagline"></p>
       <p class="home-intro-lead" id="home-intro-lead"></p>
     </section>
 
     <!-- 3. 味噌・こだわり -->
     <section class="home-feature">
       <div class="home-feature-media">
-        <img id="home-feature-miso-img" src="images/aka-miso/home-feature-miso.jpg" alt="">
+        <img id="home-feature-miso-img" src="images/aka-miso/home-feature-miso-v5.webp" alt="">
       </div>
       <div class="home-feature-body">
         <h2 class="home-feature-title" data-i18n="homeMisoTitle"></h2>
@@ -51,7 +51,7 @@
     <!-- 5. レシピ -->
     <section class="home-feature">
       <div class="home-feature-media">
-        <img src="images/aka-miso/home-feature-recipe.jpg" alt="">
+        <img src="images/aka-miso/home-feature-recipe-v3.webp" alt="">
       </div>
       <div class="home-feature-body">
         <h2 class="home-feature-title" data-i18n="navRecipes"></h2>
@@ -66,18 +66,13 @@
       <!-- お知らせを追加するときは、この中を news/index.html と同じ
            日付・タイトル・本文の構造(news.js の renderNewsItem 相当)で
            置き換える想定。今は内容が無いので空の案内文だけを表示する。 -->
-      <p class="home-news-empty" data-i18n="newsEmpty"></p>
+      <p class="home-news-empty" data-i18n="homeNewsEmpty"></p>
       <a class="home-feature-link" href="news/index.html" data-i18n="homeNewsLink"></a>
     </section>
 
-    <!-- 6. お問い合わせ(シンプルなフッター。作り手についてはトップページ内で
-         すでに紹介しているため、フッターには置かない) -->
-    <section class="home-closing">
-      <h2 class="home-closing-heading" data-i18n="navContact"></h2>
-      <p class="home-closing-email" id="home-closing-email"></p>
-      <p class="home-closing-copyright">&copy; HAKKODO</p>
-    </section>
   </main>
+
+  <footer class="global-footer" id="global-footer-root"></footer>
 
   <script src="data/aka-miso.js"></script>
   <script src="assets/i18n.js"></script>
@@ -85,8 +80,8 @@
   <script src="assets/nav.js"></script>
   <script>
     // 商品データ(data/aka-miso.js)にすでにある文章・写真だけを再利用して、
-    // トップページの「味噌・こだわり」「お問い合わせ」欄を作る。
-    // 新しい文章は作らず、商品ページと同じ内容をそのまま流用している。
+    // トップページの「味噌・こだわり」欄を作る。新しい文章は作らず、
+    // 商品ページと同じ内容をそのまま流用している。
     function renderHomeContent(lang) {
       const data = window.PRODUCT_DATA;
       const tr = data.translations[lang] || data.translations.ja;
@@ -95,14 +90,6 @@
       document.getElementById("home-intro-lead").textContent = lead;
 
       document.getElementById("home-feature-miso-text").textContent = tr.tagline || "";
-
-      const emailRoot = document.getElementById("home-closing-email");
-      const email = tr.creator && tr.creator.brand && tr.creator.brand.email;
-      if (emailRoot) {
-        emailRoot.innerHTML = email
-          ? `<a href="mailto:${escapeHtml(email)}">✉ ${escapeHtml(email)}</a>`
-          : "";
-      }
     }
 
     function render() {
@@ -111,16 +98,9 @@
       renderHomeContent(lang);
     }
     renderGlobalNav(document.getElementById("global-nav-root"), "./", "top");
+    renderGlobalFooter(document.getElementById("global-footer-root"), "./");
     renderLangSwitcher(document.getElementById("lang-switcher-root"), render);
     render();
-
-    // ヘッダーのブランド名(文字)を、既存のHAKKODOロゴ画像に差し替える。
-    // nav.js(全ページ共通)は変更せず、トップページのここだけで見た目を上書きする。
-    const headerBrandLink = document.querySelector("#global-nav-root .global-nav-brand");
-    if (headerBrandLink) {
-      headerBrandLink.innerHTML =
-        '<img src="images/aka-miso/hakkodo-logo-crop.png" alt="HAKKODO" class="home-header-logo">';
-    }
   </script>
 </body>
 </html>

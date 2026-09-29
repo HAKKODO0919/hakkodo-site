@@ -23,7 +23,9 @@ function renderNewsListContent(newsItems, lang) {
   if (!root) return;
 
   if (!newsItems || newsItems.length === 0) {
-    root.innerHTML = `<div class="empty-state">${escapeHtml(t("newsEmpty", lang))}</div>`;
+    // お問い合わせ・ワークショップと同じく、枠で囲まず文字だけで表示する。
+    // お知らせが追加されたら、この分岐を通らず自動的に一覧表示になる。
+    root.innerHTML = `<div class="intro intro-mid"><p style="white-space: pre-line;">${escapeHtml(t("newsEmpty", lang))}</p></div>`;
     return;
   }
 

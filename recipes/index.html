@@ -7,20 +7,21 @@
 <link rel="stylesheet" href="../assets/style.css">
 </head>
 <body>
-  <div id="global-nav-root"></div>
-  <header class="site-header">
-    <a href="../index.html" class="recipe-btn" data-i18n="homeLink">← トップにもどる</a>
+  <header class="home-header">
+    <div id="global-nav-root"></div>
     <div id="lang-switcher-root" class="lang-switcher"></div>
   </header>
 
   <main class="page">
     <div class="intro">
-      <p class="recipes-catchphrase" data-i18n="recipesCatchphrase"></p>
+      <h1 data-i18n="recipesTitle">レシピ一覧</h1>
       <p data-i18n="recipesIntro"></p>
     </div>
 
     <div id="recipe-list-root">...</div>
   </main>
+
+  <footer class="global-footer" id="global-footer-root"></footer>
 
   <script src="../data/recipes/miso-dressing.js"></script>
   <script>window.RECIPE_MISO_DRESSING = window.RECIPE_DATA;</script>
@@ -40,6 +41,7 @@
   <script src="../assets/nav.js"></script>
   <script>
     renderGlobalNav(document.getElementById("global-nav-root"), "../", "recipes");
+    renderGlobalFooter(document.getElementById("global-footer-root"), "../");
     // レシピを1件追加したら、ここに
     // { href: "レシピ名/index.html", data: window.RECIPE_DATA相当 }
     // の形で1行増やしていきます(data.category にカテゴリーを持たせます)。
