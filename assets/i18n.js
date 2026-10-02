@@ -351,7 +351,7 @@ function getCurrentLang() {
   } catch (e) {
     // localStorageが使えない環境ではデフォルト言語にフォールバック
   }
-  return "ja";
+  return "ca";
 }
 
 function setCurrentLang(lang) {
