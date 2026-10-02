@@ -1384,6 +1384,18 @@ body > main {
   object-position: center 31%;
 }
 
+/* スマホ幅では、ヒーローが薄い横長の帯(約3.1:1)になって下の味噌画像
+   (4:3)より小さく見えるため、同じ4:3にして主役として見せる。
+   元写真は16:9なので、左右を約25%切り抜く。3つの瓶(横幅の約52%)が
+   収まるよう、水平位置は瓶の中央(約55%)を基準にしている。
+   PC幅(800px以上)は変更しない。 */
+@media (max-width: 799px) {
+  .home-hero-img.home-hero-img-jars {
+    aspect-ratio: 4 / 3;
+    object-position: 68% center;
+  }
+}
+
 /* ---- 2. ブランド紹介 ---- */
 .home-intro {
   max-width: 480px;
