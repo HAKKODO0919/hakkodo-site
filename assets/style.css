@@ -1609,6 +1609,15 @@ body > main {
   text-align: center;
 }
 
+/* スマホ幅では、本文下の余白(.page: 48px)+フッター上の余白(96px)=144pxが
+   画面に対して大きく見えるため、フッター上の余白だけ48pxにする(合計96px)。
+   下側の余白(72px)と、PC幅(800px以上)は変更しない。 */
+@media (max-width: 799px) {
+  .global-footer {
+    padding-top: 48px;
+  }
+}
+
 .global-footer-copyright {
   margin: 0;
   /* ヘッダーナビ「商品」(.global-nav-link)と同じフォント・サイズ・
