@@ -1164,6 +1164,14 @@ body > main {
   margin-top: 16vh;
 }
 
+/* PC幅(800px以上)だけ、案内・準備中の文章ブロックをさらに50px下げる
+   (Tallers・Novetats・Contacteの3ページ共通)。スマホ幅は変更しない。 */
+@media (min-width: 800px) {
+  .intro-mid {
+    margin-top: calc(16vh + 50px);
+  }
+}
+
 /* Tallersページ(workshops/index.html)の準備中メッセージだけ、スマホ幅で
    文字をほんの少し小さく・行間を詰め・文章の最大幅を少し絞って、2行の
    横幅のバランスを整える。縦位置(.intro-midのmargin-top)は変えない。
