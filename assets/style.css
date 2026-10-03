@@ -129,6 +129,44 @@ body > main {
   padding: 0;
 }
 
+/* スマホ幅のナビ(5項目)を、画面中央を基準に整える。
+   言語切替が必ず別の行に下がる479px以下(スマホの縦向き)だけ、
+   ナビ全体と各段を中央に寄せる(変更前は左寄せで、段の中心が画面中央
+   から25〜90pxずれていた)。480px以上(PC幅を含む)は変更しない。 */
+@media (max-width: 479px) {
+  .global-nav-list {
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+/* 360〜479pxでは、画面幅によって「4項目+1項目」のように最後の1つだけが
+   取り残されないよう、1段目3項目・2段目2項目に固定する(orderと幅100%の
+   疑似要素で、3項目目の後ろに改行を入れる)。段の間隔は、これまでと
+   同じ4pxに保つ。3項目が1段に収まらない359px以下では、固定せず
+   自然な折り返しのままにして、ヘッダーの高さが変わらないようにする。 */
+@media (min-width: 360px) and (max-width: 479px) {
+  .global-nav-list {
+    row-gap: 0;
+  }
+
+  .global-nav-list li:nth-child(-n + 3) {
+    order: 1;
+  }
+
+  .global-nav-list::after {
+    content: "";
+    flex-basis: 100%;
+    height: 4px;
+    order: 2;
+  }
+
+  .global-nav-list li:nth-child(n + 4) {
+    order: 3;
+  }
+}
+
 /* ナビゲーション6項目はすべて同じ太さ・同じ大きさにし、
    ブランドより控えめな存在感にする。項目ごとの太字化はしない。 */
 .global-nav-link {
