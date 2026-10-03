@@ -972,6 +972,15 @@ body > main {
   display: none;
 }
 
+/* スマホ幅のレシピ一覧だけ、レシピ名を少し小さくして写真と同じくらい
+   強く見えないようにする(23.36〜24.48px → 20.8px)。商品一覧など
+   他ページの.recipe-cardと、PC幅(800px以上)は変更しない。 */
+@media (max-width: 799px) {
+  #recipe-list-root .recipe-card .card-body h2 {
+    font-size: 1.3rem;
+  }
+}
+
 /* レシピ一覧のコンテンツ部分だけ、.page(640px)より少し幅を広げる。
    ページタイトル・説明文(.intro)は.pageの幅のまま変更しない。
    .pageが確実に640px幅になる640px以上でだけ、左右対称のマイナス
