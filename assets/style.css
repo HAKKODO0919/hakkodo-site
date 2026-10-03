@@ -1556,6 +1556,15 @@ body > main {
   text-align: center;
 }
 
+/* スマホ幅では、他のセクション間の余白(96px)に対して、新着情報の
+   下余白(96px)+フッターの上余白(96px)=192pxが大きく見えるため、
+   新着情報側だけ48pxにする(合計144px)。PC幅(800px以上)は変更しない。 */
+@media (max-width: 799px) {
+  .home-news {
+    padding-bottom: 48px;
+  }
+}
+
 .home-news-title {
   margin: 0 0 16px;
   font-family: "Shippori Mincho", serif;
