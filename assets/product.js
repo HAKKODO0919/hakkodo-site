@@ -192,7 +192,7 @@ function renderProductContent(data, siteRoot, lang) {
         ? `${tr.descriptionLine1 ? `<p class="product-catchphrase">${escapeHtml(tr.descriptionLine1)}</p>` : ""}${tr.descriptionLine2 ? `<p class="tagline">${escapeHtml(tr.descriptionLine2)}</p>` : ""}`
         : tr.tagline ? `<p class="tagline">${escapeHtml(tr.tagline)}</p>` : ""}
       ${(priceHtml || netWeightHtml) ? `<div class="price-row">${priceHtml}${netWeightHtml}</div>` : ""}
-      <p class="recipe-link"><a href="${escapeHtml(siteRoot)}recipes/index.html" class="home-feature-link">${escapeHtml(t("viewRecipesLink", lang))}</a></p>
+      <p class="recipe-link"><a href="${escapeHtml(pageLinkRoot(siteRoot))}recipes/index.html" class="home-feature-link">${escapeHtml(t("viewRecipesLink", lang))}</a></p>
     </div>
     ${tr.description ? `<div class="section description"><h2>${t("sectionDescription", lang)}</h2><p>${escapeHtml(tr.description)}</p></div>` : ""}
     ${storyHtml}

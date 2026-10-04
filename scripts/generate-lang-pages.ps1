@@ -56,9 +56,10 @@ foreach ($pageProp in $cfg.pages.PSObject.Properties) {
     $html = [regex]::Replace($html, '(<meta name="viewport"[^\n]*\n)', { param($m) $m.Groups[1].Value + $seoText })
 
     # assets / images / data: relative -> absolute (the page now lives one folder deeper)
-    $html = [regex]::Replace($html, '(src|href)="(assets|images|data)/', '$1="/$2/')
-    # siteRoot passed to renderGlobalNav / renderGlobalFooter: "./" -> "/"
-    $html = $html.Replace(', "./"', ', "/"')
+    # (works for any source depth: "assets/", "../assets/", "../../assets/" ...)
+    $html = [regex]::Replace($html, '(src|href)="(?:\.\./)*(?:\./)?(assets|images|data)/', '$1="/$2/')
+    # siteRoot passed to renderGlobalNav / renderGlobalFooter / initXxxPage: "./", "../", "../../" -> "/"
+    $html = [regex]::Replace($html, ', "(?:\./|(?:\.\./)+)"', ', "/"')
 
     # note for maintainers, right after the doctype
     $html = [regex]::Replace($html, '^(<!DOCTYPE html>\n)', { param($m) $m.Groups[1].Value + "<!-- " + $cfg.generatedNote + " -->`n" })
