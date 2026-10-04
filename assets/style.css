@@ -1218,16 +1218,28 @@ body > main {
   }
 }
 
-/* Tallersページ(workshops/index.html)の準備中メッセージだけ、スマホ幅で
-   文字をほんの少し小さく・行間を詰め・文章の最大幅を少し絞って、2行の
-   横幅のバランスを整える。縦位置(.intro-midのmargin-top)は変えない。
-   Contacte・Novetatsなど他ページとPC幅(800px以上)は変更しない。 */
+/* Tallersページ(workshops/index.html)の準備中メッセージは、スマホ幅で
+   文章の最大幅だけ少し絞り、文字サイズ(16px)・行間(27.2px)は
+   Novetats・Contacteと同じにする(最初の文字の位置を揃えるため)。
+   他ページとPC幅(800px以上)は変更しない。 */
 @media (max-width: 799px) {
   .intro-workshops p {
     max-width: 300px;
     margin: 0 auto;
-    font-size: 0.9rem;
-    line-height: 1.55;
+    font-size: 1rem;
+    line-height: 1.7;
+  }
+
+  /* スペイン語だけ、2文目が16pxで326px必要なため、300pxの最大幅では
+     「fecha.」が3行目に落ちる。左右の余白を8pxに詰め、最大幅の制限を
+     外して2行に収める(文字サイズ・行間・他言語は変更しない)。 */
+  html[lang="es"] .intro-workshops {
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+
+  html[lang="es"] .intro-workshops p {
+    max-width: none;
   }
 }
 
