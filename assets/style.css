@@ -1528,6 +1528,22 @@ body > main {
   color: var(--color-heading);
 }
 
+/* PCは語順「Cuina Japonesa / Fermentació / Miso」、スマホは「Miso / Fermentació」+改行+「Cuina Japonesa」の2行 */
+.home-intro-tagline .tagline-mobile {
+  display: none;
+  white-space: pre-line;
+}
+
+@media (max-width: 799px) {
+  .home-intro-tagline .tagline-pc {
+    display: none;
+  }
+
+  .home-intro-tagline .tagline-mobile {
+    display: inline;
+  }
+}
+
 .home-intro-lead {
   margin: 22px 0 0;
   font-family: "Shippori Mincho", serif;

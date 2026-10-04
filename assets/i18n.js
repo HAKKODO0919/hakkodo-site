@@ -57,6 +57,7 @@ function langFlagHtml(code) {
 const UI_STRINGS = {
   ja: {
     homeIntroTagline: "Japanese Food / Fermentation / Miso",
+    homeIntroTaglineMobile: "Japanese Food / Fermentation / Miso",
     titleSuffix: "商品情報",
     topTitle: "商品一覧",
     topIntro: "気になる商品を選んでください",
@@ -130,6 +131,7 @@ const UI_STRINGS = {
     // 幅が足りず折り返すときは「Cuina Japonesa /」「Fermentació / Miso」の2行にするため、
     // 「Japonesa」と「/」の間、「Fermentació / Miso」の間を改行されない空白(\u00a0)にしている。
     homeIntroTagline: "Cuina Japonesa\u00a0/ Fermentació\u00a0/\u00a0Miso",
+    homeIntroTaglineMobile: "Miso / Fermentació\nCuina Japonesa",
     titleSuffix: "Informació del producte",
     topTitle: "Llista de productes",
     topIntro: "Un producte per descobrir.",
@@ -201,6 +203,7 @@ const UI_STRINGS = {
   },
   es: {
     homeIntroTagline: "Cocina Japonesa / Fermentación / Miso",
+    homeIntroTaglineMobile: "Miso / Fermentación\nCocina Japonesa",
     titleSuffix: "Información del producto",
     topTitle: "Lista de productos",
     topIntro: "Un producto por descubrir.",
@@ -272,6 +275,7 @@ const UI_STRINGS = {
   },
   en: {
     homeIntroTagline: "Japanese Food / Fermentation / Miso",
+    homeIntroTaglineMobile: "Miso / Fermentation\nJapanese Cuisine",
     titleSuffix: "Product Information",
     topTitle: "Product List",
     topIntro: "Choose a product you're interested in",
