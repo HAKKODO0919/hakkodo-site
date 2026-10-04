@@ -127,7 +127,9 @@ const UI_STRINGS = {
     contentComingSoon: "詳しい内容は近日公開予定です。",
   },
   ca: {
-    homeIntroTagline: "Cuina Japonesa / Fermentació / Miso",
+    // 幅が足りず折り返すときは「Cuina Japonesa /」「Fermentació / Miso」の2行にするため、
+    // 「Japonesa」と「/」の間、「Fermentació / Miso」の間を改行されない空白(\u00a0)にしている。
+    homeIntroTagline: "Cuina Japonesa\u00a0/ Fermentació\u00a0/\u00a0Miso",
     titleSuffix: "Informació del producte",
     topTitle: "Llista de productes",
     topIntro: "Un producte per descobrir.",
