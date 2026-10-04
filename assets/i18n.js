@@ -131,7 +131,7 @@ const UI_STRINGS = {
     // 幅が足りず折り返すときは「Cuina Japonesa /」「Fermentació / Miso」の2行にするため、
     // 「Japonesa」と「/」の間、「Fermentació / Miso」の間を改行されない空白(\u00a0)にしている。
     homeIntroTagline: "Cuina Japonesa\u00a0/ Fermentació\u00a0/\u00a0Miso",
-    homeIntroTaglineMobile: "Miso / Fermentació\nCuina Japonesa",
+    homeIntroTaglineMobile: "Cuina Japonesa\nFermentació / Miso",
     titleSuffix: "Informació del producte",
     topTitle: "Llista de productes",
     topIntro: "Un producte per descobrir.",
@@ -203,7 +203,7 @@ const UI_STRINGS = {
   },
   es: {
     homeIntroTagline: "Cocina Japonesa / Fermentación / Miso",
-    homeIntroTaglineMobile: "Miso / Fermentación\nCocina Japonesa",
+    homeIntroTaglineMobile: "Cocina Japonesa\nFermentación / Miso",
     titleSuffix: "Información del producto",
     topTitle: "Lista de productos",
     topIntro: "Un producto por descubrir.",
@@ -275,7 +275,7 @@ const UI_STRINGS = {
   },
   en: {
     homeIntroTagline: "Japanese Food / Fermentation / Miso",
-    homeIntroTaglineMobile: "Miso / Fermentation\nJapanese Cuisine",
+    homeIntroTaglineMobile: "Japanese Cuisine\nFermentation / Miso",
     titleSuffix: "Product Information",
     topTitle: "Product List",
     topIntro: "Choose a product you're interested in",
