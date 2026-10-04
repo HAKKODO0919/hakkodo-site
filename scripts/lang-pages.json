@@ -40,6 +40,60 @@
         "description": "日本の味噌をいつもの食事に。HAKKODOの味噌を使った、すぐに実践できる簡単レシピ。"
       }
     },
+    "recipes/miso-dressing/index.html": {
+      "ca": {
+        "title": "Vinagreta de miso",
+        "description": "Vinagreta de miso: una vinagreta senzilla i versàtil, perfecta per amanir verdures."
+      },
+      "es": {
+        "title": "Vinagreta de miso",
+        "description": "Vinagreta de miso: una vinagreta sencilla y versátil, perfecta para aliñar verduras."
+      },
+      "en": {
+        "title": "Miso Dressing",
+        "description": "Miso Dressing: a simple all-purpose dressing — just drizzle it over vegetables."
+      },
+      "ja": {
+        "title": "味噌ドレッシング",
+        "description": "味噌ドレッシング：野菜にかけるだけの、簡単な万能ドレッシング。"
+      }
+    },
+    "recipes/miso-mayo/index.html": {
+      "ca": {
+        "title": "Maionesa de miso",
+        "description": "Maionesa de miso: una maionesa de miso cremosa i plena de sabor, ideal per a carn, peix i verdures."
+      },
+      "es": {
+        "title": "Mayonesa de miso",
+        "description": "Mayonesa de miso: una mayonesa de miso cremosa y llena de sabor, ideal para carne, pescado y verduras."
+      },
+      "en": {
+        "title": "Miso Mayonnaise",
+        "description": "Miso Mayonnaise: a rich and creamy miso mayonnaise, perfect with meat, fish and vegetables."
+      },
+      "ja": {
+        "title": "味噌マヨネーズ",
+        "description": "味噌マヨネーズ：お肉や魚、野菜に合うコクのある味噌マヨネーズ。"
+      }
+    },
+    "recipes/cracker-miso/index.html": {
+      "ca": {
+        "title": "Galetes salades amb miso",
+        "description": "Galetes salades amb miso: una recepta senzilla amb galetes salades, formatge Camembert i miso."
+      },
+      "es": {
+        "title": "Galletas saladas con miso",
+        "description": "Galletas saladas con miso: una receta sencilla con galletas saladas, queso Camembert y miso."
+      },
+      "en": {
+        "title": "Crackers with Miso",
+        "description": "Crackers with Miso: a simple recipe with crackers, Camembert cheese and miso."
+      },
+      "ja": {
+        "title": "クラッカーと味噌",
+        "description": "クラッカーと味噌：クラッカーにカマンベールチーズと味噌をのせるだけの簡単レシピ。"
+      }
+    },
     "products/aka-miso/index.html": {
       "ca": {
         "title": "Miso vermell cru madurat | Informació del producte",
