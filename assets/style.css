@@ -1202,6 +1202,14 @@ body > main {
   margin-top: 16vh;
 }
 
+/* スマホ幅(799px以下)では、画面の高さに比例する16vhの余白をなくし、
+   他のページと同じく、ヘッダーからの距離を.pageの上余白(56px)だけにする。 */
+@media (max-width: 799px) {
+  .intro-mid {
+    margin-top: 0;
+  }
+}
+
 /* PC幅(800px以上)だけ、案内・準備中の文章ブロックをさらに50px下げる
    (Tallers・Novetats・Contacteの3ページ共通)。スマホ幅は変更しない。 */
 @media (min-width: 800px) {
