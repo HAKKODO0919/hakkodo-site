@@ -56,8 +56,7 @@ function langFlagHtml(code) {
 // サイト共通の文言。新しい言語を増やす場合はここにキーを追加します。
 const UI_STRINGS = {
   ja: {
-    homeIntroTagline: "Japanese Food / Fermentation / Miso",
-    homeIntroTaglineMobile: "Japanese Food / Fermentation / Miso",
+    homeIntroTagline: "Japanese Food\nMiso / Fermentation",
     titleSuffix: "商品情報",
     topTitle: "商品一覧",
     topIntro: "気になる商品を選んでください",
@@ -128,10 +127,7 @@ const UI_STRINGS = {
     contentComingSoon: "詳しい内容は近日公開予定です。",
   },
   ca: {
-    // 幅が足りず折り返すときは「Cuina Japonesa /」「Fermentació / Miso」の2行にするため、
-    // 「Japonesa」と「/」の間、「Fermentació / Miso」の間を改行されない空白(\u00a0)にしている。
-    homeIntroTagline: "Cuina Japonesa\u00a0/ Fermentació\u00a0/\u00a0Miso",
-    homeIntroTaglineMobile: "Cuina Japonesa\nMiso / Fermentació",
+    homeIntroTagline: "Cuina Japonesa\nMiso / Fermentació",
     titleSuffix: "Informació del producte",
     topTitle: "Llista de productes",
     topIntro: "Un producte per descobrir.",
@@ -202,8 +198,7 @@ const UI_STRINGS = {
     contentComingSoon: "El contingut detallat estarà disponible properament.",
   },
   es: {
-    homeIntroTagline: "Cocina Japonesa / Fermentación / Miso",
-    homeIntroTaglineMobile: "Cocina Japonesa\nMiso / Fermentación",
+    homeIntroTagline: "Cocina Japonesa\nMiso / Fermentación",
     titleSuffix: "Información del producto",
     topTitle: "Lista de productos",
     topIntro: "Un producto por descubrir.",
@@ -274,8 +269,7 @@ const UI_STRINGS = {
     contentComingSoon: "El contenido detallado estará disponible próximamente.",
   },
   en: {
-    homeIntroTagline: "Japanese Food / Fermentation / Miso",
-    homeIntroTaglineMobile: "Japanese Cuisine\nMiso / Fermentation",
+    homeIntroTagline: "Japanese Cuisine\nMiso / Fermentation",
     titleSuffix: "Product Information",
     topTitle: "Product List",
     topIntro: "Choose a product you're interested in",
