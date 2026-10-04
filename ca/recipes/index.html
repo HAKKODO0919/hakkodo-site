@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<!-- このファイルは scripts/generate-lang-pages.ps1 が元のページから自動生成しています。直接編集せず、元のページ(index.html など)を編集してから再生成してください。 -->
+<html lang="ca">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="El miso japonès, per al dia a dia. Receptes senzilles amb miso de HAKKODO.">
+<link rel="canonical" href="https://hakkodo.cat/ca/recipes/">
+<link rel="alternate" hreflang="ca" href="https://hakkodo.cat/ca/recipes/">
+<link rel="alternate" hreflang="es" href="https://hakkodo.cat/es/recipes/">
+<link rel="alternate" hreflang="en" href="https://hakkodo.cat/en/recipes/">
+<link rel="alternate" hreflang="ja" href="https://hakkodo.cat/ja/recipes/">
+<link rel="alternate" hreflang="x-default" href="https://hakkodo.cat/ca/recipes/">
+<script>window.PAGE_LANG = "ca";</script>
+<title>Llista de receptes</title>
+<link rel="stylesheet" href="/assets/style.css">
+</head>
+<body>
+  <header class="home-header">
+    <div id="global-nav-root"></div>
+    <div id="lang-switcher-root" class="lang-switcher"></div>
+  </header>
+
+  <main class="page">
+    <div class="intro">
+      <h1 data-i18n="recipesTitle">レシピ一覧</h1>
+      <p data-i18n="recipesIntro"></p>
+    </div>
+
+    <div id="recipe-list-root">...</div>
+  </main>
+
+  <footer class="global-footer" id="global-footer-root"></footer>
+
+  <script src="/data/recipes/miso-dressing.js"></script>
+  <script>window.RECIPE_MISO_DRESSING = window.RECIPE_DATA;</script>
+  <script src="/data/recipes/miso-mayo.js"></script>
+  <script>window.RECIPE_MISO_MAYO = window.RECIPE_DATA;</script>
+  <script src="/data/recipes/miso-soup.js"></script>
+  <script>window.RECIPE_MISO_SOUP = window.RECIPE_DATA;</script>
+  <script src="/data/recipes/miso-minestrone.js"></script>
+  <script>window.RECIPE_MISO_MINESTRONE = window.RECIPE_DATA;</script>
+  <script src="/data/recipes/cookie.js"></script>
+  <script>window.RECIPE_COOKIE = window.RECIPE_DATA;</script>
+  <script src="/data/recipes/cracker-miso.js"></script>
+  <script>window.RECIPE_CRACKER_MISO = window.RECIPE_DATA;</script>
+  <script src="/assets/i18n.js"></script>
+  <script src="/assets/product.js"></script>
+  <script src="/assets/recipe.js"></script>
+  <script src="/assets/nav.js"></script>
+  <script>
+    renderGlobalNav(document.getElementById("global-nav-root"), "/", "recipes");
+    renderGlobalFooter(document.getElementById("global-footer-root"), "/");
+    // レシピを1件追加したら、ここに
+    // { href: "レシピ名/index.html", data: window.RECIPE_DATA相当 }
+    // の形で1行増やしていきます(data.category にカテゴリーを持たせます)。
+    // 存在しないカテゴリーは目次に出ないので、カテゴリーも
+    // レシピを追加するたびに自然に増えていきます。
+    initRecipeList([
+      { href: "miso-dressing/index.html", data: window.RECIPE_MISO_DRESSING },
+      { href: "miso-mayo/index.html", data: window.RECIPE_MISO_MAYO },
+      // お味噌汁・味噌ミネストローネ・クッキーは次回改めて掲載するまで一時的に非表示。
+      // 掲載するタイミングで下の行を戻すだけで再度一覧に表示されます。
+      // { href: "miso-soup/index.html", data: window.RECIPE_MISO_SOUP },
+      // { href: "miso-minestrone/index.html", data: window.RECIPE_MISO_MINESTRONE },
+      // { href: "cookie/index.html", data: window.RECIPE_COOKIE },
+      { href: "cracker-miso/index.html", data: window.RECIPE_CRACKER_MISO }
+    ], "/");
+  </script>
+</body>
+</html>

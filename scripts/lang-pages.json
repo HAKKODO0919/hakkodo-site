@@ -22,6 +22,24 @@
         "description": "HAKKODO：日本の食、発酵、味噌。米麹から丁寧に育てる、HAKKODOの味噌。"
       }
     },
+    "recipes/index.html": {
+      "ca": {
+        "title": "Llista de receptes",
+        "description": "El miso japonès, per al dia a dia. Receptes senzilles amb miso de HAKKODO."
+      },
+      "es": {
+        "title": "Lista de recetas",
+        "description": "El miso japonés, para el día a día. Recetas sencillas con miso de HAKKODO."
+      },
+      "en": {
+        "title": "Recipe List",
+        "description": "Japanese miso, for everyday cooking. Simple recipes with HAKKODO's miso."
+      },
+      "ja": {
+        "title": "レシピ一覧",
+        "description": "日本の味噌をいつもの食事に。HAKKODOの味噌を使った、すぐに実践できる簡単レシピ。"
+      }
+    },
     "products/aka-miso/index.html": {
       "ca": {
         "title": "Miso vermell cru madurat | Informació del producte",
