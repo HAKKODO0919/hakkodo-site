@@ -14,7 +14,7 @@ window.RECIPE_DATA = {
     ja: {
       title: "味噌マヨネーズ",
       heroAlt: "味噌マヨネーズ",
-      listIntro: "お肉やお魚、野菜スティックに添える、コクのある味噌マヨネーズ。",
+      listIntro: "お肉や魚、野菜に合うコクのある味噌マヨネーズ。",
       ingredients: [
         "マヨネーズ：30g",
         "味噌：8g",
@@ -30,7 +30,7 @@ window.RECIPE_DATA = {
     ca: {
       title: "Maionesa de miso",
       heroAlt: "Maionesa de miso",
-      listIntro: "Una maionesa de miso amb molt de gust, Ideal per acompanyar carn, peix o bastonets de verdura.",
+      listIntro: "Una maionesa de miso cremosa i plena de sabor, Ideal per a carn, peix i verdures.",
       ingredients: [
         "Maionesa: 30 g",
         "Miso: 8 g",
@@ -46,7 +46,7 @@ window.RECIPE_DATA = {
     es: {
       title: "Mayonesa de miso",
       heroAlt: "Mayonesa de miso",
-      listIntro: "Una mayonesa de miso con mucho sabor, Ideal para acompañar carne, pescado o bastones de verdura.",
+      listIntro: "Una mayonesa de miso cremosa y llena de sabor, Ideal para carne, pescado y verduras.",
       ingredients: [
         "Mayonesa: 30 g",
         "Miso: 8 g",
@@ -62,7 +62,7 @@ window.RECIPE_DATA = {
     en: {
       title: "Miso Mayonnaise",
       heroAlt: "Miso mayonnaise",
-      listIntro: "A rich miso mayonnaise, great alongside meat, fish, or vegetable sticks.",
+      listIntro: "A rich and creamy miso mayonnaise, perfect with meat, fish and vegetables.",
       ingredients: [
         "Mayonnaise: 30g",
         "Miso: 8g",
