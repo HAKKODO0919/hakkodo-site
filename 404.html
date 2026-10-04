@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>404 | HAKKODO</title>
+<meta name="robots" content="noindex">
+<!-- 存在しないURLで表示されるページ(Cloudflare Pagesは404ステータスで返す)。
+     どの階層のURLで表示されても読み込みが壊れないよう、
+     CSS・JS・画像は「/」から始まる絶対パスで指定している。 -->
+<link rel="stylesheet" href="/assets/style.css">
+</head>
+<body>
+  <header class="home-header">
+    <div id="global-nav-root"></div>
+    <div id="lang-switcher-root" class="lang-switcher"></div>
+  </header>
+
+  <main class="page">
+    <div class="intro intro-mid">
+      <p id="not-found-message" style="white-space: pre-line;"></p>
+      <p class="contact-email"><a id="not-found-link" href="/"></a></p>
+    </div>
+  </main>
+
+  <footer class="global-footer" id="global-footer-root"></footer>
+
+  <script src="/assets/i18n.js"></script>
+  <script src="/assets/product.js"></script>
+  <script src="/assets/nav.js"></script>
+  <script>
+    // この文言は i18n.js に追加せず、このページ内だけで持つ(既存の4言語文言を変更しないため)。
+    const NOT_FOUND_STRINGS = {
+      ca: { title: "Pàgina no trobada", message: "No s'ha trobat la pàgina.", link: "Tornar a l'inici" },
+      es: { title: "Página no encontrada", message: "No se ha encontrado la página.", link: "Volver al inicio" },
+      en: { title: "Page not found", message: "The page could not be found.", link: "Back to home" },
+      ja: { title: "ページが見つかりません", message: "ページが見つかりませんでした。", link: "トップページへ戻る" }
+    };
+
+    function render() {
+      const lang = getCurrentLang();
+      applyUiStrings(lang);
+      const s = NOT_FOUND_STRINGS[lang] || NOT_FOUND_STRINGS.ca;
+      document.title = s.title + " | HAKKODO";
+      document.getElementById("not-found-message").textContent = s.message;
+      document.getElementById("not-found-link").textContent = s.link;
+    }
+    renderGlobalNav(document.getElementById("global-nav-root"), "/", "");
+    renderGlobalFooter(document.getElementById("global-footer-root"), "/");
+    renderLangSwitcher(document.getElementById("lang-switcher-root"), render);
+    render();
+  </script>
+</body>
+</html>
