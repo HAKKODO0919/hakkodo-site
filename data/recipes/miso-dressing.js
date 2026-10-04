@@ -11,7 +11,7 @@ window.RECIPE_DATA = {
   translations: {
     ja: {
       title: "味噌ドレッシング",
-      intro: "野菜にかけるだけの、簡単な万能ドレッシング。",
+      listIntro: "野菜にかけるだけの、簡単な万能ドレッシング。",
       heroAlt: "味噌ドレッシング",
       ingredients: [
         "オリーブオイル 24g",
@@ -30,7 +30,7 @@ window.RECIPE_DATA = {
     },
     ca: {
       title: "Vinagreta de miso",
-      intro: "Una vinagreta senzilla i versàtil, perfecta per amanir verdures.",
+      listIntro: "Una vinagreta senzilla i versàtil, perfecta per amanir verdures.",
       heroAlt: "Vinagreta de miso",
       ingredients: [
         "Oli d'oliva 24 g",
@@ -49,7 +49,7 @@ window.RECIPE_DATA = {
     },
     es: {
       title: "Vinagreta de miso",
-      intro: "Una vinagreta sencilla y versátil, perfecta para aliñar verduras.",
+      listIntro: "Una vinagreta sencilla y versátil, perfecta para aliñar verduras.",
       heroAlt: "Vinagreta de miso",
       ingredients: [
         "Aceite de oliva 24 g",
@@ -68,7 +68,7 @@ window.RECIPE_DATA = {
     },
     en: {
       title: "Miso Dressing",
-      intro: "A simple all-purpose dressing — just drizzle it over vegetables.",
+      listIntro: "A simple all-purpose dressing — just drizzle it over vegetables.",
       heroAlt: "Miso dressing",
       ingredients: [
         "Olive oil 24g",
