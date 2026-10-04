@@ -344,7 +344,25 @@ const UI_STRINGS = {
 
 const LANG_STORAGE_KEY = "siteLang";
 
+// 言語別の静的ページ(/ca/ /es/ /en/ /ja/)が、<head>などで window.PAGE_LANG = "es"
+// のように指定したときだけ、そのページの言語をlocalStorageより優先して固定する。
+// PAGE_LANGが無い(既存URLの)ページでは null を返し、これまでと完全に同じ動作になる。
+function getPageLang() {
+  const lang = window.PAGE_LANG;
+  return SUPPORTED_LANGS.includes(lang) ? lang : null;
+}
+
+// ページ同士のリンク用のルート。画像などの素材用の siteRoot とは分けて使う。
+// 言語固定ページでは "/es/" のように言語の接頭辞付きにし、
+// PAGE_LANGが無いページでは渡された siteRoot をそのまま返す(既存の動作のまま)。
+function pageLinkRoot(siteRoot) {
+  const lang = getPageLang();
+  return lang ? "/" + lang + "/" : siteRoot;
+}
+
 function getCurrentLang() {
+  const pageLang = getPageLang();
+  if (pageLang) return pageLang;
   try {
     const saved = localStorage.getItem(LANG_STORAGE_KEY);
     if (SUPPORTED_LANGS.includes(saved)) return saved;
@@ -426,6 +444,16 @@ function renderLangSwitcher(container, onChange) {
     btn.addEventListener("click", () => {
       const code = btn.getAttribute("data-lang");
       setCurrentLang(code);
+      // 言語固定ページ(/es/... など)では、同じページの別言語URLへ移動する。
+      // 接頭辞が見つからないなど移動先を作れないときは、下の通常の切り替えにまかせる。
+      const pageLang = getPageLang();
+      if (pageLang && code !== pageLang) {
+        const nextPath = location.pathname.replace(new RegExp("^/" + pageLang + "(?=/|$)"), "/" + code);
+        if (nextPath !== location.pathname) {
+          location.href = nextPath + location.search + location.hash;
+          return;
+        }
+      }
       toggleBtn.innerHTML = currentButtonHtml(code);
       container.querySelectorAll(".lang-options li").forEach((li) => {
         li.setAttribute("aria-selected", li.querySelector(".lang-option-btn").getAttribute("data-lang") === code ? "true" : "false");

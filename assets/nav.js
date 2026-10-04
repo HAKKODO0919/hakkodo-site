@@ -30,9 +30,12 @@ const NAV_ITEMS = [
 // currentKey に今のページの key を渡すと、そのリンクだけ強調表示される。
 function renderGlobalNav(container, siteRoot, currentKey) {
   if (!container) return;
+  // ページ同士のリンクだけ linkRoot を使う(画像は siteRoot のまま)。
+  // 言語固定ページ(PAGE_LANGあり)では "/es/" など、既存ページでは siteRoot と同じ値になる。
+  const linkRoot = pageLinkRoot(siteRoot);
   const itemsHtml = NAV_ITEMS.map((item) => {
     const activeClass = item.key === currentKey ? " active" : "";
-    return `<li><a class="global-nav-link${activeClass}" href="${escapeHtml(siteRoot + item.href)}" data-i18n="${item.i18nKey}"></a></li>`;
+    return `<li><a class="global-nav-link${activeClass}" href="${escapeHtml(linkRoot + item.href)}" data-i18n="${item.i18nKey}"></a></li>`;
   }).join("");
 
   // ブランド表示(HAKKODOロゴ＋顔ロゴ)は全ページ共通。
@@ -41,7 +44,7 @@ function renderGlobalNav(container, siteRoot, currentKey) {
   // ヘッダーを統一するため、ここで最初から画像として出力する。
   const brandActive = currentKey === "top" ? " active" : "";
   container.innerHTML = `
-    <a class="global-nav-brand${brandActive}" href="${escapeHtml(siteRoot + "index.html")}">
+    <a class="global-nav-brand${brandActive}" href="${escapeHtml(linkRoot + "index.html")}">
       <img src="${escapeHtml(siteRoot + "images/aka-miso/hakkodo-logo-crop-transparent.png")}" alt="HAKKODO" class="home-header-logo">
       <img src="${escapeHtml(siteRoot + "images/aka-miso/hakkodo-face-logo-transparent.png")}" alt="" class="home-header-face-logo">
     </a>
@@ -52,8 +55,9 @@ function renderGlobalNav(container, siteRoot, currentKey) {
 // トップページ本体に出す、大きめのセクション導線(既存の .recipe-btn を流用)。
 function renderHomeNav(container, siteRoot) {
   if (!container) return;
+  const linkRoot = pageLinkRoot(siteRoot);
   container.innerHTML = NAV_ITEMS.map(
-    (item) => `<a class="recipe-btn" href="${escapeHtml(siteRoot + item.href)}" data-i18n="${item.i18nKey}"></a>`
+    (item) => `<a class="recipe-btn" href="${escapeHtml(linkRoot + item.href)}" data-i18n="${item.i18nKey}"></a>`
   ).join("");
 }
 
