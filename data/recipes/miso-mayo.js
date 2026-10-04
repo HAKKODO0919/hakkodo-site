@@ -30,7 +30,7 @@ window.RECIPE_DATA = {
     ca: {
       title: "Maionesa de miso",
       heroAlt: "Maionesa de miso",
-      listIntro: "Una maionesa de miso amb molt de gust, ideal per acompanyar carn, peix o bastonets de verdura.",
+      listIntro: "Una maionesa de miso amb molt de gust, Ideal per acompanyar carn, peix o bastonets de verdura.",
       ingredients: [
         "Maionesa: 30 g",
         "Miso: 8 g",
@@ -46,7 +46,7 @@ window.RECIPE_DATA = {
     es: {
       title: "Mayonesa de miso",
       heroAlt: "Mayonesa de miso",
-      listIntro: "Una mayonesa de miso con mucho sabor, ideal para acompañar carne, pescado o bastones de verdura.",
+      listIntro: "Una mayonesa de miso con mucho sabor, Ideal para acompañar carne, pescado o bastones de verdura.",
       ingredients: [
         "Mayonesa: 30 g",
         "Miso: 8 g",
