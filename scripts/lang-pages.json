@@ -1,0 +1,26 @@
+{
+  "siteUrl": "https://hakkodo.cat",
+  "defaultLang": "ca",
+  "langs": ["ca", "es", "en", "ja"],
+  "generatedNote": "このファイルは scripts/generate-lang-pages.ps1 が元のページから自動生成しています。直接編集せず、元のページ(index.html など)を編集してから再生成してください。",
+  "pages": {
+    "index.html": {
+      "ca": {
+        "title": "HAKKODO | Cuina japonesa, fermentació i miso",
+        "description": "HAKKODO: cuina japonesa, fermentació i miso. El miso de HAKKODO, elaborat amb cura a partir del koji d'arròs."
+      },
+      "es": {
+        "title": "HAKKODO | Cocina japonesa, fermentación y miso",
+        "description": "HAKKODO: cocina japonesa, fermentación y miso. El miso de HAKKODO, elaborado con esmero a partir del koji de arroz."
+      },
+      "en": {
+        "title": "HAKKODO | Japanese cuisine, fermentation and miso",
+        "description": "HAKKODO: Japanese cuisine, fermentation and miso. HAKKODO's miso, carefully crafted from rice koji."
+      },
+      "ja": {
+        "title": "HAKKODO | 日本の食・発酵・味噌",
+        "description": "HAKKODO：日本の食、発酵、味噌。米麹から丁寧に育てる、HAKKODOの味噌。"
+      }
+    }
+  }
+}

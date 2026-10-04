@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<!-- このファイルは scripts/generate-lang-pages.ps1 が元のページから自動生成しています。直接編集せず、元のページ(index.html など)を編集してから再生成してください。 -->
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="HAKKODO: cocina japonesa, fermentación y miso. El miso de HAKKODO, elaborado con esmero a partir del koji de arroz.">
+<link rel="canonical" href="https://hakkodo.cat/es/">
+<link rel="alternate" hreflang="ca" href="https://hakkodo.cat/ca/">
+<link rel="alternate" hreflang="es" href="https://hakkodo.cat/es/">
+<link rel="alternate" hreflang="en" href="https://hakkodo.cat/en/">
+<link rel="alternate" hreflang="ja" href="https://hakkodo.cat/ja/">
+<link rel="alternate" hreflang="x-default" href="https://hakkodo.cat/ca/">
+<script>window.PAGE_LANG = "es";</script>
+<title>HAKKODO | Cocina japonesa, fermentación y miso</title>
+<link rel="stylesheet" href="/assets/style.css">
+</head>
+<body class="home-page">
+  <header class="home-header">
+    <div id="global-nav-root"></div>
+    <div id="lang-switcher-root" class="lang-switcher"></div>
+  </header>
+
+  <main class="home">
+    <!-- 1. 大きなヒーロー写真 -->
+    <div class="home-hero">
+      <img class="home-hero-img home-hero-img-jars" src="/images/aka-miso/main-v6.jpg" alt="">
+    </div>
+
+    <!-- 2. ブランド紹介(HAKKODOのロゴ名はヘッダーにあるため、ここでは表示しない) -->
+    <section class="home-intro">
+      <p class="home-intro-tagline" data-i18n="homeIntroTagline"></p>
+      <p class="home-intro-lead" id="home-intro-lead"></p>
+    </section>
+
+    <!-- 3. 味噌・こだわり -->
+    <section class="home-feature">
+      <div class="home-feature-media">
+        <img id="home-feature-miso-img" src="/images/aka-miso/home-feature-miso-v5.webp" alt="">
+      </div>
+      <div class="home-feature-body">
+        <h2 class="home-feature-title" data-i18n="homeMisoTitle"></h2>
+        <p class="home-feature-text" id="home-feature-miso-text"></p>
+        <a class="home-feature-link" href="products/aka-miso/index.html" data-i18n="homeMisoLink"></a>
+      </div>
+    </section>
+
+    <!-- 4. ワークショップ -->
+    <section class="home-feature home-feature--reverse">
+      <div class="home-feature-media">
+        <img src="/images/aka-miso/home-feature-workshop.jpg" alt="">
+      </div>
+      <div class="home-feature-body">
+        <h2 class="home-feature-title" data-i18n="navWorkshops"></h2>
+        <p class="home-feature-text" data-i18n="workshopsIntro"></p>
+        <a class="home-feature-link" href="workshops/index.html" data-i18n="homeWorkshopLink"></a>
+      </div>
+    </section>
+
+    <!-- 5. レシピ -->
+    <section class="home-feature">
+      <div class="home-feature-media">
+        <img src="/images/aka-miso/home-feature-recipe-v3.webp" alt="">
+      </div>
+      <div class="home-feature-body">
+        <h2 class="home-feature-title" data-i18n="navRecipes"></h2>
+        <p class="home-feature-text" data-i18n="recipesIntro"></p>
+        <a class="home-feature-link" href="recipes/index.html" data-i18n="viewRecipesLink"></a>
+      </div>
+    </section>
+
+    <!-- 5.5 新着情報(内容は今後追加。今は空の状態を表示するだけの構造) -->
+    <section class="home-news">
+      <h2 class="home-news-title" data-i18n="navNews"></h2>
+      <!-- お知らせを追加するときは、この中を news/index.html と同じ
+           日付・タイトル・本文の構造(news.js の renderNewsItem 相当)で
+           置き換える想定。今は内容が無いので空の案内文だけを表示する。 -->
+      <p class="home-news-empty" data-i18n="homeNewsEmpty"></p>
+      <a class="home-feature-link" href="news/index.html" data-i18n="homeNewsLink"></a>
+    </section>
+
+  </main>
+
+  <footer class="global-footer" id="global-footer-root"></footer>
+
+  <script src="/data/aka-miso.js"></script>
+  <script src="/assets/i18n.js"></script>
+  <script src="/assets/product.js"></script>
+  <script src="/assets/nav.js"></script>
+  <script>
+    // 商品データ(data/aka-miso.js)にすでにある文章・写真だけを再利用して、
+    // トップページの「味噌・こだわり」欄を作る。新しい文章は作らず、
+    // 商品ページと同じ内容をそのまま流用している。
+    function renderHomeContent(lang) {
+      const data = window.PRODUCT_DATA;
+      const tr = data.translations[lang] || data.translations.ja;
+
+      const lead = (tr.story && tr.story.closing && tr.story.closing.main) || "";
+      document.getElementById("home-intro-lead").textContent = lead;
+
+      document.getElementById("home-feature-miso-text").textContent = tr.tagline || "";
+    }
+
+    function render() {
+      const lang = getCurrentLang();
+      applyUiStrings(lang);
+      renderHomeContent(lang);
+    }
+    renderGlobalNav(document.getElementById("global-nav-root"), "/", "top");
+    renderGlobalFooter(document.getElementById("global-footer-root"), "/");
+    renderLangSwitcher(document.getElementById("lang-switcher-root"), render);
+    render();
+  </script>
+</body>
+</html>
