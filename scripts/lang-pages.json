@@ -22,6 +22,60 @@
         "description": "HAKKODO：日本の食、発酵、味噌。米麹から丁寧に育てる、HAKKODOの味噌。"
       }
     },
+    "workshops/index.html": {
+      "ca": {
+        "title": "Tallers",
+        "description": "Tallers de cuina japonesa de HAKKODO. Les dates es comunicaran quan es confirmin."
+      },
+      "es": {
+        "title": "Talleres",
+        "description": "Talleres de cocina japonesa de HAKKODO. Las fechas se comunicarán cuando se confirmen."
+      },
+      "en": {
+        "title": "Workshops",
+        "description": "HAKKODO Japanese cooking workshops. Dates will be announced once confirmed."
+      },
+      "ja": {
+        "title": "ワークショップ",
+        "description": "HAKKODOの日本料理ワークショップ。開催が決まりしだいお知らせします。"
+      }
+    },
+    "news/index.html": {
+      "ca": {
+        "title": "Novetats",
+        "description": "Novetats de HAKKODO."
+      },
+      "es": {
+        "title": "Novedades",
+        "description": "Novedades de HAKKODO."
+      },
+      "en": {
+        "title": "News",
+        "description": "News from HAKKODO."
+      },
+      "ja": {
+        "title": "新着情報",
+        "description": "HAKKODOからのお知らせ。"
+      }
+    },
+    "contact/index.html": {
+      "ca": {
+        "title": "Contacte",
+        "description": "Contacte amb HAKKODO: per a consultes, es pot escriure per correu electrònic."
+      },
+      "es": {
+        "title": "Contacto",
+        "description": "Contacto con HAKKODO: para consultas, se puede escribir por correo electrónico."
+      },
+      "en": {
+        "title": "Contact",
+        "description": "Contact HAKKODO: for any questions, please contact us by email."
+      },
+      "ja": {
+        "title": "お問い合わせ",
+        "description": "HAKKODOへのお問い合わせ。ご質問・お問い合わせは、メールにてお願いいたします。"
+      }
+    },
     "recipes/index.html": {
       "ca": {
         "title": "Llista de receptes",

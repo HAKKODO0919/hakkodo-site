@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<!-- このファイルは scripts/generate-lang-pages.ps1 が元のページから自動生成しています。直接編集せず、元のページ(index.html など)を編集してから再生成してください。 -->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="HAKKODO Japanese cooking workshops. Dates will be announced once confirmed.">
+<link rel="canonical" href="https://hakkodo.cat/en/workshops/">
+<link rel="alternate" hreflang="ca" href="https://hakkodo.cat/ca/workshops/">
+<link rel="alternate" hreflang="es" href="https://hakkodo.cat/es/workshops/">
+<link rel="alternate" hreflang="en" href="https://hakkodo.cat/en/workshops/">
+<link rel="alternate" hreflang="ja" href="https://hakkodo.cat/ja/workshops/">
+<link rel="alternate" hreflang="x-default" href="https://hakkodo.cat/ca/workshops/">
+<script>window.PAGE_LANG = "en";</script>
+<title>Workshops</title>
+<link rel="stylesheet" href="/assets/style.css">
+</head>
+<body>
+  <header class="home-header">
+    <div id="global-nav-root"></div>
+    <div id="lang-switcher-root" class="lang-switcher"></div>
+  </header>
+
+  <main class="page">
+    <div class="intro intro-mid intro-workshops">
+      <p data-i18n="workshopsScheduleEmpty" style="white-space: pre-line;"></p>
+    </div>
+  </main>
+
+  <footer class="global-footer" id="global-footer-root"></footer>
+
+  <script src="/assets/i18n.js"></script>
+  <script src="/assets/product.js"></script>
+  <script src="/assets/nav.js"></script>
+  <script>
+    function render() {
+      const lang = getCurrentLang();
+      applyUiStrings(lang);
+      document.title = t("workshopsTitle", lang);
+    }
+    renderGlobalNav(document.getElementById("global-nav-root"), "/", "workshops");
+    renderGlobalFooter(document.getElementById("global-footer-root"), "/");
+    renderLangSwitcher(document.getElementById("lang-switcher-root"), render);
+    render();
+  </script>
+</body>
+</html>
