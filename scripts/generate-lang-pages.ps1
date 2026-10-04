@@ -72,3 +72,26 @@ foreach ($pageProp in $cfg.pages.PSObject.Properties) {
   }
 }
 Write-Host ("done: " + $count + " files")
+
+# sitemap.xml: one <url> per language page, each listing every language version (hreflang) + x-default.
+# Built from the same page list as above, so it always matches the hreflang tags inside the pages.
+$sm = New-Object System.Collections.Generic.List[string]
+$sm.Add('<?xml version="1.0" encoding="UTF-8"?>')
+$sm.Add('<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">')
+$urlCount = 0
+foreach ($pageProp in $cfg.pages.PSObject.Properties) {
+  $urlPath = Get-UrlPath $pageProp.Name
+  foreach ($lang in $cfg.langs) {
+    $sm.Add('  <url>')
+    $sm.Add('    <loc>' + $cfg.siteUrl + "/" + $lang + $urlPath + '</loc>')
+    foreach ($l in $cfg.langs) {
+      $sm.Add('    <xhtml:link rel="alternate" hreflang="' + $l + '" href="' + $cfg.siteUrl + "/" + $l + $urlPath + '"/>')
+    }
+    $sm.Add('    <xhtml:link rel="alternate" hreflang="x-default" href="' + $cfg.siteUrl + "/" + $cfg.defaultLang + $urlPath + '"/>')
+    $sm.Add('  </url>')
+    $urlCount++
+  }
+}
+$sm.Add('</urlset>')
+[System.IO.File]::WriteAllText((Join-Path $root "sitemap.xml"), (($sm -join "`n") + "`n"), $utf8)
+Write-Host ("sitemap.xml: " + $urlCount + " URLs")

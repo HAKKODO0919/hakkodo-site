@@ -1,12 +1,291 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://hakkodo.cat/</loc></url>
-  <url><loc>https://hakkodo.cat/products/aka-miso/</loc></url>
-  <url><loc>https://hakkodo.cat/recipes/</loc></url>
-  <url><loc>https://hakkodo.cat/recipes/miso-dressing/</loc></url>
-  <url><loc>https://hakkodo.cat/recipes/miso-mayo/</loc></url>
-  <url><loc>https://hakkodo.cat/recipes/cracker-miso/</loc></url>
-  <url><loc>https://hakkodo.cat/workshops/</loc></url>
-  <url><loc>https://hakkodo.cat/news/</loc></url>
-  <url><loc>https://hakkodo.cat/contact/</loc></url>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://hakkodo.cat/ca/</loc>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://hakkodo.cat/ca/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://hakkodo.cat/es/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://hakkodo.cat/en/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://hakkodo.cat/ja/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://hakkodo.cat/ca/"/>
+  </url>
+  <url>
+    <loc>https://hakkodo.cat/es/</loc>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://hakkodo.cat/ca/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://hakkodo.cat/es/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://hakkodo.cat/en/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://hakkodo.cat/ja/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://hakkodo.cat/ca/"/>
+  </url>
+  <url>
+    <loc>https://hakkodo.cat/en/</loc>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://hakkodo.cat/ca/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://hakkodo.cat/es/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://hakkodo.cat/en/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://hakkodo.cat/ja/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://hakkodo.cat/ca/"/>
+  </url>
+  <url>
+    <loc>https://hakkodo.cat/ja/</loc>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://hakkodo.cat/ca/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://hakkodo.cat/es/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://hakkodo.cat/en/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://hakkodo.cat/ja/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://hakkodo.cat/ca/"/>
+  </url>
+  <url>
+    <loc>https://hakkodo.cat/ca/workshops/</loc>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://hakkodo.cat/ca/workshops/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://hakkodo.cat/es/workshops/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://hakkodo.cat/en/workshops/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://hakkodo.cat/ja/workshops/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://hakkodo.cat/ca/workshops/"/>
+  </url>
+  <url>
+    <loc>https://hakkodo.cat/es/workshops/</loc>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://hakkodo.cat/ca/workshops/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://hakkodo.cat/es/workshops/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://hakkodo.cat/en/workshops/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://hakkodo.cat/ja/workshops/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://hakkodo.cat/ca/workshops/"/>
+  </url>
+  <url>
+    <loc>https://hakkodo.cat/en/workshops/</loc>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://hakkodo.cat/ca/workshops/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://hakkodo.cat/es/workshops/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://hakkodo.cat/en/workshops/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://hakkodo.cat/ja/workshops/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://hakkodo.cat/ca/workshops/"/>
+  </url>
+  <url>
+    <loc>https://hakkodo.cat/ja/workshops/</loc>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://hakkodo.cat/ca/workshops/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://hakkodo.cat/es/workshops/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://hakkodo.cat/en/workshops/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://hakkodo.cat/ja/workshops/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://hakkodo.cat/ca/workshops/"/>
+  </url>
+  <url>
+    <loc>https://hakkodo.cat/ca/news/</loc>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://hakkodo.cat/ca/news/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://hakkodo.cat/es/news/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://hakkodo.cat/en/news/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://hakkodo.cat/ja/news/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://hakkodo.cat/ca/news/"/>
+  </url>
+  <url>
+    <loc>https://hakkodo.cat/es/news/</loc>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://hakkodo.cat/ca/news/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://hakkodo.cat/es/news/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://hakkodo.cat/en/news/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://hakkodo.cat/ja/news/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://hakkodo.cat/ca/news/"/>
+  </url>
+  <url>
+    <loc>https://hakkodo.cat/en/news/</loc>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://hakkodo.cat/ca/news/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://hakkodo.cat/es/news/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://hakkodo.cat/en/news/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://hakkodo.cat/ja/news/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://hakkodo.cat/ca/news/"/>
+  </url>
+  <url>
+    <loc>https://hakkodo.cat/ja/news/</loc>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://hakkodo.cat/ca/news/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://hakkodo.cat/es/news/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://hakkodo.cat/en/news/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://hakkodo.cat/ja/news/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://hakkodo.cat/ca/news/"/>
+  </url>
+  <url>
+    <loc>https://hakkodo.cat/ca/contact/</loc>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://hakkodo.cat/ca/contact/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://hakkodo.cat/es/contact/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://hakkodo.cat/en/contact/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://hakkodo.cat/ja/contact/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://hakkodo.cat/ca/contact/"/>
+  </url>
+  <url>
+    <loc>https://hakkodo.cat/es/contact/</loc>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://hakkodo.cat/ca/contact/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://hakkodo.cat/es/contact/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://hakkodo.cat/en/contact/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://hakkodo.cat/ja/contact/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://hakkodo.cat/ca/contact/"/>
+  </url>
+  <url>
+    <loc>https://hakkodo.cat/en/contact/</loc>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://hakkodo.cat/ca/contact/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://hakkodo.cat/es/contact/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://hakkodo.cat/en/contact/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://hakkodo.cat/ja/contact/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://hakkodo.cat/ca/contact/"/>
+  </url>
+  <url>
+    <loc>https://hakkodo.cat/ja/contact/</loc>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://hakkodo.cat/ca/contact/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://hakkodo.cat/es/contact/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://hakkodo.cat/en/contact/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://hakkodo.cat/ja/contact/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://hakkodo.cat/ca/contact/"/>
+  </url>
+  <url>
+    <loc>https://hakkodo.cat/ca/recipes/</loc>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://hakkodo.cat/ca/recipes/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://hakkodo.cat/es/recipes/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://hakkodo.cat/en/recipes/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://hakkodo.cat/ja/recipes/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://hakkodo.cat/ca/recipes/"/>
+  </url>
+  <url>
+    <loc>https://hakkodo.cat/es/recipes/</loc>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://hakkodo.cat/ca/recipes/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://hakkodo.cat/es/recipes/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://hakkodo.cat/en/recipes/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://hakkodo.cat/ja/recipes/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://hakkodo.cat/ca/recipes/"/>
+  </url>
+  <url>
+    <loc>https://hakkodo.cat/en/recipes/</loc>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://hakkodo.cat/ca/recipes/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://hakkodo.cat/es/recipes/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://hakkodo.cat/en/recipes/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://hakkodo.cat/ja/recipes/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://hakkodo.cat/ca/recipes/"/>
+  </url>
+  <url>
+    <loc>https://hakkodo.cat/ja/recipes/</loc>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://hakkodo.cat/ca/recipes/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://hakkodo.cat/es/recipes/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://hakkodo.cat/en/recipes/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://hakkodo.cat/ja/recipes/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://hakkodo.cat/ca/recipes/"/>
+  </url>
+  <url>
+    <loc>https://hakkodo.cat/ca/recipes/miso-dressing/</loc>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://hakkodo.cat/ca/recipes/miso-dressing/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://hakkodo.cat/es/recipes/miso-dressing/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://hakkodo.cat/en/recipes/miso-dressing/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://hakkodo.cat/ja/recipes/miso-dressing/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://hakkodo.cat/ca/recipes/miso-dressing/"/>
+  </url>
+  <url>
+    <loc>https://hakkodo.cat/es/recipes/miso-dressing/</loc>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://hakkodo.cat/ca/recipes/miso-dressing/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://hakkodo.cat/es/recipes/miso-dressing/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://hakkodo.cat/en/recipes/miso-dressing/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://hakkodo.cat/ja/recipes/miso-dressing/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://hakkodo.cat/ca/recipes/miso-dressing/"/>
+  </url>
+  <url>
+    <loc>https://hakkodo.cat/en/recipes/miso-dressing/</loc>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://hakkodo.cat/ca/recipes/miso-dressing/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://hakkodo.cat/es/recipes/miso-dressing/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://hakkodo.cat/en/recipes/miso-dressing/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://hakkodo.cat/ja/recipes/miso-dressing/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://hakkodo.cat/ca/recipes/miso-dressing/"/>
+  </url>
+  <url>
+    <loc>https://hakkodo.cat/ja/recipes/miso-dressing/</loc>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://hakkodo.cat/ca/recipes/miso-dressing/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://hakkodo.cat/es/recipes/miso-dressing/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://hakkodo.cat/en/recipes/miso-dressing/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://hakkodo.cat/ja/recipes/miso-dressing/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://hakkodo.cat/ca/recipes/miso-dressing/"/>
+  </url>
+  <url>
+    <loc>https://hakkodo.cat/ca/recipes/miso-mayo/</loc>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://hakkodo.cat/ca/recipes/miso-mayo/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://hakkodo.cat/es/recipes/miso-mayo/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://hakkodo.cat/en/recipes/miso-mayo/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://hakkodo.cat/ja/recipes/miso-mayo/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://hakkodo.cat/ca/recipes/miso-mayo/"/>
+  </url>
+  <url>
+    <loc>https://hakkodo.cat/es/recipes/miso-mayo/</loc>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://hakkodo.cat/ca/recipes/miso-mayo/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://hakkodo.cat/es/recipes/miso-mayo/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://hakkodo.cat/en/recipes/miso-mayo/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://hakkodo.cat/ja/recipes/miso-mayo/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://hakkodo.cat/ca/recipes/miso-mayo/"/>
+  </url>
+  <url>
+    <loc>https://hakkodo.cat/en/recipes/miso-mayo/</loc>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://hakkodo.cat/ca/recipes/miso-mayo/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://hakkodo.cat/es/recipes/miso-mayo/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://hakkodo.cat/en/recipes/miso-mayo/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://hakkodo.cat/ja/recipes/miso-mayo/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://hakkodo.cat/ca/recipes/miso-mayo/"/>
+  </url>
+  <url>
+    <loc>https://hakkodo.cat/ja/recipes/miso-mayo/</loc>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://hakkodo.cat/ca/recipes/miso-mayo/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://hakkodo.cat/es/recipes/miso-mayo/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://hakkodo.cat/en/recipes/miso-mayo/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://hakkodo.cat/ja/recipes/miso-mayo/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://hakkodo.cat/ca/recipes/miso-mayo/"/>
+  </url>
+  <url>
+    <loc>https://hakkodo.cat/ca/recipes/cracker-miso/</loc>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://hakkodo.cat/ca/recipes/cracker-miso/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://hakkodo.cat/es/recipes/cracker-miso/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://hakkodo.cat/en/recipes/cracker-miso/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://hakkodo.cat/ja/recipes/cracker-miso/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://hakkodo.cat/ca/recipes/cracker-miso/"/>
+  </url>
+  <url>
+    <loc>https://hakkodo.cat/es/recipes/cracker-miso/</loc>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://hakkodo.cat/ca/recipes/cracker-miso/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://hakkodo.cat/es/recipes/cracker-miso/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://hakkodo.cat/en/recipes/cracker-miso/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://hakkodo.cat/ja/recipes/cracker-miso/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://hakkodo.cat/ca/recipes/cracker-miso/"/>
+  </url>
+  <url>
+    <loc>https://hakkodo.cat/en/recipes/cracker-miso/</loc>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://hakkodo.cat/ca/recipes/cracker-miso/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://hakkodo.cat/es/recipes/cracker-miso/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://hakkodo.cat/en/recipes/cracker-miso/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://hakkodo.cat/ja/recipes/cracker-miso/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://hakkodo.cat/ca/recipes/cracker-miso/"/>
+  </url>
+  <url>
+    <loc>https://hakkodo.cat/ja/recipes/cracker-miso/</loc>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://hakkodo.cat/ca/recipes/cracker-miso/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://hakkodo.cat/es/recipes/cracker-miso/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://hakkodo.cat/en/recipes/cracker-miso/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://hakkodo.cat/ja/recipes/cracker-miso/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://hakkodo.cat/ca/recipes/cracker-miso/"/>
+  </url>
+  <url>
+    <loc>https://hakkodo.cat/ca/products/aka-miso/</loc>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://hakkodo.cat/ca/products/aka-miso/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://hakkodo.cat/es/products/aka-miso/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://hakkodo.cat/en/products/aka-miso/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://hakkodo.cat/ja/products/aka-miso/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://hakkodo.cat/ca/products/aka-miso/"/>
+  </url>
+  <url>
+    <loc>https://hakkodo.cat/es/products/aka-miso/</loc>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://hakkodo.cat/ca/products/aka-miso/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://hakkodo.cat/es/products/aka-miso/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://hakkodo.cat/en/products/aka-miso/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://hakkodo.cat/ja/products/aka-miso/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://hakkodo.cat/ca/products/aka-miso/"/>
+  </url>
+  <url>
+    <loc>https://hakkodo.cat/en/products/aka-miso/</loc>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://hakkodo.cat/ca/products/aka-miso/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://hakkodo.cat/es/products/aka-miso/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://hakkodo.cat/en/products/aka-miso/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://hakkodo.cat/ja/products/aka-miso/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://hakkodo.cat/ca/products/aka-miso/"/>
+  </url>
+  <url>
+    <loc>https://hakkodo.cat/ja/products/aka-miso/</loc>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://hakkodo.cat/ca/products/aka-miso/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://hakkodo.cat/es/products/aka-miso/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://hakkodo.cat/en/products/aka-miso/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://hakkodo.cat/ja/products/aka-miso/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://hakkodo.cat/ca/products/aka-miso/"/>
+  </url>
 </urlset>
