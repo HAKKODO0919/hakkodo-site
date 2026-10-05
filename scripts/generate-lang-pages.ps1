@@ -55,6 +55,12 @@ foreach ($pageProp in $cfg.pages.PSObject.Properties) {
     $seoText = ($seo -join "`n") + "`n"
     $html = [regex]::Replace($html, '(<meta name="viewport"[^\n]*\n)', { param($m) $m.Groups[1].Value + $seoText })
 
+    # JSON-LD (Organization / WebSite) is only for "/" and the default-language page (/ca/):
+    # drop it from the other language versions.
+    if ($lang -ne $cfg.defaultLang) {
+      $html = [regex]::Replace($html, '(?s)<script type="application/ld\+json">.*?</script>\n', "")
+    }
+
     # assets / images / data: relative -> absolute (the page now lives one folder deeper)
     # (works for any source depth: "assets/", "../assets/", "../../assets/" ...)
     $html = [regex]::Replace($html, '(src|href)="(?:\.\./)*(?:\./)?(assets|images|data)/', '$1="/$2/')
