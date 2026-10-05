@@ -72,6 +72,17 @@ function renderTagList(items) {
     .join("")}</ul>`;
 }
 
+// 商品名の見出し用HTML。「HAKKODO MISO｜熟成赤味噌」のように「｜」を含む名前は、
+// 「｜」より後ろ(味噌の種類)を1つのまとまり(.product-name-type)にして、
+// 幅が足りないスマホでは「HAKKODO MISO｜」と種類の2行に分かれるようにする。
+// 「｜」が無い名前は、これまでどおりそのまま出す。
+function renderProductNameHtml(name) {
+  const text = name || "";
+  const sep = text.indexOf("｜");
+  if (sep < 0) return escapeHtml(text);
+  return `${escapeHtml(text.slice(0, sep + 1))}<span class="product-name-type">${escapeHtml(text.slice(sep + 1))}</span>`;
+}
+
 // 商品ページの中身を、指定した言語で描画する
 // data: window.PRODUCT_DATA の中身(images / translations / updatedAt を持つ)
 // siteRoot: サイトの一番上の階層への相対パス、lang: 表示する言語コード
@@ -187,7 +198,7 @@ function renderProductContent(data, siteRoot, lang) {
       <div class="hero">${imageOrPlaceholder(images.hero, tr.heroAlt, "hero-img", siteRoot, lang)}</div>
     </div>
     <div class="product-head product-detail-head">
-      <h1>${escapeHtml(tr.name || "")}</h1>
+      <h1>${renderProductNameHtml(tr.name)}</h1>
       ${tr.descriptionLine1 || tr.descriptionLine2
         ? `${tr.descriptionLine1 ? `<p class="product-catchphrase">${escapeHtml(tr.descriptionLine1)}</p>` : ""}${tr.descriptionLine2 ? `<p class="tagline">${escapeHtml(tr.descriptionLine2)}</p>` : ""}`
         : tr.tagline ? `<p class="tagline">${escapeHtml(tr.tagline)}</p>` : ""}

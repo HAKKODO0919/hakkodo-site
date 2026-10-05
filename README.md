@@ -124,7 +124,7 @@ contact/index.html              … お問い合わせページ
 
 【追記】現在実際に使用している商品ページの固定URLは次のとおりです。
 
-- 商品名「HAKKODO MISO」: `/products/miso/`
+- 商品名「HAKKODO MISO｜熟成赤味噌」(言語ごとに種類の表記が異なる): `/products/miso/`
   (旧URL `/products/aka-miso/` は、リポジトリ直下の `_redirects` で新URLへ301転送しています。
   印刷済みQRコードなどで旧URLが使われている可能性があるため、`_redirects` は削除しないでください)
 

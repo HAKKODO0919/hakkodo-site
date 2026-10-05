@@ -469,6 +469,12 @@ body > main {
   margin-bottom: 10px;
 }
 
+/* 商品名の「｜」より後ろ(味噌の種類)。幅が足りないときは、種類の途中ではなく
+   「｜」の後ろで折り返し、種類全体を次の行に送る。PC幅など1行に収まる場合は変わらない。 */
+.product-name-type {
+  display: inline-block;
+}
+
 .product-detail-head {
   padding-bottom: 30px;
 }
