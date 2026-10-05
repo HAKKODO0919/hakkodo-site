@@ -6,8 +6,8 @@
 4言語をページ右上の切り替えメニューで切り替えられます。
 
 【追記】現在、実際に販売している商品は「熟成味噌(赤味噌)」の1商品です。
-`products/aka-miso/` が現在使用中の商品ページで、固定URLは
-`/products/aka-miso` です。商品A・B・Cのファイルはサンプルとして
+`products/miso/` が現在使用中の商品ページで、固定URLは
+`/products/miso` です。商品A・B・Cのファイルはサンプルとして
 そのまま残していますが、今のトップページからはリンクされていません。
 将来、新しい商品を追加するときの参考にしてください。
 
@@ -24,7 +24,7 @@ URLやQRコードには一切影響しません。詳しくは下記の
 ```
 TOP (index.html)
 ├─ 商品 (products/)
-│   └─ 赤味噌 (products/aka-miso/) … 今後、商品が増えたら products/商品名/ を追加
+│   └─ 赤味噌 (products/miso/) … 今後、商品が増えたら products/商品名/ を追加
 ├─ レシピ (recipes/)
 │   └─ 各レシピ (recipes/レシピ名/) … 今後もどんどん追加できます
 ├─ ワークショップ (workshops/)
@@ -41,7 +41,7 @@ TOP (index.html)
 
 【追記】現在は商品が「熟成味噌(赤味噌)」の1点だけのため、ヘッダーの
 「商品」リンクは `products/index.html`(一覧)を経由せず、
-`products/aka-miso/index.html`(商品詳細)に直接つなげています
+`products/miso/index.html`(商品詳細)に直接つなげています
 (`assets/nav.js` の `NAV_ITEMS`)。`products/index.html` 自体や
 `initProductList` の仕組みはそのまま残してあるので、商品が2点以上に
 増えたら、`NAV_ITEMS` のhrefを `products/index.html` に戻すだけで
@@ -65,7 +65,7 @@ TOP (index.html)
 **作り手について / お問い合わせについて**
 
 独立した「作り手について」ページは廃止し、ナビゲーションからも
-削除しました。商品ページ(`products/aka-miso/`)内にもともとある
+削除しました。商品ページ(`products/miso/`)内にもともとある
 「作り手について」のセクションは、内容を変更せずそのまま残しています。
 
 `contact/index.html` は、商品ページの「作り手について」で既に
@@ -88,7 +88,7 @@ assets/product.js       … データを読み込んで表示する仕組み
 assets/i18n.js          … 言語切り替えの仕組みと、サイト共通文言の翻訳
 
 (追記: 現在使用中のファイル)
-products/aka-miso/index.html … 熟成味噌(赤味噌)のページ(現在使用中。固定URL: /products/aka-miso)
+products/miso/index.html … 熟成味噌(赤味噌)のページ(現在使用中。固定URL: /products/miso)
 data/aka-miso.js              … 熟成味噌(赤味噌)の内容(★ここを編集する)
 images/aka-miso/              … 熟成味噌(赤味噌)の写真の置き場所
 
@@ -124,10 +124,12 @@ contact/index.html              … お問い合わせページ
 
 【追記】現在実際に使用している商品ページの固定URLは次のとおりです。
 
-- 熟成味噌(赤味噌): `/products/aka-miso/`
+- 商品名「HAKKODO MISO」: `/products/miso/`
+  (旧URL `/products/aka-miso/` は、リポジトリ直下の `_redirects` で新URLへ301転送しています。
+  印刷済みQRコードなどで旧URLが使われている可能性があるため、`_redirects` は削除しないでください)
 
 商品ページの文章・写真・原材料・保存方法・賞味期限などをあとから
-編集しても、このURL(`/products/aka-miso/`)は変わりません。そのため、
+編集しても、このURL(`/products/miso/`)は変わりません。そのため、
 QRコードを一度印刷すれば、内容を更新するたびに作り直す必要はありません。
 
 将来、商品が増えた場合も `products/商品名/` のようにフォルダを

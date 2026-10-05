@@ -1,0 +1,22 @@
+# 商品ページのURL変更(products/aka-miso -> products/miso)に伴う301リダイレクト。
+# 旧URLは印刷済みのQRコードなどで使われている可能性があるため、このファイルは恒久的に残すこと。
+# Cloudflare Pages の仕様で、このファイルは公開されず、サイト配信時にだけ使われる。
+
+# 接頭辞なし(QRコード用の旧URL)
+/products/aka-miso             /products/miso/     301
+/products/aka-miso/            /products/miso/     301
+/products/aka-miso/index.html  /products/miso/     301
+
+# 言語別
+/ca/products/aka-miso             /ca/products/miso/  301
+/ca/products/aka-miso/            /ca/products/miso/  301
+/ca/products/aka-miso/index.html  /ca/products/miso/  301
+/es/products/aka-miso             /es/products/miso/  301
+/es/products/aka-miso/            /es/products/miso/  301
+/es/products/aka-miso/index.html  /es/products/miso/  301
+/en/products/aka-miso             /en/products/miso/  301
+/en/products/aka-miso/            /en/products/miso/  301
+/en/products/aka-miso/index.html  /en/products/miso/  301
+/ja/products/aka-miso             /ja/products/miso/  301
+/ja/products/aka-miso/            /ja/products/miso/  301
+/ja/products/aka-miso/index.html  /ja/products/miso/  301

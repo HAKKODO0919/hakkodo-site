@@ -462,7 +462,7 @@ body > main {
   font-size: 1.6rem;
 }
 
-/* 商品詳細ページ(products/aka-miso)だけの余白微調整。
+/* 商品詳細ページ(products/miso)だけの余白微調整。
    .product-head はレシピページ(assets/recipe.js)とも共有しているため、
    商品詳細ページに付く .product-detail-head の範囲だけに限定する。 */
 .product-detail-head h1 {

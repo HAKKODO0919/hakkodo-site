@@ -16,7 +16,7 @@ const NAV_ITEMS = [
   // 商品一覧ページ(products/index.html)自体や商品データ・
   // initProductListの仕組みは残してあるので、商品が増えたら
   // ここのhrefを "products/index.html" に戻すだけで一覧が復活する。
-  { key: "products", href: "products/aka-miso/index.html", i18nKey: "navProducts" },
+  { key: "products", href: "products/miso/index.html", i18nKey: "navProducts" },
   { key: "recipes", href: "recipes/index.html", i18nKey: "navRecipes" },
   // ヘッダーの「ワークショップ」は紹介ページ(workshops/index.html)へ。
   // その中の「開催スケジュールを見る」ボタンからスケジュール

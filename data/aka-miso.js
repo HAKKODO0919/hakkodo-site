@@ -1,5 +1,5 @@
 // 熟成味噌(赤味噌)の内容データ。ここを編集するとページの内容が変わります。
-// URL(products/aka-miso のページアドレス)には影響しません。
+// URL(products/miso のページアドレス)には影響しません。
 //
 // 日本語(ja) / Català(ca) / Español(es) / English(en) の4言語分を用意しています。
 window.PRODUCT_DATA = {
@@ -14,7 +14,7 @@ window.PRODUCT_DATA = {
   updatedAt: "2026-09-01",
   translations: {
     ja: {
-      name: "熟成生味噌(赤味噌)",
+      name: "HAKKODO MISO",
       descriptionLine1: "いつもの一皿に、味噌の奥深い味わいを。",
       descriptionLine2: "米麹を贅沢に使い、じっくり時間をかけて熟成させました。",
       tagline: "米麹から丁寧に育てる、HAKKODOの味噌。",
@@ -88,7 +88,7 @@ window.PRODUCT_DATA = {
       ]
     },
     ca: {
-      name: "Miso vermell cru madurat",
+      name: "HAKKODO MISO",
       descriptionLine1: "Un toc de sabor profund de miso per al plat de cada dia.",
       descriptionLine2: "Elaborat amb una quantitat generosa de koji d'arròs, madurat lentament durant molt de temps.",
       tagline: "El miso de HAKKODO, elaborat amb cura a partir del koji d'arròs.",
@@ -156,7 +156,7 @@ window.PRODUCT_DATA = {
       ]
     },
     es: {
-      name: "Miso rojo crudo madurado",
+      name: "HAKKODO MISO",
       descriptionLine1: "Un toque de sabor profundo de miso para el plato de cada día.",
       descriptionLine2: "Elaborado con una cantidad generosa de koji de arroz, madurado lentamente durante mucho tiempo.",
       tagline: "El miso de HAKKODO, elaborado con esmero a partir del koji de arroz.",
@@ -224,7 +224,7 @@ window.PRODUCT_DATA = {
       ]
     },
     en: {
-      name: "Aged Raw Miso (Red Miso)",
+      name: "HAKKODO MISO",
       descriptionLine1: "A deep miso flavor for your everyday dish.",
       descriptionLine2: "Made with a generous amount of rice koji, slowly matured over time.",
       tagline: "HAKKODO's miso, carefully crafted from rice koji.",

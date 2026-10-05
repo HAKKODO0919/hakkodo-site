@@ -148,21 +148,21 @@
         "description": "クラッカーと味噌：クラッカーにカマンベールチーズと味噌をのせるだけの簡単レシピ。"
       }
     },
-    "products/aka-miso/index.html": {
+    "products/miso/index.html": {
       "ca": {
-        "title": "Miso vermell cru madurat | Informació del producte",
+        "title": "HAKKODO MISO | Informació del producte",
         "description": "El miso de HAKKODO, elaborat amb cura a partir del koji d'arròs i madurat lentament. Un toc de sabor profund de miso per al plat de cada dia."
       },
       "es": {
-        "title": "Miso rojo crudo madurado | Información del producto",
+        "title": "HAKKODO MISO | Información del producto",
         "description": "El miso de HAKKODO, elaborado con esmero a partir del koji de arroz y madurado lentamente. Un toque de sabor profundo de miso para el plato de cada día."
       },
       "en": {
-        "title": "Aged Raw Miso (Red Miso) | Product Information",
+        "title": "HAKKODO MISO | Product Information",
         "description": "HAKKODO's miso, carefully crafted from rice koji and slowly matured. A deep miso flavor for your everyday dish."
       },
       "ja": {
-        "title": "熟成生味噌(赤味噌) | 商品情報",
+        "title": "HAKKODO MISO | 商品情報",
         "description": "米麹から丁寧に育てる、HAKKODOの味噌。いつもの一皿に、味噌の奥深い味わいを。じっくり時間をかけて熟成させました。"
       }
     }
