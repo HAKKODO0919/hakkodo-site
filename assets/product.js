@@ -97,7 +97,7 @@ function renderProductContent(data, siteRoot, lang) {
 
   const images = data.images || {};
 
-  document.title = `${tr.name} | ${t("titleSuffix", lang)}`;
+  document.title = `${tr.docName || tr.name} | ${t("titleSuffix", lang)}`;
 
   const storyHtml = (tr.story && tr.story.blocks && tr.story.blocks.length)
     ? `<div class="section story-section">

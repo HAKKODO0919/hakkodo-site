@@ -187,7 +187,7 @@ function initRecipeList(recipes, siteRoot) {
     try {
       const lang = getCurrentLang();
       applyUiStrings(lang);
-      document.title = t("recipesTitle", lang);
+      document.title = t("recipesTabTitle", lang);
       renderRecipeListContent(recipes, siteRoot, lang);
     } catch (e) {
       console.error(e);

@@ -1191,6 +1191,14 @@ body > main {
   font-size: 1.4rem;
 }
 
+/* レシピ一覧ページの見出し。トップページの「Recipes」の見出し(.home-feature-title)と
+   同じ書体・大きさ・字間・色にする(他のページの .intro h1 は変えない)。 */
+.intro h1[data-i18n="recipesTitle"] {
+  font-family: "Shippori Mincho", serif;
+  font-size: 1.5rem;
+  letter-spacing: 0.12em;
+  color: var(--color-heading);
+}
 .intro p {
   margin: 0;
   color: var(--color-muted);
