@@ -23,8 +23,10 @@ const NAV_ITEMS = [
   // (workshops/schedule/index.html)へ進む、2段階の導線にする。
   { key: "workshops", href: "workshops/index.html", i18nKey: "navWorkshops" },
   { key: "news", href: "news/index.html", i18nKey: "navNews" },
-  // Story(ブランドの考え方)。「お問い合わせ」の前に置く。
-  { key: "story", href: "story/index.html", i18nKey: "navStory" },
+  // About(ブランドの考え方。URLは story/ のまま)。「お問い合わせ」の前に置く。
+  // fallback: i18n.js が古いキャッシュのままでも、翻訳キー名(navStory)が
+  // そのまま画面に出ないようにするための代わりの表示文字。
+  { key: "story", href: "story/index.html", i18nKey: "navStory", fallback: "About" },
   { key: "contact", href: "contact/index.html", i18nKey: "navContact" },
 ];
 
@@ -37,7 +39,11 @@ function renderGlobalNav(container, siteRoot, currentKey) {
   const linkRoot = pageLinkRoot(siteRoot);
   const itemsHtml = NAV_ITEMS.map((item) => {
     const activeClass = item.key === currentKey ? " active" : "";
-    return `<li><a class="global-nav-link${activeClass}" href="${escapeHtml(linkRoot + item.href)}" data-i18n="${item.i18nKey}"></a></li>`;
+    // 翻訳が(古いキャッシュなどで)見つからない項目は、data-i18n を付けず fallback をそのまま出す
+    const known = typeof UI_STRINGS === "undefined" || !item.fallback || (UI_STRINGS.ja && UI_STRINGS.ja[item.i18nKey]);
+    const labelAttr = known ? ` data-i18n="${item.i18nKey}"` : "";
+    const labelText = known ? "" : escapeHtml(item.fallback);
+    return `<li><a class="global-nav-link${activeClass}" href="${escapeHtml(linkRoot + item.href)}"${labelAttr}>${labelText}</a></li>`;
   }).join("");
 
   // ブランド表示(HAKKODOロゴ＋顔ロゴ)は全ページ共通。

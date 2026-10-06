@@ -15,7 +15,7 @@ window.STORY_DATA = {
   },
   translations: {
     ja: {
-      title: "Story",
+      title: "About",
       heading: "HAKKODO ― 発酵道",
       imageAlt: "切り株の上に並んだ、味噌の瓶3つ。背景には緑の山の景色",
       paragraphs: [
@@ -26,7 +26,7 @@ window.STORY_DATA = {
       ]
     },
     ca: {
-      title: "Story",
+      title: "About",
       heading: "HAKKODO ― 発酵道",
       imageAlt: "Tres pots de miso sobre un tronc tallat, amb un paisatge verd al fons",
       paragraphs: [
@@ -37,7 +37,7 @@ window.STORY_DATA = {
       ]
     },
     es: {
-      title: "Story",
+      title: "About",
       heading: "HAKKODO ― 発酵道",
       imageAlt: "Tres tarros de miso sobre un tocón, con un paisaje verde al fondo",
       paragraphs: [
@@ -48,7 +48,7 @@ window.STORY_DATA = {
       ]
     },
     en: {
-      title: "Story",
+      title: "About",
       heading: "HAKKODO ― 発酵道",
       imageAlt: "Three jars of miso on a tree stump, with green hills behind",
       paragraphs: [
