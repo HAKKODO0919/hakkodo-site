@@ -14,8 +14,7 @@ window.PRODUCT_DATA = {
   updatedAt: "2026-09-01",
   translations: {
     ja: {
-      name: "HAKKODO MISO｜Aged Red Miso",
-      docName: "HAKKODO MISO｜熟成赤味噌",
+      name: "HAKKODO MISO｜熟成赤味噌",
       descriptionLine1: "いつもの一皿に、味噌の奥深い味わいを。",
       descriptionLine2: "米麹を贅沢に使い、じっくり時間をかけて熟成させました。",
       tagline: "米麹から丁寧に育てる、HAKKODOの味噌。",
