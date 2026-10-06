@@ -165,6 +165,24 @@
         "title": "HAKKODO MISO｜熟成赤味噌 | 商品情報",
         "description": "米麹から丁寧に育てる、HAKKODOの味噌。いつもの一皿に、味噌の奥深い味わいを。じっくり時間をかけて熟成させました。"
       }
+    },
+    "story/index.html": {
+      "ca": {
+        "title": "Story | HAKKODO",
+        "description": "El significat de HAKKODO (発酵道): “hakkō” (fermentació) i “dō” (camí), i el miso nascut de la cultura japonesa de la fermentació a l'Alta Garrotxa."
+      },
+      "es": {
+        "title": "Story | HAKKODO",
+        "description": "El significado de HAKKODO (発酵道): “hakkō” (fermentación) y “dō” (camino), y el miso nacido de la cultura japonesa de la fermentación en la Alta Garrotxa."
+      },
+      "en": {
+        "title": "Story | HAKKODO",
+        "description": "The meaning of HAKKODO (発酵道): “hakkō” (fermentation) and “dō” (way), and the miso born from Japan's fermentation culture in Alta Garrotxa."
+      },
+      "ja": {
+        "title": "Story | HAKKODO",
+        "description": "HAKKODO（発酵道）は「発酵」と「道」から生まれた名前。日本の発酵文化を背景に、カタルーニャのアルタ・ガロチャで生まれるHAKKODOの味噌のストーリー。"
+      }
     }
   }
 }

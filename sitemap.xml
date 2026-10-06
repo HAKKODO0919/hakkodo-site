@@ -288,4 +288,36 @@
     <xhtml:link rel="alternate" hreflang="ja" href="https://hakkodo.cat/ja/products/miso/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://hakkodo.cat/ca/products/miso/"/>
   </url>
+  <url>
+    <loc>https://hakkodo.cat/ca/story/</loc>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://hakkodo.cat/ca/story/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://hakkodo.cat/es/story/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://hakkodo.cat/en/story/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://hakkodo.cat/ja/story/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://hakkodo.cat/ca/story/"/>
+  </url>
+  <url>
+    <loc>https://hakkodo.cat/es/story/</loc>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://hakkodo.cat/ca/story/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://hakkodo.cat/es/story/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://hakkodo.cat/en/story/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://hakkodo.cat/ja/story/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://hakkodo.cat/ca/story/"/>
+  </url>
+  <url>
+    <loc>https://hakkodo.cat/en/story/</loc>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://hakkodo.cat/ca/story/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://hakkodo.cat/es/story/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://hakkodo.cat/en/story/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://hakkodo.cat/ja/story/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://hakkodo.cat/ca/story/"/>
+  </url>
+  <url>
+    <loc>https://hakkodo.cat/ja/story/</loc>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://hakkodo.cat/ca/story/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://hakkodo.cat/es/story/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://hakkodo.cat/en/story/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://hakkodo.cat/ja/story/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://hakkodo.cat/ca/story/"/>
+  </url>
 </urlset>

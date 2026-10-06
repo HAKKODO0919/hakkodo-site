@@ -1765,3 +1765,41 @@ a.global-footer-instagram:hover,
 a.global-footer-instagram:focus-visible {
   color: var(--color-heading);
 }
+
+/* ---- STORYページ(story/index.html) ----
+   見出し(.intro)・本文(.home-feature-text)・写真(.recipe-hero)は、
+   他のページと同じ既存のクラスをそのまま使う。ここでは、STORYのページ内で
+   必要な余白だけを足す(新しいデザインは作らない)。 */
+.story-page {
+  padding: 0 24px;
+}
+
+.story-page .intro {
+  margin-bottom: 36px;
+  padding: 0;
+}
+
+/* 見出し「Story」は、トップページの見出し(.home-feature-title)と同じ書体・大きさ・字間・色にする。 */
+.story-page .intro h1 {
+  font-family: "Shippori Mincho", serif;
+  font-size: 1.5rem;
+  letter-spacing: 0.12em;
+  color: var(--color-heading);
+}
+.story-page .home-feature-text {
+  margin: 0 auto 1.9em;
+  /* 段落の最後の行に1〜2文字だけが残らないよう整える。日本語は文節の区切りで
+     折り返す(どちらも対応ブラウザのみ。非対応でも見た目は崩れない)。 */
+  text-wrap: pretty;
+  word-break: auto-phrase;
+}
+
+.story-page .home-feature-text:last-child {
+  margin-bottom: 0;
+}
+
+/* 写真は本文の左右の余白ぶんだけ広げて、画面の端まで出す(高さ・切り抜きは .recipe-hero のまま)。 */
+.story-page .recipe-hero {
+  width: auto;
+  margin: 0.4em -24px 2.2em;
+}

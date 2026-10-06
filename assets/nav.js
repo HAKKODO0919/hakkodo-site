@@ -23,6 +23,8 @@ const NAV_ITEMS = [
   // (workshops/schedule/index.html)へ進む、2段階の導線にする。
   { key: "workshops", href: "workshops/index.html", i18nKey: "navWorkshops" },
   { key: "news", href: "news/index.html", i18nKey: "navNews" },
+  // Story(ブランドの考え方)。「お問い合わせ」の前に置く。
+  { key: "story", href: "story/index.html", i18nKey: "navStory" },
   { key: "contact", href: "contact/index.html", i18nKey: "navContact" },
 ];
 
