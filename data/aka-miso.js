@@ -75,7 +75,7 @@ window.PRODUCT_DATA = {
         }
       },
       ingredients: ["米麹(米、麹菌)", "大豆", "海塩"],
-      ingredientsNote: "米・大豆・塩はすべて有機認証原料を使用しています。",
+      ingredientsNote: "米・大豆・塩は有機認証原料を使用しています。",
       allergens: ["大豆"],
       storageWarning: [
         { text: "生味噌のため、酵母が生きています。", bold: true },
@@ -143,7 +143,7 @@ window.PRODUCT_DATA = {
         }
       },
       ingredients: ["Koji d'arròs (arròs, fong koji)", "Soja", "Sal marina"],
-      ingredientsNote: "L'arròs, la soja i la sal són tots ingredients certificats ecològics.",
+      ingredientsNote: "L'arròs, la soja i la sal són ingredients certificats ecològics.",
       allergens: ["Soja"],
       storageWarning: [
         { text: "Com que és miso cru, encara és viu.", bold: true },
@@ -211,7 +211,7 @@ window.PRODUCT_DATA = {
         }
       },
       ingredients: ["Koji de arroz (arroz, hongo koji)", "Soja", "Sal marina"],
-      ingredientsNote: "El arroz, la soja y la sal son todos ingredientes certificados ecológicos.",
+      ingredientsNote: "El arroz, la soja y la sal son ingredientes certificados ecológicos.",
       allergens: ["Soja"],
       storageWarning: [
         { text: "Como es miso crudo, sigue vivo.", bold: true },
@@ -279,7 +279,7 @@ window.PRODUCT_DATA = {
         }
       },
       ingredients: ["Rice koji (rice, koji mold)", "Soybeans", "Sea salt"],
-      ingredientsNote: "The rice, soybeans, and salt are all certified organic.",
+      ingredientsNote: "The rice, soybeans, and salt are certified organic ingredients.",
       allergens: ["Soybeans"],
       storageWarning: [
         { text: "This is raw miso, so it's still alive.", bold: true },
