@@ -191,6 +191,12 @@ body > main {
   color: var(--color-heading);
 }
 
+/* About(story/)を開いているときの「現在地」は、他のメニューと同じ文字色にして、強調しない。
+   (マウスを乗せたとき・キーボードで選んだときは、他のメニューと同じく濃くなる) */
+.global-nav-link.active[href$="story/index.html"]:not(:hover):not(:focus-visible) {
+  color: #524d45;
+}
+
 /* ヘッダーの本来のHAKKODOロゴ(画像)。ナビゲーションより一段
    存在感のあるブランド要素にする。 */
 .home-header-logo {
