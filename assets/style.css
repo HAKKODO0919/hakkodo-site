@@ -1805,7 +1805,7 @@ a.global-footer-instagram:focus-visible {
      (text-wrap: pretty は、iPhone の Safari で行末の短い行をなくそうとして行を早めに
      折り返し、日本語で「か／ら」のように言葉の途中で細かく切れる原因になったため使わない。
      word-break: auto-phrase も、対応しないブラウザでは意味がないため使わない。)
-     white-space: normal なので、文章中の改行「\n」は半角スペース1つと同じ扱いになる。 */
+     段落の中は、画面の幅に合わせてブラウザが自然に折り返す。段落と段落の間の余白(下の margin)だけを残す。 */
   word-break: normal;
   overflow-wrap: normal;
   white-space: normal;
@@ -1818,16 +1818,6 @@ a.global-footer-instagram:focus-visible {
      少しだけ広くとって、本文と区別して見えるようにする(隣り合う余白は大きいほうが使われる)。 */
   margin-top: 2.6em;
   margin-bottom: 0;
-}
-
-/* 文章の中の「{br-sm}」(assets/story.js が <br class="story-br-sm"> にする)は、
-   375px前後のスマホ幅(389px以下)だけ改行にして、390px以上(大きめのスマホ・タブレット・PC)
-   では無効にして、通常の折り返しにする。390〜400px付近は、端末のフォントの幅の違いで
-   「japoneses:」だけの短い行ができやすいため、改行の対象から外している。 */
-@media (min-width: 390px) {
-  .story-page .story-br-sm {
-    display: none;
-  }
 }
 
 /* 写真は本文の左右の余白ぶんだけ広げて、画面の端まで出す(高さ・切り抜きは .recipe-hero のまま)。 */

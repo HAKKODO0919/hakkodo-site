@@ -5,14 +5,6 @@
    そのページの言語が固定されます(他のページと同じ仕組みです)。
    ======================================================== */
 
-// 文章の中の「{br-sm}」は、スマホ幅だけ改行になる印(<br class="story-br-sm">)に置き換える。
-// PC・タブレットでは CSS で無効になり、通常の折り返しのままになる。
-const STORY_BR_SM = "{br-sm}";
-
-function storyTextHtml(text) {
-  return escapeHtml(text).split(STORY_BR_SM).join('<br class="story-br-sm">');
-}
-
 // STORYの中身(見出し・段落・写真)を、指定した言語で描画する
 function renderStoryContent(data, siteRoot, lang) {
   const root = document.getElementById("story-root");
@@ -32,7 +24,7 @@ function renderStoryContent(data, siteRoot, lang) {
     : "";
 
   const bodyHtml = (tr.paragraphs || [])
-    .map((text, i) => `<p class="home-feature-text">${storyTextHtml(text)}</p>${i + 1 === photoAfter ? photoHtml : ""}`)
+    .map((text, i) => `<p class="home-feature-text">${escapeHtml(text)}</p>${i + 1 === photoAfter ? photoHtml : ""}`)
     .join("");
 
   // 見出しは他の文章ページと同じ .intro、本文は .home-feature-text を使う
