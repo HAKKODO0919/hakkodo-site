@@ -10,7 +10,7 @@
 const STORY_BR_SM = "{br-sm}";
 
 function storyTextHtml(text) {
-  return escapeHtml(text).split(STORY_BR_SM).join('<br class="story-br-sm">');
+  return escapeText(text).split(STORY_BR_SM).join('<br class="story-br-sm">');
 }
 
 // STORYの中身(見出し・段落・写真)を、指定した言語で描画する
@@ -19,7 +19,7 @@ function renderStoryContent(data, siteRoot, lang) {
   if (!root) return;
   const tr = data && data.translations && (data.translations[lang] || data.translations.en);
   if (!tr) {
-    root.innerHTML = `<div class="load-error">${escapeHtml(t("productLoadError", lang))}</div>`;
+    root.innerHTML = `<div class="load-error">${escapeText(t("productLoadError", lang))}</div>`;
     return;
   }
 
@@ -38,8 +38,8 @@ function renderStoryContent(data, siteRoot, lang) {
   // 見出しは他の文章ページと同じ .intro、本文は .home-feature-text を使う
   root.innerHTML = `
     <div class="intro">
-      <h1>${escapeHtml(tr.title)}</h1>
-      <p>${escapeHtml(tr.heading)}</p>
+      <h1>${escapeText(tr.title)}</h1>
+      <p>${escapeText(tr.heading)}</p>
     </div>
     ${bodyHtml}
   `;
@@ -58,7 +58,7 @@ function initStoryPage(data, siteRoot) {
     } catch (e) {
       console.error(e);
       const root = document.getElementById("story-root");
-      if (root) root.innerHTML = `<div class="load-error">${escapeHtml(t("productLoadError"))}</div>`;
+      if (root) root.innerHTML = `<div class="load-error">${escapeText(t("productLoadError"))}</div>`;
     }
   }
 

@@ -16,7 +16,7 @@
 function renderIngredientList(items) {
   if (!items || items.length === 0) return "";
   return `<ul class="tag-list">${items
-    .map((item) => `<li>${escapeHtml(item)}</li>`)
+    .map((item) => `<li>${escapeText(item)}</li>`)
     .join("")}</ul>`;
 }
 
@@ -35,7 +35,7 @@ function renderSteps(steps, siteRoot, lang) {
           <li class="step has-image">
             <div class="step-header">
               <span class="step-number">${number}</span>
-              <p class="step-text">${escapeHtml(step.text || "")}</p>
+              <p class="step-text">${escapeText(step.text || "")}</p>
             </div>
             <div class="step-image">${img}</div>
           </li>`;
@@ -43,7 +43,7 @@ function renderSteps(steps, siteRoot, lang) {
       return `
         <li class="step">
           <span class="step-number">${number}</span>
-          <p class="step-text">${escapeHtml(step.text || "")}</p>
+          <p class="step-text">${escapeText(step.text || "")}</p>
         </li>`;
     })
     .join("");
@@ -59,7 +59,7 @@ function renderRecipeContent(data, siteRoot, lang) {
   const tr = data && data.translations && (data.translations[lang] || data.translations.ja);
 
   if (!tr) {
-    root.innerHTML = `<div class="load-error">${escapeHtml(t("productLoadError", lang))}</div>`;
+    root.innerHTML = `<div class="load-error">${escapeText(t("productLoadError", lang))}</div>`;
     return;
   }
 
@@ -78,13 +78,13 @@ function renderRecipeContent(data, siteRoot, lang) {
   // 保存期間・ポイントは共通フォーマットの正式なセクションではなく、
   // データにあるレシピだけ「作り方」の下に補足として表示する任意項目。
   const storageNoteHtml = tr.storage
-    ? `<p class="recipe-subheading">${escapeHtml(t("recipeStorageLabel", lang))}</p><p class="notes">${escapeHtml(tr.storage)}</p>`
+    ? `<p class="recipe-subheading">${escapeText(t("recipeStorageLabel", lang))}</p><p class="notes">${escapeText(tr.storage)}</p>`
     : "";
   // tipsLabel を指定すると、この位置の見出しをレシピごとに差し替えられる
   // (指定が無ければ従来どおり共通の「ポイント」になる)。
   const tipsLabel = tr.tipsLabel || t("recipeTipsLabel", lang);
   const tipsNoteHtml = tr.tips
-    ? `<p class="recipe-subheading">${escapeHtml(tipsLabel)}</p><p class="notes">${escapeHtml(tr.tips)}</p>`
+    ? `<p class="recipe-subheading">${escapeText(tipsLabel)}</p><p class="notes">${escapeText(tr.tips)}</p>`
     : "";
 
   const stepsHtml = tr.steps && tr.steps.length
@@ -92,18 +92,18 @@ function renderRecipeContent(data, siteRoot, lang) {
     : "";
 
   const arrangeHtml = tr.arrange
-    ? `<div class="section"><h2>${t("sectionArrange", lang)}</h2><p>${escapeHtml(tr.arrange)}</p></div>`
+    ? `<div class="section"><h2>${t("sectionArrange", lang)}</h2><p>${escapeText(tr.arrange)}</p></div>`
     : "";
 
   const misoPointHtml = tr.misoPoint
-    ? `<div class="section"><h2>${t("sectionMisoPoint", lang)}</h2><p>${escapeHtml(tr.misoPoint)}</p></div>`
+    ? `<div class="section"><h2>${escapeText(t("sectionMisoPoint", lang))}</h2><p>${escapeText(tr.misoPoint)}</p></div>`
     : "";
 
   root.innerHTML = `
     ${heroHtml}
     <div class="product-head">
-      <h1>${escapeHtml(tr.title || "")}</h1>
-      ${tr.intro ? `<p class="tagline">${escapeHtml(tr.intro)}</p>` : ""}
+      <h1>${escapeText(tr.title || "")}</h1>
+      ${tr.intro ? `<p class="tagline">${escapeText(tr.intro)}</p>` : ""}
     </div>
     ${ingredientsHtml}
     ${stepsHtml}
@@ -125,7 +125,7 @@ function initRecipePage(data, siteRoot) {
     } catch (e) {
       console.error(e);
       const root = document.getElementById("recipe-root");
-      if (root) root.innerHTML = `<div class="load-error">${escapeHtml(t("productLoadError"))}</div>`;
+      if (root) root.innerHTML = `<div class="load-error">${escapeText(t("productLoadError"))}</div>`;
     }
   }
 
@@ -152,9 +152,9 @@ function renderRecipeCard(href, data, siteRoot, lang, index) {
       <div class="thumb">${imageOrPlaceholder(images.hero, tr.heroAlt, "thumb-img", siteRoot, lang)}</div>
       <div class="card-body">
         <p class="recipe-card-number">${number}</p>
-        <h2>${escapeHtml(tr.title || "")}</h2>
-        <p>${escapeHtml(cardIntro)}</p>
-        <span class="home-feature-link">${escapeHtml(t("viewRecipesLink", lang))}</span>
+        <h2>${escapeText(tr.title || "")}</h2>
+        <p>${escapeText(cardIntro)}</p>
+        <span class="home-feature-link">${escapeText(t("viewRecipesLink", lang))}</span>
       </div>
     </a>`;
 }
@@ -168,7 +168,7 @@ function renderRecipeListContent(recipes, siteRoot, lang) {
   if (tocRoot) tocRoot.innerHTML = "";
 
   if (!recipes || recipes.length === 0) {
-    listRoot.innerHTML = `<div class="empty-state">${escapeHtml(t("recipesEmpty", lang))}</div>`;
+    listRoot.innerHTML = `<div class="empty-state">${escapeText(t("recipesEmpty", lang))}</div>`;
     return;
   }
 
@@ -192,7 +192,7 @@ function initRecipeList(recipes, siteRoot) {
     } catch (e) {
       console.error(e);
       const root = document.getElementById("recipe-list-root");
-      if (root) root.innerHTML = `<div class="load-error">${escapeHtml(t("productLoadError"))}</div>`;
+      if (root) root.innerHTML = `<div class="load-error">${escapeText(t("productLoadError"))}</div>`;
     }
   }
 

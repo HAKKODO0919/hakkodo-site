@@ -52,7 +52,7 @@ function renderGlobalNav(container, siteRoot, currentKey) {
   // ヘッダーを統一するため、ここで最初から画像として出力する。
   const brandActive = currentKey === "top" ? " active" : "";
   container.innerHTML = `
-    <a class="global-nav-brand${brandActive}" href="${escapeHtml(linkRoot + "index.html")}">
+    <a class="global-nav-brand${brandActive}" translate="no" href="${escapeHtml(linkRoot + "index.html")}">
       <img src="${escapeHtml(siteRoot + "images/aka-miso/hakkodo-logo-crop-transparent.png")}" alt="HAKKODO" class="home-header-logo">
       <img src="${escapeHtml(siteRoot + "images/aka-miso/hakkodo-face-logo-transparent.png")}" alt="" class="home-header-face-logo">
     </a>
@@ -91,7 +91,7 @@ function renderGlobalFooter(container, siteRoot) {
     : `<span class="global-footer-instagram" aria-hidden="true">${INSTAGRAM_ICON_SVG}</span>`;
   container.innerHTML = `
     <div class="global-footer-row">
-      <p class="global-footer-copyright"><span class="global-footer-copyright-mark">&copy;</span><span class="global-footer-copyright-name">HAKKODO</span></p>
+      <p class="global-footer-copyright"><span class="global-footer-copyright-mark">&copy;</span><span class="global-footer-copyright-name" translate="no">HAKKODO</span></p>
       <span class="global-footer-divider" aria-hidden="true">|</span>
       ${instagramHtml}
     </div>

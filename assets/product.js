@@ -20,6 +20,16 @@ function escapeHtml(str) {
   }[c]));
 }
 
+// テキスト(要素の中身)用のエスケープ。escapeHtml の処理に加えて、ブランド名・商品名を
+// <span translate="no"> で囲み、ブラウザの自動翻訳で変換されないようにする。
+// 属性値(alt・href・src など)には使わないこと(属性の中に<span>は入れられないため)。
+// 長い表記を先に書く: 「HAKKODO ― 発酵道」(Aboutの正式な見出し)→「HAKKODO MISO」→「HAKKODO」。
+// 本文中の「発酵道」「味噌」などの一般的な語は保護しない。
+const BRAND_NO_TRANSLATE = /HAKKODO ― 発酵道|HAKKODO MISO|HAKKODO/g;
+function escapeText(str) {
+  return escapeHtml(str).replace(BRAND_NO_TRANSLATE, '<span translate="no">$&</span>');
+}
+
 // 写真が用意されていない/読み込めない場合にプレースホルダーを表示する
 // src: images.hero や images.gallery[n] の文字列、siteRoot: サイトの一番上の階層への相対パス
 function imageOrPlaceholder(src, alt, className, siteRoot, lang) {
@@ -44,8 +54,8 @@ function renderCreatorProfile(creator, siteRoot, lang) {
       ${creator.body
         .map((part) =>
           part.bold
-            ? `<p class="creator-emphasis">${escapeHtml(part.text)}</p>`
-            : `<p class="notes">${escapeHtml(part.text)}</p>`
+            ? `<p class="creator-emphasis">${escapeText(part.text)}</p>`
+            : `<p class="notes">${escapeText(part.text)}</p>`
         )
         .join("")}
     </div>`;
@@ -59,8 +69,8 @@ function renderNotesBlocks(parts) {
   return list
     .map((part) =>
       part.bold
-        ? `<p class="notes-strong">${escapeHtml(part.text)}</p>`
-        : `<p class="notes">${escapeHtml(part.text)}</p>`
+        ? `<p class="notes-strong">${escapeText(part.text)}</p>`
+        : `<p class="notes">${escapeText(part.text)}</p>`
     )
     .join("");
 }
@@ -68,7 +78,7 @@ function renderNotesBlocks(parts) {
 function renderTagList(items) {
   if (!items || items.length === 0) return "";
   return `<ul class="tag-list">${items
-    .map((item) => `<li>${escapeHtml(item)}</li>`)
+    .map((item) => `<li>${escapeText(item)}</li>`)
     .join("")}</ul>`;
 }
 
@@ -79,8 +89,8 @@ function renderTagList(items) {
 function renderProductNameHtml(name) {
   const text = name || "";
   const sep = text.indexOf("｜");
-  if (sep < 0) return escapeHtml(text);
-  return `${escapeHtml(text.slice(0, sep + 1))}<span class="product-name-type">${escapeHtml(text.slice(sep + 1))}</span>`;
+  if (sep < 0) return escapeText(text);
+  return `${escapeText(text.slice(0, sep + 1))}<span class="product-name-type">${escapeText(text.slice(sep + 1))}</span>`;
 }
 
 // 商品ページの中身を、指定した言語で描画する
@@ -91,7 +101,7 @@ function renderProductContent(data, siteRoot, lang) {
   const tr = data && data.translations && (data.translations[lang] || data.translations.ja);
 
   if (!tr) {
-    root.innerHTML = `<div class="load-error">${escapeHtml(t("productLoadError", lang))}</div>`;
+    root.innerHTML = `<div class="load-error">${escapeText(t("productLoadError", lang))}</div>`;
     return;
   }
 
@@ -106,21 +116,21 @@ function renderProductContent(data, siteRoot, lang) {
           .map(
             (block) => `
           <div class="story-block">
-            <h3>${escapeHtml(block.heading || "")}</h3>
+            <h3>${escapeText(block.heading || "")}</h3>
             ${(block.body || [])
               .map((part) => {
                 // runs があれば、1つの文の中で太字にする部分だけを指定できる
                 if (part.runs) {
                   const inner = part.runs
                     .map((run) =>
-                      run.bold ? `<strong>${escapeHtml(run.text)}</strong>` : escapeHtml(run.text)
+                      run.bold ? `<strong>${escapeText(run.text)}</strong>` : escapeText(run.text)
                     )
                     .join("");
                   return `<p>${inner}</p>`;
                 }
                 return part.bold
-                  ? `<p class="story-emphasis">${escapeHtml(part.text)}</p>`
-                  : `<p>${escapeHtml(part.text)}</p>`;
+                  ? `<p class="story-emphasis">${escapeText(part.text)}</p>`
+                  : `<p>${escapeText(part.text)}</p>`;
               })
               .join("")}
           </div>`
@@ -151,14 +161,14 @@ function renderProductContent(data, siteRoot, lang) {
     : "";
 
   const allergensLineHtml = (tr.allergens && tr.allergens.length)
-    ? `<p class="allergens">${escapeHtml(t("allergensLabel", lang))}${escapeHtml(tr.allergens.join(t("listSeparator", lang)))}</p>`
+    ? `<p class="allergens">${escapeText(t("allergensLabel", lang))}${escapeText(tr.allergens.join(t("listSeparator", lang)))}</p>`
     : "";
 
   const ingredientsHtml = (tr.ingredients && tr.ingredients.length)
     ? `<div class="section ingredients-section">
         <h2>${t("sectionIngredients", lang)}</h2>
         ${renderTagList(tr.ingredients)}
-        ${tr.ingredientsNote ? `<p class="notes">${escapeHtml(tr.ingredientsNote)}</p>` : ""}
+        ${tr.ingredientsNote ? `<p class="notes">${escapeText(tr.ingredientsNote)}</p>` : ""}
         ${allergensLineHtml}
       </div>`
     : "";
@@ -167,7 +177,7 @@ function renderProductContent(data, siteRoot, lang) {
     ? `<div class="section storage-info">
         <h2>${t("sectionStorage", lang)}</h2>
         ${renderNotesBlocks(tr.storageWarning)}
-        ${tr.storageMethod ? `<p class="notes">${escapeHtml(tr.storageMethod)}</p>` : ""}
+        ${tr.storageMethod ? `<p class="notes">${escapeText(tr.storageMethod)}</p>` : ""}
       </div>`
     : "";
 
@@ -181,16 +191,16 @@ function renderProductContent(data, siteRoot, lang) {
   const notesHtml = tr.notes
     ? `<div class="section">
         <h2>${t("sectionNotes", lang)}</h2>
-        <p class="notes">${escapeHtml(tr.notes)}</p>
+        <p class="notes">${escapeText(tr.notes)}</p>
       </div>`
     : "";
 
   const priceHtml = tr.price
-    ? `<span class="price">${escapeHtml(tr.price)}</span>`
+    ? `<span class="price">${escapeText(tr.price)}</span>`
     : "";
 
   const netWeightHtml = tr.netWeight
-    ? `<span class="net-weight">${escapeHtml(t("netWeightLabel", lang))}${escapeHtml(tr.netWeight)}</span>`
+    ? `<span class="net-weight">${escapeText(t("netWeightLabel", lang))}${escapeText(tr.netWeight)}</span>`
     : "";
 
   root.innerHTML = `
@@ -200,12 +210,12 @@ function renderProductContent(data, siteRoot, lang) {
     <div class="product-head product-detail-head">
       <h1>${renderProductNameHtml(tr.name)}</h1>
       ${tr.descriptionLine1 || tr.descriptionLine2
-        ? `${tr.descriptionLine1 ? `<p class="product-catchphrase">${escapeHtml(tr.descriptionLine1)}</p>` : ""}${tr.descriptionLine2 ? `<p class="tagline">${escapeHtml(tr.descriptionLine2)}</p>` : ""}`
-        : tr.tagline ? `<p class="tagline">${escapeHtml(tr.tagline)}</p>` : ""}
+        ? `${tr.descriptionLine1 ? `<p class="product-catchphrase">${escapeText(tr.descriptionLine1)}</p>` : ""}${tr.descriptionLine2 ? `<p class="tagline">${escapeText(tr.descriptionLine2)}</p>` : ""}`
+        : tr.tagline ? `<p class="tagline">${escapeText(tr.tagline)}</p>` : ""}
       ${(priceHtml || netWeightHtml) ? `<div class="price-row">${priceHtml}${netWeightHtml}</div>` : ""}
       <p class="recipe-link"><a href="${escapeHtml(pageLinkRoot(siteRoot))}recipes/index.html" class="home-feature-link">${escapeHtml(t("viewRecipesLink", lang))}</a></p>
     </div>
-    ${tr.description ? `<div class="section description"><h2>${t("sectionDescription", lang)}</h2><p>${escapeHtml(tr.description)}</p></div>` : ""}
+    ${tr.description ? `<div class="section description"><h2>${t("sectionDescription", lang)}</h2><p>${escapeText(tr.description)}</p></div>` : ""}
     ${storyHtml}
     ${galleryHtml}
     ${ingredientsHtml}
@@ -229,7 +239,7 @@ function initProductPage(data, siteRoot) {
     } catch (e) {
       console.error(e);
       const root = document.getElementById("product-root");
-      if (root) root.innerHTML = `<div class="load-error">${escapeHtml(t("productLoadError"))}</div>`;
+      if (root) root.innerHTML = `<div class="load-error">${escapeText(t("productLoadError"))}</div>`;
     }
   }
 
@@ -252,9 +262,9 @@ function renderProductListContent(items, siteRoot, lang) {
       if (!tr) {
         return `
           <a class="card recipe-card" href="${escapeHtml(href)}">
-            <div class="thumb"><div class="thumb-img placeholder">${escapeHtml(t("photoPending", lang))}</div></div>
+            <div class="thumb"><div class="thumb-img placeholder">${escapeText(t("photoPending", lang))}</div></div>
             <div class="card-body">
-              <h2>${escapeHtml(t("productLoadError", lang))}</h2>
+              <h2>${escapeText(t("productLoadError", lang))}</h2>
             </div>
           </a>`;
       }
@@ -263,9 +273,9 @@ function renderProductListContent(items, siteRoot, lang) {
         <a class="card recipe-card" href="${escapeHtml(href)}">
           <div class="thumb">${imageOrPlaceholder(images.hero, tr.heroAlt, "thumb-img", siteRoot, lang)}</div>
           <div class="card-body">
-            <h2>${escapeHtml(tr.name || "")}</h2>
-            <p>${escapeHtml(tr.tagline || "")}</p>
-            <span class="home-feature-link">${escapeHtml(t("homeMisoLink", lang))}</span>
+            <h2>${escapeText(tr.name || "")}</h2>
+            <p>${escapeText(tr.tagline || "")}</p>
+            <span class="home-feature-link">${escapeText(t("homeMisoLink", lang))}</span>
           </div>
         </a>`;
     })
@@ -286,7 +296,7 @@ function initProductList(items, siteRoot) {
     } catch (e) {
       console.error(e);
       const root = document.getElementById("product-list-root");
-      if (root) root.innerHTML = `<div class="load-error">${escapeHtml(t("productLoadError"))}</div>`;
+      if (root) root.innerHTML = `<div class="load-error">${escapeText(t("productLoadError"))}</div>`;
     }
   }
 

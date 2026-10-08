@@ -397,7 +397,10 @@ function t(key, lang) {
 function applyUiStrings(lang) {
   document.documentElement.lang = lang;
   document.querySelectorAll("[data-i18n]").forEach((el) => {
-    el.textContent = t(el.getAttribute("data-i18n"), lang);
+    const text = t(el.getAttribute("data-i18n"), lang);
+    // ブランド名を含む文言だけ、ブランド名を翻訳対象外にして描画する(それ以外は従来どおり textContent)
+    if (text.indexOf("HAKKODO") >= 0) el.innerHTML = escapeText(text);
+    else el.textContent = text;
   });
 }
 

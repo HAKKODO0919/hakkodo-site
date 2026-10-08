@@ -21,14 +21,14 @@ function renderWorkshopCard(data, lang) {
 
   const metaHtml = rows.length
     ? `<ul class="workshop-meta">${rows
-        .map((r) => `<li><strong>${escapeHtml(r.label)}</strong>${escapeHtml(r.value)}</li>`)
+        .map((r) => `<li><strong>${escapeText(r.label)}</strong>${escapeText(r.value)}</li>`)
         .join("")}</ul>`
     : "";
 
   return `
     <div class="section workshop-card">
-      <h2>${escapeHtml(tr.title || "")}</h2>
-      ${tr.content ? `<p>${escapeHtml(tr.content)}</p>` : ""}
+      <h2>${escapeText(tr.title || "")}</h2>
+      ${tr.content ? `<p>${escapeText(tr.content)}</p>` : ""}
       ${metaHtml}
     </div>`;
 }
@@ -44,7 +44,7 @@ function renderWorkshopScheduleContent(workshops, lang) {
     // (.intro)と同じ静かな見た目にする。
     // 開催予定が決まったら、initWorkshopSchedule([...]) に1件渡すだけで
     // 自動的にこの案内文から一覧表示へ切り替わる(このifごと変更不要)。
-    root.innerHTML = `<div class="intro"><p style="white-space: pre-line;">${escapeHtml(t("workshopsScheduleEmpty", lang))}</p></div>`;
+    root.innerHTML = `<div class="intro"><p style="white-space: pre-line;">${escapeText(t("workshopsScheduleEmpty", lang))}</p></div>`;
     return;
   }
 
@@ -65,7 +65,7 @@ function initWorkshopSchedule(workshops) {
     } catch (e) {
       console.error(e);
       const root = document.getElementById("workshop-schedule-root");
-      if (root) root.innerHTML = `<div class="load-error">${escapeHtml(t("productLoadError"))}</div>`;
+      if (root) root.innerHTML = `<div class="load-error">${escapeText(t("productLoadError"))}</div>`;
     }
   }
 

@@ -11,9 +11,9 @@ function renderNewsItem(data, lang) {
   if (!tr) return "";
   return `
     <li class="news-item">
-      ${tr.date ? `<p class="news-date">${escapeHtml(tr.date)}</p>` : ""}
-      <h2>${escapeHtml(tr.title || "")}</h2>
-      ${tr.body ? `<p>${escapeHtml(tr.body)}</p>` : ""}
+      ${tr.date ? `<p class="news-date">${escapeText(tr.date)}</p>` : ""}
+      <h2>${escapeText(tr.title || "")}</h2>
+      ${tr.body ? `<p>${escapeText(tr.body)}</p>` : ""}
     </li>`;
 }
 
@@ -25,7 +25,7 @@ function renderNewsListContent(newsItems, lang) {
   if (!newsItems || newsItems.length === 0) {
     // お問い合わせ・ワークショップと同じく、枠で囲まず文字だけで表示する。
     // お知らせが追加されたら、この分岐を通らず自動的に一覧表示になる。
-    root.innerHTML = `<div class="intro intro-mid"><p style="white-space: pre-line;">${escapeHtml(t("newsEmpty", lang))}</p></div>`;
+    root.innerHTML = `<div class="intro intro-mid"><p style="white-space: pre-line;">${escapeText(t("newsEmpty", lang))}</p></div>`;
     return;
   }
 
@@ -46,7 +46,7 @@ function initNewsList(newsItems) {
     } catch (e) {
       console.error(e);
       const root = document.getElementById("news-list-root");
-      if (root) root.innerHTML = `<div class="load-error">${escapeHtml(t("productLoadError"))}</div>`;
+      if (root) root.innerHTML = `<div class="load-error">${escapeText(t("productLoadError"))}</div>`;
     }
   }
 

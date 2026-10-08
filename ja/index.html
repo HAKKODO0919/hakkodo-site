@@ -102,9 +102,9 @@ Miso / Fermentation</h1>
       const tr = data.translations[lang] || data.translations.ja;
 
       const lead = (tr.story && tr.story.closing && tr.story.closing.main) || "";
-      document.getElementById("home-intro-lead").textContent = lead;
+      document.getElementById("home-intro-lead").innerHTML = escapeText(lead);
 
-      document.getElementById("home-feature-miso-text").textContent = tr.tagline || "";
+      document.getElementById("home-feature-miso-text").innerHTML = escapeText(tr.tagline || "");
     }
 
     function render() {
