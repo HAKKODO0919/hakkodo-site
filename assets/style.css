@@ -387,26 +387,12 @@ body > main {
   border-radius: 0;
 }
 
-/* 商品ページの冒頭の写真だけ、デスクトップ幅では.pageの640px幅より
-   少し外へ広げ、商品写真がページの主役として見えるようにする
-   (TOPページのヒーローほど大きくはしない)。モバイル〜中間幅では
-   今までどおり.pageの640px幅いっぱいのまま変更しない。
-   写真自体・トリミング(.hero側の設定)は一切変更しない。 */
+/* 商品ページの冒頭の写真は、About・レシピ詳細と同じく、どの画面幅でも
+   .pageの640px幅(--max-width)に収める(以前あった1000px以上での拡大はやめた)。
+   写真自体・トリミング(.hero側の設定)は変更しない。 */
 .product-hero-frame {
   display: flex;
   justify-content: center;
-}
-
-@media (min-width: 1000px) {
-  .product-hero-frame {
-    width: 100vw;
-    margin-left: calc(-50vw + 50%);
-  }
-
-  .product-hero-frame .hero {
-    width: 65vw;
-    max-width: 900px;
-  }
 }
 
 .hero img,
