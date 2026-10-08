@@ -455,6 +455,15 @@ body > main {
   margin-bottom: 10px;
 }
 
+/* スマホ幅(479px以下)だけ、商品名の主張を少し弱めて、サイト全体の静かなトーンに合わせる
+   (25.6px → 22.4px、行間は詰まりすぎないよう1.25)。480px以上・PC幅は変更しない。 */
+@media (max-width: 479px) {
+  .product-detail-head h1 {
+    font-size: 1.4rem;
+    line-height: 1.25;
+  }
+}
+
 /* 商品名の「｜」より後ろ(味噌の種類)。幅が足りないときは、種類の途中ではなく
    「｜」の後ろで折り返し、種類全体を次の行に送る。PC幅など1行に収まる場合は変わらない。 */
 .product-name-type {
@@ -473,6 +482,14 @@ body > main {
   font-weight: 600;
   color: var(--color-heading);
   line-height: 1.6;
+}
+
+/* スマホ幅(479px以下)だけ、キャッチコピーの太さを少し弱める(600 → 500)。
+   サイズ(16.8px)・行間・色は変えない。480px以上・PC幅は変更しない。 */
+@media (max-width: 479px) {
+  .product-catchphrase {
+    font-weight: 500;
+  }
 }
 
 .tagline {
