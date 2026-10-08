@@ -1814,6 +1814,9 @@ a.global-footer-instagram:focus-visible {
 }
 
 .story-page .home-feature-text:last-child {
+  /* 最後の一文(締めの言葉)は独立した段落。前の段落との間を、段落どうしの間(1.9em)より
+     少しだけ広くとって、本文と区別して見えるようにする(隣り合う余白は大きいほうが使われる)。 */
+  margin-top: 2.6em;
   margin-bottom: 0;
 }
 
