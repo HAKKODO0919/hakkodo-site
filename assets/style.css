@@ -410,11 +410,12 @@ body > main {
   display: block;
 }
 
-/* レシピ詳細ページの写真。商品ページのheroより控えめな高さに固定し、
-   スマートフォンで写真が画面を占領しすぎないようにする。 */
+/* レシピ詳細ページとAboutページの写真(assets/recipe.js・assets/story.js)。
+   商品ページのheroより控えめな高さに固定し、スマートフォンで写真が画面を占領しすぎないようにする。
+   横幅はそのまま、高さだけを以前の220pxから300pxにして、縦方向に写る範囲を少し増やした。 */
 .recipe-hero {
   width: 100%;
-  height: 220px;
+  height: 300px;
   background: #eee;
   overflow: hidden;
 }
