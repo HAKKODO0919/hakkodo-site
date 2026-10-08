@@ -1679,7 +1679,7 @@ body > main {
   /* 「ワークショップ」「レシピ」の説明文(.home-feature-text)と
      同じ大きさに揃え、TOPページ全体でのバランスを合わせる */
   font-size: 0.98rem;
-  color: var(--color-muted);
+  color: var(--color-text);
 }
 
 /* ---- サイト全体で共通のフッター。背景の山・植物イラストなどの
