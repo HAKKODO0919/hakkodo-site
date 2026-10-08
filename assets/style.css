@@ -1819,6 +1819,16 @@ a.global-footer-instagram:focus-visible {
   margin-bottom: 0;
 }
 
+/* スマホ幅(479px以下)だけ、最後の一文と、その1つ前の段落との間を、他の段落どうしより
+   少し狭くする(1.9em → 1em。ちょうど空白1行分に見える)。隣り合う余白は大きいほうが
+   使われるため、1つ前の段落の下の余白だけを小さくしている。
+   480px以上(タブレット・PC)は変更しない。 */
+@media (max-width: 479px) {
+  .story-page .home-feature-text:nth-last-child(2) {
+    margin-bottom: 1em;
+  }
+}
+
 /* 写真は本文の左右の余白ぶんだけ広げて、画面の端まで出す(高さ・切り抜きは .recipe-hero のまま)。 */
 .story-page .recipe-hero {
   width: auto;
