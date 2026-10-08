@@ -5,6 +5,8 @@
 // (表示の仕組みは assets/story.js、見た目は assets/style.css の .story-* です)。
 //
 // paragraphs: 段落の配列。文字列の中の「\n」は、その位置で改行されます。
+//   「{br-sm}」は、375px前後のスマホ幅(389px以下)だけ改行になる印です(画面には表示されず、
+//   それより広い画面では何も起きません)。現在は ca の最初の段落の1か所だけに使っています。
 // image: 本文の途中に1枚だけ入れる写真(既存の写真を使用)。
 //        afterParagraph = 何番目の段落の直後に入れるか(1始まり)。
 // ============================================================
@@ -30,7 +32,7 @@ window.STORY_DATA = {
       heading: "HAKKODO ― 発酵道",
       imageAlt: "Muntanyes verdes i una vall, vistes entre roques, amb cims nevats al fons",
       paragraphs: [
-        "HAKKODO és un nom que neix de dues paraules japoneses: “hakkō” (fermentació) i “dō” (camí).",
+        "HAKKODO és un nom que neix de dues paraules japoneses:{br-sm} “hakkō” (fermentació) i “dō” (camí).",
         "En el judo, el kendo, el chadō (el camí del te) o el kadō (el camí de les flors), el “dō” no es limita a dominar una tècnica: és polir-se un mateix i continuar creixent, dia rere dia, a través de la pràctica. Aquest camí no té final.\nHAKKODO també continua aprenent, perfeccionant-se i creixent a través de la fermentació. Continuar avançant, pas a pas. Això és el “hakkōdō”.",
         "El lloc que HAKKODO ha triat per fer aquest camí és l’Alta Garrotxa, a Catalunya.\nEn aquesta terra, afavorida per una natura generosa i per aigües clares, i amb la cultura japonesa de la fermentació com a rerefons, hi fem madurar el miso de HAKKODO. La natura i l’aigua d’aquí són imprescindibles per al miso de HAKKODO.",
         "El miso, nascut de la cultura japonesa de la fermentació, es troba amb tota mena de plats i cultures culinàries, i les qualitats pròpies d’uns i dels altres s’entrellacen. D’aquí en sorgeixen sabors nous i noves possibilitats.\n\nVoldríem que el nostre miso fos l’espurna de nous lligams amb altres plats i cultures, i de sabors que encara no coneixem."

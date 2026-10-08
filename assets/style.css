@@ -1817,6 +1817,16 @@ a.global-footer-instagram:focus-visible {
   margin-bottom: 0;
 }
 
+/* 文章の中の「{br-sm}」(assets/story.js が <br class="story-br-sm"> にする)は、
+   375px前後のスマホ幅(389px以下)だけ改行にして、390px以上(大きめのスマホ・タブレット・PC)
+   では無効にして、通常の折り返しにする。390〜400px付近は、端末のフォントの幅の違いで
+   「japoneses:」だけの短い行ができやすいため、改行の対象から外している。 */
+@media (min-width: 390px) {
+  .story-page .story-br-sm {
+    display: none;
+  }
+}
+
 /* 写真は本文の左右の余白ぶんだけ広げて、画面の端まで出す(高さ・切り抜きは .recipe-hero のまま)。 */
 .story-page .recipe-hero {
   width: auto;
