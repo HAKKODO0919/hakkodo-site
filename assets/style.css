@@ -1542,6 +1542,8 @@ body > main {
   border-bottom: 1px solid var(--color-border);
   font-family: "Hiragino Sans", "Yu Gothic", "Noto Sans JP", system-ui, -apple-system, sans-serif;
   font-size: 1.05rem;
+  /* <h1> の標準の太字にならないよう、以前の <p> のときと同じ太さに固定する */
+  font-weight: 400;
   letter-spacing: 0.05em;
   color: var(--color-heading);
   white-space: pre-line;

@@ -44,6 +44,11 @@ foreach ($pageProp in $cfg.pages.PSObject.Properties) {
     $html = [regex]::Replace($html, '<html lang="[^"]*">', '<html lang="' + $lang + '">')
     $html = [regex]::Replace($html, '<title>.*?</title>', { param($m) "<title>" + (Escape-Attr $meta.title) + "</title>" })
 
+    # static H1 text (only pages whose entry has "h1", i.e. the top page); JS sets the same text later
+    if ($meta.h1) {
+      $html = [regex]::Replace($html, '(<h1 class="home-intro-tagline"[^>]*>)(</h1>)', { param($m) $m.Groups[1].Value + (Escape-Attr $meta.h1) + $m.Groups[2].Value })
+    }
+
     # drop the source page's own description / canonical, then add this language's SEO block
     $html = [regex]::Replace($html, '(?m)^<meta name="description"[^\n]*\n', "")
     $html = [regex]::Replace($html, '(?m)^<link rel="canonical"[^\n]*\n', "")
