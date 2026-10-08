@@ -1811,6 +1811,19 @@ a.global-footer-instagram:focus-visible {
   margin-bottom: 0;
 }
 
+/* 日本語の本文だけ、折り返しの特別な指定をすべて外して、完全に通常の文章として流す。
+   (上の text-wrap: pretty は、iPhone の Safari で行末の短い行をなくそうとして、
+   行を早めに折り返し、「か／ら」のように言葉の途中で細かく切れる原因になるため。
+   word-break: auto-phrase も、対応しないブラウザでは意味がない。)
+   日本語本文には改行「\n」を入れていないので、white-space: normal で問題ない。 */
+html[lang="ja"] .story-page .home-feature-text {
+  word-break: normal;
+  overflow-wrap: normal;
+  white-space: normal;
+  text-wrap: wrap;
+  line-break: auto;
+}
+
 /* 写真は本文の左右の余白ぶんだけ広げて、画面の端まで出す(高さ・切り抜きは .recipe-hero のまま)。 */
 .story-page .recipe-hero {
   width: auto;
