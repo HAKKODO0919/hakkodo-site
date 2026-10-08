@@ -1811,6 +1811,13 @@ a.global-footer-instagram:focus-visible {
   margin-bottom: 0;
 }
 
+/* auto-phrase 非対応のブラウザの日本語本文だけ(assets/story.js が付ける)。
+   文節の間に入れた <wbr> の位置でだけ折り返し、1文字ごとには切らない。 */
+.story-page .home-feature-text.story-ja-phrases {
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+}
+
 /* 写真は本文の左右の余白ぶんだけ広げて、画面の端まで出す(高さ・切り抜きは .recipe-hero のまま)。 */
 .story-page .recipe-hero {
   width: auto;
