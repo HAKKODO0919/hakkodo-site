@@ -1811,17 +1811,6 @@ a.global-footer-instagram:focus-visible {
   margin-bottom: 0;
 }
 
-/* 日本語本文(assets/story.js が付ける)。意味のまとまり(.story-chunk)の途中では
-   折り返さず、まとまりの間でだけ折り返す。どのブラウザでも同じ折り返しになるよう、
-   word-break はブラウザ任せの auto-phrase ではなく標準にする。 */
-.story-page .home-feature-text.story-ja-phrases {
-  word-break: normal;
-}
-
-.story-chunk {
-  white-space: nowrap;
-}
-
 /* 写真は本文の左右の余白ぶんだけ広げて、画面の端まで出す(高さ・切り抜きは .recipe-hero のまま)。 */
 .story-page .recipe-hero {
   width: auto;

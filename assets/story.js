@@ -5,35 +5,6 @@
    そのページの言語が固定されます(他のページと同じ仕組みです)。
    ======================================================== */
 
-// ---- 日本語本文の折り返し(意味のまとまり単位) ----
-// 日本語の本文は、data/story.js の中で、折り返してよい位置(意味のまとまりの境目)を
-// 「｜」で示してある。画面では「｜」は表示せず、まとまりごとに <span class="story-chunk">
-// (CSSで途中の折り返しを禁止)に包み、まとまりの間にだけ折り返しを許す。
-// ブラウザ(iPhone の Safari など)ごとの日本語の折り返しの違いに左右されず、
-// 「「発酵」と「道」から」のような言葉が途中で切れない。
-// 「｜」を含まない行は、これまでどおりの普通の表示のまま。日本語以外の言語は何も変わらない。
-const STORY_CHUNK_MARK = "｜";
-
-// 「｜」を取り除いた、実際に表示する文章
-function stripChunkMarks(text) {
-  return text.split(STORY_CHUNK_MARK).join("");
-}
-
-// 「｜」で区切った意味のまとまりを <span> に包んだHTML(改行「\n」はそのまま残す)
-function chunkedHtml(text) {
-  return text
-    .split("\n")
-    .map((line) => {
-      if (!line.includes(STORY_CHUNK_MARK)) return escapeHtml(line);
-      return line
-        .split(STORY_CHUNK_MARK)
-        .filter((chunk) => chunk !== "")
-        .map((chunk) => `<span class="story-chunk">${escapeHtml(chunk)}</span>`)
-        .join("<wbr>");
-    })
-    .join("\n");
-}
-
 // STORYの中身(見出し・段落・写真)を、指定した言語で描画する
 function renderStoryContent(data, siteRoot, lang) {
   const root = document.getElementById("story-root");
@@ -52,9 +23,8 @@ function renderStoryContent(data, siteRoot, lang) {
     ? `<div class="recipe-hero"><img src="${escapeHtml(siteRoot + data.image.src)}" alt="${escapeHtml(tr.imageAlt || "")}"></div>`
     : "";
 
-  const chunked = lang === "ja";
   const bodyHtml = (tr.paragraphs || [])
-    .map((text, i) => `<p class="home-feature-text${chunked ? " story-ja-phrases" : ""}">${chunked ? chunkedHtml(text) : escapeHtml(stripChunkMarks(text))}</p>${i + 1 === photoAfter ? photoHtml : ""}`)
+    .map((text, i) => `<p class="home-feature-text">${escapeHtml(text)}</p>${i + 1 === photoAfter ? photoHtml : ""}`)
     .join("");
 
   // 見出しは他の文章ページと同じ .intro、本文は .home-feature-text を使う
