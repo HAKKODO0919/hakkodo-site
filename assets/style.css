@@ -1825,6 +1825,16 @@ a.global-footer-instagram:focus-visible {
   margin-bottom: 0;
 }
 
+/* 文章の中の「{br-sm}」(assets/story.js が <br class="story-br-sm"> にする)は、
+   375px前後のスマホ幅(389px以下)だけ改行にして、390px以上(大きめのスマホ・タブレット・PC)
+   では無効にして、通常の折り返しにする。390px付近以上は、端末のフォントの幅の違いで
+   「japoneses:」だけの短い行ができやすいため、改行の対象から外している。 */
+@media (min-width: 390px) {
+  .story-page .story-br-sm {
+    display: none;
+  }
+}
+
 /* スマホ幅(479px以下)だけ、最後の一文と、その1つ前の段落との間を、他の段落どうしより
    少し狭くする(1.9em → 1em。ちょうど空白1行分に見える)。隣り合う余白は大きいほうが
    使われるため、1つ前の段落の下の余白だけを小さくしている。
