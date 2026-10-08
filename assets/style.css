@@ -1765,7 +1765,7 @@ a.global-footer-instagram:focus-visible {
    他のページと同じ既存のクラスをそのまま使う。ここでは、STORYのページ内で
    必要な余白だけを足す(新しいデザインは作らない)。 */
 .story-page {
-  padding: 0 24px;
+  padding: 0 20px;
 }
 
 .story-page .intro {
@@ -1782,6 +1782,8 @@ a.global-footer-instagram:focus-visible {
 }
 .story-page .home-feature-text {
   margin: 0 auto 1.9em;
+  /* 本文の幅は商品ページ(.section の左右 padding 20px)と同じ考え方にそろえる。 */
+  max-width: none;
   /* 段落の最後の行に1〜2文字だけが残らないよう整える。日本語は文節の区切りで
      折り返す(どちらも対応ブラウザのみ。非対応でも見た目は崩れない)。 */
   text-wrap: pretty;
@@ -1795,5 +1797,10 @@ a.global-footer-instagram:focus-visible {
 /* 写真は本文の左右の余白ぶんだけ広げて、画面の端まで出す(高さ・切り抜きは .recipe-hero のまま)。 */
 .story-page .recipe-hero {
   width: auto;
-  margin: 0.4em -24px 2.2em;
+  margin: 0.4em -20px 2.2em;
+}
+
+/* 横長の写真が枠(高さ220px)に切り抜かれるとき、空の部分が多めに残る位置にそろえる。 */
+.story-page .recipe-hero img {
+  object-position: 50% 20%;
 }
