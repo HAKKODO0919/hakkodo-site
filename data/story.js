@@ -43,7 +43,7 @@ window.STORY_DATA = {
       heading: "HAKKODO ― 発酵道",
       imageAlt: "Montañas verdes y un valle, vistos entre rocas, con cumbres nevadas al fondo",
       paragraphs: [
-        "HAKKODO es un nombre que nace de dos palabras japonesas: “hakkō” (fermentación) y “dō” (camino).",
+        "HAKKODO es un nombre que nace de{br-sm} dos palabras japonesas:{br-sm} “hakkō” (fermentación) y “dō” (camino).",
         "En el judo, el kendo, el chadō (el camino del té) o el kadō (el camino de las flores), el “dō” no se limita a dominar una técnica: consiste en pulirse a uno mismo y seguir creciendo, día tras día, a través de la práctica. Este camino no tiene fin.\nHAKKODO también sigue aprendiendo, puliéndose y creciendo a través de la fermentación. Seguir avanzando, paso a paso. Eso es el “hakkōdō”.",
         "El lugar que HAKKODO ha elegido para recorrer este camino es la Alta Garrotxa, en Cataluña. En esta tierra, favorecida por una naturaleza generosa y aguas claras, y con la cultura japonesa de la fermentación como telón de fondo, hacemos madurar el miso de HAKKODO. La naturaleza y el agua de aquí son imprescindibles para el miso de HAKKODO.",
         "El miso, nacido de la cultura japonesa de la fermentación, se encuentra con todo tipo de platos y culturas culinarias, y las cualidades propias de cada uno se entrelazan. De ahí nacen sabores nuevos y nuevas posibilidades.\n\nQuisiéramos que nuestro miso fuera la chispa de nuevos vínculos con otros platos y culturas, y de sabores que aún no conocemos."
