@@ -1801,27 +1801,20 @@ a.global-footer-instagram:focus-visible {
   margin: 0 auto 1.9em;
   /* 本文の幅は商品ページ(.section の左右 padding 20px)と同じ考え方にそろえる。 */
   max-width: none;
-  /* 段落の最後の行に1〜2文字だけが残らないよう整える。日本語は文節の区切りで
-     折り返す(どちらも対応ブラウザのみ。非対応でも見た目は崩れない)。 */
-  text-wrap: pretty;
-  word-break: auto-phrase;
-}
-
-.story-page .home-feature-text:last-child {
-  margin-bottom: 0;
-}
-
-/* 日本語の本文だけ、折り返しの特別な指定をすべて外して、完全に通常の文章として流す。
-   (上の text-wrap: pretty は、iPhone の Safari で行末の短い行をなくそうとして、
-   行を早めに折り返し、「か／ら」のように言葉の途中で細かく切れる原因になるため。
-   word-break: auto-phrase も、対応しないブラウザでは意味がない。)
-   日本語本文には改行「\n」を入れていないので、white-space: normal で問題ない。 */
-html[lang="ja"] .story-page .home-feature-text {
+  /* 折り返しの特別な指定はせず、4言語とも完全に通常の文章として横幅いっぱいに流す。
+     (text-wrap: pretty は、iPhone の Safari で行末の短い行をなくそうとして行を早めに
+     折り返し、日本語で「か／ら」のように言葉の途中で細かく切れる原因になったため使わない。
+     word-break: auto-phrase も、対応しないブラウザでは意味がないため使わない。)
+     white-space: normal なので、文章中の改行「\n」は半角スペース1つと同じ扱いになる。 */
   word-break: normal;
   overflow-wrap: normal;
   white-space: normal;
   text-wrap: wrap;
   line-break: auto;
+}
+
+.story-page .home-feature-text:last-child {
+  margin-bottom: 0;
 }
 
 /* 写真は本文の左右の余白ぶんだけ広げて、画面の端まで出す(高さ・切り抜きは .recipe-hero のまま)。 */
