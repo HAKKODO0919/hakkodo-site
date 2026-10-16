@@ -1989,9 +1989,27 @@ a.global-footer-instagram:focus-visible {
    トップページの外に影響しないようにしている。ヒーロー・ヘッダー・フッターは変更しない。
    リンク(.home-feature-link)は、他のページと同じ丸い枠付きボタンのまま変更しない。 ---- */
 
-/* 紹介文(ヒーローの下) */
+/* 紹介文(ヒーローの下): 小さな案内文(h1。HTMLの見出し構造はそのまま)→ 大きな見出し(lead)の順に、
+   上品な間隔でつなぐ。案内文は控えめに、「うまみの世界へ」の見出しを最初の画面で印象に残す。 */
+.home .home-intro {
+  padding: 48px 24px 80px;
+}
+
+.home .home-intro-tagline {
+  padding-bottom: 16px;
+  font-size: 0.82rem;
+  line-height: 1.9;
+  letter-spacing: 0.2em;
+  color: var(--color-muted);
+}
+
 .home .home-intro-lead {
-  font-size: 1.35rem;
+  margin: 30px auto 0;
+  font-size: 1.75rem;
+  font-weight: 500;
+  line-height: 1.65;
+  letter-spacing: 0.06em;
+  text-wrap: balance;
 }
 
 /* 写真: 被写体(味噌の円錐、ワークショップの手、レシピのお皿)が切れないよう、やや右寄りを基準に切り抜く */
@@ -2023,10 +2041,6 @@ a.global-footer-instagram:focus-visible {
 
 /* スマホ・タブレット(幅799px以下): 写真を端まで大きく(599px以下は正方形)、写真と見出しの間を広く */
 @media (max-width: 799px) {
-  .home .home-intro {
-    padding: 56px 24px 72px;
-  }
-
   .home .home-feature {
     padding-bottom: 112px;
   }
@@ -2050,11 +2064,22 @@ a.global-footer-instagram:focus-visible {
 /* PC・タブレット横向き(幅800px以上): 写真の列を広げ、余白を大きく。左右交互の配置は維持 */
 @media (min-width: 800px) {
   .home .home-intro {
-    padding: 72px 24px 88px;
+    max-width: 880px;
+    padding: 56px 24px 112px;
+  }
+
+  .home .home-intro-tagline {
+    font-size: 0.88rem;
   }
 
   .home .home-intro-lead {
-    font-size: 1.5rem;
+    margin-top: 36px;
+    font-size: 2.4rem;
+  }
+
+  /* ヒーロー写真は現状の大きさを基本に、縦だけ画面の高さの74%までにして、下の見出しが最初の画面に入るようにする */
+  .home .home-hero-img {
+    max-height: max(74vh, 420px);
   }
 
   .home .home-feature {
