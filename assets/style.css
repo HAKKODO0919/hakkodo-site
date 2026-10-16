@@ -1980,7 +1980,7 @@ a.global-footer-instagram:focus-visible {
   }
 }
 
-/* ---- スクロール時のフェードイン(カタルーニャ語のトップページだけ。assets/reveal.js が .reveal を付ける) ----
+/* ---- スクロール時のフェードイン(トップページ。assets/reveal.js が .reveal を付ける) ----
    .reveal は JavaScript だけが付けるクラスなので、JSが動かない環境では何も隠れない。
    opacity と transform だけを動かし、レイアウトは変えない(写真の枠は aspect-ratio のまま)。 */
 .reveal {
@@ -1990,6 +1990,12 @@ a.global-footer-instagram:focus-visible {
 }
 
 .reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* キーボードのフォーカスが中のリンクに入ったときは、透明のままにせず、すぐ表示する */
+.reveal:focus-within {
   opacity: 1;
   transform: none;
 }

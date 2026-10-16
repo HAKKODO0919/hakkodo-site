@@ -20,13 +20,49 @@ function initReveal(selector) {
   const options = compact
     ? { threshold: 0, rootMargin: "0px" }
     : { threshold: 0.12, rootMargin: "0px 0px -8% 0px" };
+
+  // まだ表示していない(.reveal を付けた)要素
+  const pending = new Set();
+
+  function show(el) {
+    el.classList.add("is-visible");
+    pending.delete(el);
+    observer.unobserve(el);
+    if (pending.size === 0) stopSweep();
+  }
+
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
-      if (!entry.isIntersecting) return;
-      entry.target.classList.add("is-visible");
-      observer.unobserve(entry.target);
+      // 画面に入った要素、または画面の上へ通り過ぎた要素(ジャンプ・スクロール位置の復元など)は、
+      // 透明のまま残さず表示する(通り過ぎた要素は画面の外なので、動きは見えない)
+      if (entry.isIntersecting || entry.boundingClientRect.bottom <= 0) show(entry.target);
     });
   }, options);
+
+  // 保険: IntersectionObserver の通知が遅れる・届かない環境(Safariの慣性スクロール中など)に備え、
+  // スクロール・画面サイズの変更・ページの再表示のあと、まだ表示していない要素を調べ直す。
+  // 表示する基準は上の options と同じなので、通常は IntersectionObserver が先に表示する。
+  let timer = null;
+  function sweep() {
+    timer = null;
+    const bottomEdge = compact ? window.innerHeight : window.innerHeight * 0.92;
+    pending.forEach((el) => {
+      const r = el.getBoundingClientRect();
+      const overlap = Math.min(r.bottom, bottomEdge) - Math.max(r.top, 0);
+      if (r.bottom <= 0 || overlap > options.threshold * r.height) show(el);
+    });
+  }
+  function scheduleSweep() {
+    if (timer !== null) clearTimeout(timer);
+    timer = setTimeout(sweep, 150);
+  }
+  function stopSweep() {
+    if (timer !== null) clearTimeout(timer);
+    timer = null;
+    window.removeEventListener("scroll", scheduleSweep);
+    window.removeEventListener("resize", scheduleSweep);
+    window.removeEventListener("pageshow", scheduleSweep);
+  }
 
   document.querySelectorAll(selector).forEach((el) => {
     // 最初から画面に見えている要素と、すでに通り過ぎた要素は動かさない
@@ -38,5 +74,12 @@ function initReveal(selector) {
       return;
     }
     el.classList.add("reveal");
+    pending.add(el);
   });
+
+  if (pending.size > 0) {
+    window.addEventListener("scroll", scheduleSweep, { passive: true });
+    window.addEventListener("resize", scheduleSweep);
+    window.addEventListener("pageshow", scheduleSweep);
+  }
 }
