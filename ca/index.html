@@ -143,8 +143,8 @@ Miso / Fermentació</h1>
     renderGlobalFooter(document.getElementById("global-footer-root"), "/");
     renderLangSwitcher(document.getElementById("lang-switcher-root"), render);
     render();
-    // カタルーニャ語のトップページ(/ca/)だけ、写真・本文・新着情報をスクロールに合わせて控えめに表示する
-    if (window.PAGE_LANG === "ca") initReveal(".home-feature-media, .home-feature-body, .home-news");
+    // 4言語すべてのトップページで、写真・本文・新着情報をスクロールに合わせて控えめに表示する
+    initReveal(".home-feature-media, .home-feature-body, .home-news");
   </script>
 </body>
 </html>
