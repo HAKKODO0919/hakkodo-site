@@ -12,9 +12,11 @@ function initReveal(selector) {
   if (window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
   const viewportHeight = window.innerHeight;
-  // スマホ・タブレット幅(799px以下)は、指で素早くスクロールしても透明な時間が長くならないよう、
-  // 要素が画面に入った時点で動き始める。PC幅は、画面に少し入ってから動き始める。
-  const compact = window.matchMedia && matchMedia("(max-width: 799px)").matches;
+  // スマホ・タブレット(幅799px以下、または指で操作する端末。iPadの横向きなども含む)は、
+  // 指で素早くスクロールしても透明な時間が長くならないよう、要素が画面に入った時点で動き始める。
+  // マウスで操作するPCは、画面に少し入ってから動き始める。
+  // この条件は style.css の「@media (max-width: 799px), (pointer: coarse)」と同じにしておくこと。
+  const compact = window.matchMedia && matchMedia("(max-width: 799px), (pointer: coarse)").matches;
   const options = compact
     ? { threshold: 0, rootMargin: "0px" }
     : { threshold: 0.12, rootMargin: "0px 0px -8% 0px" };

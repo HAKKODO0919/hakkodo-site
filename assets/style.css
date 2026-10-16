@@ -1872,10 +1872,10 @@ a.global-footer-instagram:focus-visible {
   transition-delay: 0.15s;
 }
 
-/* スマホ・タブレット幅(799px以下)だけ、指で素早くスクロールしても自然に見えるよう、
-   動きを少し小さく・短くする(PC幅は上のまま)。will-change は、写真の描画を事前に準備させ、
+/* スマホ・タブレット(幅799px以下、または指で操作する端末)だけ、指で素早くスクロールしても自然に見えるよう、
+   動きを少し小さく・短くする(マウスで操作するPCは上のまま。assets/reveal.js の条件と同じにしておくこと)。will-change は、写真の描画を事前に準備させ、
    現れる瞬間に一瞬途切れて見えるのを防ぐためのもの。 */
-@media (max-width: 799px) {
+@media (max-width: 799px), (pointer: coarse) {
   .reveal {
     transform: translateY(16px);
     transition-duration: 0.7s;
