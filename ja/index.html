@@ -93,6 +93,7 @@ Miso / Fermentation</h1>
   <script src="/assets/i18n.js"></script>
   <script src="/assets/product.js"></script>
   <script src="/assets/nav.js"></script>
+  <script src="/assets/reveal.js"></script>
   <script>
     // 商品データ(data/aka-miso.js)にすでにある文章・写真だけを再利用して、
     // トップページの「味噌・こだわり」欄を作る。新しい文章は作らず、
@@ -116,6 +117,8 @@ Miso / Fermentation</h1>
     renderGlobalFooter(document.getElementById("global-footer-root"), "/");
     renderLangSwitcher(document.getElementById("lang-switcher-root"), render);
     render();
+    // カタルーニャ語のトップページ(/ca/)だけ、写真・本文・新着情報をスクロールに合わせて控えめに表示する
+    if (window.PAGE_LANG === "ca") initReveal(".home-feature-media, .home-feature-body, .home-news");
   </script>
 </body>
 </html>

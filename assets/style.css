@@ -1852,3 +1852,30 @@ a.global-footer-instagram:focus-visible {
 .story-page .recipe-hero img {
   object-position: 50% 20%;
 }
+
+/* ---- スクロール時のフェードイン(カタルーニャ語のトップページだけ。assets/reveal.js が .reveal を付ける) ----
+   .reveal は JavaScript だけが付けるクラスなので、JSが動かない環境では何も隠れない。
+   opacity と transform だけを動かし、レイアウトは変えない(写真の枠は aspect-ratio のまま)。 */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.9s cubic-bezier(0.22, 0.61, 0.36, 1), transform 0.9s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* 写真のあとに、文字がわずかに遅れて現れる */
+.home-feature-body.reveal {
+  transition-delay: 0.15s;
+}
+
+@media (prefers-reduced-motion: reduce), print {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
