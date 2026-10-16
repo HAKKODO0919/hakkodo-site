@@ -1476,16 +1476,14 @@ body > main {
   padding-bottom: 0;
 }
 
-/* ---- 1. ヒーロー写真: 写真を主役にする。
-   PC幅は、元写真(1600×900)の16:9をそのまま見せ、縦は画面の高さの82%で止める
-   (ヘッダーを含めて最初の画面のほぼ全部が写真になる)。横幅は元写真の大きさ(1600px)を
-   超えて拡大しない(それより広い画面では、写真を中央に置き、両側は背景色)。
-   縦が82%を超える画面(横長のウィンドウ)では、object-position で上下を切り抜く。
+/* ---- 1. ヒーロー写真: 横幅いっぱいの表示を保ったまま横長の帯
+   (1600:515)に切り抜く。現在の写真(お皿に盛った味噌)は、
+   お皿が画像の上のほうにあり、下は木のテーブルが広く続くため、
+   上端(center top)を基準に切り抜き、お皿の頭が欠けないように
+   しつつ、下のテーブルを余白として見せる。
    縦の引き伸ばしはしない(object-fit: cover で常に等倍にトリミング)。 ---- */
 .home-hero {
   width: 100%;
-  max-width: 1600px;
-  margin: 0 auto;
   background: var(--color-bg);
   overflow: hidden;
 }
@@ -1493,8 +1491,7 @@ body > main {
 .home-hero-img {
   display: block;
   width: 100%;
-  aspect-ratio: 16 / 9;
-  max-height: max(82vh, 420px);
+  aspect-ratio: 1600 / 515;
   object-fit: cover;
   object-position: center top;
 }
@@ -1503,13 +1500,14 @@ body > main {
   object-position: center 31%;
 }
 
-/* スマホ・タブレット幅では、スマホのヘッダーが小さくなる(下の「トップページのスマホ用ヘッダー」)
-   ぶん、ヒーロー写真を5:4にして、最初の画面で写真と紹介文の見出しまで見えるようにする。
-   元写真は16:9なので、左右を約30%切り抜く(以前の4:3は約25%)。3つの瓶(横幅の約52%)が
-   収まるよう、水平位置は瓶の中央を基準にしている(68%)。 */
+/* スマホ幅では、ヒーローが薄い横長の帯(約3.1:1)になって下の味噌画像
+   (4:3)より小さく見えるため、同じ4:3にして主役として見せる。
+   元写真は16:9なので、左右を約25%切り抜く。3つの瓶(横幅の約52%)が
+   収まるよう、水平位置は瓶の中央(約55%)を基準にしている。
+   PC幅(800px以上)は変更しない。 */
 @media (max-width: 799px) {
   .home-hero-img.home-hero-img-jars {
-    aspect-ratio: 5 / 4;
+    aspect-ratio: 4 / 3;
     object-position: 68% center;
   }
 }
@@ -1979,148 +1977,6 @@ a.global-footer-instagram:focus-visible {
     padding-left: 0;
     background: none;
     border-top: 1px solid var(--color-border);
-  }
-}
-
-/* ---- トップページのセクション部分(第2段階。すべて .home = トップページの <main> 配下に限定) ----
-   写真を大きく見せ、余白をゆったりさせ、見出し・本文の強弱をはっきりさせる。
-   上にある既存のルールは消さず、ここで上書きしている(戻すときは、このブロックを消す)。
-   .home-feature-text などは他のページでも使うため、必ず .home を前置きして
-   トップページの外に影響しないようにしている。ヒーロー・ヘッダー・フッターは変更しない。
-   リンク(.home-feature-link)は、他のページと同じ丸い枠付きボタンのまま変更しない。 ---- */
-
-/* 紹介文(ヒーローの下): 小さな案内文(h1。HTMLの見出し構造はそのまま)→ 大きな見出し(lead)の順に、
-   上品な間隔でつなぐ。案内文は控えめに、「うまみの世界へ」の見出しを最初の画面で印象に残す。 */
-.home .home-intro {
-  padding: 48px 24px 80px;
-}
-
-.home .home-intro-tagline {
-  padding-bottom: 16px;
-  font-size: 0.82rem;
-  line-height: 1.9;
-  letter-spacing: 0.2em;
-  color: var(--color-muted);
-}
-
-.home .home-intro-lead {
-  margin: 30px auto 0;
-  font-size: 1.75rem;
-  font-weight: 500;
-  line-height: 1.65;
-  letter-spacing: 0.06em;
-  text-wrap: balance;
-}
-
-/* 写真: 被写体(味噌の円錐、ワークショップの手、レシピのお皿)が切れないよう、やや右寄りを基準に切り抜く */
-.home .home-feature-media img {
-  object-position: 60% center;
-}
-
-/* 見出し: 太さ700→500(読み込み済み)にして、字間を広げる。写真・本文との主従をはっきりさせる */
-.home .home-feature-title,
-.home .home-news-title {
-  margin-bottom: 22px;
-  font-size: 1.2rem;
-  font-weight: 500;
-  letter-spacing: 0.16em;
-  line-height: 1.5;
-}
-
-/* 本文: 少し小さく、行間をゆったり */
-.home .home-feature-text,
-.home .home-news-empty {
-  max-width: 30em;
-  font-size: 0.94rem;
-  line-height: 2.1;
-}
-
-.home #home-feature-miso-text {
-  font-size: 1rem;
-}
-
-/* スマホ・タブレット(幅799px以下): 写真を端まで大きく(599px以下は正方形)、写真と見出しの間を広く */
-@media (max-width: 799px) {
-  .home .home-feature {
-    padding-bottom: 112px;
-  }
-
-  .home .home-feature-media {
-    aspect-ratio: 1 / 1;
-  }
-
-  .home .home-feature-body {
-    padding: 44px 24px 0;
-  }
-}
-
-/* 幅600〜799px(iPad miniの縦向きなど)は、正方形だと画面を占めすぎるため4:3のまま */
-@media (min-width: 600px) and (max-width: 799px) {
-  .home .home-feature-media {
-    aspect-ratio: 4 / 3;
-  }
-}
-
-/* スマホ(幅599px以下)の見出し「Bienvenidos al mundo del umami.」など: 2行の見た目を整える。
-   - 文字サイズは約28pxのまま、狭い画面(320px前後)だけ少し小さくして3行にならないようにする。
-   - 古いSafariは text-wrap: balance に対応していないため、見出しの幅を文字サイズ基準(em)で絞り、
-     「Benvinguts al / món de l'umami.」「Bienvenidos al / mundo del umami.」「Welcome to the / world of umami.」の
-     位置で改行されるようにする(言語ごとに文字数が違うため、スペイン語だけ少し広め)。
-   - 日本語は1行に収まる大きさにする(「旨味の世界 / へようこそ。」のような不自然な分かれ方を避ける)。
-   - 行間と上下の余白を少し詰め、2行を1つのまとまりに見せる。 */
-@media (max-width: 599px) {
-  .home .home-intro {
-    padding-bottom: 72px;
-  }
-
-  .home .home-intro-lead {
-    max-width: 9.7em;
-    margin-top: 28px;
-    font-size: clamp(1.45rem, 7.4vw, 1.75rem);
-    line-height: 1.55;
-  }
-
-  .home:lang(es) .home-intro-lead {
-    max-width: 10.6em;
-  }
-
-  .home:lang(ja) .home-intro-lead {
-    max-width: none;
-    font-size: clamp(1.3rem, 6.9vw, 1.75rem);
-  }
-}
-
-/* PC・タブレット横向き(幅800px以上): 写真の列を広げ、余白を大きく。左右交互の配置は維持 */
-@media (min-width: 800px) {
-  .home .home-intro {
-    max-width: 880px;
-    padding: 56px 24px 112px;
-  }
-
-  .home .home-intro-tagline {
-    font-size: 0.88rem;
-  }
-
-  .home .home-intro-lead {
-    margin-top: 36px;
-    font-size: 2.4rem;
-  }
-
-  .home .home-feature {
-    max-width: 1240px;
-    grid-template-columns: 1.45fr 1fr;
-    column-gap: clamp(48px, 6vw, 80px);
-    padding: 0 clamp(32px, 4vw, 48px) clamp(112px, 12vw, 176px);
-  }
-
-  .home .home-feature--reverse {
-    grid-template-columns: 1fr 1.45fr;
-  }
-
-  .home .home-feature-title,
-  .home .home-news-title {
-    font-size: 1.35rem;
-    letter-spacing: 0.18em;
   }
 }
 
