@@ -1982,6 +1982,121 @@ a.global-footer-instagram:focus-visible {
   }
 }
 
+/* ---- トップページのセクション部分(第2段階。すべて .home = トップページの <main> 配下に限定) ----
+   写真を大きく見せ、余白をゆったりさせ、見出し・本文・リンクの強弱をはっきりさせる。
+   上にある既存のルールは消さず、ここで上書きしている(戻すときは、このブロックを消す)。
+   .home-feature-link などは商品ページ・レシピでも使うため、必ず .home を前置きして
+   トップページの外に影響しないようにしている。ヒーロー・ヘッダー・フッターは変更しない。 ---- */
+
+/* 紹介文(ヒーローの下) */
+.home .home-intro-lead {
+  font-size: 1.35rem;
+}
+
+/* 写真: 被写体(味噌の円錐、ワークショップの手、レシピのお皿)が切れないよう、やや右寄りを基準に切り抜く */
+.home .home-feature-media img {
+  object-position: 60% center;
+}
+
+/* 見出し: 太さ700→500(読み込み済み)にして、字間を広げる。写真・本文との主従をはっきりさせる */
+.home .home-feature-title,
+.home .home-news-title {
+  margin-bottom: 22px;
+  font-size: 1.2rem;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  line-height: 1.5;
+}
+
+/* 本文: 少し小さく、行間をゆったり */
+.home .home-feature-text,
+.home .home-news-empty {
+  max-width: 30em;
+  font-size: 0.94rem;
+  line-height: 2.1;
+}
+
+.home #home-feature-miso-text {
+  font-size: 1rem;
+}
+
+/* リンク: 丸いボタン風 → 控えめな下線付きの文字リンク */
+.home .home-feature-link {
+  margin-top: 30px;
+  padding: 10px 0;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  font-size: 0.85rem;
+  letter-spacing: 0.14em;
+  color: var(--color-heading);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 7px;
+  text-decoration-color: var(--color-muted);
+}
+
+.home .home-feature-link:hover,
+.home .home-feature-link:focus-visible {
+  color: var(--color-heading);
+  border: 0;
+  text-decoration-color: var(--color-heading);
+}
+
+/* スマホ・タブレット(幅799px以下): 写真を端まで大きく(599px以下は正方形)、写真と見出しの間を広く */
+@media (max-width: 799px) {
+  .home .home-intro {
+    padding: 56px 24px 72px;
+  }
+
+  .home .home-feature {
+    padding-bottom: 112px;
+  }
+
+  .home .home-feature-media {
+    aspect-ratio: 1 / 1;
+  }
+
+  .home .home-feature-body {
+    padding: 44px 24px 0;
+  }
+}
+
+/* 幅600〜799px(iPad miniの縦向きなど)は、正方形だと画面を占めすぎるため4:3のまま */
+@media (min-width: 600px) and (max-width: 799px) {
+  .home .home-feature-media {
+    aspect-ratio: 4 / 3;
+  }
+}
+
+/* PC・タブレット横向き(幅800px以上): 写真の列を広げ、余白を大きく。左右交互の配置は維持 */
+@media (min-width: 800px) {
+  .home .home-intro {
+    padding: 72px 24px 88px;
+  }
+
+  .home .home-intro-lead {
+    font-size: 1.5rem;
+  }
+
+  .home .home-feature {
+    max-width: 1240px;
+    grid-template-columns: 1.45fr 1fr;
+    column-gap: clamp(48px, 6vw, 80px);
+    padding: 0 clamp(32px, 4vw, 48px) clamp(112px, 12vw, 176px);
+  }
+
+  .home .home-feature--reverse {
+    grid-template-columns: 1fr 1.45fr;
+  }
+
+  .home .home-feature-title,
+  .home .home-news-title {
+    font-size: 1.35rem;
+    letter-spacing: 0.18em;
+  }
+}
+
 /* ---- スクロール時のフェードイン(カタルーニャ語のトップページだけ。assets/reveal.js が .reveal を付ける) ----
    .reveal は JavaScript だけが付けるクラスなので、JSが動かない環境では何も隠れない。
    opacity と transform だけを動かし、レイアウトは変えない(写真の枠は aspect-ratio のまま)。 */
