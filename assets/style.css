@@ -1983,10 +1983,11 @@ a.global-footer-instagram:focus-visible {
 }
 
 /* ---- トップページのセクション部分(第2段階。すべて .home = トップページの <main> 配下に限定) ----
-   写真を大きく見せ、余白をゆったりさせ、見出し・本文・リンクの強弱をはっきりさせる。
+   写真を大きく見せ、余白をゆったりさせ、見出し・本文の強弱をはっきりさせる。
    上にある既存のルールは消さず、ここで上書きしている(戻すときは、このブロックを消す)。
-   .home-feature-link などは商品ページ・レシピでも使うため、必ず .home を前置きして
-   トップページの外に影響しないようにしている。ヒーロー・ヘッダー・フッターは変更しない。 ---- */
+   .home-feature-text などは他のページでも使うため、必ず .home を前置きして
+   トップページの外に影響しないようにしている。ヒーロー・ヘッダー・フッターは変更しない。
+   リンク(.home-feature-link)は、他のページと同じ丸い枠付きボタンのまま変更しない。 ---- */
 
 /* 紹介文(ヒーローの下) */
 .home .home-intro-lead {
@@ -2018,29 +2019,6 @@ a.global-footer-instagram:focus-visible {
 
 .home #home-feature-miso-text {
   font-size: 1rem;
-}
-
-/* リンク: 丸いボタン風 → 控えめな下線付きの文字リンク */
-.home .home-feature-link {
-  margin-top: 30px;
-  padding: 10px 0;
-  border: 0;
-  border-radius: 0;
-  background: none;
-  font-size: 0.85rem;
-  letter-spacing: 0.14em;
-  color: var(--color-heading);
-  text-decoration: underline;
-  text-decoration-thickness: 1px;
-  text-underline-offset: 7px;
-  text-decoration-color: var(--color-muted);
-}
-
-.home .home-feature-link:hover,
-.home .home-feature-link:focus-visible {
-  color: var(--color-heading);
-  border: 0;
-  text-decoration-color: var(--color-heading);
 }
 
 /* スマホ・タブレット(幅799px以下): 写真を端まで大きく(599px以下は正方形)、写真と見出しの間を広く */
