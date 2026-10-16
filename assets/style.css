@@ -2061,6 +2061,35 @@ a.global-footer-instagram:focus-visible {
   }
 }
 
+/* スマホ(幅599px以下)の見出し「Bienvenidos al mundo del umami.」など: 2行の見た目を整える。
+   - 文字サイズは約28pxのまま、狭い画面(320px前後)だけ少し小さくして3行にならないようにする。
+   - 古いSafariは text-wrap: balance に対応していないため、見出しの幅を文字サイズ基準(em)で絞り、
+     「Benvinguts al / món de l'umami.」「Bienvenidos al / mundo del umami.」「Welcome to the / world of umami.」の
+     位置で改行されるようにする(言語ごとに文字数が違うため、スペイン語だけ少し広め)。
+   - 日本語は1行に収まる大きさにする(「旨味の世界 / へようこそ。」のような不自然な分かれ方を避ける)。
+   - 行間と上下の余白を少し詰め、2行を1つのまとまりに見せる。 */
+@media (max-width: 599px) {
+  .home .home-intro {
+    padding-bottom: 72px;
+  }
+
+  .home .home-intro-lead {
+    max-width: 9.7em;
+    margin-top: 28px;
+    font-size: clamp(1.45rem, 7.4vw, 1.75rem);
+    line-height: 1.55;
+  }
+
+  .home:lang(es) .home-intro-lead {
+    max-width: 10.6em;
+  }
+
+  .home:lang(ja) .home-intro-lead {
+    max-width: none;
+    font-size: clamp(1.3rem, 6.9vw, 1.75rem);
+  }
+}
+
 /* PC・タブレット横向き(幅800px以上): 写真の列を広げ、余白を大きく。左右交互の配置は維持 */
 @media (min-width: 800px) {
   .home .home-intro {
