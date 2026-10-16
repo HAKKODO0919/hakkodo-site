@@ -51,13 +51,60 @@ function renderGlobalNav(container, siteRoot, currentKey) {
   // 画像へ差し替える専用スクリプトを使っていたが、全ページの
   // ヘッダーを統一するため、ここで最初から画像として出力する。
   const brandActive = currentKey === "top" ? " active" : "";
+  // スマホ幅のメニューボタン(ハンバーガー)は、いまはトップページ(key: "top")だけに付ける。
+  // 他のページに広げるときは、この条件を外し、style.css の .home-page 限定も外す。
+  // 見た目(表示・非表示)は style.css が決める。hidden は、style.css が古いままのときに
+  // ボタンだけが裸で表示されないようにするためのもの。
+  const withMenuToggle = currentKey === "top";
+  const menuLabel = typeof UI_STRINGS !== "undefined" && UI_STRINGS.ja && UI_STRINGS.ja.navMenu ? t("navMenu") : "Menu";
+  const toggleHtml = withMenuToggle
+    ? `<button type="button" class="global-nav-toggle" hidden aria-expanded="false" aria-controls="global-nav-list" aria-label="${escapeHtml(menuLabel)}" data-i18n-label="navMenu"><span class="global-nav-toggle-bar"></span><span class="global-nav-toggle-bar"></span><span class="global-nav-toggle-bar"></span></button>`
+    : "";
   container.innerHTML = `
     <a class="global-nav-brand${brandActive}" translate="no" href="${escapeHtml(linkRoot + "index.html")}">
       <img src="${escapeHtml(siteRoot + "images/aka-miso/hakkodo-logo-crop-transparent.png")}" alt="HAKKODO" class="home-header-logo">
       <img src="${escapeHtml(siteRoot + "images/aka-miso/hakkodo-face-logo-transparent.png")}" alt="" class="home-header-face-logo">
     </a>
-    <ul class="global-nav-list">${itemsHtml}</ul>
+    ${toggleHtml}
+    <ul class="global-nav-list" id="global-nav-list">${itemsHtml}</ul>
   `;
+  if (withMenuToggle) initMenuToggle(container);
+}
+
+// スマホ幅のメニューボタンの開閉。開いている間は、ヘッダー(.home-header)に
+// is-menu-open を付ける(ナビ6項目と言語切替を出すかどうかは style.css が決める)。
+// has-menu-toggle は、この仕組みが働いていることを style.css に伝える印
+// (これが無いときは、スマホ幅でも従来どおりナビを常に表示する)。
+function initMenuToggle(container) {
+  const header = container.closest(".home-header");
+  const button = container.querySelector(".global-nav-toggle");
+  if (!header || !button) return;
+  header.classList.add("has-menu-toggle");
+
+  function setOpen(open) {
+    header.classList.toggle("is-menu-open", open);
+    button.setAttribute("aria-expanded", open ? "true" : "false");
+    if (!open) {
+      // メニューを閉じるときは、中で開いていた言語の一覧も閉じる(次に開いたとき、開いたままにならないように)
+      const languageList = header.querySelector(".lang-options");
+      const languageButton = header.querySelector(".lang-current");
+      if (languageList) languageList.hidden = true;
+      if (languageButton) languageButton.setAttribute("aria-expanded", "false");
+    }
+  }
+
+  button.addEventListener("click", () => setOpen(!header.classList.contains("is-menu-open")));
+  container.querySelectorAll(".global-nav-link").forEach((link) => link.addEventListener("click", () => setOpen(false)));
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && header.classList.contains("is-menu-open")) {
+      setOpen(false);
+      button.focus();
+    }
+  });
+  // 画面が広くなってPC表示に切り替わったら、開いた状態を残さない
+  window.addEventListener("resize", () => {
+    if (window.innerWidth >= 800) setOpen(false);
+  });
 }
 
 // トップページ本体に出す、大きめのセクション導線(既存の .recipe-btn を流用)。

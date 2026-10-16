@@ -98,6 +98,7 @@ const UI_STRINGS = {
     navWorkshops: "Workshops",
     navNews: "News",
     navContact: "Contact",
+    navMenu: "メニュー",
     navStory: "About",
     homeMisoTitle: "Miso",
     homeMisoLink: "商品を見る",
@@ -171,6 +172,7 @@ const UI_STRINGS = {
     navWorkshops: "Tallers",
     navNews: "Novetats",
     navContact: "Contacte",
+    navMenu: "Menú",
     navStory: "Sobre",
     homeMisoTitle: "El miso i el nostre compromís",
     homeMisoLink: "Veure el producte",
@@ -244,6 +246,7 @@ const UI_STRINGS = {
     navWorkshops: "Talleres",
     navNews: "Novedades",
     navContact: "Contacto",
+    navMenu: "Menú",
     navStory: "Acerca de",
     homeMisoTitle: "El miso y nuestro compromiso",
     homeMisoLink: "Ver el producto",
@@ -318,6 +321,7 @@ const UI_STRINGS = {
     navWorkshops: "Workshops",
     navNews: "News",
     navContact: "Contact",
+    navMenu: "Menu",
     navStory: "About",
     homeMisoTitle: "Miso & Our Commitment",
     homeMisoLink: "See the product",
@@ -401,6 +405,10 @@ function applyUiStrings(lang) {
     // ブランド名を含む文言だけ、ブランド名を翻訳対象外にして描画する(それ以外は従来どおり textContent)
     if (text.indexOf("HAKKODO") >= 0) el.innerHTML = escapeText(text);
     else el.textContent = text;
+  });
+  // 文字ではなく aria-label で読み上げるラベル(スマホのメニューボタンなど)
+  document.querySelectorAll("[data-i18n-label]").forEach((el) => {
+    el.setAttribute("aria-label", t(el.getAttribute("data-i18n-label"), lang));
   });
 }
 

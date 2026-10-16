@@ -1476,14 +1476,16 @@ body > main {
   padding-bottom: 0;
 }
 
-/* ---- 1. ヒーロー写真: 横幅いっぱいの表示を保ったまま横長の帯
-   (1600:515)に切り抜く。現在の写真(お皿に盛った味噌)は、
-   お皿が画像の上のほうにあり、下は木のテーブルが広く続くため、
-   上端(center top)を基準に切り抜き、お皿の頭が欠けないように
-   しつつ、下のテーブルを余白として見せる。
+/* ---- 1. ヒーロー写真: 写真を主役にする。
+   PC幅は、元写真(1600×900)の16:9をそのまま見せ、縦は画面の高さの82%で止める
+   (ヘッダーを含めて最初の画面のほぼ全部が写真になる)。横幅は元写真の大きさ(1600px)を
+   超えて拡大しない(それより広い画面では、写真を中央に置き、両側は背景色)。
+   縦が82%を超える画面(横長のウィンドウ)では、object-position で上下を切り抜く。
    縦の引き伸ばしはしない(object-fit: cover で常に等倍にトリミング)。 ---- */
 .home-hero {
   width: 100%;
+  max-width: 1600px;
+  margin: 0 auto;
   background: var(--color-bg);
   overflow: hidden;
 }
@@ -1491,7 +1493,8 @@ body > main {
 .home-hero-img {
   display: block;
   width: 100%;
-  aspect-ratio: 1600 / 515;
+  aspect-ratio: 16 / 9;
+  max-height: max(82vh, 420px);
   object-fit: cover;
   object-position: center top;
 }
@@ -1500,14 +1503,13 @@ body > main {
   object-position: center 31%;
 }
 
-/* スマホ幅では、ヒーローが薄い横長の帯(約3.1:1)になって下の味噌画像
-   (4:3)より小さく見えるため、同じ4:3にして主役として見せる。
-   元写真は16:9なので、左右を約25%切り抜く。3つの瓶(横幅の約52%)が
-   収まるよう、水平位置は瓶の中央(約55%)を基準にしている。
-   PC幅(800px以上)は変更しない。 */
+/* スマホ・タブレット幅では、スマホのヘッダーが小さくなる(下の「トップページのスマホ用ヘッダー」)
+   ぶん、ヒーロー写真を5:4にして、最初の画面で写真と紹介文の見出しまで見えるようにする。
+   元写真は16:9なので、左右を約30%切り抜く(以前の4:3は約25%)。3つの瓶(横幅の約52%)が
+   収まるよう、水平位置は瓶の中央を基準にしている(68%)。 */
 @media (max-width: 799px) {
   .home-hero-img.home-hero-img-jars {
-    aspect-ratio: 4 / 3;
+    aspect-ratio: 5 / 4;
     object-position: 68% center;
   }
 }
@@ -1851,6 +1853,111 @@ a.global-footer-instagram:focus-visible {
 /* 横長の写真が枠(高さ220px)に切り抜かれるとき、空の部分が多めに残る位置にそろえる。 */
 .story-page .recipe-hero img {
   object-position: 50% 20%;
+}
+
+/* ---- トップページのスマホ用ヘッダー(幅799px以下)。
+   1行目: ロゴ(左)+メニューボタン(右)。ナビ6項目と言語切替は、ボタンで開くメニューの中に入れる。
+   メニューの開閉は assets/nav.js(.has-menu-toggle は、ボタンを出したときだけ付く印、
+   .is-menu-open は開いている間だけ付く)。他のページ・PC幅(800px以上)は変更しない。 ---- */
+.global-nav-toggle {
+  display: none;
+}
+
+@media (max-width: 799px) {
+  /* ボタンの有無にかかわらず、ヘッダーの高さを先に確保して、読み込み時のずれを防ぐ */
+  .home-page .home-header {
+    padding: 12px 20px;
+    gap: 0 16px;
+    min-height: 67px;
+  }
+
+  .home-page .has-menu-toggle .global-nav-toggle {
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    width: 44px;
+    height: 44px;
+    margin: -6px -10px -6px 0;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: var(--color-heading);
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .global-nav-toggle-bar {
+    display: block;
+    width: 22px;
+    height: 1.5px;
+    background: currentColor;
+  }
+
+  /* 開いている間は「×」にする */
+  .is-menu-open .global-nav-toggle-bar:nth-child(1) {
+    transform: translateY(6.5px) rotate(45deg);
+  }
+
+  .is-menu-open .global-nav-toggle-bar:nth-child(2) {
+    opacity: 0;
+  }
+
+  .is-menu-open .global-nav-toggle-bar:nth-child(3) {
+    transform: translateY(-6.5px) rotate(-45deg);
+  }
+
+  /* メニュー(閉じている間は隠す)。開くと、ヘッダーの下に1項目1行で縦に並ぶ */
+  .home-page .has-menu-toggle .global-nav-list {
+    display: none;
+    order: 3;
+    flex-basis: 100%;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    margin: 12px 0 0;
+  }
+
+  .home-page .has-menu-toggle.is-menu-open .global-nav-list {
+    display: flex;
+  }
+
+  /* 360〜479pxで、ナビを2段に分けるために付けている order と改行を、ここでは使わない */
+  .home-page .has-menu-toggle .global-nav-list li:nth-child(n) {
+    order: 0;
+  }
+
+  .home-page .has-menu-toggle .global-nav-list::after {
+    display: none;
+  }
+
+  .home-page .has-menu-toggle .global-nav-link {
+    display: block;
+    padding: 13px 0;
+    border-top: 1px solid var(--color-border);
+    border-radius: 0;
+    font-size: 0.95rem;
+  }
+
+  /* 言語切替もメニューの中(開いている間だけ表示) */
+  .home-page .has-menu-toggle .lang-switcher {
+    display: none;
+    order: 4;
+    flex-basis: 100%;
+    padding: 12px 0 2px;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .home-page .has-menu-toggle.is-menu-open .lang-switcher {
+    display: block;
+  }
+
+  /* 言語の一覧は、画面の左端から開く(右端基準だと画面の外にはみ出すため) */
+  .home-page .has-menu-toggle .lang-options {
+    left: 0;
+    right: auto;
+  }
 }
 
 /* ---- スクロール時のフェードイン(カタルーニャ語のトップページだけ。assets/reveal.js が .reveal を付ける) ----
