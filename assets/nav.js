@@ -51,15 +51,11 @@ function renderGlobalNav(container, siteRoot, currentKey) {
   // 画像へ差し替える専用スクリプトを使っていたが、全ページの
   // ヘッダーを統一するため、ここで最初から画像として出力する。
   const brandActive = currentKey === "top" ? " active" : "";
-  // スマホ幅のメニューボタン(ハンバーガー)は、いまはトップページ(key: "top")だけに付ける。
-  // 他のページに広げるときは、この条件を外し、style.css の .home-page 限定も外す。
+  // スマホ・タブレット幅のメニューボタン(ハンバーガー)。全ページ共通のヘッダーなので、ここで1回だけ描く。
   // 見た目(表示・非表示)は style.css が決める。hidden は、style.css が古いままのときに
   // ボタンだけが裸で表示されないようにするためのもの。
-  const withMenuToggle = currentKey === "top";
   const menuLabel = typeof UI_STRINGS !== "undefined" && UI_STRINGS.ja && UI_STRINGS.ja.navMenu ? t("navMenu") : "Menu";
-  const toggleHtml = withMenuToggle
-    ? `<button type="button" class="global-nav-toggle" hidden aria-expanded="false" aria-controls="global-nav-list" aria-label="${escapeHtml(menuLabel)}" data-i18n-label="navMenu"><span class="global-nav-toggle-bar"></span><span class="global-nav-toggle-bar"></span><span class="global-nav-toggle-bar"></span></button>`
-    : "";
+  const toggleHtml = `<button type="button" class="global-nav-toggle" hidden aria-expanded="false" aria-controls="global-nav-list" aria-label="${escapeHtml(menuLabel)}" data-i18n-label="navMenu"><span class="global-nav-toggle-bar"></span><span class="global-nav-toggle-bar"></span><span class="global-nav-toggle-bar"></span></button>`;
   container.innerHTML = `
     <a class="global-nav-brand${brandActive}" translate="no" href="${escapeHtml(linkRoot + "index.html")}">
       <img src="${escapeHtml(siteRoot + "images/aka-miso/hakkodo-logo-crop-transparent.png")}" alt="HAKKODO" class="home-header-logo">
@@ -68,8 +64,12 @@ function renderGlobalNav(container, siteRoot, currentKey) {
     ${toggleHtml}
     <ul class="global-nav-list" id="global-nav-list">${itemsHtml}</ul>
   `;
-  if (withMenuToggle) initMenuToggle(container);
+  initMenuToggle(container);
 }
+
+// ハンバーガーに切り替わる画面幅の上限(px)。style.css の「@media (max-width: 1180px)」と同じ値にしておくこと。
+// iPad miniは縦向き744〜768px・横向き1024〜1133px。PC(1181px以上)は従来の横並びメニュー。
+const NAV_COLLAPSE_MAX_WIDTH = 1180;
 
 // スマホ幅のメニューボタンの開閉。開いている間は、ヘッダー(.home-header)に
 // is-menu-open を付ける(ナビ6項目と言語切替を出すかどうかは style.css が決める)。
@@ -103,7 +103,7 @@ function initMenuToggle(container) {
   });
   // 画面が広くなってPC表示に切り替わったら、開いた状態を残さない
   window.addEventListener("resize", () => {
-    if (window.innerWidth >= 800) setOpen(false);
+    if (window.innerWidth > NAV_COLLAPSE_MAX_WIDTH) setOpen(false);
   });
 }
 
