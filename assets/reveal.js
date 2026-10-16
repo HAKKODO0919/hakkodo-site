@@ -12,21 +12,29 @@ function initReveal(selector) {
   if (window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
   const viewportHeight = window.innerHeight;
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (!entry.isIntersecting) return;
-        entry.target.classList.add("is-visible");
-        observer.unobserve(entry.target);
-      });
-    },
-    { threshold: 0.12, rootMargin: "0px 0px -8% 0px" }
-  );
+  // スマホ・タブレット幅(799px以下)は、指で素早くスクロールしても透明な時間が長くならないよう、
+  // 要素が画面に入った時点で動き始める。PC幅は、画面に少し入ってから動き始める。
+  const compact = window.matchMedia && matchMedia("(max-width: 799px)").matches;
+  const options = compact
+    ? { threshold: 0, rootMargin: "0px" }
+    : { threshold: 0.12, rootMargin: "0px 0px -8% 0px" };
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      entry.target.classList.add("is-visible");
+      observer.unobserve(entry.target);
+    });
+  }, options);
 
   document.querySelectorAll(selector).forEach((el) => {
     // 最初から画面に見えている要素と、すでに通り過ぎた要素は動かさない
     if (el.getBoundingClientRect().top < viewportHeight * 0.9) return;
+    // 監視を先に始め、失敗したときは .reveal を付けない(隠れたまま残らないように)
+    try {
+      observer.observe(el);
+    } catch (e) {
+      return;
+    }
     el.classList.add("reveal");
-    observer.observe(el);
   });
 }

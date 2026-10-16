@@ -1872,6 +1872,26 @@ a.global-footer-instagram:focus-visible {
   transition-delay: 0.15s;
 }
 
+/* スマホ・タブレット幅(799px以下)だけ、指で素早くスクロールしても自然に見えるよう、
+   動きを少し小さく・短くする(PC幅は上のまま)。will-change は、写真の描画を事前に準備させ、
+   現れる瞬間に一瞬途切れて見えるのを防ぐためのもの。 */
+@media (max-width: 799px) {
+  .reveal {
+    transform: translateY(16px);
+    transition-duration: 0.7s;
+    will-change: opacity, transform;
+  }
+
+  .reveal.is-visible {
+    transform: none;
+  }
+
+  .home-feature-body.reveal {
+    transition-delay: 0.1s;
+  }
+}
+
+/* 動きを減らす設定・印刷では、上のどの幅の指定よりも優先して、常に表示する(最後に書くこと) */
 @media (prefers-reduced-motion: reduce), print {
   .reveal {
     opacity: 1;
