@@ -2077,11 +2077,6 @@ a.global-footer-instagram:focus-visible {
     font-size: 2.4rem;
   }
 
-  /* ヒーロー写真は現状の大きさを基本に、縦だけ画面の高さの74%までにして、下の見出しが最初の画面に入るようにする */
-  .home .home-hero-img {
-    max-height: max(74vh, 420px);
-  }
-
   .home .home-feature {
     max-width: 1240px;
     grid-template-columns: 1.45fr 1fr;
