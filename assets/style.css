@@ -456,12 +456,11 @@ body > main {
   margin-bottom: 10px;
 }
 
-/* スマホ幅(479px以下)だけ、商品名の主張を少し弱めて、サイト全体の静かなトーンに合わせる
-   (25.6px → 22.4px、行間は詰まりすぎないよう1.25)。480px以上・PC幅は変更しない。 */
+/* スマホ幅(479px以下)だけ、商品名は2行になることが多い(「HAKKODO MISO｜」+ 種類)ため、
+   行間を1.35にする(文字サイズは25.6pxのまま)。480px以上・PC幅は変更しない。 */
 @media (max-width: 479px) {
   .product-detail-head h1 {
-    font-size: 1.4rem;
-    line-height: 1.25;
+    line-height: 1.35;
   }
 }
 
@@ -483,14 +482,6 @@ body > main {
   font-weight: 600;
   color: var(--color-heading);
   line-height: 1.6;
-}
-
-/* スマホ幅(479px以下)だけ、キャッチコピーの太さを少し弱める(600 → 500)。
-   サイズ(16.8px)・行間・色は変えない。480px以上・PC幅は変更しない。 */
-@media (max-width: 479px) {
-  .product-catchphrase {
-    font-weight: 500;
-  }
 }
 
 .tagline {
@@ -1026,6 +1017,7 @@ body > main {
 @media (max-width: 799px) {
   #recipe-list-root .recipe-card .card-body h2 {
     font-size: 1.3rem;
+    font-weight: 700; /* 小さくした分、太さを600→700にして読みやすさを補う */
   }
 }
 
@@ -1195,14 +1187,6 @@ body > main {
   font-size: 1.4rem;
 }
 
-/* レシピ一覧ページの見出し。トップページの「Recipes」の見出し(.home-feature-title)と
-   同じ書体・大きさ・字間・色にする(他のページの .intro h1 は変えない)。 */
-.intro h1[data-i18n="recipesTitle"] {
-  font-family: "Shippori Mincho", serif;
-  font-size: 1.5rem;
-  letter-spacing: 0.12em;
-  color: var(--color-heading);
-}
 .intro p {
   margin: 0;
   color: var(--color-muted);
@@ -1795,13 +1779,6 @@ a.global-footer-instagram:focus-visible {
   padding: 0;
 }
 
-/* 見出し「Story」は、トップページの見出し(.home-feature-title)と同じ書体・大きさ・字間・色にする。 */
-.story-page .intro h1 {
-  font-family: "Shippori Mincho", serif;
-  font-size: 1.5rem;
-  letter-spacing: 0.12em;
-  color: var(--color-heading);
-}
 .story-page .home-feature-text {
   margin: 0 auto 1.9em;
   /* 本文の幅は商品ページ(.section の左右 padding 20px)と同じ考え方にそろえる。 */
