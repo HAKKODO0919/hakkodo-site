@@ -2296,25 +2296,42 @@ a.global-footer-instagram:focus-visible {
   }
 }
 
-/* スマホ(幅599px以下)だけ、ヒーローの下に続く3枚の写真(El miso i el nostre compromís / Tallers / Receptes)を
-   画面幅の70.5%に小さくして(元の正方形・画面いっぱいから約30%減。前回の83%からさらに約15%減)、左右に余白を作る。
-   - 縦横比は正方形(1:1)のまま(aspect-ratio は変えず、幅だけ狭めるので、縦も同じ割合で小さくなる)。
-     引き伸ばしや、切り抜き方の変更はない。
-   - 幅の狭い画面でも比率で決まるので、写真が極端に小さくなることはない。
-   - 写真が小さくなったぶんは、セクションの高さが自然に縮む。上下の余白・文章は変えない。
+/* スマホ(幅599px以下)だけ、ヒーローの下に続く3枚の写真(El miso i el nostre compromís / Tallers / Receptes)を、
+   PC版と同じ考え方の「写真と文章がつながって見える」レイアウトにする。
+   - 写真は画面幅いっぱいの横長(2.2:1)にして、下端を背景色へ段階的にゆるやかに溶かす(mask。暗い写真でも濁った帯が出ないよう、不透明度を 100% → 60% → 25% → 0% と落とす)。
+     写真の下に線や枠は作らず、見出しを溶けた部分に少し重ねる。
+   - 文章側(見出し・本文・ボタン)の文字サイズ・フォント・色・内容、見出し〜本文〜ボタンの間隔は変えない。
+   - 写真は上下を切り出して横長に見せる(引き伸ばさない)。被写体が残るよう、写真ごとに切り出す位置を決めている。
    - 幅600px以上(タブレット・PC)は、この指定の外なので変わらない。 */
 @media (max-width: 599px) {
   .home .home-feature-media {
-    width: 70.5%;
-    margin: 0 auto;
+    width: 100%;
+    margin: 0;
+    aspect-ratio: 2.2 / 1;
+    background: transparent;
+    -webkit-mask-image: linear-gradient(to bottom, #000 55%, rgba(0, 0, 0, 0.6) 72%, rgba(0, 0, 0, 0.25) 88%, transparent 100%);
+    mask-image: linear-gradient(to bottom, #000 55%, rgba(0, 0, 0, 0.6) 72%, rgba(0, 0, 0, 0.25) 88%, transparent 100%);
   }
 
-  /* 写真の下端から見出しまでの間隔を、44px → 34px(約23%減)にして、写真と見出しをひとまとまりに見せる。
-     左右の余白(24px)と、見出し・本文・ボタンの間隔は元のまま。.home-feature-body はこの3つの欄だけが使っている。 */
+  .home .home-feature .home-feature-media img {
+    object-position: center 26%;
+  }
+
+  .home .home-feature .home-feature-media img[src*="home-feature-recipe"] {
+    object-position: center 62%;
+  }
+
+  .home .home-feature--reverse .home-feature-media img {
+    object-position: center 17%;
+  }
+
+  /* 見出しを、写真の溶けた下端に20pxだけ重ねる(写真の上に表示するため z-index を付ける)。 */
   .home .home-feature-body {
-    padding-top: 34px;
+    position: relative;
+    z-index: 1;
+    margin-top: -20px;
+    padding-top: 0;
   }
-
   /* 「Novetats」: 本文とボタンの間隔が、本文の下の余白(26px)とボタンの上の余白(26px)の足し算で52pxになっていた。
      本文の下の余白をなくし、「Receptes」などと同じ26pxにする。新着情報とフッターの間隔(下の余白)は変えない。 */
   .home .home-news-empty {
