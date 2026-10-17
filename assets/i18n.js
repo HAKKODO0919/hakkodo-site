@@ -431,7 +431,7 @@ function renderLangSwitcher(container, onChange) {
           (code) => `
           <li role="option" aria-selected="${code === current}">
             <button type="button" class="lang-option-btn" data-lang="${code}">
-              ${langFlagHtml(code)}<span>${LANG_LABELS[code]}</span>
+              ${langFlagHtml(code)}<span class="lang-option-code" aria-hidden="true">${code}</span><span class="lang-option-name">${LANG_LABELS[code]}</span>
             </button>
           </li>`
         ).join("")}
