@@ -1906,23 +1906,24 @@ a.global-footer-instagram:focus-visible {
     -webkit-tap-highlight-color: transparent;
   }
 
-  /* ヘッダーの3つのアイコン(地球・言語の矢印・この3本線)は、色を3つとも var(--color-heading) で共通にし、
-     線の太さは、3本線(基準。この高さ1.3pxの指定は変更しない)の「実際に画面に描かれる太さ」に地球と矢印を合わせる。
-     3本線の長方形は、画面の画素に合わせて丸められ、実機では約1.0〜1.3pxの濃い線として描かれる(DPR2では1.0px)。
-     一方、地球と矢印は mask(SVG)の線画で、指定した太さのまま(縁がやや柔らかく)描かれ、同じ1.3pxの指定だと
-     約3割太く見えていた。そのため地球と矢印は、3本線の描画の中間(1.15px)にする。
-     太さは下の mask(SVG)の stroke-width で決まる(地球: 1.15px ÷ 18px × 24 ≒ 1.5333、矢印: 1.15px ÷ 12px × 24 = 2.3)。
-     「×」にしたときの translateY は、線の間隔(線の高さ+gap 5px = 6.3px)に合わせている。 */
+  /* ヘッダーの3つのアイコン(地球・言語の矢印・この3本線)は、色を3つとも var(--color-heading) で共通にする。
+     地球と矢印の線の太さは mask(SVG)の stroke-width で決まる(1.15px。地球: 1.15px ÷ 18px × 24 ≒ 1.5333、
+     矢印: 1.15px ÷ 12px × 24 = 2.3)。
+     3本線は、線の高さを 1px、線の間隔(高さ + gap 5px)を 6px の、どちらも「1CSSピクセルの整数倍」にしている。
+     長方形は描画時に上下の端が画素に丸められるため、高さや間隔が整数倍でない(以前は1.3pxと6.3px)と、線ごとに
+     丸められ方が変わり、DPR 2では3・2・3画素、DPR 3では4・3・4画素と、真ん中だけ細く見えていた。
+     整数倍にすると、どの画素密度(DPR 1・2・3)でも3本が同じ画素数(1・2・3画素)になる。
+     「×」にしたときの translateY は、線の間隔(6px)に合わせている。 */
   .global-nav-toggle-bar {
     display: block;
     width: 22px;
-    height: 1.3px;
+    height: 1px;
     background: currentColor;
   }
 
   /* 開いている間は「×」にする */
   .is-menu-open .global-nav-toggle-bar:nth-child(1) {
-    transform: translateY(6.3px) rotate(45deg);
+    transform: translateY(6px) rotate(45deg);
   }
 
   .is-menu-open .global-nav-toggle-bar:nth-child(2) {
@@ -1930,7 +1931,7 @@ a.global-footer-instagram:focus-visible {
   }
 
   .is-menu-open .global-nav-toggle-bar:nth-child(3) {
-    transform: translateY(-6.3px) rotate(-45deg);
+    transform: translateY(-6px) rotate(-45deg);
   }
 
   /* メニュー(閉じている間は隠す)。開くと、ヘッダーの下に1項目1行で縦に並ぶ。
