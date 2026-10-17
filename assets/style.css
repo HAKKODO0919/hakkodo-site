@@ -1514,6 +1514,97 @@ body > main {
   }
 }
 
+/* ---- 1-b. ヒーロー写真の上の文字(MISO / 説明)。写真・トリミング・サイズは変えず、文字だけ重ねる。
+   PC・タブレット幅(800px以上): 写真の左側に白文字で重ねる(瓶は写真の右寄り・中央にあるので隠さない)。
+   スマホ幅(799px以下): 写真の上には重ねず、写真の直下に置く(下の @media)。
+   フォントは新しく追加せず、すでに読み込み済みの Cormorant Garamond(MISO)と、
+   サイト共通のサンセリフ(説明文)を使う。 ---- */
+.home-hero {
+  position: relative;
+}
+
+.home-hero-copy {
+  position: absolute;
+  top: 50%;
+  left: 6%;
+  transform: translateY(-50%);
+  color: #fff;
+  text-shadow: 0 1px 14px rgba(0, 0, 0, 0.35);
+}
+
+.home-hero-title {
+  margin: 0;
+  font-family: "Cormorant Garamond", "Shippori Mincho", serif;
+  font-weight: 500;
+  font-size: clamp(2.6rem, 5.4vw, 5rem);
+  line-height: 1;
+  letter-spacing: 0.1em;
+}
+
+.home-hero-title::after {
+  content: "";
+  display: block;
+  width: 3.2rem;
+  height: 1px;
+  margin: 1.1rem 0 1.3rem;
+  background: currentColor;
+}
+
+.home-hero-sub {
+  margin: 0;
+  font-size: clamp(0.58rem, 1.05vw, 0.95rem);
+  line-height: 1.7;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+/* PC幅は「Fermentació japonesa」と「Condiment」を2行に分け、「·」は出さない */
+.home-hero-sub span {
+  display: block;
+  white-space: nowrap;
+}
+
+.home-hero-sub .home-hero-dot {
+  display: none;
+}
+
+/* スマホ幅(799px以下)も、写真の上に白文字で重ねる。瓶は写真の上半分にあるので、
+   文字は写真の下側(切り株の上)の左下に置く。写真の大きさ・切り抜きは変えない。 */
+@media (max-width: 799px) {
+  .home-hero-copy {
+    top: auto;
+    bottom: 5%;
+    left: 6%;
+    transform: none;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.45), 0 2px 18px rgba(0, 0, 0, 0.45);
+  }
+
+  .home-hero-title {
+    font-size: 2.6rem;
+  }
+
+  .home-hero-title::after {
+    width: 2rem;
+    margin: 0.55rem 0 0.65rem;
+  }
+
+  .home-hero-sub {
+    font-size: 0.62rem;
+    line-height: 1.6;
+    letter-spacing: 0.18em;
+  }
+}
+
+@media (max-width: 359px) {
+  .home-hero-title {
+    font-size: 2.3rem;
+  }
+
+  .home-hero-sub {
+    font-size: 0.6rem;
+    letter-spacing: 0.12em;
+  }
+}
 /* ---- 2. ブランド紹介 ---- */
 .home-intro {
   max-width: 480px;
