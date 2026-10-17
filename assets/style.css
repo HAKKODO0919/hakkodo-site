@@ -1865,6 +1865,55 @@ a.global-footer-instagram:focus-visible {
   display: none;
 }
 
+/* ---- 言語切替の見た目(全幅共通。スマホ・タブレットのヘッダーも、PC幅のヘッダーも同じ) ----
+   旗・言語名の文字・塗りつぶしの▼をやめ、細線の地球アイコン(18px)と、線の細い小さなシェブロン(⌄)だけにする。
+   アイコンはマスク画像で描き、色は background-color だけで決まる(ヘッダーのほかのアイコンと同じ var(--color-heading))。
+   旗と言語名は、開いた一覧の中に表示する。ボタンの読み上げ名(aria-label)には、現在の言語名を含めている。
+   display: flex にして、ボタンを「文字の行」の中に置かないようにする(行内に置くと、文字の行の高さぶん上に出る)。
+   アイコン+矢印を1つのまとまりとして、ヘッダーの中央にそろえる。アイコンと矢印の間隔は4px。 */
+.home-header .lang-current {
+  display: flex;
+  gap: 4px;
+}
+
+.home-header .lang-current .lang-flag,
+.home-header .lang-current .lang-current-label {
+  display: none;
+}
+
+.home-header .lang-current::before {
+  content: "";
+  flex: none;
+  width: 18px;
+  height: 18px;
+  background-color: var(--color-heading);
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.5333' stroke-linecap='round'%3E%3Ccircle cx='12' cy='12' r='9'/%3E%3Cellipse cx='12' cy='12' rx='4' ry='9'/%3E%3Cpath d='M3 12h18'/%3E%3C/svg%3E") center / contain no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.5333' stroke-linecap='round'%3E%3Ccircle cx='12' cy='12' r='9'/%3E%3Cellipse cx='12' cy='12' rx='4' ry='9'/%3E%3Cpath d='M3 12h18'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+
+/* 下向きの矢印は、塗りつぶしの三角(▼)をやめ、線の細い小さなシェブロン(⌄)にする。
+   元の文字(▼)は font-size: 0 で見えなくし、同じ要素にマスク画像を描く(色は地球アイコンと同じ)。
+   矢印は装飾(aria-hidden)なので、読み上げは変わらない。 */
+.home-header .lang-caret {
+  flex: none;
+  width: 12px;
+  height: 12px;
+  font-size: 0;
+  line-height: 0;
+  background-color: var(--color-heading);
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 9l7 7 7-7'/%3E%3C/svg%3E") center / contain no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 9l7 7 7-7'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+
+/* 現在の言語が分かるよう、選択中の項目の右端に小さな印(✓)を付ける。
+   旗は言語の識別の補助で、言語名のラベルが一覧の中の主な表示 */
+.home-header .lang-options li[aria-selected="true"] .lang-option-btn::after {
+  content: "✓";
+  margin-left: auto;
+  font-size: 0.8rem;
+  color: var(--color-muted);
+}
+
 @media (max-width: 1180px) {
   /* ボタンの有無にかかわらず、ヘッダーの高さを先に確保して、読み込み時のずれを防ぐ */
   .home-header {
@@ -1981,63 +2030,15 @@ a.global-footer-instagram:focus-visible {
     margin-left: auto;
   }
 
-  /* display: flex にして、ボタンを「文字の行」の中に置かないようにする(行内に置くと、文字の行の高さ・ベースラインぶん
-     ボタンが上に出て、アイコンがロゴより約3.5px上に見えていた)。アイコン+矢印を1つのまとまりとして、
-     ヘッダーの1行目の中央(=ロゴの視覚的な中心)にそろえる。アイコンと矢印の間隔は4px。 */
+  /* スマホ・タブレットでは、見た目は変えず、押せる範囲だけを負のmarginで上下左右に広げる(行の高さは変わらない)。 */
   .has-menu-toggle .lang-current {
-    display: flex;
-    gap: 4px;
     padding: 15px 8px;
     margin: -15px -8px;
-  }
-
-  .has-menu-toggle .lang-current-label {
-    display: none;
-  }
-
-  /* 旗の代わりに、細線の地球アイコン(18px)を、旗と同じ位置・同じ大きさで表示する(モバイルのヘッダーのボタンだけ。
-     言語一覧の中の旗と、PC幅の表示は変えない)。アイコンはマスク画像で描き、色は background-color だけで決まる
-     (ハンバーガーの線と同じ色)。ボタンの読み上げ名(aria-label)は変えない。 */
-  .has-menu-toggle .lang-current .lang-flag {
-    display: none;
-  }
-
-  .has-menu-toggle .lang-current::before {
-    content: "";
-    flex: none;
-    width: 18px;
-    height: 18px;
-    background-color: var(--color-heading);
-    -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.5333' stroke-linecap='round'%3E%3Ccircle cx='12' cy='12' r='9'/%3E%3Cellipse cx='12' cy='12' rx='4' ry='9'/%3E%3Cpath d='M3 12h18'/%3E%3C/svg%3E") center / contain no-repeat;
-    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.5333' stroke-linecap='round'%3E%3Ccircle cx='12' cy='12' r='9'/%3E%3Cellipse cx='12' cy='12' rx='4' ry='9'/%3E%3Cpath d='M3 12h18'/%3E%3C/svg%3E") center / contain no-repeat;
-  }
-
-  /* 下向きの矢印は、塗りつぶしの三角(▼)をやめ、線の細い小さなシェブロン(⌄)にする。
-     元の文字(▼)は font-size: 0 で見えなくし、同じ要素にマスク画像を描く(色は地球アイコンと同じ)。
-     矢印は装飾(aria-hidden)なので、読み上げは変わらない。 */
-  .has-menu-toggle .lang-caret {
-    flex: none;
-    width: 12px;
-    height: 12px;
-    font-size: 0;
-    line-height: 0;
-    background-color: var(--color-heading);
-    -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 9l7 7 7-7'/%3E%3C/svg%3E") center / contain no-repeat;
-    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 9l7 7 7-7'/%3E%3C/svg%3E") center / contain no-repeat;
   }
 
   /* 言語の一覧は、ヘッダーのすぐ下に、ボタンの右端にそろえて開く(画面の端からはみ出さない) */
   .has-menu-toggle .lang-options {
     top: calc(100% + 16.5px);
-  }
-
-  /* 現在の言語が分かるよう、選択中の項目の右端に小さな印(✓)を付ける。
-     旗は言語の識別の補助で、言語名のラベルが一覧の中の主な表示 */
-  .has-menu-toggle .lang-options li[aria-selected="true"] .lang-option-btn::after {
-    content: "✓";
-    margin-left: auto;
-    font-size: 0.8rem;
-    color: var(--color-muted);
   }
 
   /* メニューを開いている間は、背景のスクロールを止める(nav.js が html に is-menu-lock を付ける)。
