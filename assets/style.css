@@ -1966,7 +1966,7 @@ a.global-footer-instagram:focus-visible {
 
   /* 言語切替は、メニューの中ではなく、ヘッダーの1行目に独立して置く(ロゴ | 言語 | メニューボタンの順)。
      margin-left: auto で左の余りを埋め、ロゴだけを左に残して右に寄せる。
-     旗と▼だけを見せる(枠・背景・影なし)。言語名の文字は、開いた一覧の中に表示する。
+     地球アイコンと▼だけを見せる(枠・背景・影なし)。言語名の文字は、開いた一覧の中に表示する。
      押しやすいよう、見た目は変えず、押せる範囲だけを負のmarginで上下左右に広げている(行の高さは変わらない)。 */
   .has-menu-toggle .lang-switcher {
     order: 1;
@@ -1982,9 +1982,26 @@ a.global-footer-instagram:focus-visible {
     display: none;
   }
 
+  /* 旗の代わりに、細線の地球アイコン(18px)を、旗と同じ位置・同じ大きさで表示する(モバイルのヘッダーのボタンだけ。
+     言語一覧の中の旗と、PC幅の表示は変えない)。アイコンはマスク画像で描き、色は background-color だけで決まる
+     (ハンバーガーの線と同じ色)。ボタンの読み上げ名(aria-label)は変えない。 */
+  .has-menu-toggle .lang-current .lang-flag {
+    display: none;
+  }
+
+  .has-menu-toggle .lang-current::before {
+    content: "";
+    flex: none;
+    width: 18px;
+    height: 18px;
+    background-color: var(--color-heading);
+    -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.6' stroke-linecap='round'%3E%3Ccircle cx='12' cy='12' r='9'/%3E%3Cellipse cx='12' cy='12' rx='4' ry='9'/%3E%3Cpath d='M3 12h18'/%3E%3C/svg%3E") center / contain no-repeat;
+    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.6' stroke-linecap='round'%3E%3Ccircle cx='12' cy='12' r='9'/%3E%3Cellipse cx='12' cy='12' rx='4' ry='9'/%3E%3Cpath d='M3 12h18'/%3E%3C/svg%3E") center / contain no-repeat;
+  }
+
   /* 言語の一覧は、ヘッダーのすぐ下に、ボタンの右端にそろえて開く(画面の端からはみ出さない) */
   .has-menu-toggle .lang-options {
-    top: calc(100% + 28px);
+    top: calc(100% + 26.5px);
   }
 
   /* 現在の言語が分かるよう、選択中の項目の右端に小さな印(✓)を付ける。
