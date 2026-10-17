@@ -1973,7 +1973,12 @@ a.global-footer-instagram:focus-visible {
     margin-left: auto;
   }
 
+  /* display: flex にして、ボタンを「文字の行」の中に置かないようにする(行内に置くと、文字の行の高さ・ベースラインぶん
+     ボタンが上に出て、アイコンがロゴより約3.5px上に見えていた)。アイコン+矢印を1つのまとまりとして、
+     ヘッダーの1行目の中央(=ロゴの視覚的な中心)にそろえる。アイコンと矢印の間隔は4px。 */
   .has-menu-toggle .lang-current {
+    display: flex;
+    gap: 4px;
     padding: 15px 8px;
     margin: -15px -8px;
   }
@@ -1995,13 +2000,27 @@ a.global-footer-instagram:focus-visible {
     width: 18px;
     height: 18px;
     background-color: var(--color-heading);
-    -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.6' stroke-linecap='round'%3E%3Ccircle cx='12' cy='12' r='9'/%3E%3Cellipse cx='12' cy='12' rx='4' ry='9'/%3E%3Cpath d='M3 12h18'/%3E%3C/svg%3E") center / contain no-repeat;
-    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.6' stroke-linecap='round'%3E%3Ccircle cx='12' cy='12' r='9'/%3E%3Cellipse cx='12' cy='12' rx='4' ry='9'/%3E%3Cpath d='M3 12h18'/%3E%3C/svg%3E") center / contain no-repeat;
+    -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round'%3E%3Ccircle cx='12' cy='12' r='9'/%3E%3Cellipse cx='12' cy='12' rx='4' ry='9'/%3E%3Cpath d='M3 12h18'/%3E%3C/svg%3E") center / contain no-repeat;
+    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round'%3E%3Ccircle cx='12' cy='12' r='9'/%3E%3Cellipse cx='12' cy='12' rx='4' ry='9'/%3E%3Cpath d='M3 12h18'/%3E%3C/svg%3E") center / contain no-repeat;
+  }
+
+  /* 下向きの矢印は、塗りつぶしの三角(▼)をやめ、線の細い小さなシェブロン(⌄)にする。
+     元の文字(▼)は font-size: 0 で見えなくし、同じ要素にマスク画像を描く(色は地球アイコンと同じ)。
+     矢印は装飾(aria-hidden)なので、読み上げは変わらない。 */
+  .has-menu-toggle .lang-caret {
+    flex: none;
+    width: 12px;
+    height: 12px;
+    font-size: 0;
+    line-height: 0;
+    background-color: var(--color-heading);
+    -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 9l7 7 7-7'/%3E%3C/svg%3E") center / contain no-repeat;
+    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 9l7 7 7-7'/%3E%3C/svg%3E") center / contain no-repeat;
   }
 
   /* 言語の一覧は、ヘッダーのすぐ下に、ボタンの右端にそろえて開く(画面の端からはみ出さない) */
   .has-menu-toggle .lang-options {
-    top: calc(100% + 26.5px);
+    top: calc(100% + 16.5px);
   }
 
   /* 現在の言語が分かるよう、選択中の項目の右端に小さな印(✓)を付ける。
