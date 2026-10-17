@@ -84,6 +84,15 @@ function initMenuToggle(container) {
   function setOpen(open) {
     header.classList.toggle("is-menu-open", open);
     button.setAttribute("aria-expanded", open ? "true" : "false");
+    // メニューを開いている間は、背景(本文とフッター)の操作を無効にし、スクロールも止める。
+    // inert が、タップ・キーボード・読み上げの操作をまとめて止める。inert に対応していない
+    // 古いブラウザでは、style.css の pointer-events と aria-hidden が代わりに働く。
+    document.documentElement.classList.toggle("is-menu-lock", open);
+    document.querySelectorAll("body > main, body > footer").forEach((el) => {
+      el.inert = open;
+      if (open) el.setAttribute("aria-hidden", "true");
+      else el.removeAttribute("aria-hidden");
+    });
     if (!open) {
       // メニューを閉じるときは、中で開いていた言語の一覧も閉じる(次に開いたとき、開いたままにならないように)
       const languageList = header.querySelector(".lang-options");

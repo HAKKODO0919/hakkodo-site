@@ -1874,6 +1874,21 @@ a.global-footer-instagram:focus-visible {
     min-height: 67px;
   }
 
+  /* メニューは本文を押し下げず、ヘッダーの下に重ねて表示する。
+     ヘッダー自体の高さを閉じている状態(68px)に固定し、開いたメニューと言語切替は
+     その下にはみ出して本文の上に重なる(本文の位置は動かない)。
+     68pxは、このヘッダーを閉じたときの高さ(ロゴの高さ+上下の余白)と同じ値にしておくこと。 */
+  .has-menu-toggle {
+    position: relative;
+    z-index: 50;
+    height: 68px;
+    align-content: flex-start;
+  }
+
+  .has-menu-toggle.is-menu-open {
+    background: var(--color-bg);
+  }
+
   .has-menu-toggle .global-nav-toggle {
     display: inline-flex;
     flex-direction: column;
@@ -1922,6 +1937,9 @@ a.global-footer-instagram:focus-visible {
     gap: 0;
     margin: 12px 0 0;
     padding-left: calc(100% - 360px);
+    /* 背景は右寄せの幅360pxのパネルの範囲だけ(スマホ幅では下の799px以下の指定で画面の端まで広げる) */
+    background-color: var(--color-bg);
+    background-clip: content-box;
   }
 
   .has-menu-toggle.is-menu-open .global-nav-list {
@@ -1950,8 +1968,12 @@ a.global-footer-instagram:focus-visible {
     display: none;
     order: 4;
     flex-basis: 100%;
-    padding: 12px 0 2px calc(100% - 360px);
-    background: linear-gradient(var(--color-border), var(--color-border)) right top / 360px 1px no-repeat;
+    padding: 12px 0 14px calc(100% - 360px);
+    /* 上の線・下の線・背景色。いずれも右寄せの幅360pxのパネルの範囲だけに描く */
+    background:
+      linear-gradient(var(--color-border), var(--color-border)) right top / 360px 1px no-repeat,
+      linear-gradient(var(--color-border), var(--color-border)) right bottom / 360px 1px no-repeat,
+      linear-gradient(var(--color-bg), var(--color-bg)) right top / 360px 100% no-repeat;
   }
 
   .has-menu-toggle.is-menu-open .lang-switcher {
@@ -1963,6 +1985,17 @@ a.global-footer-instagram:focus-visible {
     left: 0;
     right: auto;
   }
+
+  /* メニューを開いている間は、背景のスクロールを止める(nav.js が html に is-menu-lock を付ける)。
+     scrollbar-gutter: stable があるので、スクロールバー分の横幅は変わらない */
+  html.is-menu-lock {
+    overflow: hidden;
+  }
+
+  html.is-menu-lock body > main,
+  html.is-menu-lock body > footer {
+    pointer-events: none;
+  }
 }
 
 @media (max-width: 799px) {
@@ -1970,15 +2003,23 @@ a.global-footer-instagram:focus-visible {
     padding: 12px 20px;
   }
 
-  /* スマホ幅では、メニューは画面の幅いっぱいに開く */
+  /* スマホ幅では、メニューは画面の幅いっぱいに開く(背景も画面の端から端まで。
+     ヘッダーの左右の余白20pxぶんを、負のmarginとpaddingで打ち消している) */
   .has-menu-toggle .global-nav-list {
-    padding-left: 0;
+    margin-right: -20px;
+    margin-left: -20px;
+    padding: 0 20px;
+    flex-basis: calc(100% + 40px);
+    background-clip: border-box;
   }
 
   .has-menu-toggle .lang-switcher {
-    padding-left: 0;
-    background: none;
+    margin: 0 -20px;
+    padding: 12px 20px 14px;
+    flex-basis: calc(100% + 40px);
+    background: var(--color-bg);
     border-top: 1px solid var(--color-border);
+    border-bottom: 1px solid var(--color-border);
   }
 }
 
