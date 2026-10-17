@@ -1857,11 +1857,10 @@ a.global-footer-instagram:focus-visible {
 
 /* ---- スマホ・タブレット用ヘッダー(幅1180px以下。全ページ共通)。
    iPad miniは縦向き744〜768px・横向き1024〜1133pxなので、どちらもここに入る。PC(1181px以上)は変更しない。
-   1行目: ロゴ(左)+メニューボタン(右)。ナビ6項目と言語切替は、ボタンで開くメニューの中に入れる。
+   1行目: ロゴ(左)+ 言語切替(旗と▼だけ)+ メニューボタン(右)。ナビ6項目は、ボタンで開くメニューの中に入れる。
    メニューの開閉は assets/nav.js(.has-menu-toggle は、ボタンを出したときだけ付く印、
    .is-menu-open は開いている間だけ付く)。上限の1180は nav.js の NAV_COLLAPSE_MAX_WIDTH と同じにしておくこと。
-   メニューは本文を押し下げる(ヘッダーの下に縦に並ぶ)ので、開いたままスクロールしても、
-   メニューは本文と一緒に自然に流れる。 ---- */
+   メニューは本文を押し下げず、ヘッダーの下に重ねて表示する。 ---- */
 .global-nav-toggle {
   display: none;
 }
@@ -1890,6 +1889,7 @@ a.global-footer-instagram:focus-visible {
   }
 
   .has-menu-toggle .global-nav-toggle {
+    order: 2;
     display: inline-flex;
     flex-direction: column;
     justify-content: center;
@@ -1936,10 +1936,11 @@ a.global-footer-instagram:focus-visible {
     align-items: stretch;
     gap: 0;
     margin: 12px 0 0;
-    padding-left: calc(100% - 360px);
-    /* 背景は右寄せの幅360pxのパネルの範囲だけ(スマホ幅では下の799px以下の指定で画面の端まで広げる) */
-    background-color: var(--color-bg);
-    background-clip: content-box;
+    padding: 0 0 14px calc(100% - 360px);
+    /* 背景と下の線は、右寄せの幅360pxのパネルの範囲だけ(スマホ幅では下の799px以下の指定で画面の端まで広げる) */
+    background:
+      linear-gradient(var(--color-border), var(--color-border)) right bottom / 360px 1px no-repeat,
+      linear-gradient(var(--color-bg), var(--color-bg)) right top / 360px 100% no-repeat;
   }
 
   .has-menu-toggle.is-menu-open .global-nav-list {
@@ -1963,27 +1964,36 @@ a.global-footer-instagram:focus-visible {
     font-size: 0.95rem;
   }
 
-  /* 言語切替もメニューの中(開いている間だけ表示) */
+  /* 言語切替は、メニューの中ではなく、ヘッダーの1行目に独立して置く(ロゴ | 言語 | メニューボタンの順)。
+     margin-left: auto で左の余りを埋め、ロゴだけを左に残して右に寄せる。
+     旗と▼だけを見せる(枠・背景・影なし)。言語名の文字は、開いた一覧の中に表示する。
+     押しやすいよう、見た目は変えず、押せる範囲だけを負のmarginで上下左右に広げている(行の高さは変わらない)。 */
   .has-menu-toggle .lang-switcher {
+    order: 1;
+    margin-left: auto;
+  }
+
+  .has-menu-toggle .lang-current {
+    padding: 15px 8px;
+    margin: -15px -8px;
+  }
+
+  .has-menu-toggle .lang-current-label {
     display: none;
-    order: 4;
-    flex-basis: 100%;
-    padding: 12px 0 14px calc(100% - 360px);
-    /* 上の線・下の線・背景色。いずれも右寄せの幅360pxのパネルの範囲だけに描く */
-    background:
-      linear-gradient(var(--color-border), var(--color-border)) right top / 360px 1px no-repeat,
-      linear-gradient(var(--color-border), var(--color-border)) right bottom / 360px 1px no-repeat,
-      linear-gradient(var(--color-bg), var(--color-bg)) right top / 360px 100% no-repeat;
   }
 
-  .has-menu-toggle.is-menu-open .lang-switcher {
-    display: block;
-  }
-
-  /* 言語の一覧は、メニューの左端から開く(右端基準だと画面の外にはみ出すため) */
+  /* 言語の一覧は、ヘッダーのすぐ下に、ボタンの右端にそろえて開く(画面の端からはみ出さない) */
   .has-menu-toggle .lang-options {
-    left: 0;
-    right: auto;
+    top: calc(100% + 28px);
+  }
+
+  /* 現在の言語が分かるよう、選択中の項目の右端に小さな印(✓)を付ける。
+     旗は言語の識別の補助で、言語名のラベルが一覧の中の主な表示 */
+  .has-menu-toggle .lang-options li[aria-selected="true"] .lang-option-btn::after {
+    content: "✓";
+    margin-left: auto;
+    font-size: 0.8rem;
+    color: var(--color-muted);
   }
 
   /* メニューを開いている間は、背景のスクロールを止める(nav.js が html に is-menu-lock を付ける)。
@@ -2008,18 +2018,33 @@ a.global-footer-instagram:focus-visible {
   .has-menu-toggle .global-nav-list {
     margin-right: -20px;
     margin-left: -20px;
-    padding: 0 20px;
-    flex-basis: calc(100% + 40px);
-    background-clip: border-box;
-  }
-
-  .has-menu-toggle .lang-switcher {
-    margin: 0 -20px;
-    padding: 12px 20px 14px;
+    padding: 0 20px 14px;
     flex-basis: calc(100% + 40px);
     background: var(--color-bg);
-    border-top: 1px solid var(--color-border);
     border-bottom: 1px solid var(--color-border);
+  }
+}
+
+/* 幅354px以下(iPhone SE 第1世代など幅320px級の端末)だけ、ロゴ・言語切替・メニューボタンが1行に収まるよう、
+   左右の余白と間隔を少し詰め、ロゴを約6%小さくする(355px以上は変更なし)。
+   ロゴの高さを下げても1行目の高さ(43px)は変わらないよう、ブランドの最小の高さを指定している。 */
+@media (max-width: 354px) {
+  .home-header {
+    padding-right: 16px;
+    padding-left: 16px;
+    gap: 0 8px;
+  }
+
+  .has-menu-toggle .global-nav-brand {
+    min-height: 43px;
+  }
+
+  .has-menu-toggle .home-header-logo {
+    height: 30px;
+  }
+
+  .has-menu-toggle .home-header-face-logo {
+    height: 40px;
   }
 }
 

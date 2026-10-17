@@ -81,6 +81,16 @@ function initMenuToggle(container) {
   if (!header || !button) return;
   header.classList.add("has-menu-toggle");
 
+  // 言語切替(ヘッダーの旗と▼)の一覧を閉じる。一覧が開いていたときだけ true を返す。
+  function closeLanguageList() {
+    const languageList = header.querySelector(".lang-options");
+    const languageButton = header.querySelector(".lang-current");
+    const wasOpen = !!languageList && !languageList.hidden;
+    if (languageList) languageList.hidden = true;
+    if (languageButton) languageButton.setAttribute("aria-expanded", "false");
+    return wasOpen;
+  }
+
   function setOpen(open) {
     header.classList.toggle("is-menu-open", open);
     button.setAttribute("aria-expanded", open ? "true" : "false");
@@ -93,23 +103,32 @@ function initMenuToggle(container) {
       if (open) el.setAttribute("aria-hidden", "true");
       else el.removeAttribute("aria-hidden");
     });
-    if (!open) {
-      // メニューを閉じるときは、中で開いていた言語の一覧も閉じる(次に開いたとき、開いたままにならないように)
-      const languageList = header.querySelector(".lang-options");
-      const languageButton = header.querySelector(".lang-current");
-      if (languageList) languageList.hidden = true;
-      if (languageButton) languageButton.setAttribute("aria-expanded", "false");
-    }
+    // メニューを開くときも閉じるときも、言語の一覧は閉じる(メニューと言語の一覧が同時に開いたままにならないように)
+    closeLanguageList();
   }
 
   button.addEventListener("click", () => setOpen(!header.classList.contains("is-menu-open")));
   container.querySelectorAll(".global-nav-link").forEach((link) => link.addEventListener("click", () => setOpen(false)));
   document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape" && header.classList.contains("is-menu-open")) {
+    if (e.key !== "Escape") return;
+    if (header.classList.contains("is-menu-open")) {
       setOpen(false);
       button.focus();
+    } else if (closeLanguageList()) {
+      // 言語の一覧を Esc で閉じたときは、フォーカスを言語切替のボタンへ戻す
+      const languageButton = header.querySelector(".lang-current");
+      if (languageButton) languageButton.focus();
     }
   });
+  // 言語切替のボタンを押したときは、開いているメニューを先に閉じる(メニューと言語の一覧が同時に開かないように)。
+  // キャプチャ(第3引数 true)にして、言語切替のボタン自身の処理(一覧を開く)より前に実行する。
+  header.addEventListener(
+    "click",
+    (e) => {
+      if (e.target.closest && e.target.closest(".lang-current") && header.classList.contains("is-menu-open")) setOpen(false);
+    },
+    true
+  );
   // 画面が広くなってPC表示に切り替わったら、開いた状態を残さない
   window.addEventListener("resize", () => {
     if (window.innerWidth > NAV_COLLAPSE_MAX_WIDTH) setOpen(false);

@@ -423,7 +423,7 @@ function renderLangSwitcher(container, onChange) {
 
   container.innerHTML = `
     <div class="lang-switcher-dropdown">
-      <button type="button" class="lang-current" aria-haspopup="listbox" aria-expanded="false" aria-label="Language / 言語 / Idioma">
+      <button type="button" class="lang-current" aria-haspopup="listbox" aria-expanded="false" aria-label="Language / 言語 / Idioma: ${LANG_LABELS[current]}">
         ${currentButtonHtml(current)}
       </button>
       <ul class="lang-options" role="listbox" hidden>
@@ -474,6 +474,7 @@ function renderLangSwitcher(container, onChange) {
         }
       }
       toggleBtn.innerHTML = currentButtonHtml(code);
+      toggleBtn.setAttribute("aria-label", "Language / 言語 / Idioma: " + LANG_LABELS[code]);
       container.querySelectorAll(".lang-options li").forEach((li) => {
         li.setAttribute("aria-selected", li.querySelector(".lang-option-btn").getAttribute("data-lang") === code ? "true" : "false");
       });
