@@ -8,7 +8,7 @@
 const SUPPORTED_LANGS = ["ca", "es", "en", "ja"];
 
 const LANG_LABELS = {
-  ja: "日本語",
+  ja: "Japanese",
   ca: "Català",
   es: "Español",
   en: "English",
