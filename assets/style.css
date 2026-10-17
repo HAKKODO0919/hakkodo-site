@@ -1906,16 +1906,21 @@ a.global-footer-instagram:focus-visible {
     -webkit-tap-highlight-color: transparent;
   }
 
+  /* ヘッダーの3つのアイコン(地球・言語の矢印・この3本線)は、線の太さを1.3pxにそろえる
+     (顔ロゴの輪郭線は、表示サイズで約1.56px)。色も3つとも var(--color-heading) で共通。
+     地球と矢印の太さは、下の mask(SVG)の stroke-width を、この太さになるよう計算した値にしている
+     (地球: 1.3px ÷ 18px × 24 ≒ 1.7333、矢印: 1.3px ÷ 12px × 24 = 2.6)。
+     「×」にしたときの translateY は、線の間隔(線の高さ+gap 5px = 6.3px)に合わせている。 */
   .global-nav-toggle-bar {
     display: block;
     width: 22px;
-    height: 1.5px;
+    height: 1.3px;
     background: currentColor;
   }
 
   /* 開いている間は「×」にする */
   .is-menu-open .global-nav-toggle-bar:nth-child(1) {
-    transform: translateY(6.5px) rotate(45deg);
+    transform: translateY(6.3px) rotate(45deg);
   }
 
   .is-menu-open .global-nav-toggle-bar:nth-child(2) {
@@ -1923,7 +1928,7 @@ a.global-footer-instagram:focus-visible {
   }
 
   .is-menu-open .global-nav-toggle-bar:nth-child(3) {
-    transform: translateY(-6.5px) rotate(-45deg);
+    transform: translateY(-6.3px) rotate(-45deg);
   }
 
   /* メニュー(閉じている間は隠す)。開くと、ヘッダーの下に1項目1行で縦に並ぶ。
@@ -2000,8 +2005,8 @@ a.global-footer-instagram:focus-visible {
     width: 18px;
     height: 18px;
     background-color: var(--color-heading);
-    -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round'%3E%3Ccircle cx='12' cy='12' r='9'/%3E%3Cellipse cx='12' cy='12' rx='4' ry='9'/%3E%3Cpath d='M3 12h18'/%3E%3C/svg%3E") center / contain no-repeat;
-    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round'%3E%3Ccircle cx='12' cy='12' r='9'/%3E%3Cellipse cx='12' cy='12' rx='4' ry='9'/%3E%3Cpath d='M3 12h18'/%3E%3C/svg%3E") center / contain no-repeat;
+    -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.7333' stroke-linecap='round'%3E%3Ccircle cx='12' cy='12' r='9'/%3E%3Cellipse cx='12' cy='12' rx='4' ry='9'/%3E%3Cpath d='M3 12h18'/%3E%3C/svg%3E") center / contain no-repeat;
+    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.7333' stroke-linecap='round'%3E%3Ccircle cx='12' cy='12' r='9'/%3E%3Cellipse cx='12' cy='12' rx='4' ry='9'/%3E%3Cpath d='M3 12h18'/%3E%3C/svg%3E") center / contain no-repeat;
   }
 
   /* 下向きの矢印は、塗りつぶしの三角(▼)をやめ、線の細い小さなシェブロン(⌄)にする。
@@ -2014,8 +2019,8 @@ a.global-footer-instagram:focus-visible {
     font-size: 0;
     line-height: 0;
     background-color: var(--color-heading);
-    -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 9l7 7 7-7'/%3E%3C/svg%3E") center / contain no-repeat;
-    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 9l7 7 7-7'/%3E%3C/svg%3E") center / contain no-repeat;
+    -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 9l7 7 7-7'/%3E%3C/svg%3E") center / contain no-repeat;
+    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 9l7 7 7-7'/%3E%3C/svg%3E") center / contain no-repeat;
   }
 
   /* 言語の一覧は、ヘッダーのすぐ下に、ボタンの右端にそろえて開く(画面の端からはみ出さない) */
