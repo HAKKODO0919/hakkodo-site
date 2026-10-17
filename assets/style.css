@@ -2240,9 +2240,9 @@ a.global-footer-instagram:focus-visible {
 
 .home .home-intro-lead {
   margin: 30px auto 0;
-  font-size: 1.75rem;
+  font-size: 1.4875rem;
   font-weight: 500;
-  line-height: 1.65;
+  line-height: 1.94;
   letter-spacing: 0.06em;
   text-wrap: balance;
 }
@@ -2296,6 +2296,31 @@ a.global-footer-instagram:focus-visible {
   }
 }
 
+/* スマホ(幅599px以下)だけ、ヒーローの下に続く3枚の写真(El miso i el nostre compromís / Tallers / Receptes)を
+   画面幅の70.5%に小さくして(元の正方形・画面いっぱいから約30%減。前回の83%からさらに約15%減)、左右に余白を作る。
+   - 縦横比は正方形(1:1)のまま(aspect-ratio は変えず、幅だけ狭めるので、縦も同じ割合で小さくなる)。
+     引き伸ばしや、切り抜き方の変更はない。
+   - 幅の狭い画面でも比率で決まるので、写真が極端に小さくなることはない。
+   - 写真が小さくなったぶんは、セクションの高さが自然に縮む。上下の余白・文章は変えない。
+   - 幅600px以上(タブレット・PC)は、この指定の外なので変わらない。 */
+@media (max-width: 599px) {
+  .home .home-feature-media {
+    width: 70.5%;
+    margin: 0 auto;
+  }
+
+  /* 写真の下端から見出しまでの間隔を、44px → 34px(約23%減)にして、写真と見出しをひとまとまりに見せる。
+     左右の余白(24px)と、見出し・本文・ボタンの間隔は元のまま。.home-feature-body はこの3つの欄だけが使っている。 */
+  .home .home-feature-body {
+    padding-top: 34px;
+  }
+
+  /* 「Novetats」: 本文とボタンの間隔が、本文の下の余白(26px)とボタンの上の余白(26px)の足し算で52pxになっていた。
+     本文の下の余白をなくし、「Receptes」などと同じ26pxにする。新着情報とフッターの間隔(下の余白)は変えない。 */
+  .home .home-news-empty {
+    margin-bottom: 0;
+  }
+}
 /* スマホ(幅599px以下)の見出し「Bienvenidos al mundo del umami.」など: 2行の見た目を整える。
    - 文字サイズは約28pxのまま、狭い画面(320px前後)だけ少し小さくして3行にならないようにする。
    - 古いSafariは text-wrap: balance に対応していないため、見出しの幅を文字サイズ基準(em)で絞り、
@@ -2312,7 +2337,7 @@ a.global-footer-instagram:focus-visible {
     max-width: 9.7em;
     margin-top: 28px;
     font-size: clamp(1.45rem, 7.4vw, 1.75rem);
-    line-height: 1.55;
+    line-height: 1.82;
   }
 
   .home:lang(es) .home-intro-lead {
@@ -2325,6 +2350,89 @@ a.global-footer-instagram:focus-visible {
   }
 }
 
+/* 小さな案内文「Cuina Japonesa / Miso / Fermentació」(h1)と、その下線は画面には出さない。
+   ページ唯一の h1 なので、HTMLからは消さず(検索エンジン・読み上げ用に残す)、見た目だけ取り除く。
+   見えなくするだけで場所は取らないので、写真の下はメインコピーから始まる。 */
+.home .home-intro-tagline {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+/* メインコピー(lead)の下: 短く薄い横線 → サブコピー(sub)。サブコピーはメインより小さく、落ち着いた色にする。
+   線はサブコピーの ::before で描く(HTMLの追加はサブコピーの1行だけ)。 */
+.home .home-intro-sub {
+  margin: 0;
+  font-family: "Hiragino Sans", "Yu Gothic", "Noto Sans JP", system-ui, -apple-system, sans-serif;
+  font-size: 0.82rem;
+  font-weight: 400;
+  line-height: 1.9;
+  letter-spacing: 0.16em;
+  /* 補助文字色(#6b6b6b)より少し濃く、本文(#2b2b2b)よりは薄いグレー */
+  color: #555;
+}
+
+@media (min-width: 800px) {
+  .home .home-intro-sub {
+    font-size: 0.88rem;
+  }
+}
+
+.home .home-intro-sub::before {
+  content: "";
+  display: block;
+  width: 36px;
+  height: 1px;
+  margin: 24px auto 18px;
+  background: rgba(43, 35, 32, 0.28);
+}
+
+/* スマホ・小さい画面(幅639px以下): メインコピーを1行にする。
+   これまでの「Benvinguts al / món de l'umami.」の2行を、折り返さず1行にするため、
+   文字サイズは「紹介欄の幅(画面幅。ただし最大480px) − 左右の余白(48px)」を、
+   言語ごとの1行の長さ(em)で割った大きさにする
+   (長さは実測: ca 約15.9em / es 約17.5em / en 約16.7em。字間は0.02em。少し余裕を見た値で割る)。
+   見出しは従来より約15%小さくしてある(割る数は、長さ(em)÷0.85 に余裕を足した値。上限は 1.75rem × 0.85)。
+   行の高さ(line-height)は、1行ぶんの高さが変わらないよう 0.85 で割った値にしてある。
+   日本語は短いので、サイズだけ約15%小さくする(もともと1行)。 */
+@media (max-width: 639px) {
+  .home .home-intro-lead {
+    max-width: none;
+    white-space: nowrap;
+    letter-spacing: 0.02em;
+    font-size: min(1.4875rem, calc((min(100vw, 480px) - 48px) / 19.5));
+  }
+
+  .home:lang(ca) .home-intro-lead {
+    max-width: none;
+    font-size: min(1.4875rem, calc((min(100vw, 480px) - 48px) / 19.5));
+  }
+
+  .home:lang(es) .home-intro-lead {
+    max-width: none;
+    font-size: min(1.4875rem, calc((min(100vw, 480px) - 48px) / 21.4));
+  }
+
+  .home:lang(en) .home-intro-lead {
+    max-width: none;
+    font-size: min(1.4875rem, calc((min(100vw, 480px) - 48px) / 20.5));
+  }
+
+  .home:lang(ja) .home-intro-lead {
+    letter-spacing: 0.06em;
+    font-size: clamp(1.105rem, 5.865vw, 1.4875rem);
+  }
+
+  .home .home-intro-sub::before {
+    margin: 20px auto 16px;
+  }
+}
 /* PC・タブレット横向き(幅800px以上): 写真の列を広げ、余白を大きく。左右交互の配置は維持 */
 @media (min-width: 800px) {
   .home .home-intro {
@@ -2338,7 +2446,8 @@ a.global-footer-instagram:focus-visible {
 
   .home .home-intro-lead {
     margin-top: 36px;
-    font-size: 2.4rem;
+    font-size: 2.04rem;
+    line-height: 1.94;
   }
 
   .home .home-feature {
@@ -2352,6 +2461,27 @@ a.global-footer-instagram:focus-visible {
     grid-template-columns: 1fr 1.45fr;
   }
 
+  /* 「El miso i el nostre compromís」「Tallers」「Receptes」の3つの欄で、写真の表示を約17%小さくする。
+     - 文章の列の幅・文字の大きさ・書体・色は変えない(列の幅は元と同じ割合のまま)。
+     - 写真の列は、元の 1.45 : 1 の割合から約17%狭める(元 0.5918 → 0.49 の割合)。縦横比(5:4)は
+       aspect-ratio のままなので、写真は引き伸ばさず・切り抜き方も変わらず、縦横とも同じ割合で小さくなる。
+     - 写真と文章の間隔(column-gap)は元のまま。余った左右の幅は、組全体を中央に寄せて均等に分ける。
+     - 写真が右側に来る欄(.home-feature--reverse = Tallers)は、列の順番だけ入れ替える。
+     - スマホ・タブレット縦向き(799px以下)は、この指定の外なので変わらない。 */
+  .home .home-feature {
+    --home-feature-gap: clamp(48px, 6vw, 80px);
+    grid-template-columns:
+      calc((100% - var(--home-feature-gap)) * 0.49)
+      calc((100% - var(--home-feature-gap)) * 0.4082);
+    column-gap: var(--home-feature-gap);
+    justify-content: center;
+  }
+
+  .home .home-feature--reverse {
+    grid-template-columns:
+      calc((100% - var(--home-feature-gap)) * 0.4082)
+      calc((100% - var(--home-feature-gap)) * 0.49);
+  }
   .home .home-feature-title,
   .home .home-news-title {
     font-size: 1.35rem;
