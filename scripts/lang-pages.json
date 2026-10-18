@@ -67,19 +67,19 @@
     "contact/index.html": {
       "ca": {
         "title": "Contacte",
-        "description": "Contacte amb HAKKODO: per a consultes, es pot escriure per correu electrònic."
+        "description": "Contacte amb HAKKODO: esperem el seu missatge per correu electrònic."
       },
       "es": {
         "title": "Contacto",
-        "description": "Contacto con HAKKODO: para consultas, se puede escribir por correo electrónico."
+        "description": "Contacto con HAKKODO: esperamos su mensaje por correo electrónico."
       },
       "en": {
         "title": "Contact",
-        "description": "Contact HAKKODO: for any questions, please contact us by email."
+        "description": "Contact HAKKODO: we'd love to hear from you by email."
       },
       "ja": {
         "title": "お問い合わせ",
-        "description": "HAKKODOへのお問い合わせ。ご質問・お問い合わせは、メールにてお願いいたします。"
+        "description": "HAKKODOへのお問い合わせ。ご連絡は、メールでお待ちしています。"
       }
     },
     "recipes/index.html": {
