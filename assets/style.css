@@ -1589,9 +1589,9 @@ body > main {
   }
 
   .home-hero-sub {
-    font-size: 0.62rem;
+    font-size: 0.75rem;
     line-height: 1.6;
-    letter-spacing: 0.18em;
+    letter-spacing: 0.14em;
   }
 }
 
@@ -1601,8 +1601,8 @@ body > main {
   }
 
   .home-hero-sub {
-    font-size: 0.6rem;
-    letter-spacing: 0.12em;
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
   }
 }
 /* ---- 2. ブランド紹介 ---- */
@@ -2298,7 +2298,8 @@ a.global-footer-instagram:focus-visible {
 
 /* スマホ(幅599px以下)だけ、ヒーローの下に続く3枚の写真(El miso i el nostre compromís / Tallers / Receptes)を、
    PC版と同じ考え方の「写真と文章がつながって見える」レイアウトにする。
-   - 写真は画面幅いっぱいの横長(2.2:1)にして、下端を背景色へ段階的にゆるやかに溶かす(mask。暗い写真でも濁った帯が出ないよう、不透明度を 100% → 60% → 25% → 0% と落とす)。
+   - 写真は画面幅いっぱいの横長(1.6:1。上下が溶けるぶん、細い帯に見えないよう高さを出す)にして、上端と下端を背景色へ段階的にゆるやかに溶かす(mask)。
+     上端は最初の4%だけ 0% → 100%(直線の硬さを少しやわらげる程度)。下端は48%から100%まで、なめらかな曲線(smoothstep)で段階的に透明にして、見出しの文字となじませる。
      写真の下に線や枠は作らず、見出しを溶けた部分に少し重ねる。
    - 文章側(見出し・本文・ボタン)の文字サイズ・フォント・色・内容、見出し〜本文〜ボタンの間隔は変えない。
    - 写真は上下を切り出して横長に見せる(引き伸ばさない)。被写体が残るよう、写真ごとに切り出す位置を決めている。
@@ -2307,30 +2308,67 @@ a.global-footer-instagram:focus-visible {
   .home .home-feature-media {
     width: 100%;
     margin: 0;
-    aspect-ratio: 2.2 / 1;
+    aspect-ratio: 1.6 / 1;
     background: transparent;
-    -webkit-mask-image: linear-gradient(to bottom, #000 55%, rgba(0, 0, 0, 0.6) 72%, rgba(0, 0, 0, 0.25) 88%, transparent 100%);
-    mask-image: linear-gradient(to bottom, #000 55%, rgba(0, 0, 0, 0.6) 72%, rgba(0, 0, 0, 0.25) 88%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 4%, #000 48%, rgba(0, 0, 0, 0.96) 55%, rgba(0, 0, 0, 0.86) 62%, rgba(0, 0, 0, 0.72) 69%, rgba(0, 0, 0, 0.55) 76%, rgba(0, 0, 0, 0.38) 83%, rgba(0, 0, 0, 0.22) 90%, rgba(0, 0, 0, 0.08) 96%, transparent 100%);
+    mask-image: linear-gradient(to bottom, transparent 0, #000 4%, #000 48%, rgba(0, 0, 0, 0.96) 55%, rgba(0, 0, 0, 0.86) 62%, rgba(0, 0, 0, 0.72) 69%, rgba(0, 0, 0, 0.55) 76%, rgba(0, 0, 0, 0.38) 83%, rgba(0, 0, 0, 0.22) 90%, rgba(0, 0, 0, 0.08) 96%, transparent 100%);
   }
 
   .home .home-feature .home-feature-media img {
-    object-position: center 26%;
+    object-position: center 32%;
   }
 
   .home .home-feature .home-feature-media img[src*="home-feature-recipe"] {
-    object-position: center 62%;
+    object-position: center 55%;
   }
 
   .home .home-feature--reverse .home-feature-media img {
-    object-position: center 17%;
+    object-position: center 18%;
   }
 
-  /* 見出しを、写真の溶けた下端に20pxだけ重ねる(写真の上に表示するため z-index を付ける)。 */
+  /* 見出しを、写真の溶けた下端に24pxだけ重ねる(写真の上に表示するため z-index を付ける)。 */
   .home .home-feature-body {
     position: relative;
     z-index: 1;
-    margin-top: -20px;
+    margin-top: -24px;
     padding-top: 0;
+  }
+
+  /* 見出しと本文の折り返しを整える(1語だけが次の行に残る「El miso i el nostre / compromís」のような折り返しを避ける)。
+     文章の内容・文字サイズは変えない。 text-wrap: balance に対応していない古い環境では、これまでどおり。
+     セクションの下の余白は、写真の上端も溶けるようになったぶん、112px → 96px に少し詰める。 */
+  .home .home-feature-title,
+  .home .home-feature-text {
+    text-wrap: balance;
+  }
+
+  .home .home-feature {
+    padding-bottom: 96px;
+  }
+
+  /* ボタン(Veure el producte / Veure els tallers / Veure receptes): 指で押しやすい高さ(44px)にして、文字を少し大きく濃くする。
+     Tallers(最終的な目的の入り口)だけ、文字と枠をさらに濃くして、少し目立たせる。形(丸い枠)・背景は変えない。 */
+  .home .home-feature-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    min-height: 44px;
+    padding: 0 28px;
+    font-size: 0.85rem;
+    color: #4d4640;
+    border-color: #d6d0c6;
+  }
+
+  .home .home-feature--reverse .home-feature-link {
+    color: var(--color-heading);
+    border-color: var(--color-heading);
+  }
+
+  .home .home-feature-link:hover,
+  .home .home-feature-link:focus-visible {
+    color: var(--color-heading);
+    border-color: var(--color-muted);
   }
   /* 「Novetats」: 本文とボタンの間隔が、本文の下の余白(26px)とボタンの上の余白(26px)の足し算で52pxになっていた。
      本文の下の余白をなくし、「Receptes」などと同じ26pxにする。新着情報とフッターの間隔(下の余白)は変えない。 */
@@ -2448,6 +2486,25 @@ a.global-footer-instagram:focus-visible {
 
   .home .home-intro-sub::before {
     margin: 20px auto 16px;
+  }
+}
+/* スマホ(幅599px以下)のメインコピー: 2行にして、欄の見出し(19.2px)より大きくする。
+   1行に収めるために約15%小さくした結果、サイトで一番大事な言葉が、下の見出しや本文より小さくなっていたため。
+   text-wrap: balance で、「Benvinguts al món / de l'umami.」のように2行を均等に分ける
+   (対応していない古い環境でも、2行に折り返されるだけで、崩れない)。日本語は短いので1行のまま。
+   幅600〜639pxは、上の1行のルールのまま。 */
+@media (max-width: 599px) {
+  .home .home-intro-lead,
+  .home:lang(ca) .home-intro-lead,
+  .home:lang(es) .home-intro-lead,
+  .home:lang(en) .home-intro-lead,
+  .home:lang(ja) .home-intro-lead {
+    max-width: none;
+    white-space: normal;
+    text-wrap: balance;
+    letter-spacing: 0.04em;
+    font-size: clamp(1.3rem, 6vw, 1.5rem);
+    line-height: 1.55;
   }
 }
 /* PC・タブレット横向き(幅800px以上): 写真の列を広げ、余白を大きく。左右交互の配置は維持 */
