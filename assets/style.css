@@ -2667,7 +2667,7 @@ a.global-footer-instagram:focus-visible {
     grid-column: 1;
     grid-row: 1;
     order: 0;
-    aspect-ratio: 2.2 / 1;
+    aspect-ratio: 2.1 / 1;
     background: transparent;
     -webkit-mask-image: linear-gradient(to left, transparent 0, #000 30%);
     mask-image: linear-gradient(to left, transparent 0, #000 30%);
@@ -2677,7 +2677,8 @@ a.global-footer-instagram:focus-visible {
     object-position: center 26%;
   }
 
-  /* 味噌の円錐: 先端の上の余白を、できるだけ広く取るため、一番上(0%)に寄せる。元の写真には、先端の上に、上から約7%の余白があり、これが最大。26%だと、先端の上が約2%(約6px)しか残らなかった。 */
+  /* 味噌の円錐: 先端の上の余白を、できるだけ広く取るため、一番上(0%)に寄せる。元の写真(v5)は、先端の上が約7%で、これが限界だったため、
+     写真の上に木目を約6%つなぎ足した写真(v6)に差し替えた。先端の上は約13%になる(1133px幅で約25px → 約50px)。 */
   .home .home-feature .home-feature-media img[src*="home-feature-miso"] {
     object-position: center 0%;
   }
@@ -2711,8 +2712,9 @@ a.global-footer-instagram:focus-visible {
     mask-image: linear-gradient(to right, transparent 0, #000 30%);
   }
 
-  /* 写真の高さは、3枚とも同じ(2.2:1)に統一する。以前は欄ごとに個別に決めていた(El miso 2.2:1 / Receptes 2.15:1 / Tallers 2.3:1)が、
-     並べたときに高さがそろわず、ばらついて見えたため。切り出す位置は、写真ごと(img[src*=...])に決めてある。 */
+  /* 写真の高さは、3枚とも同じ(2.1:1)に統一する。以前は欄ごとに個別に決めていた(El miso 2.2:1 / Receptes 2.15:1 / Tallers 2.3:1)が、
+     並べたときに高さがそろわず、ばらついて見えたため。2.2:1から2.1:1にしたのは、ミソの写真の上に、木目をつなぎ足した(home-feature-miso-v6.jpg。
+     先端の上の余白が広がった)ぶん、お皿の下が切れないようにするため。切り出す位置は、写真ごと(img[src*=...])に決めてある。 */
 
   /* 写真が右の欄(いまは Receptes): 暗い木目の写真なので、文章は、写真の溶けていく端(38%)の手前までに収めて、文字が写真に重ならないようにする。 */
   .home .home-feature--reverse .home-feature-body {
