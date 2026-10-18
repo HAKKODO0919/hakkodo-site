@@ -1552,12 +1552,41 @@ body > main {
 
 .home-hero-sub {
   margin: 0;
-  font-size: clamp(0.58rem, 1.05vw, 0.95rem);
+  font-size: clamp(0.7rem, 1.05vw, 0.95rem);
   line-height: 1.7;
   letter-spacing: 0.16em;
   text-transform: uppercase;
 }
 
+/* ヒーローの印鑑(HAKKODOの落款)。説明文の2行目「Condiment」の右横に、少し傾けて置く(署名のように)。
+   上端は、1行目と2行目の境目にそろえ、文字には一切かけない。印鑑(30px)は2行目の高さより少し高いので、下にわずかにはみ出す。
+   印鑑は、2行目を包む .home-hero-line2 の中にある(翻訳の仕組み data-i18n が書き換えるのは、中の span だけなので、
+   言語を切り替えても、印鑑は消えない)。装飾なので、文字の読み上げには含めない。
+   大きさは、どの画面幅でも30px固定。ヘッダーのHAKKODOのロゴ(文字ロゴ 高さ32px・顔のロゴ 37×43px。画面幅によらず固定)より
+   必ず小さくして、ロゴが何個もあるように見えないようにする(ロゴの大きさを変えるときは、ここも合わせること)。 */
+.home-hero-sub .home-hero-line2 {
+  position: relative;
+  width: fit-content;
+}
+
+.home-hero-seal {
+  --seal-size: 30px;
+  position: absolute;
+  top: 0;
+  left: calc(100% + 12px);
+  width: var(--seal-size);
+  height: auto;
+  margin: 0;
+  transform: rotate(-8deg);
+  pointer-events: none;
+}
+
+/* 幅354px以下の小さい画面では、ヘッダーのロゴも小さくなる(文字ロゴ 高さ30px・顔のロゴ 34×40px)ので、印鑑もそれより小さくする。 */
+@media (max-width: 354px) {
+  .home-hero-seal {
+    --seal-size: 26px;
+  }
+}
 /* PC幅は「Fermentació japonesa」と「Condiment」を2行に分け、「·」は出さない */
 .home-hero-sub span {
   display: block;
