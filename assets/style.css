@@ -2221,7 +2221,8 @@ a.global-footer-instagram:focus-visible {
     align-items: stretch;
     gap: 0;
     margin: 12px 0 0;
-    padding: 0 0 14px calc(100% - 360px);
+    /* 一番下の項目(Contact)の下に余白を足さない。足すと、Contactだけ、下の線までの間隔が広くなり、枠が大きく見えていた */
+    padding: 0 0 0 calc(100% - 360px);
     /* 背景と下の線は、右寄せの幅360pxのパネルの範囲だけ(スマホ幅では下の799px以下の指定で画面の端まで広げる) */
     background:
       linear-gradient(var(--color-border), var(--color-border)) right bottom / 360px 1px no-repeat,
@@ -2291,7 +2292,7 @@ a.global-footer-instagram:focus-visible {
   .has-menu-toggle .global-nav-list {
     margin-right: -20px;
     margin-left: -20px;
-    padding: 0 20px 14px;
+    padding: 0 20px;
     flex-basis: calc(100% + 40px);
     background: var(--color-bg);
     border-bottom: 1px solid var(--color-border);
