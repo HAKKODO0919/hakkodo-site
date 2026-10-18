@@ -2677,6 +2677,11 @@ a.global-footer-instagram:focus-visible {
     object-position: center 26%;
   }
 
+  /* 味噌の円錐: 先端の上の余白を、できるだけ広く取るため、一番上(0%)に寄せる。元の写真には、先端の上に、上から約7%の余白があり、これが最大。26%だと、先端の上が約2%(約6px)しか残らなかった。 */
+  .home .home-feature .home-feature-media img[src*="home-feature-miso"] {
+    object-position: center 0%;
+  }
+
   .home .home-feature .home-feature-media img[src*="home-feature-recipe"] {
     object-position: center 63%;
   }
@@ -2706,17 +2711,8 @@ a.global-footer-instagram:focus-visible {
     mask-image: linear-gradient(to right, transparent 0, #000 30%);
   }
 
-  /* 写真の高さは欄ごとに個別に決めている(横幅は変えず、縦横比だけを変える)。
-     El miso 2.2:1(基本)/ Receptes 2.15:1 / Tallers 2.3:1。
-     並び順や左右ではなく、欄の名前(.home-feature--recipes / .home-feature--workshops)で決めるので、順番を入れ替えても、写真と高さの組み合わせは変わらない。
-     切り出す位置も、写真ごと(img[src*=...])に決めてある。 */
-  .home .home-feature--recipes .home-feature-media {
-    aspect-ratio: 2.15 / 1;
-  }
-
-  .home .home-feature--workshops .home-feature-media {
-    aspect-ratio: 2.3 / 1;
-  }
+  /* 写真の高さは、3枚とも同じ(2.2:1)に統一する。以前は欄ごとに個別に決めていた(El miso 2.2:1 / Receptes 2.15:1 / Tallers 2.3:1)が、
+     並べたときに高さがそろわず、ばらついて見えたため。切り出す位置は、写真ごと(img[src*=...])に決めてある。 */
 
   /* 写真が右の欄(いまは Receptes): 暗い木目の写真なので、文章は、写真の溶けていく端(38%)の手前までに収めて、文字が写真に重ならないようにする。 */
   .home .home-feature--reverse .home-feature-body {
