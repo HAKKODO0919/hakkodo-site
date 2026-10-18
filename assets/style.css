@@ -2389,7 +2389,7 @@ a.global-footer-instagram:focus-visible {
     object-position: center 55%;
   }
 
-  .home .home-feature--reverse .home-feature-media img {
+  .home .home-feature .home-feature-media img[src*="home-feature-workshop"] {
     object-position: center 18%;
   }
 
@@ -2602,10 +2602,10 @@ a.global-footer-instagram:focus-visible {
      - 同じ行に、横長(2:1)の写真と文章を置く。写真は上下を切り出して横長に見せる(引き伸ばしはしない)。
        写真ごとに、被写体(味噌の円錐、手、器と野菜)が残るよう切り出す位置(object-position)を決めている。
      - 写真の文章側の端は、背景色へゆるやかに溶けるようにして(mask)、境目の線や枠を作らない。
-     - 写真が左・文章が右の欄(El miso / Receptes): 写真は左から62%、文章は右の40%。暗い木目の写真なので、
-       文章は写真の溶けていく端のすぐ外から始め、文字が写真に重ならないようにする。
-     - 写真が右・文章が左の欄(Tallers = .home-feature--reverse): 写真の幅は他の2つと同じ62%。明るい写真なので、文章は写真の溶けていく端に近づけて置く。
-     - 左右の並び(El miso=写真左 / Tallers=写真右 / Receptes=写真左)はこれまでどおり。
+     - 写真が左・文章が右の欄(El miso / Tallers): 写真は左から62%、文章は右の40%。El miso は暗い木目の写真なので、
+       文章は写真の溶けていく端のすぐ外から始め、文字が写真に重ならないようにする。Tallers は明るい写真なので、文章を溶けていく端に少し入り込ませる。
+     - 写真が右・文章が左の欄(Receptes = .home-feature--reverse): 写真の幅は同じ62%。暗い木目の写真なので、文章は写真の溶けていく端の手前に収める。
+     - 並びは、ヘッダーのナビと同じ順番(El miso=写真左 / Receptes=写真右 / Tallers=写真左)。
      - スマホ・タブレット縦向き(799px以下)は、この指定の外なので、縦並びのまま変わらない。 */
   .home .home-feature {
     grid-template-columns: 62% 38%;
@@ -2632,6 +2632,10 @@ a.global-footer-instagram:focus-visible {
     object-position: center 63%;
   }
 
+  .home .home-feature .home-feature-media img[src*="home-feature-workshop"] {
+    object-position: center 16%;
+  }
+
   .home .home-feature .home-feature-body {
     grid-column: 1 / 3;
     grid-row: 1;
@@ -2649,25 +2653,32 @@ a.global-footer-instagram:focus-visible {
 
   .home .home-feature--reverse .home-feature-media {
     grid-column: 2;
-    aspect-ratio: 2.3 / 1;
-    -webkit-mask-image: linear-gradient(to right, transparent 0, #000 24%);
-    mask-image: linear-gradient(to right, transparent 0, #000 24%);
-  }
-
-  .home .home-feature--reverse .home-feature-media img {
-    object-position: center 16%;
+    -webkit-mask-image: linear-gradient(to right, transparent 0, #000 30%);
+    mask-image: linear-gradient(to right, transparent 0, #000 30%);
   }
 
   /* 写真の高さは欄ごとに個別に決めている(横幅は変えず、縦横比だけを変える)。
-     El miso 2.2:1(約9%減)/ Tallers 2.3:1(約13%減)/ Receptes 2.15:1(約7%減)。
-     切り出す位置は、それぞれの被写体が残るように合わせてある。 */
-  .home .home-feature--reverse + .home-feature .home-feature-media {
+     El miso 2.2:1(基本)/ Receptes 2.15:1 / Tallers 2.3:1。
+     並び順や左右ではなく、欄の名前(.home-feature--recipes / .home-feature--workshops)で決めるので、順番を入れ替えても、写真と高さの組み合わせは変わらない。
+     切り出す位置も、写真ごと(img[src*=...])に決めてある。 */
+  .home .home-feature--recipes .home-feature-media {
     aspect-ratio: 2.15 / 1;
   }
 
+  .home .home-feature--workshops .home-feature-media {
+    aspect-ratio: 2.3 / 1;
+  }
+
+  /* 写真が右の欄(いまは Receptes): 暗い木目の写真なので、文章は、写真の溶けていく端(38%)の手前までに収めて、文字が写真に重ならないようにする。 */
   .home .home-feature--reverse .home-feature-body {
     justify-self: start;
-    max-width: 42%;
+    max-width: 36%;
+    padding-left: 0;
+  }
+
+  /* Tallers(写真が左): 明るい写真なので、文章を、写真の溶けていく端に少し入り込ませる(これまでのTallersと同じ雰囲気)。 */
+  .home .home-feature--workshops .home-feature-body {
+    max-width: 44%;
     padding-left: 0;
   }
 
