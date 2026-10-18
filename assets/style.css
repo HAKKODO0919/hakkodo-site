@@ -2376,7 +2376,7 @@ a.global-footer-instagram:focus-visible {
   }
 
   /* ボタン(Veure el producte / Veure els tallers / Veure receptes): 指で押しやすい高さ(44px)にして、文字を少し大きく濃くする。
-     Tallers(最終的な目的の入り口)だけ、文字と枠をさらに濃くして、少し目立たせる。形(丸い枠)・背景は変えない。 */
+     3つのボタン(El miso / Tallers / Receptes)は、同じ見た目にそろえる。形(丸い枠)・背景は変えない。 */
   .home .home-feature-link {
     display: inline-flex;
     align-items: center;
@@ -2387,11 +2387,6 @@ a.global-footer-instagram:focus-visible {
     font-size: 0.85rem;
     color: #4d4640;
     border-color: #d6d0c6;
-  }
-
-  .home .home-feature--reverse .home-feature-link {
-    color: var(--color-heading);
-    border-color: var(--color-heading);
   }
 
   .home .home-feature-link:hover,
