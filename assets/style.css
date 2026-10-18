@@ -2664,22 +2664,12 @@ a.global-footer-instagram:focus-visible {
   transition-delay: 0.15s;
 }
 
-/* スマホ・タブレット(幅799px以下、または指で操作する端末)だけ、指で素早くスクロールしても自然に見えるよう、
-   動きを少し小さく・短くする(マウスで操作するPCは上のまま。assets/reveal.js の条件と同じにしておくこと)。will-change は、写真の描画を事前に準備させ、
-   現れる瞬間に一瞬途切れて見えるのを防ぐためのもの。 */
+/* スマホ・タブレット(幅799px以下、または指で操作する端末)でも、動きの強さ(距離24px・長さ0.9秒)はPCと同じ。
+   この幅では、assets/reveal.js が、写真と文章を含むセクション(.home-feature)全体を1つの塊として動かす(条件は reveal.js と同じにしておくこと)。
+   will-change は、描画を事前に準備させ、現れる瞬間に一瞬途切れて見えるのを防ぐためのもの。 */
 @media (max-width: 799px), (pointer: coarse) {
   .reveal {
-    transform: translateY(16px);
-    transition-duration: 0.7s;
     will-change: opacity, transform;
-  }
-
-  .reveal.is-visible {
-    transform: none;
-  }
-
-  .home-feature-body.reveal {
-    transition-delay: 0.1s;
   }
 }
 
