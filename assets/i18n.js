@@ -57,6 +57,9 @@ function langFlagHtml(code) {
 const UI_STRINGS = {
   ja: {
     homeIntroTagline: "Japanese Food\nMiso / Fermentation",
+    homeHeroSub1: "Japanese fermentation",
+    homeHeroSub2: "Condiment",
+    homeIntroSub: "味わいの、その先に。",
     titleSuffix: "商品情報",
     topTitle: "商品一覧",
     topIntro: "気になる商品を選んでください",
@@ -131,6 +134,9 @@ const UI_STRINGS = {
   },
   ca: {
     homeIntroTagline: "Cuina Japonesa\nMiso / Fermentació",
+    homeHeroSub1: "Fermentació japonesa",
+    homeHeroSub2: "Condiment",
+    homeIntroSub: "Més enllà del sabor.",
     titleSuffix: "Informació del producte",
     topTitle: "Llista de productes",
     topIntro: "Un producte per descobrir.",
@@ -205,6 +211,9 @@ const UI_STRINGS = {
   },
   es: {
     homeIntroTagline: "Cocina Japonesa\nMiso / Fermentación",
+    homeHeroSub1: "Fermentación japonesa",
+    homeHeroSub2: "Condimento",
+    homeIntroSub: "Más allá del sabor.",
     titleSuffix: "Información del producto",
     topTitle: "Lista de productos",
     topIntro: "Un producto por descubrir.",
@@ -279,6 +288,9 @@ const UI_STRINGS = {
   },
   en: {
     homeIntroTagline: "Japanese Cuisine\nMiso / Fermentation",
+    homeHeroSub1: "Japanese fermentation",
+    homeHeroSub2: "Condiment",
+    homeIntroSub: "Beyond flavor.",
     titleSuffix: "Product Information",
     topTitle: "Product List",
     topIntro: "Choose a product you're interested in",
