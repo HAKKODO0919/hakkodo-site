@@ -1926,12 +1926,39 @@ a.global-footer-instagram:focus-visible {
   padding: 0;
 }
 
-/* 見出し「Story」は、トップページの見出し(.home-feature-title)と同じ書体・大きさ・字間・色にする。 */
+/* 見出し「Sobre」(ストーリーページ)は、トップページの見出し(.home .home-feature-title)と
+   同じ書体・太さ・大きさ・字間・行間・色にする(レシピ一覧ページの見出しと同じ値)。
+   スマホは 1.2rem・字間0.16em、PC(800px以上)は 1.35rem・字間0.18em
+   (トップの見出しの大きさ・字間を変えるときは、ここと、レシピ一覧ページの見出しも合わせること)。 */
 .story-page .intro h1 {
   font-family: "Shippori Mincho", serif;
-  font-size: 1.5rem;
-  letter-spacing: 0.12em;
+  font-size: 1.2rem;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  line-height: 1.5;
   color: var(--color-heading);
+}
+
+@media (min-width: 800px) {
+  .story-page .intro h1 {
+    font-size: 1.35rem;
+    letter-spacing: 0.18em;
+  }
+}
+
+/* 見出しの下の「HAKKODO ― 発酵道」。見出しを軽く小さくしたので、これも、トップの紹介欄のサブコピー(.home-intro-sub)と
+   同じ、小さく・字間を広く・落ち着いた色にして、見出しに静かに添える(見出しより目立たせない)。 */
+.story-page .intro p {
+  font-size: 0.82rem;
+  line-height: 1.9;
+  letter-spacing: 0.2em;
+  color: #555;
+}
+
+@media (min-width: 800px) {
+  .story-page .intro p {
+    font-size: 0.88rem;
+  }
 }
 .story-page .home-feature-text {
   margin: 0 auto 1.9em;
