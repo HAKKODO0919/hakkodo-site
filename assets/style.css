@@ -1195,13 +1195,24 @@ body > main {
   font-size: 1.4rem;
 }
 
-/* レシピ一覧ページの見出し。トップページの「Recipes」の見出し(.home-feature-title)と
-   同じ書体・大きさ・字間・色にする(他のページの .intro h1 は変えない)。 */
+/* レシピ一覧ページの見出し。トップページの「Receptes」の見出し(.home .home-feature-title)と
+   同じ書体・太さ・大きさ・字間・行間・色にする(他のページの .intro h1 は変えない)。
+   トップの見出しは、スマホは 1.2rem・字間0.16em、PC(800px以上)は 1.35rem・字間0.18em なので、ここも同じ値にしてある
+   (トップの見出しの大きさ・字間を変えるときは、ここも合わせること)。 */
 .intro h1[data-i18n="recipesTitle"] {
   font-family: "Shippori Mincho", serif;
-  font-size: 1.5rem;
-  letter-spacing: 0.12em;
+  font-size: 1.2rem;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  line-height: 1.5;
   color: var(--color-heading);
+}
+
+@media (min-width: 800px) {
+  .intro h1[data-i18n="recipesTitle"] {
+    font-size: 1.35rem;
+    letter-spacing: 0.18em;
+  }
 }
 .intro p {
   margin: 0;
