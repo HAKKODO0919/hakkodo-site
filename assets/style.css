@@ -471,6 +471,22 @@ body > main {
   display: inline-block;
 }
 
+.product-name-brand {
+  white-space: nowrap;
+}
+
+/* スマホ幅(599px以下)では、商品名(HAKKODO MISO)と種類(熟成赤味噌)が2行に分かれて並ぶため、間の「｜」は隠す。
+   1行に収まる幅でも、商品名と種類がくっつかないよう、商品名のあとに少し空ける。PC・タブレット(600px以上)は、これまでどおり「｜」を表示する。 */
+@media (max-width: 599px) {
+  .product-name-sep {
+    display: none;
+  }
+
+  .product-name-brand {
+    margin-right: 0.5em;
+  }
+}
+
 .product-detail-head {
   padding-bottom: 30px;
 }
@@ -2745,4 +2761,227 @@ a.global-footer-instagram:focus-visible {
     transform: none;
     transition: none;
   }
+}
+
+/* ---- 商品ページ(#product-root)を、トップページの雰囲気につなぐ ----
+   トップページの見出し(明朝・細め・字間広め)、ゆったりした余白、中央に置いた短い文章、
+   写真の下端が背景に溶ける見せ方に合わせる。文章の内容・順番は変えない。
+   #product-root は商品ページ(products/*)だけにあるので、レシピ・About・トップには影響しない。
+   (スクロール時のフェードインは assets/product.js が assets/reveal.js を呼んで付ける。戻すときは、このブロックを消す) */
+
+/* 写真: 下端を背景へゆるやかに溶かし、商品名を、溶けた部分に24pxだけ重ねる(トップページのスマホ版と同じ) */
+#product-root .product-hero-frame .hero {
+  -webkit-mask-image: linear-gradient(to bottom, #000 0, #000 55%, rgba(0, 0, 0, 0.86) 66%, rgba(0, 0, 0, 0.62) 76%, rgba(0, 0, 0, 0.36) 86%, rgba(0, 0, 0, 0.12) 94%, transparent 100%);
+  mask-image: linear-gradient(to bottom, #000 0, #000 55%, rgba(0, 0, 0, 0.86) 66%, rgba(0, 0, 0, 0.62) 76%, rgba(0, 0, 0, 0.36) 86%, rgba(0, 0, 0, 0.12) 94%, transparent 100%);
+}
+
+/* 商品名・キャッチコピー・値段・ボタン: 中央にそろえ、見出しは明朝で細め・字間広めにする */
+#product-root .product-detail-head {
+  position: relative;
+  z-index: 1;
+  margin-top: -24px;
+  padding: 0 24px 36px;
+  text-align: center;
+}
+
+#product-root .product-detail-head h1 {
+  margin: 0 0 12px;
+  font-family: "Shippori Mincho", serif;
+  font-weight: 500;
+  font-size: 1.45rem;
+  line-height: 1.5;
+  letter-spacing: 0.1em;
+  color: var(--color-heading);
+  text-wrap: balance;
+}
+
+#product-root .product-catchphrase {
+  margin: 0 0 8px;
+  font-family: "Shippori Mincho", serif;
+  font-weight: 500;
+  font-size: 1.05rem;
+  line-height: 1.75;
+  letter-spacing: 0.04em;
+  text-wrap: balance;
+}
+
+#product-root .product-detail-head .tagline {
+  max-width: 30em;
+  margin: 0 auto;
+  font-size: 0.94rem;
+  line-height: 1.85;
+  text-wrap: balance;
+}
+
+/* 値段: 塗りつぶしをやめ、細い枠にして、サイト全体の静かなトーンに合わせる(色は今までのアクセント色のまま) */
+#product-root .price-row {
+  justify-content: center;
+  margin-top: 18px;
+}
+
+#product-root .price {
+  background: transparent;
+  border: 1px solid var(--color-accent);
+  color: var(--color-accent);
+  padding: 3px 14px;
+}
+
+#product-root .product-detail-head .recipe-link {
+  margin-top: 22px;
+}
+
+/* 各セクションの見出し(こだわり・原材料・保存方法・賞味期限・作り手について): トップページの見出しと同じ表情 */
+#product-root .section {
+  padding: 56px 24px;
+}
+
+#product-root .section h2 {
+  margin: 0 0 28px;
+  font-family: "Shippori Mincho", serif;
+  font-weight: 500;
+  font-size: 1.2rem;
+  letter-spacing: 0.16em;
+  line-height: 1.5;
+  color: var(--color-accent);
+  text-align: center;
+}
+
+/* こだわり: 4つの項目を、余白で区切った短い塊として、中央に置く。
+   太字(700)の続く文章が「ずらっと」並ぶ印象を弱めるため、太さは500にして、行間を広げる(強調の文は残す)。 */
+#product-root .story-section {
+  padding-bottom: 24px;
+}
+
+#product-root .story-block {
+  max-width: 30em;
+  margin: 0 auto 56px;
+  text-align: left;
+}
+
+#product-root .story-block:last-of-type {
+  margin-bottom: 24px;
+}
+
+#product-root .story-block h3 {
+  margin: 0 0 16px;
+  font-family: "Shippori Mincho", serif;
+  font-weight: 700;
+  font-size: 1.05rem;
+  letter-spacing: 0.08em;
+  line-height: 1.7;
+  color: var(--color-accent);
+}
+
+#product-root .story-emphasis,
+#product-root .story-block p {
+  font-size: 0.98rem;
+  font-weight: 500;
+  line-height: 2.05;
+  margin: 0 0 0.5em;
+  color: var(--color-text);
+  text-wrap: pretty;
+}
+
+#product-root .story-block p strong {
+  font-weight: 700;
+}
+
+#product-root .story-block p:last-child {
+  margin-bottom: 0;
+}
+
+/* 原材料の写真: 余白を広く */
+#product-root .gallery-section {
+  padding-top: 24px;
+  padding-bottom: 24px;
+}
+
+/* 原材料・保存方法・賞味期限: 確認のための情報なので、見出しも本文も左そろえにして、縦に拾いやすくする */
+#product-root .ingredients-section h2,
+#product-root .storage-info h2,
+#product-root .best-before h2 {
+  text-align: left;
+  /* アクセント色は「こだわり」(商品の核心)だけに使う。確認のための情報の見出しは、黒に近い色にして静かにする */
+  color: var(--color-heading);
+  /* 「こだわり」の大きな見出しとの差を、色だけでなく大きさでも付ける: 小さなラベルのような見出しにする */
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  margin-bottom: 14px;
+}
+
+#product-root .tag-list {
+  padding-top: 0;
+}
+
+/* 保存方法・賞味期限の、見出しの下の太字の文: 見出し(約15px)や本文(約14px)より大きく見えないよう、0.95rem(約15px)にそろえる。
+   以前は1.05〜1.1remで、見出しを小さくしたあと、文のほうが大きく見えていた */
+#product-root .storage-info .notes-strong,
+#product-root .best-before .notes-strong {
+  font-size: 0.95rem;
+  line-height: 1.9;
+}
+
+#product-root .storage-info .notes,
+#product-root .best-before .notes {
+  line-height: 2;
+}
+
+#product-root .ingredients-section .notes {
+  margin: 14px 0 0;
+}
+
+#product-root .storage-info,
+#product-root .best-before {
+  padding-top: 24px;
+  padding-bottom: 24px;
+}
+
+/* 「作り手について」は、「こだわり」の直後に置く(物語がそのまま続く)。ここには区切り線を引かず、余白だけでつなぐ */
+#product-root .creator-outer {
+  border-top: none;
+  padding-top: 24px;
+  padding-bottom: 24px;
+}
+
+/* 「作り手について」の見出し */
+#product-root .creator-outer h2 {
+  /* 「こだわり」から続く物語の一部なので、アクセント色(価格・「こだわり」と同じ色)にする */
+  color: var(--color-accent);
+  /* 原材料・保存方法・賞味期限の見出しと同じ、小さなラベルのような大きさにそろえる(位置だけ、カードの中の中央) */
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+}
+
+/* スマホ(幅599px以下): 写真を、トップページと同じ横長(1.6:1)にする */
+@media (max-width: 599px) {
+  #product-root .product-hero-frame .hero {
+    aspect-ratio: 1.6 / 1;
+  }
+
+  #product-root .product-detail-head h1 {
+    font-size: 1.3rem;
+  }
+}
+
+/* アクセント色を、ほんの少し濃く(#b5651d → #a85a14)。背景との差(コントラスト比)が約4.1対1から約4.8対1になり、小さい文字(値段・①〜④の見出し)も読みやすくなる。
+   商品ページ(#product-root)の中だけに効かせる。サイト全体に広げるときは、:root の --color-accent を変える。 */
+#product-root {
+  --color-accent: #a85a14;
+}
+
+/* ページの終わりの「HAKKODOについて」ボタン。「レシピを見る」と同じ、小さな枠のボタンを、中央に置く */
+#product-root .product-about {
+  border-top: none;
+  padding: 40px 24px 8px;
+  text-align: center;
+}
+
+#product-root .product-about .recipe-link {
+  margin: 0;
+}
+
+#product-root .product-about .home-feature-link {
+  margin-top: 0;
 }

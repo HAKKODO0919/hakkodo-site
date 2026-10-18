@@ -90,7 +90,9 @@ function renderProductNameHtml(name) {
   const text = name || "";
   const sep = text.indexOf("｜");
   if (sep < 0) return escapeText(text);
-  return `${escapeText(text.slice(0, sep + 1))}<span class="product-name-type">${escapeText(text.slice(sep + 1))}</span>`;
+  // 「HAKKODO MISO｜」は途中で折り返さない(「｜」だけが次の行の先頭に残らないように)。
+  // 「｜」だけを別の要素(.product-name-sep)にして、スマホ幅では、CSSで隠せるようにする(商品名と種類が2行に分かれるため、線は要らない)。
+  return `<span class="product-name-brand">${escapeText(text.slice(0, sep))}<span class="product-name-sep">${escapeText(text.charAt(sep))}</span></span><span class="product-name-type">${escapeText(text.slice(sep + 1))}</span>`;
 }
 
 // 商品ページの中身を、指定した言語で描画する
@@ -188,6 +190,11 @@ function renderProductContent(data, siteRoot, lang) {
       </div>`
     : "";
 
+  // ページの終わりの「次の行き先」。読み終えた人が、作り手の話(About)へ進めるようにする。
+  const aboutHtml = `<div class="section product-about">
+        <p class="recipe-link"><a href="${escapeHtml(pageLinkRoot(siteRoot))}story/index.html" class="home-feature-link">${escapeText(t("viewAboutLink", lang))}</a></p>
+      </div>`;
+
   const notesHtml = tr.notes
     ? `<div class="section">
         <h2>${t("sectionNotes", lang)}</h2>
@@ -217,13 +224,20 @@ function renderProductContent(data, siteRoot, lang) {
     </div>
     ${tr.description ? `<div class="section description"><h2>${t("sectionDescription", lang)}</h2><p>${escapeText(tr.description)}</p></div>` : ""}
     ${storyHtml}
+    ${creatorHtml}
     ${galleryHtml}
     ${ingredientsHtml}
     ${storageHtml}
     ${bestBeforeHtml}
-    ${creatorHtml}
     ${notesHtml}
+    ${aboutHtml}
   `;
+  // トップページと同じ、スクロールに合わせた控えめなフェードイン(assets/reveal.js)。
+  // 最初から画面に見えている部分(写真・商品名)は動かさず、下の欄だけが、画面に入るときに現れる。
+  // reveal.js を読み込んでいないページでは何もしない(言語を切り替えて描き直したときも、ここで仕掛け直す)。
+  if (typeof initReveal === "function") {
+    initReveal(".product-detail-head, .story-block, .gallery-section, .ingredients-section, .storage-info, .best-before, .creator-outer, .product-about");
+  }
 }
 
 // 商品ページの初期化。言語切り替えUIを設置し、切り替え時に再描画する。
