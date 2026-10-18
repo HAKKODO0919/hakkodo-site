@@ -2796,18 +2796,21 @@ a.global-footer-instagram:focus-visible {
   margin: 0 0 12px;
   font-family: "Shippori Mincho", serif;
   font-weight: 500;
-  font-size: 1.45rem;
+  /* 大きさは、Aboutやレシピ一覧などのページ見出し(.story-page .intro h1)と同じ(スマホ1.2rem・PC 1.35rem)にそろえる。
+     字間は、Aboutの見出し(0.16em)に近づけて 0.12em にする(広げすぎると、商品名が2行に折り返しやすくなるため、中間の値)。 */
+  font-size: 1.2rem;
   line-height: 1.5;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.12em;
   color: var(--color-heading);
   text-wrap: balance;
 }
 
+/* キャッチコピーは、商品名(約19px)との差がはっきり出るよう、0.95rem(約15px)にする(以前は1.05rem=約17px。商品名を小さくして差が約2pxに縮まっていた) */
 #product-root .product-catchphrase {
   margin: 0 0 8px;
   font-family: "Shippori Mincho", serif;
   font-weight: 500;
-  font-size: 1.05rem;
+  font-size: 0.95rem;
   line-height: 1.75;
   letter-spacing: 0.04em;
   text-wrap: balance;
@@ -2974,9 +2977,11 @@ a.global-footer-instagram:focus-visible {
   #product-root .product-hero-frame .hero {
     aspect-ratio: 1.6 / 1;
   }
+}
 
+@media (min-width: 800px) {
   #product-root .product-detail-head h1 {
-    font-size: 1.3rem;
+    font-size: 1.35rem;
   }
 }
 
@@ -3047,4 +3052,45 @@ a.global-footer-instagram:focus-visible {
     margin-top: -24px;
     padding-top: 0;
   }
+}
+
+/* ---- STORYページ(About): 写真を一番上に置く(商品ページの写真と同じ見せ方) ----
+   data/story.js の image.afterParagraph が 0 のとき、assets/story.js が .story-hero を見出しの前に置く
+   (1以上なら、これまでどおり、その段落の直後に .recipe-hero で入る)。
+   写真は本文の左右の余白(20px)ぶん広げて、画面(.pageの640px幅)の端まで出し、下の端を背景へゆるやかに溶かして、
+   見出しを、溶けた部分に24pxだけ重ねる。高さは、写真そのものの縦横比(約2.1:1の横長の風景)にそろえて、全画面幅で2.1:1にする。
+   (商品ページの写真は16:9・スマホ1.6:1だが、この写真は横に長い風景なので、同じ高さにすると、見出しの「About」が下がって間延びしたため、短くした。
+   下の端の溶け方・見出しの24pxの重なり・上の余白は、商品ページと同じ。)
+   元に戻すときは、data/story.js の afterParagraph を 3 にする(このブロックは残しても、何も起きない)。 */
+.story-page .story-hero {
+  margin: 0 -20px;
+  aspect-ratio: 2.1 / 1;
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(to bottom, #000 0, #000 55%, rgba(0, 0, 0, 0.86) 66%, rgba(0, 0, 0, 0.62) 76%, rgba(0, 0, 0, 0.36) 86%, rgba(0, 0, 0, 0.12) 94%, transparent 100%);
+  mask-image: linear-gradient(to bottom, #000 0, #000 55%, rgba(0, 0, 0, 0.86) 66%, rgba(0, 0, 0, 0.62) 76%, rgba(0, 0, 0, 0.36) 86%, rgba(0, 0, 0, 0.12) 94%, transparent 100%);
+}
+
+.story-page .story-hero img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 30%;
+}
+
+.story-page .story-hero + .intro {
+  position: relative;
+  z-index: 1;
+  margin-top: -24px;
+}
+
+/* 日本語のキャッチコピー・説明文は、言葉の途中(「時間」の「時／間」など)で改行しない。
+   word-break: keep-all で、漢字・かなの間では改行せず、読点(、)や句点(。)の位置で折り返す
+   (「米麹を贅沢に使い、／じっくり時間をかけて熟成させました。」のように、意味のまとまりで切れる)。
+   途中に読点がなく、1行に収まらないほど長いときは、overflow-wrap で、はみ出さずに折り返す。
+   assets/product.js が、これらの要素に lang 属性(ja / ca / es / en)を付けているので、日本語のときだけ効く。 */
+#product-root .product-catchphrase:lang(ja),
+#product-root .product-detail-head .tagline:lang(ja) {
+  word-break: keep-all;
+  overflow-wrap: break-word;
 }

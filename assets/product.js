@@ -217,7 +217,7 @@ function renderProductContent(data, siteRoot, lang) {
     <div class="product-head product-detail-head">
       <h1>${renderProductNameHtml(tr.name)}</h1>
       ${tr.descriptionLine1 || tr.descriptionLine2
-        ? `${tr.descriptionLine1 ? `<p class="product-catchphrase">${escapeText(tr.descriptionLine1)}</p>` : ""}${tr.descriptionLine2 ? `<p class="tagline">${escapeText(tr.descriptionLine2)}</p>` : ""}`
+        ? `${tr.descriptionLine1 ? `<p class="product-catchphrase" lang="${lang}">${escapeText(tr.descriptionLine1)}</p>` : ""}${tr.descriptionLine2 ? `<p class="tagline" lang="${lang}">${escapeText(tr.descriptionLine2)}</p>` : ""}`
         : tr.tagline ? `<p class="tagline">${escapeText(tr.tagline)}</p>` : ""}
       ${(priceHtml || netWeightHtml) ? `<div class="price-row">${priceHtml}${netWeightHtml}</div>` : ""}
       <p class="recipe-link"><a href="${escapeHtml(pageLinkRoot(siteRoot))}recipes/index.html" class="home-feature-link">${escapeHtml(t("viewRecipesLink", lang))}</a></p>
