@@ -225,8 +225,8 @@ function renderProductContent(data, siteRoot, lang) {
     ${tr.description ? `<div class="section description"><h2>${t("sectionDescription", lang)}</h2><p>${escapeText(tr.description)}</p></div>` : ""}
     ${storyHtml}
     ${creatorHtml}
-    ${galleryHtml}
     ${ingredientsHtml}
+    ${galleryHtml}
     ${storageHtml}
     ${bestBeforeHtml}
     ${notesHtml}

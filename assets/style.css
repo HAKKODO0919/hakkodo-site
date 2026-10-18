@@ -2890,9 +2890,16 @@ a.global-footer-instagram:focus-visible {
   margin-bottom: 0;
 }
 
-/* 原材料の写真: 余白を広く */
+/* 原材料(見出し・タグ・アレルギー)が、物語(こだわり・作り手)から確認用の情報へ移る境目。細い区切り線を引く。
+   その下の3枚の写真(お米・大豆・塩)は、原材料の様子を見せるものとして、原材料のすぐ後ろに続ける */
+#product-root .ingredients-section {
+  border-top: 1px solid var(--color-border);
+  padding-top: 56px;
+  padding-bottom: 24px;
+}
+
 #product-root .gallery-section {
-  padding-top: 24px;
+  padding-top: 8px;
   padding-bottom: 24px;
 }
 
@@ -2941,7 +2948,7 @@ a.global-footer-instagram:focus-visible {
 #product-root .creator-outer {
   border-top: none;
   padding-top: 24px;
-  padding-bottom: 24px;
+  padding-bottom: 56px;
 }
 
 /* 「作り手について」の見出し */
