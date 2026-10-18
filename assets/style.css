@@ -3011,6 +3011,26 @@ a.global-footer-instagram:focus-visible {
    写真は4:3のまま。下端を、なめらかな曲線(smoothstep)で、62%から100%まで段階的に透明にし(スマホは48%から。
    4:3はスマホの1.6:1より縦に長いので、溶ける長さを、写真全体に対する割合で、少し短くしてある)、
    見出しを、溶けた部分に24pxだけ重ねる。上端は、スマホと同じく、くっきりした直線のまま。 */
+/* 写真の高さ: 4:3のままだと、iPad miniの縦向き(幅744px)で約565pxと、画面の半分近くを占めて大きすぎた。
+   スマホ(1.6:1)に近い横長の16:9にして(744pxで約418px)、被写体が残るよう、スマホと同じ切り出し位置にする。 */
+@media (min-width: 600px) and (max-width: 799px) {
+  .home .home-feature-media {
+    aspect-ratio: 16 / 9;
+  }
+
+  .home .home-feature .home-feature-media img {
+    object-position: center 32%;
+  }
+
+  .home .home-feature .home-feature-media img[src*="home-feature-recipe"] {
+    object-position: center 55%;
+  }
+
+  .home .home-feature .home-feature-media img[src*="home-feature-workshop"] {
+    object-position: center 18%;
+  }
+}
+
 @media (min-width: 600px) and (max-width: 799px) {
   .home .home-feature-media {
     background: transparent;
