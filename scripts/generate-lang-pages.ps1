@@ -10,6 +10,11 @@ $ErrorActionPreference = "Stop"
 $utf8 = New-Object System.Text.UTF8Encoding($false)
 $root = Split-Path -Parent $PSScriptRoot
 $cfg = [System.IO.File]::ReadAllText((Join-Path $PSScriptRoot "lang-pages.json"), $utf8) | ConvertFrom-Json
+# Pages listed in "hiddenPages" (lang-pages.json) are kept out of search: a noindex meta is added
+# to each generated language page, and the page is left out of sitemap.xml.
+# To publish such a page again, remove it from "hiddenPages" and regenerate.
+$hiddenPages = @()
+if ($cfg.hiddenPages) { $hiddenPages = @($cfg.hiddenPages) }
 
 function Escape-Attr([string]$s) {
   return $s.Replace("&", "&amp;").Replace('"', "&quot;").Replace("<", "&lt;").Replace(">", "&gt;")
@@ -55,6 +60,7 @@ foreach ($pageProp in $cfg.pages.PSObject.Properties) {
     $seo = New-Object System.Collections.Generic.List[string]
     $seo.Add('<meta name="description" content="' + (Escape-Attr $meta.description) + '">')
     $seo.Add('<link rel="canonical" href="' + $cfg.siteUrl + "/" + $lang + $urlPath + '">')
+    if ($hiddenPages -contains $page) { $seo.Add('<meta name="robots" content="noindex">') }
     foreach ($a in $alt) { $seo.Add($a) }
     $seo.Add('<script>window.PAGE_LANG = "' + $lang + '";</script>')
     $seoText = ($seo -join "`n") + "`n"
@@ -91,6 +97,7 @@ $sm.Add('<?xml version="1.0" encoding="UTF-8"?>')
 $sm.Add('<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">')
 $urlCount = 0
 foreach ($pageProp in $cfg.pages.PSObject.Properties) {
+  if ($hiddenPages -contains $pageProp.Name) { continue }
   $urlPath = Get-UrlPath $pageProp.Name
   foreach ($lang in $cfg.langs) {
     $sm.Add('  <url>')

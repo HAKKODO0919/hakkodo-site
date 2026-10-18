@@ -279,7 +279,35 @@ window.PRODUCT_DATA = {
 3. 同じページの `initNewsList([...])` の配列に
    `window.NEWS_DATA` を1件追加する
 
-## 言語切り替えの仕組み
+**ニュースを載せるまでの間は、入り口を出していません(現在の状態)**
+
+掲載できる内容が決まるまで、次の2か所を隠しています。`news/` ページとデータは残してあります。
+最初のお知らせを載せるときに、次の2つを元に戻してください。
+
+- `assets/nav.js` の `NAV_ITEMS` にある `news` の行の先頭の `//` を外す(ヘッダー・メニューに News が出る)
+- トップページ(`index.html`、`ca/` `es/` `en/` `ja/` の各 `index.html`)の `<section class="home-news" hidden>` から `hidden` を外す(トップに「新着情報」が出る)
+
+**【忘れずに】検索に出ない設定も、ニュースを載せるときに戻してください**
+
+準備中のページが検索結果に出ないよう、次の2つも設定しています。ニュースを公開するときは、これも元に戻さないと、
+ニュースが検索に出てきません。
+
+- `ca/news/index.html` `es/news/index.html` `en/news/index.html` `ja/news/index.html` の
+  `<meta name="robots" content="noindex">` の1行を、4ページとも削除する
+- `sitemap.xml` に、ニュース4言語ぶん(`/ca/news/` `/es/news/` `/en/news/` `/ja/news/`)の `<url>` を戻す
+  (削除前の内容は、Gitの履歴で確認できます)
+- あわせて、`scripts/lang-pages.json` の `"hiddenPages"` から `"news/index.html"` を消す
+  (生成の仕組みが、再生成のたびに noindex を付け直したり、サイトマップから外したりしなくなる)
+
+いちばん確実なのは、この「ニュースを隠す」変更をまとめたコミットを `git revert` で取り消す方法です
+(ナビ・トップ・検索の3つがまとめて元に戻ります)。
+
+**【注意】`scripts/generate-lang-pages.ps1` を、そのまま全体に再実行しないでください**
+
+es / en / ja のトップページ(`es/index.html` など)にある、ヒーローの文字
+(Fermentación japonesa など)と、サブコピー(Más allá del sabor. など)の訳は、各言語のページに直接書いてあります。
+元の `index.html` はカタルーニャ語なので、再生成すると、この訳がカタルーニャ語に上書きされます。
+再生成したいときは、先に、この文言を `scripts/lang-pages.json` から差し込む形に直してください。## 言語切り替えの仕組み
 
 各ページ右上に言語選択メニューが表示され、選んだ言語は端末に記憶されます
 (次に別の商品ページを開いたときも同じ言語で表示されます)。

@@ -22,7 +22,9 @@ const NAV_ITEMS = [
   // その中の「開催スケジュールを見る」ボタンからスケジュール
   // (workshops/schedule/index.html)へ進む、2段階の導線にする。
   { key: "workshops", href: "workshops/index.html", i18nKey: "navWorkshops" },
-  { key: "news", href: "news/index.html", i18nKey: "navNews" },
+  // 新着情報(News)は、掲載できる内容が決まるまで、ヘッダー・メニューに出さない。
+  // ニュースを載せるときは、次の行の先頭の「//」を外すだけで元に戻る(ページ news/ とデータ data/news/ は残してある)。
+  // { key: "news", href: "news/index.html", i18nKey: "navNews" },
   // About(ブランドの考え方。URLは story/ のまま)。「お問い合わせ」の前に置く。
   // fallback: i18n.js が古いキャッシュのままでも、翻訳キー名(navStory)が
   // そのまま画面に出ないようにするための代わりの表示文字。

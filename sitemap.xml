@@ -65,38 +65,6 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://hakkodo.cat/ca/workshops/"/>
   </url>
   <url>
-    <loc>https://hakkodo.cat/ca/news/</loc>
-    <xhtml:link rel="alternate" hreflang="ca" href="https://hakkodo.cat/ca/news/"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://hakkodo.cat/es/news/"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://hakkodo.cat/en/news/"/>
-    <xhtml:link rel="alternate" hreflang="ja" href="https://hakkodo.cat/ja/news/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://hakkodo.cat/ca/news/"/>
-  </url>
-  <url>
-    <loc>https://hakkodo.cat/es/news/</loc>
-    <xhtml:link rel="alternate" hreflang="ca" href="https://hakkodo.cat/ca/news/"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://hakkodo.cat/es/news/"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://hakkodo.cat/en/news/"/>
-    <xhtml:link rel="alternate" hreflang="ja" href="https://hakkodo.cat/ja/news/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://hakkodo.cat/ca/news/"/>
-  </url>
-  <url>
-    <loc>https://hakkodo.cat/en/news/</loc>
-    <xhtml:link rel="alternate" hreflang="ca" href="https://hakkodo.cat/ca/news/"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://hakkodo.cat/es/news/"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://hakkodo.cat/en/news/"/>
-    <xhtml:link rel="alternate" hreflang="ja" href="https://hakkodo.cat/ja/news/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://hakkodo.cat/ca/news/"/>
-  </url>
-  <url>
-    <loc>https://hakkodo.cat/ja/news/</loc>
-    <xhtml:link rel="alternate" hreflang="ca" href="https://hakkodo.cat/ca/news/"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://hakkodo.cat/es/news/"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://hakkodo.cat/en/news/"/>
-    <xhtml:link rel="alternate" hreflang="ja" href="https://hakkodo.cat/ja/news/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://hakkodo.cat/ca/news/"/>
-  </url>
-  <url>
     <loc>https://hakkodo.cat/ca/contact/</loc>
     <xhtml:link rel="alternate" hreflang="ca" href="https://hakkodo.cat/ca/contact/"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://hakkodo.cat/es/contact/"/>

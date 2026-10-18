@@ -2,6 +2,8 @@
   "siteUrl": "https://hakkodo.cat",
   "defaultLang": "ca",
   "langs": ["ca", "es", "en", "ja"],
+  "hiddenPagesNote": "hiddenPages に書いたページは、検索に出ない設定(noindex)が付き、sitemap.xml にも載りません。公開するときは、ここから外して再生成してください。",
+  "hiddenPages": ["news/index.html"],
   "generatedNote": "このファイルは scripts/generate-lang-pages.ps1 が元のページから自動生成しています。直接編集せず、元のページ(index.html など)を編集してから再生成してください。",
   "pages": {
     "index.html": {
