@@ -3012,15 +3012,21 @@ a.global-footer-instagram:focus-visible {
    4:3はスマホの1.6:1より縦に長いので、溶ける長さを、写真全体に対する割合で、少し短くしてある)、
    見出しを、溶けた部分に24pxだけ重ねる。上端は、スマホと同じく、くっきりした直線のまま。 */
 /* 写真の高さ: 4:3のままだと、iPad miniの縦向き(幅744px)で約565pxと、画面の半分近くを占めて大きすぎた。
-   16:9(744pxで約410px)にしても、実機で、まだ大きく感じられたため、さらに横長の2.2:1にする(744pxで約331px)。
-   横向き(幅1133px)の写真(約290px)に近い大きさで、被写体が残るよう、スマホと同じ切り出し位置にする。 */
+   16:9(744pxで約410px)、2.2:1(約331px)にしても、実機で、まだ大きく感じられたため、さらに横長の2.4:1にする(744pxで約304px)。
+   (2.6:1にすると、下端が溶けるぶん、はっきり見える部分が約174pxになり、被写体が窮屈になったため、2.4:1にした。)
+   横向き(幅1133px)の写真(約290px)に近い高さで、被写体が残るよう、スマホと同じ切り出し位置にする。 */
 @media (min-width: 600px) and (max-width: 799px) {
   .home .home-feature-media {
-    aspect-ratio: 2.2 / 1;
+    aspect-ratio: 2.4 / 1;
   }
 
   .home .home-feature .home-feature-media img {
     object-position: center 32%;
+  }
+
+  /* 味噌の円錐: 先端が写真の上から約7%の位置にある。2.4:1に切り出すと、32%では先端が上の端で切れるため、上寄り(15%)にする */
+  .home .home-feature .home-feature-media img[src*="home-feature-miso"] {
+    object-position: center 15%;
   }
 
   .home .home-feature .home-feature-media img[src*="home-feature-recipe"] {
