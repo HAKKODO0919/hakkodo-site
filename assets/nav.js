@@ -148,8 +148,8 @@ function renderHomeNav(container, siteRoot) {
 
 // Instagramアカウントの準備ができたら、ここにURL(例:
 // "https://www.instagram.com/hakkodo_arigato/")を入れるだけで、
-// 全ページのフッターアイコンがリンクとして有効になる。
-// 空文字のままなら、アイコンは表示だけでクリックしても何も起きない。
+// 全ページのフッターに、Instagramのアイコン(と、その左の縦線)が現れ、リンクとして使えるようになる。
+// 空文字のままなら、押しても何も起きないアイコンを見せないよう、Instagramのアイコンと縦線は出さない。
 const instagramUrl = "";
 
 // フッターのInstagramアイコン。公式ロゴの形をモノクロの線画にし、
@@ -157,20 +157,33 @@ const instagramUrl = "";
 // 派手なInstagramカラーにならないようにしている。
 const INSTAGRAM_ICON_SVG = `<svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"></rect><circle cx="12" cy="12" r="4"></circle><circle cx="17.3" cy="6.7" r="0.9" fill="currentColor" stroke="none"></circle></svg>`;
 
-// サイト全体で共通のフッター。お問い合わせ・メールアドレスは
-// ヘッダーのナビゲーション(「お問い合わせ」リンク)にすでにあるため、
-// フッターには重ねて置かず、"© HAKKODO" だけの最小限の構成にする
+// フッターのメールアイコンの宛先。お問い合わせページ(contact/)に表示しているアドレスと同じ。
+// アドレスをそのまま一続きの文字列で書かず、2つに分けて組み立てる(自動収集されにくくするため)。
+const MAIL_USER = "hakkodo.arigato";
+const MAIL_HOST = "gmail.com";
+
+// フッターのメールアイコン(封筒の線画)。Instagramのアイコンと同じ大きさ・線の太さ・色(currentColor)にそろえる。
+const MAIL_ICON_SVG = `<svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="3"></rect><path d="M4.5 8.5L12 14l7.5-5.5"></path></svg>`;
+
+// サイト全体で共通のフッター。"© HAKKODO | Instagram | メール" の1行だけの最小限の構成にする
+// (Instagramは、上のinstagramUrlが入るまで出さないので、それまでは "© HAKKODO | メール")
 // (背景の山・植物イラストなどの装飾は使わない)。
 function renderGlobalFooter(container, siteRoot) {
   if (!container) return;
+  // Instagramは、URLがあるときだけ、縦線と一緒に出す。
   const instagramHtml = instagramUrl
-    ? `<a class="global-footer-instagram" href="${instagramUrl}" target="_blank" rel="noopener noreferrer" aria-label="Instagram">${INSTAGRAM_ICON_SVG}</a>`
-    : `<span class="global-footer-instagram" aria-hidden="true">${INSTAGRAM_ICON_SVG}</span>`;
+    ? `<span class="global-footer-divider" aria-hidden="true">|</span>
+      <a class="global-footer-instagram" href="${escapeHtml(instagramUrl)}" target="_blank" rel="noopener noreferrer" aria-label="Instagram">${INSTAGRAM_ICON_SVG}</a>`
+    : "";
+  // メールアイコンは、押すとメールソフト(スマホならメールアプリ)が直接開く(mailto)。
+  // 読み上げ用の名前(aria-label)は、言語ごとの文言 footerEmail を applyUiStrings が差し替える。
+  const mailHtml = `<a class="global-footer-mail" href="mailto:${MAIL_USER}@${MAIL_HOST}" aria-label="Email" data-i18n-label="footerEmail">${MAIL_ICON_SVG}</a>`;
   container.innerHTML = `
     <div class="global-footer-row">
       <p class="global-footer-copyright"><span class="global-footer-copyright-mark">&copy;</span><span class="global-footer-copyright-name" translate="no">HAKKODO</span></p>
-      <span class="global-footer-divider" aria-hidden="true">|</span>
       ${instagramHtml}
+      <span class="global-footer-divider" aria-hidden="true">|</span>
+      ${mailHtml}
     </div>
   `;
 }

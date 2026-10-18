@@ -1913,6 +1913,27 @@ a.global-footer-instagram:focus-visible {
   color: var(--color-heading);
 }
 
+/* フッターのメールアイコン。Instagramのアイコンと同じ見た目(色・大きさ)。
+   見た目の大きさ(19px)は変えず、指で押しやすいよう、押せる範囲だけを、まわりに13pxずつ広げて45pxにする。 */
+.global-footer-mail {
+  position: relative;
+  display: inline-flex;
+  color: var(--color-muted);
+  line-height: 0;
+  text-decoration: none;
+}
+
+.global-footer-mail::after {
+  content: "";
+  position: absolute;
+  inset: -13px;
+}
+
+.global-footer-mail:hover,
+.global-footer-mail:focus-visible {
+  color: var(--color-heading);
+}
+
 /* ---- STORYページ(story/index.html) ----
    見出し(.intro)・本文(.home-feature-text)・写真(.recipe-hero)は、
    他のページと同じ既存のクラスをそのまま使う。ここでは、STORYのページ内で
