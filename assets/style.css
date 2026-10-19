@@ -1521,7 +1521,13 @@ body > main {
   display: block;
   width: 100%;
   aspect-ratio: 16 / 9;
-  max-height: max(82vh, 420px);
+  /* 写真の高さの上限を、「画面の高さ − ヘッダー − 見出しまでの高さ」にして、最初の画面に、
+     写真の下の見出し「旨味の世界へようこそ。」(下端が写真の下端から約155px)まで見えるようにする。
+     PC(幅1181px以上)は、ヘッダー96px + 155px + 余裕8px = 259px。ハンバーガーのヘッダー(800〜1180px)は、67px + 155px + 余裕8px = 230px。
+     下限は420px(画面が低すぎるときに、写真が細い帯にならないように。そのときは、見出しが少し隠れてよい)。
+     以前は 画面の高さの82%(1440x900で、見出しが最初の画面の外)。 */
+  --hero-reserve: 259px;
+  max-height: max(calc(100vh - var(--hero-reserve)), 420px);
   object-fit: cover;
   object-position: center top;
 }
@@ -1534,6 +1540,12 @@ body > main {
    ぶん、ヒーロー写真を5:4にして、最初の画面で写真と紹介文の見出しまで見えるようにする。
    元写真は16:9なので、左右を約30%切り抜く(以前の4:3は約25%)。3つの瓶(横幅の約52%)が
    収まるよう、水平位置は瓶の中央を基準にしている(68%)。 */
+@media (max-width: 1180px) {
+  .home-hero-img {
+    --hero-reserve: 230px;
+  }
+}
+
 @media (max-width: 799px) {
   .home-hero-img.home-hero-img-jars {
     aspect-ratio: 5 / 4;
@@ -2727,6 +2739,23 @@ a.global-footer-instagram:focus-visible {
     padding-left: 0;
   }
 
+  /* 3つの欄の、写真と文章の間隔をそろえ、文章を写真に近づける(PC・タブレット横向きだけ)。
+     これまで、写真の枠から文章までの間隔が、Workshops(写真左・文章が溶ける端に入り込む)だけ約62pxで、
+     MisoとRecipesは約104〜115pxと広く、写真の端が透ける分、見た目では約210〜220px離れて見えた(文章の幅の半分以上)。
+     Miso(写真左・文章右)は文章を左へ53px、Recipes(写真右・文章左)は文章を右へ42px寄せて、3つとも、約62pxにそろえる
+     (文章の幅・文字の大きさ・折り返しは変えず、位置だけ動かす)。写真の透ける端(その位置では濃さ約2割以下)に文章が少し重なるが、
+     Workshopsと同じ状態で、読みにくくならない。 */
+  /* 寄せる量は、画面の幅が1000pxのときは0、1100pxで最大(Miso 53px・Recipes 42px)になるよう、なめらかに増やす。
+     1000px以下は、もともと間隔が狭く(約20〜30px)、寄せると、文章が写真の透けた端に当たって窮屈になるため、寄せない。
+     境目で、間隔が急に変わらないよう、段階を付けず、画面の幅に比例させている。 */
+  .home .home-feature:not(.home-feature--reverse):not(.home-feature--workshops) .home-feature-body {
+    margin-right: clamp(0px, calc((100vw - 1000px) * 0.53), 53px);
+  }
+
+  .home .home-feature--recipes .home-feature-body {
+    margin-left: clamp(0px, calc((100vw - 1000px) * 0.42), 42px);
+  }
+
   .home .home-feature-title,
   .home .home-news-title {
     font-size: 1.35rem;
@@ -3093,4 +3122,58 @@ a.global-footer-instagram:focus-visible {
 #product-root .product-detail-head .tagline:lang(ja) {
   word-break: keep-all;
   overflow-wrap: break-word;
+}
+
+/* ---- PC(幅1000px以上): 商品ページ・Aboutの写真を、本文の列(640px)より広く(880px)する ----
+   トップの写真(画面いっぱい)と、内側のページの写真(640px)の落差を小さくするため。文章の幅は640pxのまま。
+   写真の縦横比・下端の溶け方・見出しの24pxの重なり・切り出し位置は変えない(高さは、広げたぶん、比例して高くなる)。
+   880pxの写真が収まらない狭い画面(1000px未満)は、これまでどおり。 */
+@media (min-width: 1000px) {
+  #product-root .product-hero-frame {
+    margin-right: -120px;
+    margin-left: -120px;
+  }
+
+  .story-page .story-hero {
+    margin-right: -140px;
+    margin-left: -140px;
+  }
+}
+
+/* ---- トップページ: 見出し「旨味の世界へようこそ。」とサブコピーの、ページを開いたときのフェードイン ----
+   最初の画面に見えている部分は、スクロール用のフェードイン(assets/reveal.js)の対象外なので、ここで、CSSだけで、
+   ページを開いた直後に1回だけ、ふわっと現れるようにする(写真のあと、見出し→サブコピーの順に目が動く)。
+   動かすのは透明度と位置(約12px)だけで、レイアウトは変わらない。長さ約0.9秒。見出しは0.25秒、サブコピーは0.45秒遅れて始まる。
+   JavaScriptを使わないので、何かの不具合で動かなくても、見出しが消えたままにはならない(animation-fill-mode: both は、
+   動きが終わったあと、表示した状態を保つ)。「動きを減らす」設定・印刷では、動かさず、最初から表示する(最後に書くこと)。 */
+@keyframes home-intro-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.home .home-intro-lead,
+.home .home-intro-sub {
+  animation: home-intro-in 0.9s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+}
+
+.home .home-intro-lead {
+  animation-delay: 0.25s;
+}
+
+.home .home-intro-sub {
+  animation-delay: 0.45s;
+}
+
+@media (prefers-reduced-motion: reduce), print {
+  .home .home-intro-lead,
+  .home .home-intro-sub {
+    animation: none;
+  }
 }
