@@ -34,8 +34,10 @@ function renderStoryContent(data, siteRoot, lang) {
   const heroHtml = data.image && photoAfter === 0 ? `<div class="story-hero">${photoImg}</div>` : "";
   const photoHtml = data.image && photoAfter > 0 ? `<div class="recipe-hero">${photoImg}</div>` : "";
 
-  const bodyHtml = (tr.paragraphs || [])
-    .map((text, i) => `<p class="home-feature-text">${storyTextHtml(text)}</p>${i + 1 === photoAfter ? photoHtml : ""}`)
+  // 最後の段落(締めの言葉)には story-closing を付けて、中央・明朝体・少し大きくする(assets/style.css)
+  const paragraphs = tr.paragraphs || [];
+  const bodyHtml = paragraphs
+    .map((text, i) => `<p class="home-feature-text${i === paragraphs.length - 1 ? " story-closing" : ""}">${storyTextHtml(text)}</p>${i + 1 === photoAfter ? photoHtml : ""}`)
     .join("");
 
   // 見出しは他の文章ページと同じ .intro、本文は .home-feature-text を使う
@@ -49,10 +51,12 @@ function renderStoryContent(data, siteRoot, lang) {
   `;
 
   // トップページ・商品ページと同じ、スクロールに合わせた控えめなフェードイン(assets/reveal.js)。
-  // 最初から画面に見えている部分(写真・見出し)は動かさず、下の段落だけが、画面に入るときに現れる。
+  // 最初から画面に見えている部分(見出し・最初の段落)は、ページを開いて0.25秒後から、上から順に、0.15秒ずつ遅れて現れ(includeVisible・startDelay・stagger。動きの長さ(0.9秒)・距離(12px)・最初の遅れ(0.25秒)は、トップページの「旨味の世界へようこそ。」と同じで、読みやすさのため、次の要素との間隔だけ、トップ(0.2秒)より少し短くした。
+  // 以前は、0.1秒後から0.12秒ずつで、最初の描画の前後に動きが終わり、気づきにくかった)、
+  // 下の段落・写真は、画面に入るときに現れる。
   // reveal.js を読み込んでいないページでは何もしない(言語を切り替えて描き直したときも、ここで仕掛け直す)。
   if (typeof initReveal === "function") {
-    initReveal(".story-page .home-feature-text");
+    initReveal(".story-page .intro, .story-page .home-feature-text, .story-page .recipe-hero, .story-page .story-hero", { includeVisible: true, startDelay: 0.25, stagger: 0.15 });
   }
 }
 

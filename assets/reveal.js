@@ -8,7 +8,15 @@
    (見た目のルールは assets/style.css の「スクロール時のフェードイン」)
    ======================================================== */
 
-function initReveal(selector) {
+// config.includeVisible: true のとき、最初から画面に見えている要素も、ページを開いた直後に、
+// 上から順に(config.stagger 秒ずつ遅らせて。省略時 0.12秒)ふわっと現れる(読み物のページ向き。トップページは、これまでどおり、動かさない)。
+function initReveal(selector, config) {
+  const includeVisible = !!(config && config.includeVisible);
+  // 最初から見えている要素が、1つずつ遅れて現れる間隔(秒)。config.stagger で変えられる(省略時 0.12)。
+  const stagger = config && config.stagger ? config.stagger : 0.12;
+  // 最初の1つが動き始めるまでの待ち時間(秒。省略時 0.1)。ページが最初に描かれたあとに動きが始まるよう、少し待たせると、
+  // 動きの大半が、画面に出る前に終わってしまうことがなくなる(通信が遅いときほど、最初の描画が遅れるため)。
+  const startDelay = config && config.startDelay != null ? config.startDelay : 0.1;
   if (!("IntersectionObserver" in window)) return;
   if (window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
@@ -43,9 +51,20 @@ function initReveal(selector) {
       .filter((el) => (seen.has(el) ? false : (seen.add(el), true)));
   }
 
+  let initialIndex = 0;
   targets.forEach((el) => {
-    // 最初から画面に見えている要素と、すでに通り過ぎた要素は動かさない
-    if (el.getBoundingClientRect().top < viewportHeight * 0.9) return;
+    if (el.getBoundingClientRect().top < viewportHeight * 0.9) {
+      // 最初から画面に見えている要素と、すでに通り過ぎた要素は、これまでどおり動かさない。
+      // includeVisible のときだけ、最初から見えている要素を、順に現れさせる(通り過ぎた要素=画面より上は動かさない)。
+      if (!includeVisible || el.getBoundingClientRect().bottom < 0) return;
+      // 最初から見えている要素は、クラスの付け外しによる動き(トランジション)ではなく、CSSのキーフレームアニメーション
+      // (.reveal-load。assets/style.css)で動かす。トランジションは、「隠した状態」が確定する前に「表示」が付くと動かず、
+      // 読み込みのタイミングに左右されるが、キーフレームアニメーションは、要素が描かれたときから、遅れ(animation-delay)を待って、
+      // 必ず始まる(遅れの間は、最初の状態=透明で待つ)。見た目(透明→表示、下から12px、0.9秒)は、トップページの見出し「旨味の世界へようこそ。」と同じ。
+      el.classList.add("reveal-load");
+      el.style.animationDelay = (startDelay + stagger * initialIndex++) + "s";
+      return;
+    }
     // 監視を先に始め、失敗したときは .reveal を付けない(隠れたまま残らないように)
     try {
       observer.observe(el);

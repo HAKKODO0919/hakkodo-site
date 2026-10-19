@@ -2011,6 +2011,9 @@ a.global-footer-instagram:focus-visible {
 }
 .story-page .home-feature-text {
   margin: 0 auto 1.9em;
+  /* 太さ・行間は、商品ページの「こだわり」の文章(.story-block p。太さ500・行間2.05)にそろえる(字の大きさ・フォント・色は、すでに同じ) */
+  font-weight: 500;
+  line-height: 2.05;
   /* 本文の幅は商品ページ(.section の左右 padding 20px)と同じ考え方にそろえる。 */
   max-width: none;
   /* 折り返しの特別な指定はせず、4言語とも完全に通常の文章として横幅いっぱいに流す。
@@ -3175,5 +3178,59 @@ a.global-footer-instagram:focus-visible {
   .home .home-intro-lead,
   .home .home-intro-sub {
     animation: none;
+  }
+}
+
+/* ---- ページを開いたときに、最初から見えている要素を、順に現れさせる(assets/reveal.js の includeVisible。Aboutページ) ----
+   トップページの見出し「旨味の世界へようこそ。」(.home-intro-lead。home-intro-in)と同じ動き(透明→表示、下から12px、0.9秒、同じ緩急)を、キーフレームアニメーションで行う。
+   animation-delay は assets/reveal.js が要素ごとに指定する。both は、遅れの間は透明で待ち、終わったあとは表示を保つ。
+   「動きを減らす」設定・印刷では、動かさず、最初から表示する(最後に書くこと)。 */
+@keyframes reveal-load {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.reveal-load {
+  animation: reveal-load 0.9s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce), print {
+  .reveal-load {
+    animation: none;
+  }
+}
+
+/* ---- STORYページ(About): 締めの言葉 ----
+   最後の段落(締めの言葉。assets/story.js が story-closing を付ける)は、中央・明朝体・少し大きくして、前に広めの余白を取り、
+   ブランドのひとこととして静かに締める。 */.story-page .story-closing {
+  margin-top: 3em;
+  font-family: "Shippori Mincho", serif;
+  font-size: 1.08rem;
+  line-height: 2;
+  letter-spacing: 0.08em;
+  text-align: center;
+  color: var(--color-heading);
+  text-wrap: balance;
+}
+
+@media (min-width: 800px) {
+  .story-page .story-closing {
+    font-size: 1.15rem;
+  }
+}
+
+/* 締めの言葉(日本語)は、字間を入れて、実際の幅が約373pxになる。幅419px以下のスマホでは、1行に収まらず、
+   「生み／出す」の途中で切れてしまうため、この幅までは、「そんなきっかけを／生み出す味噌でありたい。」と、
+   {br-sm}の位置(「を」のあと)で改行する(ほかの段落の{br-sm}は、これまでどおり、幅389px以下だけ)。420px以上は、1行に収まる。 */
+@media (max-width: 419px) {
+  .story-page .story-closing .story-br-sm {
+    display: inline;
   }
 }
