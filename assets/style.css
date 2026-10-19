@@ -3234,3 +3234,77 @@ a.global-footer-instagram:focus-visible {
     display: inline;
   }
 }
+
+/* ---- 商品ページの写真の高さを、画面の高さに応じて抑える(PC・タブレット横向き) ----
+   写真が大きすぎて、高さの低い画面(MacBook 1440x780 など)で、「レシピを見る」ボタンが最初の画面の外に出ていた。
+   写真の高さの上限を「画面の高さ − 313px」にして、題名・キャッチ・価格・ボタンまで、最初の画面に入るようにする
+   (313px = ヘッダー96px + 上の余白56px + 題名からボタンまで約305px − 写真の重なり24px + 余裕8px。ハンバーガーのヘッダー(幅1180px以下)は67pxなので、284px)。
+   下限は320px(画面が低すぎるときに、写真が細い帯にならないように。そのときは、ボタンなどが少し隠れてよい)。
+   高さの高い画面は、上限に届かず、これまでどおり(幅880px・16:9のとき495px)。幅・切り出し位置・下端の溶け方・題名の重なりは変えない。 */
+#product-root .product-hero-frame .hero {
+  --product-hero-reserve: 313px;
+  max-height: max(calc(100vh - var(--product-hero-reserve)), 320px);
+}
+
+@media (max-width: 1180px) {
+  #product-root .product-hero-frame .hero {
+    --product-hero-reserve: 284px;
+  }
+}
+
+/* ---- STORYページ(About): 最後に印を押す ----
+   トップページの写真の上にある印(images/brand/hakkodo-seal.png)を、締めの言葉のあとに、中央に置く(約38px。傾けない)。
+   日本の「押印」は、終わりの合図。締めの言葉に、署名をしたような締まりが出て、文章だけのページに、朱色が1点だけ入る。
+   動き: 締めの言葉のあと、「ぽん」と押したように、約1.18倍から1倍に縮みながら、透明から現れる(約0.5秒。控えめ)。
+   画面の下にあるときは、スクロールで画面に入るとき(.reveal)、最初から見えているときは、ページを開いて、順に現れる(.reveal-load)。
+   「動きを減らす」設定・印刷では、動かさず、最初から表示する。 */
+.story-page .story-closing {
+  margin-bottom: 0;
+}
+
+.story-page .story-seal {
+  margin-top: 2.4em;
+  text-align: center;
+  line-height: 0;
+}
+
+.story-page .story-seal img {
+  display: inline-block;
+  width: 38px;
+  height: auto;
+}
+
+.story-page .story-seal.reveal {
+  transform: scale(1.18);
+  transition: opacity 0.5s ease-out, transform 0.5s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+.story-page .story-seal.reveal.is-visible {
+  transform: none;
+}
+
+@keyframes story-stamp {
+  from {
+    opacity: 0;
+    transform: scale(1.18);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.story-page .story-seal.reveal-load {
+  animation: story-stamp 0.5s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce), print {
+  .story-page .story-seal.reveal,
+  .story-page .story-seal.reveal-load {
+    opacity: 1;
+    transform: none;
+    transition: none;
+    animation: none;
+  }
+}

@@ -40,6 +40,9 @@ function renderStoryContent(data, siteRoot, lang) {
     .map((text, i) => `<p class="home-feature-text${i === paragraphs.length - 1 ? " story-closing" : ""}">${storyTextHtml(text)}</p>${i + 1 === photoAfter ? photoHtml : ""}`)
     .join("");
 
+  // 最後に、印(トップページの写真の上にある印と同じ画像)を、締めの言葉のあとに押す。飾りなので、読み上げの対象にしない。
+  const sealHtml = `<div class="story-seal" aria-hidden="true"><img src="${escapeHtml(siteRoot + "images/brand/hakkodo-seal.png")}" alt=""></div>`;
+
   // 見出しは他の文章ページと同じ .intro、本文は .home-feature-text を使う
   root.innerHTML = `
     ${heroHtml}
@@ -48,6 +51,7 @@ function renderStoryContent(data, siteRoot, lang) {
       <p>${escapeText(tr.heading)}</p>
     </div>
     ${bodyHtml}
+    ${sealHtml}
   `;
 
   // トップページ・商品ページと同じ、スクロールに合わせた控えめなフェードイン(assets/reveal.js)。
@@ -56,7 +60,18 @@ function renderStoryContent(data, siteRoot, lang) {
   // 下の段落・写真は、画面に入るときに現れる。
   // reveal.js を読み込んでいないページでは何もしない(言語を切り替えて描き直したときも、ここで仕掛け直す)。
   if (typeof initReveal === "function") {
-    initReveal(".story-page .intro, .story-page .home-feature-text, .story-page .recipe-hero, .story-page .story-hero", { includeVisible: true, startDelay: 0.25, stagger: 0.15 });
+    initReveal(".story-page .intro, .story-page .home-feature-text, .story-page .recipe-hero, .story-page .story-hero, .story-page .story-seal", { includeVisible: true, startDelay: 0.25, stagger: 0.15 });
+
+    // 印は、締めの言葉の「次に」現れるようにする。印が、画面に入った瞬間に動き始める仕組み(.reveal)だと、
+    // 締めの言葉が順に現れている最中(ページを開いた直後)に、先に出てしまうため、締めの言葉の動きが終わるころ(0.7秒後)に始める。
+    const closing = root.querySelector(".story-closing");
+    const seal = root.querySelector(".story-seal");
+    if (closing && seal) {
+      const closingDelay = closing.classList.contains("reveal-load") ? parseFloat(closing.style.animationDelay) || 0 : 0;
+      const sealDelay = closingDelay + 0.7;
+      if (seal.classList.contains("reveal-load")) seal.style.animationDelay = sealDelay + "s";
+      else if (seal.classList.contains("reveal")) seal.style.transitionDelay = sealDelay + "s";
+    }
   }
 }
 
