@@ -3255,7 +3255,8 @@ a.global-footer-instagram:focus-visible {
 /* ---- STORYページ(About): 最後に印を押す ----
    トップページの写真の上にある印(images/brand/hakkodo-seal.png)を、締めの言葉のあとに、中央に置く(約38px。傾けない)。
    日本の「押印」は、終わりの合図。締めの言葉に、署名をしたような締まりが出て、文章だけのページに、朱色が1点だけ入る。
-   動き: 締めの言葉のあと、「ぽん」と押したように、約1.18倍から1倍に縮みながら、透明から現れる(約0.5秒。控えめ)。
+   動き: 締めの言葉と印は、1つのまとまり(.story-ending)として、同じタイミングで、一緒に、ふわっと現れる(0.9秒。ほかの段落と同じ)。
+   印だけ、現れる間に、約1.18倍から1倍へ縮み、「ぽん」と押したように見える。
    画面の下にあるときは、スクロールで画面に入るとき(.reveal)、最初から見えているときは、ページを開いて、順に現れる(.reveal-load)。
    「動きを減らす」設定・印刷では、動かさず、最初から表示する。 */
 .story-page .story-closing {
@@ -3274,35 +3275,41 @@ a.global-footer-instagram:focus-visible {
   height: auto;
 }
 
-.story-page .story-seal.reveal {
+/* スクロールで現れるとき: まとまりが画面に入って表示になる(.is-visible)と同時に、印が、縮んで元の大きさになる */
+.story-page .story-ending.reveal .story-seal img {
   transform: scale(1.18);
-  transition: opacity 0.5s ease-out, transform 0.5s cubic-bezier(0.22, 0.61, 0.36, 1);
+  transition: transform 0.9s cubic-bezier(0.22, 0.61, 0.36, 1);
 }
 
-.story-page .story-seal.reveal.is-visible {
+.story-page .story-ending.reveal.is-visible .story-seal img {
   transform: none;
 }
 
+/* ページを開いて順に現れるとき: まとまりの動き(.reveal-load)と、同じ遅れ(animation-delay: inherit)で、印が縮む */
 @keyframes story-stamp {
   from {
-    opacity: 0;
     transform: scale(1.18);
   }
 
   to {
-    opacity: 1;
     transform: none;
   }
 }
 
-.story-page .story-seal.reveal-load {
-  animation: story-stamp 0.5s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+/* 遅れ(animation-delay)は、まとまり(.story-ending)→ 印の枠(.story-seal)→ 画像(img)の順に、引き継ぐ */
+.story-page .story-ending.reveal-load .story-seal {
+  animation-delay: inherit;
+}
+
+.story-page .story-ending.reveal-load .story-seal img {
+  animation: story-stamp 0.9s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+  animation-delay: inherit;
 }
 
 @media (prefers-reduced-motion: reduce), print {
-  .story-page .story-seal.reveal,
-  .story-page .story-seal.reveal-load {
-    opacity: 1;
+  .story-page .story-ending.reveal .story-seal img,
+  .story-page .story-ending.reveal.is-visible .story-seal img,
+  .story-page .story-ending.reveal-load .story-seal img {
     transform: none;
     transition: none;
     animation: none;
