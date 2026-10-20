@@ -3373,3 +3373,63 @@ a.global-footer-instagram:focus-visible {
     mask-image: linear-gradient(to bottom, #000 0, #000 85%, rgba(0, 0, 0, 0.6) 91%, rgba(0, 0, 0, 0.3) 95%, rgba(0, 0, 0, 0.1) 98%, transparent 100%);
   }
 }
+
+/* ---- ワークショップ・お問い合わせページ: 文章の下に、筆の線(images/brand/brush-stroke.png)を、控えめな飾りとして置く ----
+   About の赤い印(images/brand/hakkodo-seal.png)と同じく、背景が透明な画像で、クリーム色の背景にそのままなじむ。
+   画像は、手で書いた筆の線の写真から、黒い筆の部分だけを取り出したもの(紙の背景を透明にしただけ。線の形・かすれ・濃さは、写真のまま)。
+   横長でほぼ真っ直ぐな線(眉毛に見えないように、弓なりの短い線は使わない)。縦横比(640:55)を保ち、横に引き伸ばさない。画面幅からははみ出さない。
+   Aboutページには、すでに赤い印があるため、置かない。
+   向き: 線は、途中で一番高くなり、右の端へ向かって下がっているため、右の端が下がって見える。右が少し上がるように、約1.5度(反時計回り)傾けて、バランスをとる。
+   傾けると、右の端が約4px上にはみ出して見えるので、上の余白を40pxから42pxにしている。画像そのものは、変えない。
+   大きさ: スマホは、画面幅の80%まで(最大240px)。PC・タブレット横向き(幅800px以上)は、300px。
+   動き: ページを開いて約0.35秒後に、左の太い端から右の細い先へ、筆を引くように、約0.9秒で現れる
+   (線の向きと同じ。やわらかい境目のマスクを動かすだけで、画像は変えない)。
+   アニメーションに対応していない環境・「動きを減らす」設定・印刷では、動かさず、最初から全部見える。 */
+.brush-line {
+  display: block;
+  width: min(80%, 240px);
+  height: auto;
+  margin: 42px auto 0;
+  transform: rotate(-1.5deg);
+  -webkit-mask-image: linear-gradient(90deg, #000 40%, transparent 60%);
+  mask-image: linear-gradient(90deg, #000 40%, transparent 60%);
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-size: 300% 100%;
+  mask-size: 300% 100%;
+  animation: brush-draw 0.9s cubic-bezier(0.22, 0.61, 0.36, 1) 0.35s both;
+}
+
+@media (min-width: 800px) {
+  .brush-line {
+    width: 300px;
+  }
+}
+
+@keyframes brush-draw {
+  from {
+    -webkit-mask-position: 100% 0;
+    mask-position: 100% 0;
+  }
+
+  to {
+    -webkit-mask-position: 0% 0;
+    mask-position: 0% 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .brush-line {
+    animation: none;
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
+}
+
+@media print {
+  .brush-line {
+    animation: none;
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
+}
