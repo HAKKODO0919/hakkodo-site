@@ -8,7 +8,7 @@
 //   段落の中は、改行を入れず、通常の文章として書いてください。
 //   行の折り返しは、画面の幅に合わせてブラウザが自然に行います(assets/style.css)。
 //   例外: 「{br-sm}」は、375px前後のスマホ幅(389px以下)だけ改行になる印です(画面には表示されず、
-//   それより広い画面では何も起きません)。現在は ca・es の最初の段落と、ja の最後の段落(締めの言葉)に使っています。
+//   それより広い画面では何も起きません)。現在は ca・es・en の最初の段落と、ja の最後の段落(締めの言葉)に使っています。
 // image: 1枚だけ入れる写真(既存の写真を使用)。
 //        afterParagraph = 何番目の段落の直後に入れるか(1始まり)。0 = 一番上(見出しの前。上に大きく見せる形)。
 //        3 = 「アルタ・ガロチャ」の段落(3段落目)の直後。文章の始まりを、最初の画面に見せるため、現在は 3。
@@ -62,7 +62,7 @@ window.STORY_DATA = {
       heading: "HAKKODO ― 発酵道",
       imageAlt: "Green mountains and a valley seen between rocks, with snow-capped peaks in the distance",
       paragraphs: [
-        "HAKKODO is a name born from two Japanese words: “hakkō” (fermentation) and “dō” (way).",
+        "HAKKODO is a name born from{br-sm} two Japanese words:{br-sm} “hakkō” (fermentation) and “dō” (way).",
         "In judo, kendo, chadō (the way of tea) and kadō (the way of flowers), “dō” is not only about mastering a technique: it is about refining oneself and continuing to grow through daily practice. There is no end to it. HAKKODO, too, keeps learning, refining and growing through fermentation. To keep moving forward, step by step. That is “hakkōdō”.",
         "The place HAKKODO chose to walk this path is Alta Garrotxa, in Catalonia. In this land, blessed with rich nature and clear water, and set against the backdrop of Japan's fermentation culture, we nurture HAKKODO's miso. The nature and water of this land are essential to HAKKODO's miso.",
         "Miso, born from Japan's fermentation culture, meets all kinds of dishes and food cultures, and the charms of each come together. From there, new flavors and new possibilities emerge.",

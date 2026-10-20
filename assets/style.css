@@ -3315,3 +3315,20 @@ a.global-footer-instagram:focus-visible {
     animation: none;
   }
 }
+
+/* ---- STORYページ(About): 書き出しの一文を、中央にそろえる ----
+   最初の段落(日本語は「HAKKODOは、「発酵」と「道」から生まれた名前です。」)は、書き出しの一文なので、中央にそろえる
+   (assets/story.js が story-lead を付ける)。続く段落は、読みやすい左そろえのまま。折り返しは、行の長さが、なるべくそろうようにする。 */
+.story-page .story-lead {
+  text-align: center;
+  text-wrap: balance;
+}
+
+/* 幅343px以下(iPhone SE 第1世代など、幅320px級のごく狭い画面)だけ、書き出しの一文を 0.9rem(約14px)にして、3行に収める。
+   英語は、この幅で、通常の大きさだと4行になり、最後の行が「(way).」だけになるため。
+   スペイン語は、340〜342pxでも4行になる(最後が「(camino).」だけ)ので、343pxまでを対象にする。344px以上は、変更しない。 */
+@media (max-width: 343px) {
+  .story-page .story-lead {
+    font-size: 0.9rem;
+  }
+}

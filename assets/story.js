@@ -44,7 +44,8 @@ function renderStoryContent(data, siteRoot, lang) {
   const bodyHtml = paragraphs
     .map((text, i) => {
       const isLast = i === paragraphs.length - 1;
-      const p = `<p class="home-feature-text${isLast ? " story-closing" : ""}">${storyTextHtml(text)}</p>`;
+      // 最初の段落(「HAKKODOは、「発酵」と「道」から生まれた名前です。」)は、書き出しの一文として、中央にそろえる(story-lead)
+      const p = `<p class="home-feature-text${i === 0 ? " story-lead" : ""}${isLast ? " story-closing" : ""}">${storyTextHtml(text)}</p>`;
       return (isLast ? `<div class="story-ending">${p}${sealHtml}</div>` : p) + (i + 1 === photoAfter ? photoHtml : "");
     })
     .join("");
