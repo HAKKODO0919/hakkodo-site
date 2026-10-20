@@ -3606,3 +3606,31 @@ a.global-footer-instagram:focus-visible {
     margin-right: -24px;
   }
 }
+
+/* ---- トップページ(スマホ。幅599px以下): 写真の下の3つの見出し(Miso / Receptes / Tallers など)に、存在感を出す ----
+   見出しは、細い明朝体のアルファベット(19.2px・太さ500)で、本文(15〜16px)との差が小さく、写真の下の溶けた部分に重なると、弱く見えていた
+   (特にカタルーニャ語・スペイン語・英語。日本語のページも、見出しはアルファベットで、同じ)。
+   太さは、今のまま(500)にして、見出しの下に、短い細線(28px × 1px)を置く。線は、上の大きな見出しの下にある短い線(.home-intro-sub::before)と同じ形で、
+   「ここから新しい欄」という目印になる(「大きな見出し → 線 → サブコピー」と同じ、「見出し → 線 → 本文」の並びにそろう)。
+   大きさは、上の大きな見出し(「Benvinguts al món de l'umami.」)の約90%(18.7〜21.6px)にして、少し大きくする。
+   大きな見出しは、画面の幅に比例して 20.8〜24px に変わるので、見出しの大きさも、同じく幅に比例させる(固定にすると、幅375〜390pxで、大きな見出しと同じ大きさになり、上下の関係が逆転して見えるため)。字間は 0.16em → 0.12em。
+   注意: このサイトは、Shippori Mincho・Cormorant Garamond を指定しているが、フォントの読み込み(下の @import)が、ファイルの途中にあるため、実際には読み込まれていない
+   (端末の標準の明朝体で表示される。標準の書体は、太さが「普通」と「太字」の2種類だけ)。そのため、太さを、600などの中間にはできない。
+   写真・本文・配置・PC・iPadは、変えない。戻すときは、このブロックを消す。 */
+@media (max-width: 599px) {
+  .home .home-feature-title,
+  .home .home-news-title {
+    font-size: clamp(1.17rem, 5.19vw, 1.35rem);
+    letter-spacing: 0.12em;
+    margin-bottom: 16px;
+  }
+
+  .home .home-feature-title::after {
+    content: "";
+    display: block;
+    width: 28px;
+    height: 1px;
+    margin: 12px auto 0;
+    background: rgba(43, 35, 32, 0.32);
+  }
+}
