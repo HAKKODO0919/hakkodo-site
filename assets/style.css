@@ -3502,3 +3502,70 @@ a.global-footer-instagram:focus-visible {
     line-height: 1.94;
   }
 }
+
+/* ---- トップページ: iPad の縦向き(幅800〜1180px・縦長の画面)の、写真・「MISO」と印鑑・見出し ----
+   iPad の Safari は、初期設定で「デスクトップ用Webサイト」の表示になり、縦向きでも、画面幅が約1024px(iPad mini でも)になる。
+   そのため、幅799px以下のスマホ用の設定は効かず、PC用の配置(写真が16:9、「MISO」が写真の左の中ほど、見出し32.6px)が、
+   約0.73倍に縮んで表示され、写真が大きく見える一方、見出しは約24pxと小さく見えていた。
+   - 写真: 16:9(1024pxの画面で、1009 × 568px)から、2.2:1(1009 × 459px。商品ページの写真・トップの下の3枚と同じ縦横比)にする。
+   - 「MISO」と印鑑: スマホと同じ、写真の左下に置く(799px以下の設定と同じ位置。大きさだけ、この画面幅に合わせる)。
+   - 見出し「旨味の世界へようこそ。」: 画面幅に比例(4.39vw。ただし 2.9rem まで)にして、画面の上での大きさが、PCのブラウザで見たときと同じ約32pxになるようにする。
+     (1024pxで44px。縮小表示で約32pxに見える。カタルーニャ語・スペイン語・英語が1行に収まるよう、紹介欄の最大幅を960pxにする)
+   横長の向き、幅1181px以上のPC、幅799px以下のスマホは、変えない。戻すときは、このブロックを消す。 */
+@media (min-width: 800px) and (max-width: 1180px) and (orientation: portrait) {
+  .home-hero-img.home-hero-img-jars {
+    aspect-ratio: 2.2 / 1;
+    object-position: center 31%;
+  }
+
+  .home-hero-copy {
+    top: auto;
+    bottom: 5%;
+    left: 6%;
+    transform: none;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.45), 0 2px 18px rgba(0, 0, 0, 0.45);
+  }
+
+  .home-hero-title {
+    font-size: 3.4rem;
+  }
+
+  .home-hero-title::after {
+    width: 2.6rem;
+    margin: 0.7rem 0 0.8rem;
+  }
+
+  .home-hero-sub {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    letter-spacing: 0.14em;
+  }
+
+  .home .home-intro {
+    max-width: 960px;
+  }
+
+  .home .home-intro-lead {
+    margin-top: 44px;
+    font-size: min(4.39vw, 2.9rem);
+  }
+
+  /* 写真の下の3つの欄(Miso / Recipes / Workshops)の、見出しと本文のバランス。
+     見出しは、細い明朝体のアルファベット(21.6px)で、日本語のゴシック体の本文(15〜16px)より、小さく細く見えていた。
+     iPadでは全体が約0.73倍に縮むため、さらに目立つ(見出し約15.8px、本文約11px)。
+     見出しを 21.6px → 28px(字間は 0.18em → 0.14em)、本文を 15〜16px → 16.5px にする(幅1024pxのとき)。
+     縮小されない幅(820px前後の、モバイル表示のiPad Airなど)では、大きくしすぎないよう、画面の幅に比例させて、
+     見出しは 1.35rem(21.6px。今まで)〜1.75rem、本文は 0.94rem(15px。今まで)〜1.03rem の間で変わる。
+     写真・配置・文章の内容は変えない。 */
+  .home .home-feature-title,
+  .home .home-news-title {
+    font-size: clamp(1.35rem, 2.73vw, 1.75rem);
+    letter-spacing: 0.14em;
+  }
+
+  .home .home-feature-text,
+  .home .home-news-empty,
+  .home #home-feature-miso-text {
+    font-size: clamp(0.94rem, 1.61vw, 1.03rem);
+  }
+}
