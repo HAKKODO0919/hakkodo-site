@@ -3477,3 +3477,28 @@ a.global-footer-instagram:focus-visible {
     margin-top: 0;
   }
 }
+
+/* ---- トップページ: iPad mini など(縦向き。幅700〜799px)の、写真と見出し ----
+   この幅は、スマホ用の設定(799px以下)になっていて、写真が5:4(744pxの画面で、729 × 583px)と大きく、
+   見出し「旨味の世界へようこそ。」も約24pxと小さかった(幅800px以上では、写真が16:9、見出しが約32.6px)。
+   - 写真: PCと同じ16:9(729 × 410px)にして、3つの瓶が、左右を切らずに全部入るようにする。切り出しの位置も、PCと同じ(上から31%)。
+   - 「MISO」と印鑑の位置: スマホと同じ、写真の左下のまま(799px以下の設定をそのまま使う。変更なし)。
+   - 見出し: PCと同じ大きさ(2.04rem)・行間・上の余白(36px)にする。カタルーニャ語・スペイン語・英語が1行に収まるよう、
+     紹介欄の最大幅を、640pxから720pxに広げる。
+   幅699px以下(スマホ)と、800px以上(PC・iPad縦のAir/10.2インチなど)は、変えない。戻すときは、このブロックを消す。 */
+@media (min-width: 700px) and (max-width: 799px) {
+  .home-hero-img.home-hero-img-jars {
+    aspect-ratio: 16 / 9;
+    object-position: center 31%;
+  }
+
+  .home .home-intro {
+    max-width: 720px;
+  }
+
+  .home .home-intro-lead {
+    margin-top: 36px;
+    font-size: 2.04rem;
+    line-height: 1.94;
+  }
+}
