@@ -3342,3 +3342,34 @@ a.global-footer-instagram:focus-visible {
     padding-top: 28px;
   }
 }
+/* ---- 商品ページの写真の縦横比と溶け方(PC・幅1000px以上) ----
+   写真が大きすぎて(880 × 495px、16:9)、商品名・価格・ボタンが画面の下に押し下げられ、バランスが悪かったため、
+   縦横比を 2:1 にする(幅880pxなら、高さは440px。今より55px低い。トップページの下の3枚は約2.2:1)。
+   あわせて、次の2つを変える(どちらも、商品=瓶が、欠けず・薄れずに見えるようにするため)。
+   - 切り出しの位置: 下寄り(75%)から、少し上寄り(35%)へ。下寄りのままだと、瓶のふた(赤い布)の上が切れる
+     (瓶は写真の高さの約74%を占める)。
+   - 下端の溶け方: 写真の上から55%あたりで溶け始めていたのを、90%あたり(瓶の底より下)から、短く溶けるようにする。
+     瓶全体(ふた〜底、ラベル)が、くっきり見え、瓶の下の木の台だけが、背景に溶ける。
+   幅(880px)・商品名の24pxの重なりは変えない。高さの上限(画面の高さ − 313px)は、そのまま働く。
+   タブレット(1000px未満)とスマホは、これまでどおり。戻すときは、このブロックを消す。 */
+@media (min-width: 1000px) {
+  #product-root .product-hero-frame .hero {
+    aspect-ratio: 2 / 1;
+    -webkit-mask-image: linear-gradient(to bottom, #000 0, #000 90%, rgba(0, 0, 0, 0.6) 94%, rgba(0, 0, 0, 0.3) 97%, rgba(0, 0, 0, 0.1) 99%, transparent 100%);
+    mask-image: linear-gradient(to bottom, #000 0, #000 90%, rgba(0, 0, 0, 0.6) 94%, rgba(0, 0, 0, 0.3) 97%, rgba(0, 0, 0, 0.1) 99%, transparent 100%);
+  }
+
+  #product-root .product-hero-frame .hero .hero-img {
+    object-position: center 35%;
+  }
+}
+/* ---- 商品ページの写真の溶け方(スマホ・タブレット・幅999px以下) ----
+   PCと同じ理由で、瓶の底(写真の枠の約83%の位置)が、下端の溶ける部分に入って薄れていた。
+   溶け始めを、枠の55%あたりから、85%あたり(瓶の底より下)に下げ、瓶全体(ふた〜底、ラベル)がくっきり見えるようにする。
+   縦横比・切り出しの位置・商品名の24pxの重なりは変えない。PC(1000px以上)は、上のブロックのとおり。戻すときは、このブロックを消す。 */
+@media (max-width: 999px) {
+  #product-root .product-hero-frame .hero {
+    -webkit-mask-image: linear-gradient(to bottom, #000 0, #000 85%, rgba(0, 0, 0, 0.6) 91%, rgba(0, 0, 0, 0.3) 95%, rgba(0, 0, 0, 0.1) 98%, transparent 100%);
+    mask-image: linear-gradient(to bottom, #000 0, #000 85%, rgba(0, 0, 0, 0.6) 91%, rgba(0, 0, 0, 0.3) 95%, rgba(0, 0, 0, 0.1) 98%, transparent 100%);
+  }
+}
