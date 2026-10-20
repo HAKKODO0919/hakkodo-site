@@ -150,7 +150,7 @@ Miso / Fermentació</h1>
     renderLangSwitcher(document.getElementById("lang-switcher-root"), render);
     render();
     // 4言語すべてのトップページで、写真・本文・新着情報をスクロールに合わせて控えめに表示する
-    initReveal(".home-feature-media, .home-feature-body, .home-news");
+    initReveal(".home-feature-media, .home-feature-body, .home-news", { includeVisible: true, startDelay: 0.7, stagger: 0.15 });
   </script>
 </body>
 </html>

@@ -9,7 +9,8 @@
    ======================================================== */
 
 // config.includeVisible: true のとき、最初から画面に見えている要素も、ページを開いた直後に、
-// 上から順に(config.stagger 秒ずつ遅らせて。省略時 0.12秒)ふわっと現れる(読み物のページ向き。トップページは、これまでどおり、動かさない)。
+// 上から順に(config.stagger 秒ずつ遅らせて。省略時 0.12秒)ふわっと現れる(読み物のページ向き。
+// トップページも、スマホ・iPadで最初の画面に入る「Miso」の欄を、見出しのあとに現れさせるため、これを使う)。
 function initReveal(selector, config) {
   const includeVisible = !!(config && config.includeVisible);
   // 最初から見えている要素が、1つずつ遅れて現れる間隔(秒)。config.stagger で変えられる(省略時 0.12)。
