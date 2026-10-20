@@ -3433,3 +3433,47 @@ a.global-footer-instagram:focus-visible {
     mask-image: none;
   }
 }
+
+/* ---- スマホ(幅799px以下): 案内文だけのページ(Workshop・Contact。.intro-mid がある本文)を、ヘッダーとフッターの間に、バランスよく置く ----
+   これまでは、本文が、ヘッダーのすぐ下(56px)に固定され、フッターまでの間が約500px空いて、上に寄って見えていた。
+   - 本文(文章+筆の線)を、ヘッダーとフッターの間の中央に置く(本文の欄を縦のflexにして、中央ぞろえ)。
+   - ページの最低の高さを、100vh から 100svh(スマホのブラウザの、上下のバーが出ているときの高さ)にする。
+     100vh だと、バーの裏まで含む高さなので、開いた直後、フッターのメールマークが、下のバーに隠れることがあるため。
+     100svh に対応していない環境は、これまでの 100vh のまま。
+   - :has() に対応していない古い環境は、この指定が効かず、これまでの見え方のまま(崩れない)。
+   PC・タブレット横向き(800px以上)と、ほかのページは、変えない。戻すときは、このブロックを消す。 */
+@media (max-width: 799px) {
+  body:has(.intro-mid) {
+    min-height: 100vh;
+    min-height: 100svh;
+  }
+
+  body:has(.intro-mid) > main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+}
+
+/* ---- iPad・iPad mini など(幅800〜1400px): 案内文だけのページ(Workshop・Contact)も、上のスマホ幅と同じく、ヘッダーとフッターの間に置く ----
+   縦向き(例: 820 × 1180)では、本文が、ヘッダーの下に寄って(ヘッダーからフッターまでの33%の位置)、下に大きく空いていた。
+   - 本文を、ヘッダーとフッターの間の中央に置く。ページの最低の高さを 100svh にして、バーが出ているときも、フッターが、画面に入るようにする。
+   - 幅800px以上で、画面の高さに比例して本文を下げていた余白(16vh + 50px)は、ここでは使わない(中央ぞろえに任せる)。
+   幅1400pxより広いPC(MacBook 1440px など)は、これまでどおり(ここで決めた本文の位置は、変えない)。
+   幅799px以下は、上のブロックのとおり。戻すときは、このブロックを消す。 */
+@media (min-width: 800px) and (max-width: 1400px) {
+  body:has(.intro-mid) {
+    min-height: 100vh;
+    min-height: 100svh;
+  }
+
+  body:has(.intro-mid) > main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  body:has(.intro-mid) .intro-mid {
+    margin-top: 0;
+  }
+}
