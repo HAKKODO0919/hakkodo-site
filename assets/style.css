@@ -3569,3 +3569,40 @@ a.global-footer-instagram:focus-visible {
     font-size: clamp(0.94rem, 1.61vw, 1.03rem);
   }
 }
+
+/* ---- トップページ(幅800px以上): 3つの欄(Miso / Recipes / Workshops)の文章と、写真の端との距離を、言語に関係なくそろえる ----
+   これまで、文章の左端(Recipesは右端)は、文章の長さで決まっていた(箱が内容に合わせて縮み、写真の側の端が、文字の長さで動く)。
+   日本語だけ、写真の端から文章までが、3つとも62pxにそろっていたが、長い言語では、そろわなかった
+   (PC 1440px: スペイン語は Miso -36px・Recipes -17px・Workshops 66px。カタルーニャ語は -36 / 35 / 97px。マイナスは、文章が写真の透ける端に重なる)。
+   - 写真が左の欄(Miso・Workshops): 文章の箱を、写真の右の列(38%)いっぱいに広げ、左に、写真との距離(--feature-gap)の余白を置く。
+     文章の左端が、写真の端から、いつも --feature-gap の位置から始まる(長い言語は、同じ幅の中で、行数が増える)。
+   - 写真が右の欄(Recipes): 同じく、写真の左の列(38%)いっぱいに広げ、右に、--feature-gap の余白を置く。
+     (文章の右端は、行ごとにそろわない「ぎざぎざ」なので、写真との見た目の距離は、言語や行の折り返しで、多少、変わる。)
+   --feature-gap は、幅1187px以上で62px(日本語の、これまでの距離)、幅が狭いほど、小さくなる(幅800pxで24px)。
+   日本語の、幅1187px以上での配置は、変わらない。文字の大きさ・写真・縦の位置・スマホ(799px以下)は、変えない。戻すときは、このブロックを消す。 */
+@media (min-width: 800px) {
+  .home .home-feature {
+    --feature-gap: clamp(24px, calc((100vw - 800px) * 0.16), 62px);
+  }
+
+  .home .home-feature:not(.home-feature--reverse) .home-feature-body {
+    grid-column: 2;
+    justify-self: stretch;
+    max-width: none;
+    padding-left: var(--feature-gap);
+  }
+
+  .home .home-feature--reverse .home-feature-body {
+    grid-column: 1;
+    justify-self: stretch;
+    max-width: none;
+    padding-left: 0;
+    padding-right: var(--feature-gap);
+  }
+
+  /* Workshops: 日本語の説明文は、1行が約373pxで、列の幅(373px)とほぼ同じ。わずかな差(フォントの違いなど)で、2行目に折り返してしまうため、
+     文章の右に、24pxの余裕を足す(欄の左右の余白(32〜48px)の中に収まる。写真との距離は変わらない)。 */
+  .home .home-feature--workshops .home-feature-body {
+    margin-right: -24px;
+  }
+}
