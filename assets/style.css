@@ -761,12 +761,11 @@ body > main {
   padding-top: 48px;
 }
 
+/* 「作り手について」は、四角い枠で囲まない。前後の細い区切り線と、余白・中央の配置だけで、独立したセクションに見せる。
+   (将来、顔のイラストを作り手の写真に差し替えても、「見出し→画像→本文」の縦の並びのまま、自然に収まる。) */
 .creator-card {
   max-width: 480px;
   margin: 0 auto;
-  padding: 26px 18px;
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius);
 }
 
 /* 見出しは箱の横幅に対して中央揃え。顔アイコンとの間は少しだけ
@@ -3674,5 +3673,143 @@ a.global-footer-instagram:focus-visible {
 
   #product-root .story-block {
     padding: 32px 32px 30px;
+  }
+}
+/* ---- 保存方法・賞味期限(商品ページ) ----
+   箱で囲まず、見出し・余白・細い区切り線だけで整理する(「こだわり」の囲みや「作り手」のカードと重ならないように)。
+   保存方法 = 導入文 + アイコン付きの3項目(縦に並べる)。賞味期限 = 期間を大きく見せ、その下に補足。
+   2つの間には、他のセクションと同じ細い区切り線を引く(以前は外していた)。 */
+#product-root .best-before {
+  border-top: 1px solid var(--color-border);
+}
+
+#product-root .storage-intro {
+  margin: 0 0 18px;
+  font-size: 0.9rem;
+  line-height: 1.9;
+  color: var(--color-text);
+}
+
+#product-root .storage-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+#product-root .storage-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 16px 0;
+  border-top: 1px solid var(--color-border);
+}
+
+#product-root .storage-list li:last-child {
+  padding-bottom: 0;
+}
+
+#product-root .info-icon {
+  flex: none;
+  color: var(--color-accent);
+}
+
+#product-root .storage-list .info-icon {
+  margin-top: 1px;
+}
+
+#product-root .storage-item-body {
+  min-width: 0;
+}
+
+#product-root .storage-label {
+  margin: 0 0 2px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  line-height: 1.7;
+  letter-spacing: 0.08em;
+  color: var(--color-heading);
+}
+
+#product-root .storage-text {
+  margin: 0;
+  font-size: 0.9rem;
+  line-height: 1.9;
+  color: var(--color-muted);
+}
+
+#product-root .best-before-main {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+/* 「開封前」「開封後」の見出し(.storage-label)と、同じフォント・文字サイズ・太さ・字間にそろえる */
+#product-root .best-before-value {
+  margin: 0;
+  min-width: 0;
+  font-size: 0.95rem;
+  font-weight: 700;
+  line-height: 1.7;
+  letter-spacing: 0.08em;
+  color: var(--color-heading);
+}
+
+/* 補足の文字の始まりを、「開封前」「開封後」の説明文と同じ位置にそろえる(アイコン26px + すき間16px = 42px。賞味期限のアイコン26px + すき間16px も42px) */
+#product-root .best-before-note {
+  margin: 14px 0 0;
+  padding-left: 42px;
+  font-size: 0.9rem;
+  line-height: 1.9;
+  color: var(--color-muted);
+}
+
+/* 補足は、1文ずつ別の行にする(長い1つの段落にしない) */
+#product-root .best-before-note > span {
+  display: block;
+}
+
+
+/* 日本語の文節(途中で折り返さない) */
+#product-root .ph {
+  display: inline-block;
+}
+
+/* 導入文を外したので、最初の項目は、見出しの直下に、線なしで置く */
+#product-root .storage-list li:first-child {
+  border-top: none;
+  padding-top: 0;
+}
+
+/* 日本語: 「生味噌ならではの自然な変化です。」は、途中で折り返さず1行にする。幅が約333px以下の小さな画面では、1行に収まるよう、補足の文字だけ少し小さくする */
+#product-root .best-before-note:lang(ja) > span:last-child {
+  white-space: nowrap;
+}
+
+@media (max-width: 340px) {
+  #product-root .best-before-note:lang(ja) {
+    font-size: 0.84rem;
+  }
+}
+
+/* ---- 商品ページの写真(PC・幅1000px以上): 表示を約13%小さくする(幅 880px → 約766px) ----
+   写真が大きく、商品名・価格などの情報とのバランスが取れていなかったため、写真の幅だけを、枠(880px)の87%にする。
+   縦横比(2:1)・切り出し位置・元の画像・下端の溶け方は、変えない。枠(880px)の中で中央に置くので、左右に余白ができる。
+   写真が小さくなったぶん、高さも比例して低くなる(440px → 約383px)ので、商品名などは、その分だけ上がる。
+   高さの低い画面(「画面の高さ − 313px」の上限が、写真の高さより低くなるとき)は、これまでは高さだけが切り詰められ、
+   写真の上下が余計に切れて、瓶が欠ける恐れがあった。そこで、幅のほうを、上限の2倍(縦横比2:1)までに抑え、
+   高さが切り詰められないようにする。どんな高さの画面でも、写真は、縦横比2:1のまま小さくなるだけで、瓶は欠けない。
+   スマホ・タブレット(1000px未満)は、変えない。戻すときは、このブロックを消す。 */
+@media (min-width: 1000px) {
+  #product-root .product-hero-frame .hero {
+    width: min(87%, calc(max(100vh - var(--product-hero-reserve), 320px) * 2));
+  }
+}
+
+/* ---- 商品名(PC・幅1000px以上): 文字を約11%大きくする(1.35rem=約21.6px → 1.5rem=24px) ----
+   写真を小さくした(上のブロック)ので、商品名が、写真に対して控えめに見えすぎないよう、少しだけ大きくする。
+   書体・太さ・字間(0.12em)・色・行間・位置・キャッチコピー以下は、変えない。スマホ・タブレット(1000px未満)は、変えない。戻すときは、このブロックを消す。 */
+@media (min-width: 1000px) {
+  #product-root .product-detail-head h1 {
+    font-size: 1.5rem;
   }
 }

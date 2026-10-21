@@ -83,15 +83,18 @@ window.PRODUCT_DATA = {
       ingredients: ["米麹(米、麹菌)", "大豆", "海塩"],
       ingredientsNote: "米・大豆・塩は有機認証原料を使用しています。",
       allergens: ["大豆"],
-      storageWarning: [
-        { text: "生味噌のため、酵母が生きています。", bold: true },
-        { text: "発酵が進みやすいため、冷蔵庫で保存してください。", bold: true }
-      ],
-      storageMethod: "味噌本来の発酵を大切にしているため、保存中も温度によって発酵が進むことがあります。\n\n開封前は直射日光を避け、涼しい場所で保存してください。より良い状態で味噌をお楽しみいただくなら、開封前から冷蔵保存することをおすすめします。\n\n開封後は必ず冷蔵庫で保存してください。",
-      bestBefore: [
-        { text: "賞味期限は、瓶詰めから1年を目安としています。", bold: true },
-        { text: "味噌は発酵・熟成が続く食品のため、保存状態や時間の経過によって、色や香り、味わいが少しずつ変化します。\nその変化も、生味噌ならではの味わいとしてお楽しみください。", bold: false }
-      ]
+      // 保存方法: intro(導入文)+ items(アイコン・見出し・説明の3項目)。icon は sun / fridge / jarOpen。日本語の文の「|」は、折り返してよい文節の切れ目(画面に「|」は出ない)
+      storage: {
+        items: [
+          { icon: "sun", label: "開封前", text: "生味噌は保存中も|発酵が進みます。|ご購入後は|品質を|良い状態に|保つため、|ご家庭では|冷蔵保存を|おすすめします。" },
+          { icon: "jarOpen", label: "開封後", text: "必ず冷蔵庫で保存してください。" }
+        ]
+      },
+      // 賞味期限: value(目立たせる期間)+ note(補足。1文ずつ、別の行になる)
+      bestBeforeInfo: {
+        value: "瓶詰めから約1年",
+        note: ["保存状態や|時間の経過により、|色・香り・|味わいが|変化することが|あります。", "生味噌|ならではの|自然な|変化です。"]
+      }
     },
     ca: {
       name: "HAKKODO MISO｜Miso vermell madurat",
@@ -154,15 +157,18 @@ window.PRODUCT_DATA = {
       ingredients: ["Koji d'arròs (arròs, fong koji)", "Soja", "Sal marina"],
       ingredientsNote: "L'arròs, la soja i la sal són ingredients certificats ecològics.",
       allergens: ["Soja"],
-      storageWarning: [
-        { text: "Com que és miso cru, encara és viu.", bold: true },
-        { text: "La fermentació pot avançar fàcilment, per això cal conservar-lo a la nevera.", bold: true }
-      ],
-      storageMethod: "Com que valorem la fermentació natural del miso, aquest pot continuar fermentant durant l'emmagatzematge segons la temperatura.\n\nAbans d'obrir-lo, cal conservar-lo en un lloc fresc, allunyat de la llum solar directa. Per gaudir-ne en les millors condicions, recomanem conservar-lo a la nevera fins i tot abans d'obrir-lo.\n\nUn cop obert, cal conservar-lo sempre a la nevera.",
-      bestBefore: [
-        { text: "La data de consum preferent és d'aproximadament un any des de l'envasat.", bold: true },
-        { text: "Com que el miso continua fermentant i madurant, el seu color, aroma i sabor canviaran gradualment segons les condicions d'emmagatzematge i el pas del temps.\nAquest canvi també forma part del caràcter propi del miso cru.", bold: false }
-      ]
+      // 保存方法: intro(導入文)+ items(アイコン・見出し・説明の3項目)。icon は sun / fridge / jarOpen。日本語の文の「|」は、折り返してよい文節の切れ目(画面に「|」は出ない)
+      storage: {
+        items: [
+          { icon: "sun", label: "Abans d'obrir", text: "El miso cru continua fermentant durant la conservació. Un cop comprat, per mantenir-ne la qualitat, recomanem conservar-lo a la nevera a casa." },
+          { icon: "jarOpen", label: "Després d'obrir", text: "Cal conservar-lo sempre a la nevera." }
+        ]
+      },
+      // 賞味期限: value(目立たせる期間)+ note(補足。1文ずつ、別の行になる)
+      bestBeforeInfo: {
+        value: "Aproximadament 1 any des de l'envasat",
+        note: ["El color, l'aroma i el sabor poden canviar segons les condicions de conservació i el pas del temps.", "És un canvi natural propi del miso cru."]
+      }
     },
     es: {
       name: "HAKKODO MISO｜Miso rojo madurado",
@@ -225,15 +231,18 @@ window.PRODUCT_DATA = {
       ingredients: ["Koji de arroz (arroz, hongo koji)", "Soja", "Sal marina"],
       ingredientsNote: "El arroz, la soja y la sal son ingredientes certificados ecológicos.",
       allergens: ["Soja"],
-      storageWarning: [
-        { text: "Como es miso crudo, sigue vivo.", bold: true },
-        { text: "La fermentación puede avanzar fácilmente, por eso hay que conservarlo en la nevera.", bold: true }
-      ],
-      storageMethod: "Como valoramos la fermentación natural del miso, este puede seguir fermentando durante el almacenamiento según la temperatura.\n\nAntes de abrirlo, conviene conservarlo en un lugar fresco, alejado de la luz solar directa. Para disfrutarlo en las mejores condiciones, recomendamos conservarlo en el refrigerador incluso antes de abrirlo.\n\nUna vez abierto, debe conservarse siempre en el refrigerador.",
-      bestBefore: [
-        { text: "La fecha de consumo preferente es de aproximadamente un año desde el envasado.", bold: true },
-        { text: "Como el miso continúa fermentando y madurando, su color, aroma y sabor cambiarán gradualmente según las condiciones de almacenamiento y el paso del tiempo.\nEse cambio también forma parte del carácter propio del miso crudo.", bold: false }
-      ]
+      // 保存方法: intro(導入文)+ items(アイコン・見出し・説明の3項目)。icon は sun / fridge / jarOpen。日本語の文の「|」は、折り返してよい文節の切れ目(画面に「|」は出ない)
+      storage: {
+        items: [
+          { icon: "sun", label: "Antes de abrir", text: "El miso crudo sigue fermentando durante el almacenamiento. Una vez comprado, para mantener su calidad, recomendamos conservarlo en el refrigerador en casa." },
+          { icon: "jarOpen", label: "Después de abrir", text: "Debe conservarse siempre en el refrigerador." }
+        ]
+      },
+      // 賞味期限: value(目立たせる期間)+ note(補足。1文ずつ、別の行になる)
+      bestBeforeInfo: {
+        value: "Aproximadamente 1 año desde el envasado",
+        note: ["El color, el aroma y el sabor pueden cambiar según las condiciones de almacenamiento y el paso del tiempo.", "Es un cambio natural propio del miso crudo."]
+      }
     },
     en: {
       name: "HAKKODO MISO｜Aged Red Miso",
@@ -296,15 +305,18 @@ window.PRODUCT_DATA = {
       ingredients: ["Rice koji (rice, koji mold)", "Soybeans", "Sea salt"],
       ingredientsNote: "The rice, soybeans, and salt are certified organic ingredients.",
       allergens: ["Soybeans"],
-      storageWarning: [
-        { text: "This is raw miso, so it's still alive.", bold: true },
-        { text: "Fermentation can progress easily, so please store it in the refrigerator.", bold: true }
-      ],
-      storageMethod: "Because we value miso's natural fermentation, it may continue to ferment during storage depending on the temperature.\n\nBefore opening, keep it away from direct sunlight in a cool place. For the best quality, we recommend refrigerating it even before opening.\n\nAfter opening, please always store it in the refrigerator.",
-      bestBefore: [
-        { text: "The best-before period is approximately one year from bottling.", bold: true },
-        { text: "Since miso continues to ferment and age, its color, aroma, and flavor will gradually change depending on storage conditions and time.\nWe hope you'll enjoy that change as part of the character of raw miso.", bold: false }
-      ]
+      // 保存方法: intro(導入文)+ items(アイコン・見出し・説明の3項目)。icon は sun / fridge / jarOpen。日本語の文の「|」は、折り返してよい文節の切れ目(画面に「|」は出ない)
+      storage: {
+        items: [
+          { icon: "sun", label: "Before opening", text: "Raw miso keeps fermenting during storage. After purchase, to keep it in good condition, we recommend storing it in the refrigerator at home." },
+          { icon: "jarOpen", label: "After opening", text: "Always store in the refrigerator." }
+        ]
+      },
+      // 賞味期限: value(目立たせる期間)+ note(補足。1文ずつ、別の行になる)
+      bestBeforeInfo: {
+        value: "About 1 year from bottling",
+        note: ["Color, aroma, and flavor may change depending on storage conditions and time.", "This is a natural change unique to raw miso."]
+      }
     }
   }
 };

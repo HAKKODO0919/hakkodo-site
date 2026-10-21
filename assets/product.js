@@ -126,6 +126,47 @@ const STORY_ICONS = {
     '<path d="M9.5 13.5h5M9.5 16.5h3.2"/>',
 };
 
+// 「保存方法」「賞味期限」に添える、線画アイコン。線の太さ・形式は、上の「こだわり」のアイコンと同じ。
+// data の storage.items[n].icon に sun / fridge / jarOpen を書く。calendar は賞味期限の表示で使う。
+const INFO_ICONS = {
+  // 日なた(直射日光を避ける): 太陽に、斜めの線を重ねる
+  sun:
+    '<circle cx="12" cy="12" r="3.6"/>' +
+    '<path d="M12 3v2M12 19v2M3 12h2M19 12h2M5.6 5.6 7 7M17 17l1.4 1.4M5.6 18.4 7 17M17 7l1.4-1.4"/>' +
+    '<path d="M3.5 20.5 20.5 3.5"/>',
+  // 冷蔵庫
+  fridge:
+    '<rect x="6" y="2.5" width="12" height="19" rx="2"/><path d="M6 10h12M9 5.8v1.6M9 13v3"/>',
+  // 蓋をあけた瓶(開封後)
+  jarOpen:
+    '<rect x="7" y="2.5" width="10" height="3" rx="1" transform="rotate(-10 12 4)"/>' +
+    '<path d="M8.2 8.5v.7C6.6 10.2 5.8 11.4 5.8 13v6a2 2 0 0 0 2 2h8.4a2 2 0 0 0 2-2v-6c0-1.6-.8-2.8-2.4-3.8v-.7z"/>' +
+    '<path d="M9.5 15.5h5"/>',
+  // カレンダー(賞味期限)
+  calendar:
+    '<rect x="3.5" y="5" width="17" height="15.5" rx="2"/><path d="M3.5 10h17M8 3v3.5M16 3v3.5"/>',
+};
+
+// 文中の「|」を、折り返してよい文節の切れ目にする(各文節は途中で折り返さない)。日本語で「ならでは」の途中や、行頭に「。」だけが残るのを防ぐ。
+// 「|」が無い文(ca・es・en)は、そのまま普通に折り返す。
+function phrasesHtml(text) {
+  const s = String(text || "");
+  if (s.indexOf("|") < 0) return escapeText(s);
+  return s
+    .split("|")
+    .map((part) => `<span class="ph">${escapeText(part)}</span>`)
+    .join("");
+}
+
+function infoIconHtml(name, size) {
+  const icon = INFO_ICONS[name];
+  if (!icon) return "";
+  return (
+    `<svg class="info-icon" width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" ` +
+    `stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">${icon}</svg>`
+  );
+}
+
 // 「こだわり」の見出し(h3)。icon があれば、見出しの上に、アイコンを置く(アイコン → 見出し → 説明文の順)。
 // アイコンは、見出し(h3)の外に置く(見出しの文字は、そのまま。読み上げにも含めない)。
 function storyHeadingHtml(block) {
@@ -215,18 +256,39 @@ function renderProductContent(data, siteRoot, lang) {
       </div>`
     : "";
 
-  const storageHtml = tr.storageWarning
+  // 保存方法: 導入文 + アイコン付きの3項目(アイコンは飾り。見出しと説明は、普通のHTMLの文字)
+  const storageHtml = tr.storage
     ? `<div class="section storage-info">
         <h2>${t("sectionStorage", lang)}</h2>
-        ${renderNotesBlocks(tr.storageWarning)}
-        ${tr.storageMethod ? `<p class="notes">${escapeText(tr.storageMethod)}</p>` : ""}
+        ${tr.storage.intro ? `<p class="storage-intro">${phrasesHtml(tr.storage.intro)}</p>` : ""}
+        <ul class="storage-list">
+          ${(tr.storage.items || [])
+            .map(
+              (item) => `
+          <li>
+            ${infoIconHtml(item.icon, 26)}
+            <div class="storage-item-body">
+              <p class="storage-label">${escapeText(item.label)}</p>
+              <p class="storage-text">${phrasesHtml(item.text)}</p>
+            </div>
+          </li>`
+            )
+            .join("")}
+        </ul>
       </div>`
     : "";
 
-  const bestBeforeHtml = tr.bestBefore
+  // 賞味期限: 期間を大きく見せ、その下に補足
+  const bestBeforeHtml = tr.bestBeforeInfo
     ? `<div class="section best-before">
         <h2>${t("sectionBestBefore", lang)}</h2>
-        ${renderNotesBlocks(tr.bestBefore)}
+        <div class="best-before-main">
+          ${infoIconHtml("calendar", 26)}
+          <p class="best-before-value">${escapeText(tr.bestBeforeInfo.value)}</p>
+        </div>
+        ${(tr.bestBeforeInfo.note || []).length
+          ? `<p class="best-before-note">${tr.bestBeforeInfo.note.map((line) => `<span>${phrasesHtml(line)}</span>`).join("")}</p>`
+          : ""}
       </div>`
     : "";
 
