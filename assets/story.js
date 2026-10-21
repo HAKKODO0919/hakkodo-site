@@ -64,9 +64,10 @@ function renderStoryContent(data, siteRoot, lang) {
   // 最初から画面に見えている部分(見出し・最初の段落)は、ページを開いて0.25秒後から、上から順に、0.15秒ずつ遅れて現れ(includeVisible・startDelay・stagger。動きの長さ(0.9秒)・距離(12px)・最初の遅れ(0.25秒)は、トップページの「旨味の世界へようこそ。」と同じで、読みやすさのため、次の要素との間隔だけ、トップ(0.2秒)より少し短くした。
   // 以前は、0.1秒後から0.12秒ずつで、最初の描画の前後に動きが終わり、気づきにくかった)、
   // 下の段落・写真は、画面に入るときに現れる。
+  // visibleRatio: 1 は、スマホで、画面の下の端に少しだけ見える段落(縦844px前後の画面の、4つ目の段落「日本の発酵文化から〜」)も、順番に現れる列に入れるため(reveal.js を参照)。
   // reveal.js を読み込んでいないページでは何もしない(言語を切り替えて描き直したときも、ここで仕掛け直す)。
   if (typeof initReveal === "function") {
-    initReveal(".story-page .intro, .story-page .home-feature-text:not(.story-closing), .story-page .story-ending, .story-page .recipe-hero, .story-page .story-hero", { includeVisible: true, startDelay: 0.25, stagger: 0.15 });
+    initReveal(".story-page .intro, .story-page .home-feature-text:not(.story-closing), .story-page .story-ending, .story-page .recipe-hero, .story-page .story-hero", { includeVisible: true, startDelay: 0.25, stagger: 0.15, visibleRatio: 1 });
   }
 }
 

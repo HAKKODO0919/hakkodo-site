@@ -18,6 +18,11 @@ function initReveal(selector, config) {
   // 最初の1つが動き始めるまでの待ち時間(秒。省略時 0.1)。ページが最初に描かれたあとに動きが始まるよう、少し待たせると、
   // 動きの大半が、画面に出る前に終わってしまうことがなくなる(通信が遅いときほど、最初の描画が遅れるため)。
   const startDelay = config && config.startDelay != null ? config.startDelay : 0.1;
+  // config.visibleRatio: 「最初から見えている」とみなす位置(画面の高さに対する割合。省略時 0.9)。スマホ・タブレット(下の compact)では、
+  // 要素が画面に少しでも入った時点で動き始める(rootMargin 0)ため、画面の高さの90〜100%のところにある要素は、
+  // 「最初から見えている」の判定(90%)から外れ、順番(遅れ)を待たずに、ページを開いた瞬間に、1つだけ先に現れてしまっていた。
+  // 1 にすると、そういう要素も、上から順に現れる列に入る。省略したページ(トップ・商品ページなど)は、これまでどおり。
+  const visibleRatio = config && config.visibleRatio ? config.visibleRatio : 0.9;
   if (!("IntersectionObserver" in window)) return;
   if (window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
@@ -54,7 +59,7 @@ function initReveal(selector, config) {
 
   let initialIndex = 0;
   targets.forEach((el) => {
-    if (el.getBoundingClientRect().top < viewportHeight * 0.9) {
+    if (el.getBoundingClientRect().top < viewportHeight * (compact ? visibleRatio : 0.9)) {
       // 最初から画面に見えている要素と、すでに通り過ぎた要素は、これまでどおり動かさない。
       // includeVisible のときだけ、最初から見えている要素を、順に現れさせる(通り過ぎた要素=画面より上は動かさない)。
       if (!includeVisible || el.getBoundingClientRect().bottom < 0) return;
