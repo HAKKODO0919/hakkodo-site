@@ -2889,20 +2889,15 @@ a.global-footer-instagram:focus-visible {
   text-align: center;
 }
 
-/* こだわり: 4つの項目を、余白で区切った短い塊として、中央に置く。
-   太字(700)の続く文章が「ずらっと」並ぶ印象を弱めるため、太さは500にして、行間を広げる(強調の文は残す)。 */
+/* こだわり: 4つの項目を、細い線で囲んだ、控えめな箱として、1つのグリッドに並べる(PCは2列×2行、スマホは縦1列。下の「こだわりの囲み」を参照)。
+   各項目は「アイコン → 見出し → 説明文」の順。強い背景色・影・大きな角丸は使わない。
+   太字(700)の続く文章が「ずらっと」並ぶ印象を弱めるため、文章の太さは500にして、行間を広げる(強調の文は残す)。 */
 #product-root .story-section {
-  padding-bottom: 24px;
+  padding-bottom: 56px;
 }
 
 #product-root .story-block {
-  max-width: 30em;
-  margin: 0 auto 56px;
   text-align: left;
-}
-
-#product-root .story-block:last-of-type {
-  margin-bottom: 24px;
 }
 
 #product-root .story-block h3 {
@@ -2987,10 +2982,12 @@ a.global-footer-instagram:focus-visible {
   padding-bottom: 24px;
 }
 
-/* 「作り手について」は、「こだわり」の直後に置く(物語がそのまま続く)。ここには区切り線を引かず、余白だけでつなぐ */
+/* 「作り手について」は、「こだわり」の直後に置く(物語がそのまま続く)。
+   「こだわり」(4つの囲み)と「作り手について」の間に、原材料の上と同じ、細い区切り線を引く(線の上下の余白は、原材料の上と同じ56px)。
+   (以前は、線を引かず、余白だけでつないでいた。「こだわり」を囲みにしたため、別のまとまりとして、線で分けた。) */
 #product-root .creator-outer {
-  border-top: none;
-  padding-top: 24px;
+  border-top: 1px solid var(--color-border);
+  padding-top: 56px;
   padding-bottom: 56px;
 }
 
@@ -3635,24 +3632,47 @@ a.global-footer-instagram:focus-visible {
   }
 }
 
-/* ---- 商品ページ「こだわり」: 見出しの左に、控えめな線画アイコンを添える ----
-   アイコンは、assets/product.js が、インラインSVGで、見出し(h3.has-icon)の左に置く(画像ファイルは使わない。色は見出しと同じ currentColor)。
-   見出しと横並びにするだけで、縦並び・幅30em・中央配置・本文の大きさ・項目の間の余白(56px)は、変えない。
-   アイコンは、見出しの1行目(行の高さ 1.7 × 1.05rem)の中央にそろえる。見出しが2行以上に折り返しても、アイコンは1行目に固定される。
-   data の icon が無い項目(ほかの商品など)は、これまでどおり(h3 に has-icon が付かない)。戻すときは、このブロックを消す。 */
-#product-root .story-block h3.has-icon {
-  display: flex;
-  align-items: flex-start;
-  gap: 12px;
+/* ---- 商品ページ「こだわり」: 細い線で囲んだ、4つの項目 ----
+   assets/product.js が、4つの項目(.story-block)を、1つのグリッド(.story-grid)に入れる。各項目は「アイコン → 見出し(h3) → 説明文」の順。
+   - スマホ・タブレット(幅999px以下): 縦1列。項目の間は16px。文章の幅は36em(約570px)までで、中央に置く。
+   - PC(幅1000px以上): 2列×2行。幅は、商品の写真(880px)と同じにそろえる(写真と同じく、本文の列(640px)から、左右にはみ出す)。
+   - 囲みは、細い線(1px・うすい茶系)だけ。背景色・影は付けず、角は2pxだけ丸める。同じ行の項目は、高さがそろう。
+   - アイコンは、見出しと同じアクセント色(currentColor)。画像ファイルは使わない。
+   data の icon が無い項目(ほかの商品など)は、アイコンなしで、同じ箱に入る。戻すときは、このブロックと、product.js の story-grid を戻す。 */
+#product-root .story-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+  max-width: 36em;
+  margin: 0 auto;
 }
 
-#product-root .story-block h3.has-icon .story-icon {
-  flex: none;
-  width: 26px;
-  height: 26px;
-  margin-top: calc((1.7 * 1.05rem - 26px) / 2);
-}
-
-#product-root .story-block h3.has-icon span {
+#product-root .story-block {
   min-width: 0;
+  margin: 0;
+  padding: 24px 22px 22px;
+  border: 1px solid #ddd6ca;
+  border-radius: 2px;
+}
+
+#product-root .story-block .story-icon {
+  display: block;
+  width: 30px;
+  height: 30px;
+  margin: 0 0 14px;
+  color: var(--color-accent);
+}
+
+@media (min-width: 1000px) {
+  #product-root .story-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+    max-width: none;
+    margin-right: -144px;
+    margin-left: -144px;
+  }
+
+  #product-root .story-block {
+    padding: 32px 32px 30px;
+  }
 }

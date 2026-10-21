@@ -102,7 +102,7 @@ function renderProductNameHtml(name) {
 // 24×24の図面・塗りなし・線幅1.5・角と線端は丸く。色は currentColor(見出しと同じ色)。
 // width / height を SVG 自身に書いてあるので、CSS が古いキャッシュのままでも、巨大には表示されない。
 const STORY_ICON_ATTRS =
-  'class="story-icon" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" ' +
+  'class="story-icon" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" ' +
   'stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"';
 const STORY_ICONS = {
   // 雪の結晶(寒仕込み): 3本の軸と、先の小さな枝
@@ -126,12 +126,13 @@ const STORY_ICONS = {
     '<path d="M9.5 13.5h5M9.5 16.5h3.2"/>',
 };
 
-// 「こだわり」の見出し(h3)。icon があれば、見出しの左にアイコンを添えて、横並びにする(見出し文は span に入れる)。
+// 「こだわり」の見出し(h3)。icon があれば、見出しの上に、アイコンを置く(アイコン → 見出し → 説明文の順)。
+// アイコンは、見出し(h3)の外に置く(見出しの文字は、そのまま。読み上げにも含めない)。
 function storyHeadingHtml(block) {
   const text = escapeText(block.heading || "");
   const icon = block.icon && STORY_ICONS[block.icon];
   if (!icon) return `<h3>${text}</h3>`;
-  return `<h3 class="has-icon"><svg ${STORY_ICON_ATTRS}>${icon}</svg><span>${text}</span></h3>`;
+  return `<svg ${STORY_ICON_ATTRS}>${icon}</svg><h3>${text}</h3>`;
 }
 
 // siteRoot: サイトの一番上の階層への相対パス、lang: 表示する言語コード
@@ -151,6 +152,7 @@ function renderProductContent(data, siteRoot, lang) {
   const storyHtml = (tr.story && tr.story.blocks && tr.story.blocks.length)
     ? `<div class="section story-section">
         <h2>${t("sectionStory", lang)}</h2>
+        <div class="story-grid">
         ${tr.story.blocks
           .map(
             (block) => `
@@ -175,6 +177,7 @@ function renderProductContent(data, siteRoot, lang) {
           </div>`
           )
           .join("")}
+        </div>
       </div>`
     : "";
 
