@@ -3891,3 +3891,57 @@ a.global-footer-instagram:focus-visible {
     font-size: 1.5rem;
   }
 }
+
+/* ---- レシピ一覧: 静かなホバー表現 ----
+   レイアウト・文章・画像・他のページ(商品一覧も)は変えない。#recipe-list-root の中の .recipe-card だけに効く。戻すときは、このブロックを消す。
+   - マウスを乗せる(ホバー)・キーボードで選ぶ(フォーカス)と、(1) 写真だけが、ごくわずか(1.02倍)に大きくなる(.thumb が overflow: hidden なので、枠の外にははみ出さない)、
+     (2) 「レシピを見る」の枠・文字・背景に、アクセント色(ブラウン)が、ごく淡く現れる。影・太い下線・新しい飾りは加えない。
+   - ホバーは、マウスなどで乗せられる端末(hover: hover かつ pointer: fine)だけ。タッチ端末では、タップのあとにホバーの見た目が残らない(ふつうのリンクのまま)。
+   - 動きは、短く滑らか(写真 0.5秒・リンク 0.3秒)。「動きを減らす」設定(prefers-reduced-motion: reduce)では、拡大も、動き(トランジション)も、なしにする(色の変化だけ、すぐに切り替わる)。
+   - キーボードで選んだときは、ホバーと同じ見た目に加えて、はっきりしたフォーカスの枠(アクセント色の2px)を出す(マウスのクリックでは出ない)。 */
+#recipe-list-root .recipe-card .home-feature-link {
+  transition: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  #recipe-list-root .recipe-card .thumb img {
+    transition: transform 0.5s ease-out;
+  }
+
+  #recipe-list-root .recipe-card .home-feature-link {
+    transition: color 0.3s ease, border-color 0.3s ease, background-color 0.3s ease;
+  }
+}
+
+/* マウスで乗せたとき(マウスなどの端末だけ) */
+@media (hover: hover) and (pointer: fine) {
+  #recipe-list-root .recipe-card:hover .home-feature-link {
+    color: var(--color-accent);
+    border-color: rgba(181, 101, 29, 0.4);
+    background-color: rgba(181, 101, 29, 0.05);
+  }
+}
+
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  #recipe-list-root .recipe-card:hover .thumb img {
+    transform: scale(1.02);
+  }
+}
+
+/* キーボードで選んだとき(ホバーと同じ見た目 + はっきりしたフォーカスの枠) */
+#recipe-list-root .recipe-card:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 4px;
+}
+
+#recipe-list-root .recipe-card:focus-visible .home-feature-link {
+  color: var(--color-accent);
+  border-color: rgba(181, 101, 29, 0.4);
+  background-color: rgba(181, 101, 29, 0.05);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  #recipe-list-root .recipe-card:focus-visible .thumb img {
+    transform: scale(1.02);
+  }
+}
