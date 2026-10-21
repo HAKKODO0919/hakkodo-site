@@ -71,7 +71,7 @@ window.PRODUCT_DATA = {
       creator: {
         image: { src: "images/aka-miso/creator.jpg", alt: "作り手の似顔絵" },
         body: [
-          { text: "私は日本で管理栄養士として、さまざまな食の現場に携わってきました。日本の家庭料理やフランス菓子に関わる経験を経て、今はスペイン・カタルーニャで、日本の伝統的な発酵文化を大切にしながら味噌を仕込んでいます。", bold: false }
+          { text: "私は日本の大学で食文化を学び、管理栄養士として食に向き合ってきました。料理教室で家庭料理を教え、お菓子づくりにも携わってきた経験を経て、現在はスペイン・カタルーニャで、日本の伝統的な発酵文化を大切にしながら味噌を仕込んでいます。", bold: false }
         ],
         // 本文の最後に表示するブランド署名(ロゴ+タグライン+メール)
         brand: {
@@ -146,7 +146,7 @@ window.PRODUCT_DATA = {
       creator: {
         image: { src: "images/aka-miso/creator.jpg", alt: "Retrat il·lustrat de la creadora" },
         body: [
-          { text: "Vaig treballar al Japó com a dietista-nutricionista titulada en diversos àmbits relacionats amb l'alimentació. Després d'una experiència vinculada a la cuina casolana japonesa i la rebosteria francesa, ara elaboro miso a Catalunya (Espanya), tot valorant la cultura tradicional japonesa de la fermentació.", bold: false }
+          { text: "Vaig estudiar cultura alimentària en una universitat del Japó i m'he dedicat a l'alimentació com a dietista-nutricionista titulada. Després d'ensenyar cuina casolana en classes de cuina i de dedicar-me també a l'elaboració de dolços, ara elaboro miso a Catalunya (Espanya), tot valorant la cultura tradicional japonesa de la fermentació.", bold: false }
         ],
         brand: {
           logo: { src: "images/aka-miso/hakkodo-logo-crop.png", alt: "HAKKODO" },
@@ -220,7 +220,7 @@ window.PRODUCT_DATA = {
       creator: {
         image: { src: "images/aka-miso/creator.jpg", alt: "Retrato ilustrado de la creadora" },
         body: [
-          { text: "Trabajé en Japón como dietista-nutricionista titulada en diversos ámbitos relacionados con la alimentación. Tras una experiencia vinculada a la cocina casera japonesa y la repostería francesa, ahora elaboro miso en Cataluña (España), valorando la cultura tradicional japonesa de la fermentación.", bold: false }
+          { text: "Estudié cultura alimentaria en una universidad de Japón y me he dedicado a la alimentación como dietista-nutricionista titulada. Tras enseñar cocina casera en clases de cocina y dedicarme también a la elaboración de dulces, ahora elaboro miso en Cataluña (España), valorando la cultura tradicional japonesa de la fermentación.", bold: false }
         ],
         brand: {
           logo: { src: "images/aka-miso/hakkodo-logo-crop.png", alt: "HAKKODO" },
@@ -294,7 +294,7 @@ window.PRODUCT_DATA = {
       creator: {
         image: { src: "images/aka-miso/creator.jpg", alt: "Portrait illustration of the maker" },
         body: [
-          { text: "In Japan, I worked as a registered dietitian across a variety of food-related settings. After experience connected to Japanese home cooking and French pastry, I now make miso in Catalonia, Spain, while cherishing Japan's traditional fermentation culture.", bold: false }
+          { text: "I studied food culture at a university in Japan and have worked with food as a registered dietitian. After teaching home cooking in cooking classes and also making sweets, I now make miso in Catalonia, Spain, while cherishing Japan's traditional fermentation culture.", bold: false }
         ],
         brand: {
           logo: { src: "images/aka-miso/hakkodo-logo-crop.png", alt: "HAKKODO" },
