@@ -4249,3 +4249,34 @@ a.global-footer-instagram:focus-visible {
 .workshops-page .brush-line {
   margin-top: 64px;
 }
+
+/* ---- 言語切替のドロップダウン: サイト全体の、淡い背景・細い罫線・静かな平面表現になじませる ----
+   見た目だけの調整。言語の種類・翻訳文・URL・旗・言語コード・選択中のチェック(✓)・余白・配置・開閉の仕組み(assets/i18n.js・assets/nav.js)は変えない。戻すときは、このブロックを消す。
+   - パネル: 背景を、サイトの背景色(var(--color-bg)。白から、淡い色に)、枠を、サイトの細い罫線(1px・var(--color-border))に。角丸は 12px → 6px、影は 0 8px 24px(濃さ0.12)→ 0 2px 8px(濃さ0.06)の、ごく淡く短い影に。
+   - 各選択肢: 角丸を 8px → 4px に。ホバー・キーボードで選んだときは、アクセント色(ブラウン)をごく淡く敷く(背景が、パネルと同じ色になったため、これまでの背景色での区別をやめた)。
+   - キーボードで選んだとき(:focus-visible): 地球のボタンと各選択肢に、アクセント色(ブラウン)2pxの細い枠。選択肢の枠は、パネルの中に収める(offset -2px)。淡い背景色との組み合わせで、色だけに頼らない。
+   開閉の動き(トランジション)は、もともと無いので、「動きを減らす」設定のための指定は不要。 */
+.lang-options {
+  background: var(--color-bg);
+  border-radius: 6px;
+  box-shadow: 0 2px 8px rgba(43, 35, 32, 0.06);
+}
+
+.lang-option-btn {
+  border-radius: 4px;
+}
+
+.lang-option-btn:hover,
+.lang-option-btn:focus-visible {
+  background: rgba(181, 101, 29, 0.06);
+}
+
+.lang-option-btn:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: -2px;
+}
+
+.lang-current:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
