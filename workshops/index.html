@@ -6,7 +6,7 @@
 <meta name="description" content="Tallers de cuina japonesa de HAKKODO. Les dates es comunicaran quan es confirmin.">
 <link rel="canonical" href="https://hakkodo.cat/ca/workshops/">
 <title>ワークショップ</title>
-<link rel="stylesheet" href="../assets/style.css?v=20261022g">
+<link rel="stylesheet" href="../assets/style.css?v=20261022m">
 <link rel="icon" href="/favicon.ico" sizes="48x48">
 <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
 <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
@@ -19,8 +19,22 @@
     <div id="lang-switcher-root" class="lang-switcher"></div>
   </header>
 
-  <main class="page">
-    <div class="intro intro-mid intro-workshops">
+  <main class="page workshops-page">
+    <div id="workshops-ja" lang="ja" hidden>
+      <article class="workshops-intro">
+        <p class="workshops-label">WORKSHOPS</p>
+        <h1>味噌のワークショップ</h1>
+        <p class="workshops-lead">味噌と発酵に、ゆっくりふれる時間。</p>
+        <div class="workshops-body">
+          <p><span class="ph">HAKKODOでは、</span><span class="ph">少人数で</span><span class="ph">味噌と発酵に</span><span class="ph">ふれる</span><span class="ph">ワークショップを</span><span class="ph">準備しています。</span></p>
+          <p><span class="ph">味噌を</span><span class="ph">もっと</span><span class="ph">身近に</span><span class="ph">感じるために。</span><br><span class="ph">ひとつの</span><span class="ph">テーブルを</span><span class="ph">囲みながら、</span><span class="ph">味わいと</span><span class="ph">発酵の</span><span class="ph">奥行きを</span><span class="ph">ゆっくりと</span><span class="ph">楽しむ</span><span class="ph">時間です。</span></p>
+        </div>
+        <p class="workshops-points"><span>少人数制</span><span class="workshops-sep" aria-hidden="true">／</span><span>味噌と発酵</span><span class="workshops-sep" aria-hidden="true">／</span><span>近日開催予定</span></p>
+        <p class="workshops-note">初回の日程は、決まり次第お知らせします。</p>
+        <p class="workshops-cta"><a class="home-feature-link" href="../contact/index.html">ワークショップについて問い合わせる</a></p>
+      </article>
+    </div>
+    <div class="intro intro-mid intro-workshops" id="workshops-other">
       <p data-i18n="workshopsScheduleEmpty" style="white-space: pre-line;"></p>
     </div>
     <img class="brush-line" src="../images/brand/brush-stroke.png" alt="" width="640" height="55" decoding="async">
@@ -36,6 +50,10 @@
       const lang = getCurrentLang();
       applyUiStrings(lang);
       document.title = t("workshopsTitle", lang);
+      // 日本語のときだけ、新しい紹介(予告)を出す。ほかの言語は、これまでの表示(翻訳は、言語ごとの既存の文章)。
+      const isJa = lang === "ja";
+      document.getElementById("workshops-ja").hidden = !isJa;
+      document.getElementById("workshops-other").hidden = isJa;
     }
     renderGlobalNav(document.getElementById("global-nav-root"), "../", "workshops");
     renderGlobalFooter(document.getElementById("global-footer-root"), "../");

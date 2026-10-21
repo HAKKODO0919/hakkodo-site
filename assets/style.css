@@ -4077,3 +4077,175 @@ a.global-footer-instagram:focus-visible {
     transform: none;
   }
 }
+
+/* ---- Workshopsページ(日本語): 少人数の味噌ワークショップの、静かな予告ページ ----
+   「準備中」の1行だけだった表示を、小さなラベル(WORKSHOPS)・唯一のH1・短いリード・本文・3つのキーワード・日程のお知らせ・問い合わせボタンにする。
+   新しい色・フォント・飾りは足さない。Aboutページと同じ、明朝体の見出し・うすいグレーの小さな添え文・商品ページの本文と同じ行間・
+   細い区切り線・アウトラインのボタン(.home-feature-link)を使い、ページ下の筆の線(.brush-line)はそのまま残す。
+   中央そろえ。本文は、幅26em(約400px)の狭い行幅。スクロールのフェードイン・カウントダウン・写真・アイコン・カードは使わない。
+   (日本語以外の言語は、これまでの表示のまま。ここは、日本語のページ(ja/workshops/ と、言語切替でjaのときのworkshops/)だけに効く。戻すときは、このブロックを消す。) */
+.workshops-page {
+  padding: 72px 20px 48px;
+}
+
+@media (min-width: 800px) {
+  .workshops-page {
+    padding-top: 104px;
+  }
+}
+
+.workshops-intro {
+  text-align: center;
+}
+
+/* 「WORKSHOPS」: 導入ラベル。フォント・大きさ・太さ・字間は、ほかのページの見出し(Recipes・Aboutなど。明朝体・スマホ1.2rem・字間0.16em、PC 1.35rem・字間0.18em)と同じ。色も、ほかの見出しと同じ(var(--color-heading))。
+   末尾の字間ぶんだけ、左に寄せて、見た目の中央にそろえる */
+.workshops-label {
+  margin: 0 0 18px;
+  padding-left: 0.16em;
+  font-family: "Shippori Mincho", serif;
+  font-size: 1.2rem;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  line-height: 1.5;
+  color: var(--color-heading);
+}
+
+@media (min-width: 800px) {
+  .workshops-label {
+    padding-left: 0.18em;
+    font-size: 1.35rem;
+    letter-spacing: 0.18em;
+  }
+}
+/* 唯一のH1。Aboutの見出しと同じ(明朝体・スマホ1.2rem・字間0.16em、PC 1.35rem・字間0.18em) */
+.workshops-intro h1 {
+  margin: 0;
+  font-family: "Shippori Mincho", serif;
+  font-size: 1.2rem;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  line-height: 1.5;
+  color: var(--color-heading);
+}
+
+@media (min-width: 800px) {
+  .workshops-intro h1 {
+    font-size: 1.35rem;
+    letter-spacing: 0.18em;
+  }
+}
+
+/* 見出しの直下に、余白を取って置く、短いリード */
+.workshops-lead {
+  margin: 22px 0 0;
+  font-family: "Shippori Mincho", serif;
+  font-size: 0.98rem;
+  letter-spacing: 0.1em;
+  line-height: 1.9;
+  color: #555;
+}
+
+/* 本文: 読みやすい狭めの行幅(26em)で、中央に置く。行末の「お」「。」だけが残らないよう、行の長さをそろえ、日本語は、読点(、)や句点(。)の位置で折り返す */
+.workshops-body {
+  max-width: 26em;
+  margin: 44px auto 0;
+}
+
+.workshops-body p {
+  margin: 0 0 1.6em;
+  font-size: 0.98rem;
+  font-weight: 500;
+  line-height: 2.05;
+  color: var(--color-text);
+  text-wrap: balance;
+  word-break: keep-all;
+  overflow-wrap: break-word;
+}
+
+.workshops-body p:last-child {
+  margin-bottom: 0;
+}
+
+/* 文は、意味のまとまり(文節)ごとに、途中で折り返さない(HTMLの文字は、そのまま。文節を <span class="ph"> で包んでいる)。「ま／す。」のように、言葉の途中で切れるのを防ぐ */
+.workshops-body .ph {
+  display: inline-block;
+}
+
+/* 「少人数制 ／ 味噌と発酵 ／ 近日開催予定」: 箱で囲まず、細い罫線で、上下をゆるく区切る。
+   スマホ(幅339px以下の、ごく狭い画面)は、3つが1行に収まらないので、縦に並べ、区切りの「／」は隠す(1行に収まる幅では、「／」でつなぐ) */
+.workshops-points {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: center;
+  max-width: 30em;
+  margin: 44px auto 0;
+  padding: 18px 0;
+  border-top: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+  font-size: 0.88rem;
+  letter-spacing: 0.1em;
+  line-height: 1.8;
+  color: var(--color-heading);
+}
+
+.workshops-points > span {
+  white-space: nowrap;
+}
+
+.workshops-sep {
+  margin: 0 12px;
+  color: var(--color-muted);
+}
+
+/* 幅389px以下のスマホは、文字と「／」の間隔を少し詰めて、3つを1行に収める(幅340〜389px) */
+@media (max-width: 389px) {
+  .workshops-points {
+    font-size: 0.84rem;
+    letter-spacing: 0.06em;
+  }
+
+  .workshops-sep {
+    margin: 0 8px;
+  }
+}
+
+@media (max-width: 339px) {
+  .workshops-points {
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .workshops-sep {
+    display: none;
+  }
+}
+
+.workshops-note {
+  margin: 32px 0 0;
+  font-size: 0.92rem;
+  line-height: 1.9;
+  color: var(--color-muted);
+}
+
+/* 問い合わせボタン: お問い合わせページ(contact/)へのリンク。既存のアウトラインのボタン(.home-feature-link。ホバーも既存どおり)を、そのまま使う。上の余白だけ、このページ用に調整。
+   キーボードで選んだときは、はっきりした枠(アクセント色の2px)を、足す */
+.workshops-cta {
+  margin: 36px 0 0;
+}
+
+.workshops-cta .home-feature-link {
+  margin-top: 0;
+}
+
+.workshops-cta .home-feature-link:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+}
+
+/* ページ下の筆の線(既存)は、そのまま残し、ボタンとの間の余白だけ、広くとる */
+.workshops-page .brush-line {
+  margin-top: 64px;
+}
