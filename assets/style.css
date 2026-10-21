@@ -3861,3 +3861,32 @@ a.global-footer-instagram:focus-visible {
   background-position: 24px -1px;
   background-size: calc(100% - 48px) 1px;
 }
+
+/* ---- 商品ページの写真と商品名(iPad mini・iPad の縦向きなど・幅600〜999px): PC版と同じバランスにそろえる ----
+   この幅では、写真が、16:9(幅640×高さ360px)で、PC(2:1)より背が高く、商品名は 19.2〜21.6px と PCの24px より小さかったため、
+   写真が大きく、商品名が小さく見えて、バランスが悪かった。PC(幅1000px以上)と同じ考え方にそろえる:
+   - 写真: 縦横比を 2:1 にし、切り出しの位置(上寄り35%)と下端の溶け方(90%から)もPCと同じにして、瓶全体が、くっきり見えるようにする。
+     幅は、文章・区切り線と同じ(列の幅 − 左右24pxずつ。幅744pxなら592px)。左右に余白ができる。高さは、約296px(これまで360px)。
+     画面の高さの上限(画面の高さ − 284px)が、写真の高さより低いときも、縦横比2:1のまま小さくなるだけで、瓶は欠けない(PCと同じ仕組み)。
+   - 商品名: 幅700px以上は24px(PCと同じ。字間・書体・色・行間は変えない)。
+   スマホ(幅599px以下)・PC(幅1000px以上)は、変えない。戻すときは、このブロックを消す。 */
+@media (min-width: 600px) and (max-width: 999px) {
+  #product-root .product-hero-frame .hero {
+    --product-hero-reserve: 284px;
+    width: min(calc(100% - 48px), calc(max(100vh - var(--product-hero-reserve), 320px) * 2));
+    aspect-ratio: 2 / 1;
+    -webkit-mask-image: linear-gradient(to bottom, #000 0, #000 90%, rgba(0, 0, 0, 0.6) 94%, rgba(0, 0, 0, 0.3) 97%, rgba(0, 0, 0, 0.1) 99%, transparent 100%);
+    mask-image: linear-gradient(to bottom, #000 0, #000 90%, rgba(0, 0, 0, 0.6) 94%, rgba(0, 0, 0, 0.3) 97%, rgba(0, 0, 0, 0.1) 99%, transparent 100%);
+  }
+
+  #product-root .product-hero-frame .hero .hero-img {
+    object-position: center 35%;
+  }
+}
+
+/* 商品名の24pxは、幅700px以上から(幅600〜699pxでは、ca・es の長い商品名が2行になるため、これまでの大きさのまま) */
+@media (min-width: 700px) and (max-width: 999px) {
+  #product-root .product-detail-head h1 {
+    font-size: 1.5rem;
+  }
+}
