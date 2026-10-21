@@ -31,7 +31,7 @@ window.PRODUCT_DATA = {
       // 4つのブロックは、PCでは2列×2行、スマホでは縦1列の、細い線で囲んだ項目になります(assets/style.css)。
       // body の各行は { text, bold } の形。bold: true の行だけ、見出しのように太字で表示されます。
       // 4言語とも、同じ内容です(日本語の文章に合わせて、ca・es・en を変更)。見出しは、日本語に合わせて、ca・es・en も短くしてあります。
-      // 4つ目の「年間200ポット」は、一般のお客様への年間の数量(ca: pots / es: tarros / en: jars)。
+      // 4つ目の「少量生産」は、限られた季節に仕込むため、毎年の量に限りがある、という内容(数量の数字は載せない)。
       story: {
         blocks: [
           {
@@ -59,7 +59,7 @@ window.PRODUCT_DATA = {
             icon: "jar",
             heading: "少量生産",
             body: [
-              { text: "毎年ご用意できる数に限りがあり、一般のお客様には年間200ポット限定でお届けしています。", bold: true }
+              { text: "限られた季節に仕込むため、毎年ご用意できる量には限りがあります。", bold: true }
             ]
           }
         ],
@@ -135,7 +135,7 @@ window.PRODUCT_DATA = {
             icon: "jar",
             heading: "Producció en petites quantitats",
             body: [
-              { text: "La quantitat disponible cada any és limitada, i al públic general només n'oferim 200 pots l'any.", bold: true }
+              { text: "Com que només s'elabora en una època concreta de l'any, la quantitat disponible cada any és limitada.", bold: true }
             ]
           }
         ],
@@ -209,7 +209,7 @@ window.PRODUCT_DATA = {
             icon: "jar",
             heading: "Producción en pequeñas cantidades",
             body: [
-              { text: "La cantidad disponible cada año es limitada, y al público general solo le ofrecemos 200 tarros al año.", bold: true }
+              { text: "Como solo se elabora en una época concreta del año, la cantidad disponible cada año es limitada.", bold: true }
             ]
           }
         ],
@@ -283,7 +283,7 @@ window.PRODUCT_DATA = {
             icon: "jar",
             heading: "Small-Batch Production",
             body: [
-              { text: "The quantity we can offer each year is limited, and we offer only 200 jars a year to the general public.", bold: true }
+              { text: "Because it is made only in a particular season, the quantity available each year is limited.", bold: true }
             ]
           }
         ],

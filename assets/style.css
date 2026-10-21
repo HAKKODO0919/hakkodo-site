@@ -3813,3 +3813,51 @@ a.global-footer-instagram:focus-visible {
     font-size: 1.5rem;
   }
 }
+
+/* ---- 商品ページ「こだわり」: 見出しを、アイコンの右横から始める ----
+   これまでは「アイコン → 見出し → 説明文」と縦に積んでいた。「アイコン+見出し」を1行にし、その下に説明文を置く
+   (HTMLは変えず、箱(.story-block)をグリッドにして、アイコンを左の列、見出しを右の列に置く)。
+   アイコンが無い項目は、見出しが、箱の左端から始まる。説明文は、箱の幅いっぱい。戻すときは、このブロックを消す。 */
+#product-root .story-block {
+  display: grid;
+  grid-template-columns: 30px minmax(0, 1fr);
+  column-gap: 12px;
+  /* 見出しが2行になっても(es・enなど)、アイコンは、1行目の高さに置く(ほかの項目と、アイコンの位置がそろう) */
+  align-items: start;
+  /* 同じ行の隣の箱のほうが背が高いとき、余った高さが、行に配られて、アイコンと見出しが下がるのを防ぐ(上から詰める) */
+  align-content: start;
+}
+
+#product-root .story-block .story-icon {
+  margin: 0;
+}
+
+#product-root .story-block h3 {
+  grid-column: 1 / -1;
+  margin: 0;
+}
+
+#product-root .story-block .story-icon + h3 {
+  grid-column: 2;
+}
+
+#product-root .story-block p {
+  grid-column: 1 / -1;
+}
+
+#product-root .story-block h3 + p {
+  margin-top: 14px;
+}
+
+/* ---- 商品ページの区切り線: 「保存方法」の「開封前」と「開封後」の間の線と、同じ長さ(文章の幅)にそろえる ----
+   これまでは、セクションの境目の線が、画面(列)の端から端まで(スマホ375px・PC640px)引かれていたが、
+   「開封後」の前の線は、左右に24pxずつ内側(327px・592px)だった。そこで、境目の線も、左右24pxずつ内側にして、同じ長さにする。
+   線は、枠線(border-top)ではなく、同じ位置に背景として描く(枠線の太さ1pxは、そのまま。ずれない)。色・太さは、今までと同じ。
+   対象は、線のあるセクション(こだわり・作り手・原材料・保存方法・賞味期限)。戻すときは、このブロックを消す。 */
+#product-root .section:not(.product-about):not(.gallery-section) {
+  border-top-color: transparent;
+  background-image: linear-gradient(var(--color-border), var(--color-border));
+  background-repeat: no-repeat;
+  background-position: 24px -1px;
+  background-size: calc(100% - 48px) 1px;
+}
