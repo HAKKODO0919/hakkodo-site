@@ -3991,3 +3991,89 @@ a.global-footer-instagram:focus-visible {
     transform: scale(1.015);
   }
 }
+
+/* ---- グローバルメニュー: 現在地・ホバー・キーボードフォーカスの、控えめな表現 ----
+   メニューの構成・順番・余白・区切り線・文字の大きさと太さは変えない(JavaScriptも変えない)。メニュー項目(.global-nav-link)・ロゴ(.global-nav-brand)・メニューボタン(.global-nav-toggle)だけに効く。
+   戻すときは、このブロックを消す。
+   - 現在地: 各ページが、assets/nav.js の renderGlobalNav に、自分のキー(products / recipes / workshops / story / contact。レシピ一覧・各レシピ詳細は recipes、
+     商品詳細は products、トップは top)を渡していて、その項目に .active が付く。すでに、ページごとに正しく付いている(トップは、どの項目にも付かない)。
+     .active は、文字をアクセント色(ブラウン)にし、PC幅では文字の下に、短い細いアクセント線(14px・1px)を引く。ハンバーガーのメニューの中では、文字の右に、同じ細い線を添える。
+   - ホバー(マウスなどの端末だけ): 文字がアクセント色になり、細い線が、中央から10pxまで伸びる(0.18秒。現在地の線は14px なので、見分けがつく)。移動・拡大・跳ねる動きはない。
+   - キーボードで選んだとき: ホバーと同じ見た目に加えて、アクセント色2pxの枠(余白2px)。メニューのリンク・ロゴ・メニューボタンのすべてに出る(マウスのクリックでは出ない)。
+   - 「動きを減らす」設定(prefers-reduced-motion: reduce)では、色と線のトランジションをなしにする。 */
+.global-nav-link {
+  position: relative;
+}
+
+.global-nav-link::after {
+  content: "";
+  position: absolute;
+  bottom: 1px;
+  left: 50%;
+  width: 0;
+  height: 1px;
+  background-color: var(--color-accent);
+  transform: translateX(-50%);
+}
+
+.global-nav-link.active {
+  color: var(--color-accent);
+}
+
+.global-nav-link.active::after {
+  width: 14px;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .global-nav-link {
+    transition: color 0.18s ease, background-color 0.15s ease;
+  }
+
+  .global-nav-link::after {
+    transition: width 0.18s ease;
+  }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .global-nav-link:hover {
+    color: var(--color-accent);
+  }
+
+  .global-nav-link:hover::after {
+    width: 10px;
+  }
+
+  .global-nav-link.active:hover::after {
+    width: 14px;
+  }
+}
+
+.global-nav-link:focus-visible {
+  color: var(--color-accent);
+}
+
+.global-nav-link:focus-visible::after {
+  width: 10px;
+}
+
+.global-nav-link.active:focus-visible::after {
+  width: 14px;
+}
+
+.global-nav-link:focus-visible,
+.global-nav-brand:focus-visible,
+.global-nav-toggle:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+/* ハンバーガーのメニューの中(幅1180px以下)は、1項目が1行になるので、線は、文字の下ではなく、文字の右に置く */
+@media (max-width: 1180px) {
+  .has-menu-toggle .global-nav-link::after {
+    position: static;
+    display: inline-block;
+    margin-left: 10px;
+    vertical-align: middle;
+    transform: none;
+  }
+}
