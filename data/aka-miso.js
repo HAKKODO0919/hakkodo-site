@@ -6,9 +6,9 @@ window.PRODUCT_DATA = {
   images: {
     hero: "images/aka-miso/home-feature-miso-v4.jpg",
     gallery: [
-      "images/aka-miso/photo2.jpg",
-      "images/aka-miso/photo3.jpg",
-      "images/aka-miso/photo1-v3.webp"
+      "images/aka-miso/photo2-v2.jpg",
+      "images/aka-miso/photo3-v2.jpg",
+      "images/aka-miso/photo1-v4.jpg"
     ]
   },
   updatedAt: "2026-09-01",

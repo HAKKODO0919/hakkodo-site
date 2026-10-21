@@ -1,13 +1,14 @@
 // ============================================================
 // クラッカーと味噌のレシピです。
-// 写真は仮画像です。images/recipes/cracker-miso/main.jpg を
-// 実際の写真に差し替えるだけで、コードを変更せず更新できます。
+// 写真は仮画像です。いまは、軽くした images/recipes/cracker-miso/main-v2.jpg(横1600px)を使っています
+// (元の main.jpg は 2.1MB と重いので、使っていません)。実際の写真に差し替えるときは、横1600px前後に縮めた写真を、
+// 新しい名前で置いて、下の hero のファイル名を変えてください。
 // 日本語(ja) / Català(ca) / Español(es) / English(en) の4言語分を用意しています。
 // ============================================================
 window.RECIPE_DATA = {
   category: { slug: "appetizer", label: "アペタイザー" },
   images: {
-    hero: "images/recipes/cracker-miso/main.jpg"
+    hero: "images/recipes/cracker-miso/main-v2.jpg"
   },
   updatedAt: "2026-09-15",
   translations: {
