@@ -97,6 +97,43 @@ function renderProductNameHtml(name) {
 
 // 商品ページの中身を、指定した言語で描画する
 // data: window.PRODUCT_DATA の中身(images / translations / updatedAt を持つ)
+// 「こだわり」の見出しの左に添える、線画アイコン(インラインSVG。画像ファイルは使わない)。
+// data の story.blocks[n].icon に、下のキー(snow / rice / clock / jar)を書くと表示される。省略すると、アイコンなし。
+// 24×24の図面・塗りなし・線幅1.5・角と線端は丸く。色は currentColor(見出しと同じ色)。
+// width / height を SVG 自身に書いてあるので、CSS が古いキャッシュのままでも、巨大には表示されない。
+const STORY_ICON_ATTRS =
+  'class="story-icon" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" ' +
+  'stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"';
+const STORY_ICONS = {
+  // 雪の結晶(寒仕込み): 3本の軸と、先の小さな枝
+  snow:
+    '<path d="M12 3v18M9.8 5.2 12 7.4l2.2-2.2M9.8 18.8 12 16.6l2.2 2.2"/>' +
+    '<path d="M12 3v18M9.8 5.2 12 7.4l2.2-2.2M9.8 18.8 12 16.6l2.2 2.2" transform="rotate(60 12 12)"/>' +
+    '<path d="M12 3v18M9.8 5.2 12 7.4l2.2-2.2M9.8 18.8 12 16.6l2.2 2.2" transform="rotate(120 12 12)"/>',
+  // 稲穂(手作り米麹)
+  rice:
+    '<path d="M12 21.5V8"/>' +
+    '<path d="M12 2.5c1.5 1.3 1.9 3 0 4.8-1.9-1.8-1.5-3.5 0-4.8z"/>' +
+    '<path d="M12 11c-2.7 0-4.4-1.5-4.7-4 2.7.1 4.5 1.5 4.7 4z"/><path d="M12 11c2.7 0 4.4-1.5 4.7-4-2.7.1-4.5 1.5-4.7 4z"/>' +
+    '<path d="M12 16c-2.7 0-4.4-1.5-4.7-4 2.7.1 4.5 1.5 4.7 4z"/><path d="M12 16c2.7 0 4.4-1.5 4.7-4-2.7.1-4.5 1.5-4.7 4z"/>',
+  // 時計(1年以上の発酵・熟成: 時間をかけて熟成する)
+  clock:
+    '<circle cx="12" cy="12" r="9"/><path d="M12 7v5.2l3.3 2"/>',
+  // 蓋つきの瓶(少量生産: 瓶に詰めた、限られた数の味噌)
+  jar:
+    '<rect x="7" y="3" width="10" height="3" rx="1"/>' +
+    '<path d="M8.2 6v1.2C6.6 8.2 5.8 9.4 5.8 11v8a2 2 0 0 0 2 2h8.4a2 2 0 0 0 2-2v-8c0-1.6-.8-2.8-2.4-3.8V6"/>' +
+    '<path d="M9.5 13.5h5M9.5 16.5h3.2"/>',
+};
+
+// 「こだわり」の見出し(h3)。icon があれば、見出しの左にアイコンを添えて、横並びにする(見出し文は span に入れる)。
+function storyHeadingHtml(block) {
+  const text = escapeText(block.heading || "");
+  const icon = block.icon && STORY_ICONS[block.icon];
+  if (!icon) return `<h3>${text}</h3>`;
+  return `<h3 class="has-icon"><svg ${STORY_ICON_ATTRS}>${icon}</svg><span>${text}</span></h3>`;
+}
+
 // siteRoot: サイトの一番上の階層への相対パス、lang: 表示する言語コード
 function renderProductContent(data, siteRoot, lang) {
   const root = document.getElementById("product-root");
@@ -118,7 +155,7 @@ function renderProductContent(data, siteRoot, lang) {
           .map(
             (block) => `
           <div class="story-block">
-            <h3>${escapeText(block.heading || "")}</h3>
+            ${storyHeadingHtml(block)}
             ${(block.body || [])
               .map((part) => {
                 // runs があれば、1つの文の中で太字にする部分だけを指定できる

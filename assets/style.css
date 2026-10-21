@@ -3634,3 +3634,25 @@ a.global-footer-instagram:focus-visible {
     background: rgba(43, 35, 32, 0.32);
   }
 }
+
+/* ---- 商品ページ「こだわり」: 見出しの左に、控えめな線画アイコンを添える ----
+   アイコンは、assets/product.js が、インラインSVGで、見出し(h3.has-icon)の左に置く(画像ファイルは使わない。色は見出しと同じ currentColor)。
+   見出しと横並びにするだけで、縦並び・幅30em・中央配置・本文の大きさ・項目の間の余白(56px)は、変えない。
+   アイコンは、見出しの1行目(行の高さ 1.7 × 1.05rem)の中央にそろえる。見出しが2行以上に折り返しても、アイコンは1行目に固定される。
+   data の icon が無い項目(ほかの商品など)は、これまでどおり(h3 に has-icon が付かない)。戻すときは、このブロックを消す。 */
+#product-root .story-block h3.has-icon {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+#product-root .story-block h3.has-icon .story-icon {
+  flex: none;
+  width: 26px;
+  height: 26px;
+  margin-top: calc((1.7 * 1.05rem - 26px) / 2);
+}
+
+#product-root .story-block h3.has-icon span {
+  min-width: 0;
+}
