@@ -30,7 +30,8 @@ window.PRODUCT_DATA = {
       //   snow(雪の結晶)/ rice(稲穂)/ clock(時計)/ jar(蓋つきの瓶)。省略すると、アイコンなし。
       // 4つのブロックは、PCでは2列×2行、スマホでは縦1列の、細い線で囲んだ項目になります(assets/style.css)。
       // body の各行は { text, bold } の形。bold: true の行だけ、見出しのように太字で表示されます。
-      // 日本語の本文は、2026-10-21 に、現在の文章に変更。ca・es・en は、まだ、以前の短い文章のままです。
+      // 4言語とも、同じ内容です(日本語の文章に合わせて、ca・es・en を変更)。見出しは、日本語に合わせて、ca・es・en も短くしてあります。
+      // 4つ目の「年間200ポット」は、一般のお客様への年間の数量(ca: pots / es: tarros / en: jars)。
       story: {
         blocks: [
           {
@@ -110,28 +111,28 @@ window.PRODUCT_DATA = {
             icon: "snow",
             heading: "Elaboració d'hivern (kan-jikomi)",
             body: [
-              { text: "Elaborat durant l'època més freda de l'any, entre el solstici d'hivern i l'inici de la primavera, segons el mètode tradicional del “kan-jikomi”.", bold: true }
+              { text: "Elaborat en l'època més freda de l'any, segons el mètode tradicional del “kan-jikomi”. Es prepara durant el període limitat que va del solstici d'hivern a l'inici de la primavera.", bold: true }
             ]
           },
           {
             icon: "rice",
-            heading: "Koji d'arròs artesanal, elaborat amb fong koji japonès",
+            heading: "Fong koji japonès",
             body: [
-              { text: "Fem servir fong koji d'una casa productora japonesa de llarga trajectòria i elaborem el koji d'arròs a mà, enmig de la natura de l'Alta Garrotxa.", bold: true }
+              { text: "Utilitzem un fong koji que fem venir d'una casa productora japonesa de llarga trajectòria, i fem créixer amb cura el koji d'arròs a partir de l'arròs, enmig de la natura de l'Alta Garrotxa.", bold: true }
             ]
           },
           {
             icon: "clock",
-            heading: "Més d'un any de fermentació i maduració",
+            heading: "Més d'un any de maduració",
             body: [
-              { text: "Sense pasteurització (tractament tèrmic) ni alcohol per aturar la fermentació, deixem que el miso fermenti i maduri lentament, confiant en la força de la natura i en el pas del temps.", bold: true }
+              { text: "Sense tractament tèrmic ni alcohol per aturar la fermentació, deixem que el miso fermenti i maduri amb calma, confiant en la força de la natura i en el pas del temps.", bold: true }
             ]
           },
           {
             icon: "jar",
             heading: "Producció en petites quantitats",
             body: [
-              { text: "Seguim el mètode tradicional i només elaborem el miso durant un període limitat cada any; per això, la quantitat disponible és limitada.", bold: true }
+              { text: "La quantitat disponible cada any és limitada, i al públic general només n'oferim 200 pots l'any.", bold: true }
             ]
           }
         ],
@@ -181,28 +182,28 @@ window.PRODUCT_DATA = {
             icon: "snow",
             heading: "Elaboración de invierno (kan-jikomi)",
             body: [
-              { text: "Elaborado durante la época más fría del año, entre el solsticio de invierno y el inicio de la primavera, según el método tradicional del “kan-jikomi”.", bold: true }
+              { text: "Elaborado en la época más fría del año, según el método tradicional del “kan-jikomi”. Se prepara durante el periodo limitado que va del solsticio de invierno al inicio de la primavera.", bold: true }
             ]
           },
           {
             icon: "rice",
-            heading: "Koji de arroz artesanal, elaborado con hongo koji japonés",
+            heading: "Hongo koji japonés",
             body: [
-              { text: "Usamos hongo koji de una casa productora japonesa de larga trayectoria y elaboramos el koji de arroz a mano, en plena naturaleza de la Alta Garrotxa.", bold: true }
+              { text: "Usamos un hongo koji que hacemos llegar desde una casa productora japonesa de larga trayectoria, y cultivamos con esmero el koji de arroz a partir del arroz, en plena naturaleza de la Alta Garrotxa.", bold: true }
             ]
           },
           {
             icon: "clock",
-            heading: "Más de un año de fermentación y maduración",
+            heading: "Más de un año de maduración",
             body: [
-              { text: "Sin pasteurización (tratamiento térmico) ni alcohol para detener la fermentación, dejamos que el miso fermente y madure con calma, confiando en la fuerza de la naturaleza y en el paso del tiempo.", bold: true }
+              { text: "Sin tratamiento térmico ni alcohol para detener la fermentación, dejamos que el miso fermente y madure con calma, confiando en la fuerza de la naturaleza y en el paso del tiempo.", bold: true }
             ]
           },
           {
             icon: "jar",
             heading: "Producción en pequeñas cantidades",
             body: [
-              { text: "Seguimos el método tradicional y solo elaboramos el miso durante un periodo limitado cada año; por eso, la cantidad disponible es limitada.", bold: true }
+              { text: "La cantidad disponible cada año es limitada, y al público general solo le ofrecemos 200 tarros al año.", bold: true }
             ]
           }
         ],
@@ -252,28 +253,28 @@ window.PRODUCT_DATA = {
             icon: "snow",
             heading: "Cold-Season Preparation (Kan-jikomi)",
             body: [
-              { text: "Made during the coldest time of the year, between the winter solstice and the first day of spring, in the traditional method known as “kan-jikomi.”", bold: true }
+              { text: "Made during the coldest time of the year, in the traditional method known as “kan-jikomi.” It is prepared within the limited period between the winter solstice and the first day of spring.", bold: true }
             ]
           },
           {
             icon: "rice",
-            heading: "Handmade Rice Koji, Grown with Japanese Koji Mold",
+            heading: "Japanese Koji Mold",
             body: [
-              { text: "We use koji mold from a long-established koji maker in Japan, and make our rice koji by hand amid the rich nature of Alta Garrotxa.", bold: true }
+              { text: "We use koji mold ordered from a long-established koji maker in Japan, and carefully grow our rice koji from the rice amid the rich nature of Alta Garrotxa.", bold: true }
             ]
           },
           {
             icon: "clock",
-            heading: "Over a Year of Fermentation and Aging",
+            heading: "Over a Year of Aging",
             body: [
-              { text: "With no heat treatment (pasteurization) or alcohol to stop fermentation, we leave the miso to ferment and age slowly, entrusting it to the power of nature and time.", bold: true }
+              { text: "With no heat treatment or alcohol to stop fermentation, we leave the miso to ferment and age slowly, entrusting it to the power of nature and time.", bold: true }
             ]
           },
           {
             icon: "jar",
             heading: "Small-Batch Production",
             body: [
-              { text: "We follow traditional methods and brew only during a limited season each year, so the quantity we can offer is limited.", bold: true }
+              { text: "The quantity we can offer each year is limited, and we offer only 200 jars a year to the general public.", bold: true }
             ]
           }
         ],
