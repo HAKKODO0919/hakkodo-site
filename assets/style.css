@@ -3945,3 +3945,49 @@ a.global-footer-instagram:focus-visible {
     transform: scale(1.02);
   }
 }
+
+/* ---- レシピ詳細ページ: 控えめなインタラクション ----
+   対象は、レシピ詳細ページの「戻るリンク」(.page-back-link)と、メイン写真(#recipe-root .recipe-hero)だけ。
+   材料タグ・手順の番号・本文・作り方の写真は動かさない。レシピ一覧・トップ・商品ページ・ABOUTの写真(.story-page .recipe-hero)には効かない。戻すときは、このブロックを消す。
+   - 戻るリンク: 乗せる(ホバー)・キーボードで選ぶ(フォーカス)と、枠・文字・背景に、アクセント色(ブラウン)が、ごく淡く現れる(レシピ一覧の「レシピを見る」と同じ)。
+     矢印は、文字(「← レシピ一覧にもどる」)の一部で、言語ごとの文章に含まれているため、動かさない。キーボードでは、さらに、はっきりしたフォーカスの枠(アクセント色の2px)を出す。
+   - メイン写真: マウスなどで乗せられる端末(hover: hover かつ pointer: fine)だけ、ごくわずか(1.015倍・0.6秒)に大きくなる。写真の枠(.recipe-hero)が overflow: hidden なので、枠の外にははみ出さない。
+     写真は、リンクにはしていない(ホバーのためだけに、リンクにはしない)。タッチ端末では何も変わらない。
+   - 「動きを減らす」設定(prefers-reduced-motion: reduce)では、拡大も、動き(トランジション)も、なしにする。 */
+@media (prefers-reduced-motion: no-preference) {
+  .page-back-link .recipe-btn {
+    transition: color 0.3s ease, border-color 0.3s ease, background-color 0.3s ease;
+  }
+
+  #recipe-root .recipe-hero img {
+    transition: transform 0.6s ease-out;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page-back-link .recipe-btn {
+    transition: none;
+  }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .page-back-link .recipe-btn:hover {
+    color: var(--color-accent);
+    border-color: rgba(181, 101, 29, 0.4);
+    background-color: rgba(181, 101, 29, 0.05);
+  }
+}
+
+.page-back-link .recipe-btn:focus-visible {
+  color: var(--color-accent);
+  border-color: rgba(181, 101, 29, 0.4);
+  background-color: rgba(181, 101, 29, 0.05);
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+}
+
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  #recipe-root .recipe-hero:hover img {
+    transform: scale(1.015);
+  }
+}
