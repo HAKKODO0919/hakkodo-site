@@ -338,7 +338,14 @@ function renderProductContent(data, siteRoot, lang) {
   // 最初から画面に見えている部分(写真・商品名)は動かさず、下の欄だけが、画面に入るときに現れる。
   // reveal.js を読み込んでいないページでは何もしない(言語を切り替えて描き直したときも、ここで仕掛け直す)。
   if (typeof initReveal === "function") {
-    initReveal(".product-detail-head, .story-block, .gallery-section, .ingredients-section, .storage-info, .best-before, .creator-outer, .product-about");
+    // スマホ・タブレット(幅799px以下、または指で操作する端末)では、最初の画面に「こだわり」の最初の箱(と、場合によっては2つ目)が入る。
+    // それらは「最初から見えている」ので、これまでは、動かされず(または、順番を待たずに、ページを開いた瞬間に)出ていた。
+    // PCでは、「こだわり」は最初の画面の下にあり、スクロールで画面に入るときに現れる。そこで、スマホ・タブレットでは、「こだわり」の箱だけ、
+    // Aboutページと同じ、ページを開いて、上から順に(0.15秒ずつ遅れて)現れるようにする(includeVisible・visibleRatio: 1。assets/reveal.js)。
+    // 写真・商品名は、これまでどおり動かさない。下にある箱や欄は、画面に入るときに現れる(これまでどおり)。PCは変えない。
+    const compactView = !!(window.matchMedia && matchMedia("(max-width: 799px), (pointer: coarse)").matches);
+    initReveal(".story-block", compactView ? { includeVisible: true, startDelay: 0.25, stagger: 0.15, visibleRatio: 1 } : undefined);
+    initReveal(".product-detail-head, .gallery-section, .ingredients-section, .storage-info, .best-before, .creator-outer, .product-about");
   }
 }
 
