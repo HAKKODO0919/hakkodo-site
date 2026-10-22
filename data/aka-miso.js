@@ -121,7 +121,7 @@ window.PRODUCT_DATA = {
             icon: "rice",
             heading: "Fong koji japonès",
             body: [
-              { text: "Utilitzem un fong koji que fem venir d'una casa productora japonesa de llarga trajectòria, i fem créixer amb cura el koji d'arròs a partir de l'arròs, enmig de la natura de l'Alta Garrotxa.", bold: true }
+              { text: "Utilitzem el fong “koji” que fem venir d'una casa productora japonesa de llarga trajectòria, i fem créixer amb cura el koji d'arròs a partir de l'arròs, enmig de la natura de l'Alta Garrotxa.", bold: true }
             ]
           },
           {
@@ -195,7 +195,7 @@ window.PRODUCT_DATA = {
             icon: "rice",
             heading: "Hongo koji japonés",
             body: [
-              { text: "Usamos un hongo koji que hacemos llegar desde una casa productora japonesa de larga trayectoria, y cultivamos con esmero el koji de arroz a partir del arroz, en plena naturaleza de la Alta Garrotxa.", bold: true }
+              { text: "Usamos el hongo “koji” que hacemos llegar desde una casa productora japonesa de larga trayectoria, y cultivamos con esmero el koji de arroz a partir del arroz, en plena naturaleza de la Alta Garrotxa.", bold: true }
             ]
           },
           {
@@ -269,7 +269,7 @@ window.PRODUCT_DATA = {
             icon: "rice",
             heading: "Japanese Koji Mold",
             body: [
-              { text: "We use koji mold ordered from a long-established koji maker in Japan, and carefully grow our rice koji from the rice amid the rich nature of Alta Garrotxa.", bold: true }
+              { text: "We use “koji” mold ordered from a long-established koji maker in Japan, and carefully grow our rice koji from the rice amid the rich nature of Alta Garrotxa.", bold: true }
             ]
           },
           {

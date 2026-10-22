@@ -4320,3 +4320,62 @@ a.global-footer-instagram:focus-visible {
     margin: 8px 0;
   }
 }
+
+/* ---- スマホ(タッチ)向け: 指で押した瞬間の反応 ----
+   パソコンでは、マウスを重ねると、写真がわずかに大きくなったり、ボタンやメニューがブラウンに色づいたりする(ホバー)。
+   スマホ・タブレットにはマウスがなく、ホバーが働かないので、同じ場所に、「指で押している間だけ」の、同じごく淡い反応を足す(:active)。
+   色・大きさは、ホバーと同じ(ブラウンをごく淡く・写真1.02倍)。動きは、押した瞬間に0.2秒。指を離すと戻る。新しい色・影・飾りは足さない。戻すときは、このブロックを消す。
+   - A. 押した瞬間の反応: レシピ一覧の項目(写真が1.02倍・「レシピを見る」が淡いブラウン)、アウトラインのボタン(.home-feature-link・.recipe-btn。戻るリンク・問い合わせなど)、
+     メニューの項目(文字がブラウン・短い細線)、言語の選択肢、フッターのメールアイコン。
+   - B. タップの色の統一: iPhoneなどで、押した瞬間に出る、灰色のハイライトを、サイトの淡いブラウンにする。上の「押した瞬間の反応」がある場所は、二重にならないよう、ハイライトを消す。
+   - 「動きを減らす」設定では、写真の拡大と動き(トランジション)をなしにする(色の変化だけ)。 */
+a,
+button {
+  -webkit-tap-highlight-color: rgba(181, 101, 29, 0.14);
+}
+
+.home-feature-link,
+.recipe-btn,
+.global-nav-link,
+.lang-option-btn,
+.global-footer-mail,
+.global-footer-instagram,
+#recipe-list-root .recipe-card {
+  -webkit-tap-highlight-color: transparent;
+}
+
+.home-feature-link:active,
+.recipe-btn:active,
+#recipe-list-root .recipe-card:active .home-feature-link {
+  color: var(--color-accent);
+  border-color: rgba(181, 101, 29, 0.4);
+  background-color: rgba(181, 101, 29, 0.05);
+}
+
+.global-nav-link:active {
+  color: var(--color-accent);
+}
+
+.global-nav-link:active::after {
+  width: 10px;
+}
+
+.global-nav-link.active:active::after {
+  width: 14px;
+}
+
+.lang-option-btn:active {
+  background: rgba(181, 101, 29, 0.06);
+}
+
+.global-footer-mail:active,
+.global-footer-instagram:active {
+  color: var(--color-heading);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  #recipe-list-root .recipe-card:active .thumb img {
+    transform: scale(1.02);
+    transition-duration: 0.2s;
+  }
+}

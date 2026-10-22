@@ -27,7 +27,7 @@
 <link rel="alternate" hreflang="x-default" href="https://hakkodo.cat/ca/workshops/">
 <script>window.PAGE_LANG = "es";</script>
 <title>Talleres</title>
-<link rel="stylesheet" href="/assets/style.css?v=20261022z">
+<link rel="stylesheet" href="/assets/style.css?v=20261023a">
 <link rel="icon" href="/favicon.ico" sizes="48x48">
 <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
 <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
@@ -59,6 +59,7 @@
   <script src="/assets/i18n.js"></script>
   <script src="/assets/product.js"></script>
   <script src="/assets/nav.js"></script>
+  <script src="/assets/reveal.js?v=20261022b"></script>
   <script>
     function render() {
       const lang = getCurrentLang();
@@ -69,6 +70,12 @@
     renderGlobalFooter(document.getElementById("global-footer-root"), "/");
     renderLangSwitcher(document.getElementById("lang-switcher-root"), render);
     render();
+    // Aboutページと同じ、ページを開いたときの、控えめなフェードイン(assets/reveal.js。About の assets/story.js と同じ設定:
+    // 0.25秒後から、上から順に0.15秒ずつ遅れて、下から12pxだけ、0.9秒で現れる)。見出し・リード・本文・キーワード・ボタンが、順に現れる。
+    // 画像・筆の線には、動きを足さない。「動きを減らす」設定では、reveal.js が何もしない。
+    if (typeof initReveal === "function") {
+      initReveal(".workshops-intro > *", { includeVisible: true, startDelay: 0.25, stagger: 0.15, visibleRatio: 1 });
+    }
   </script>
 </body>
 </html>
