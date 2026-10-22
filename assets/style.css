@@ -3769,7 +3769,6 @@ a.global-footer-instagram:focus-visible {
   display: block;
 }
 
-
 /* 日本語の文節(途中で折り返さない) */
 #product-root .ph {
   display: inline-block;
@@ -4098,7 +4097,7 @@ a.global-footer-instagram:focus-visible {
   text-align: center;
 }
 
-/* 「WORKSHOPS」: 導入ラベル。フォント・大きさ・太さ・字間は、ほかのページの見出し(Recipes・Aboutなど。明朝体・スマホ1.2rem・字間0.16em、PC 1.35rem・字間0.18em)と同じ。色も、ほかの見出しと同じ(var(--color-heading))。
+/* 「Workshops」(先頭の W だけ大文字): 導入ラベル。フォント・大きさ・太さ・字間は、ほかのページの見出し(Recipes・Aboutなど。明朝体・スマホ1.2rem・字間0.16em、PC 1.35rem・字間0.18em)と同じ。色も、ほかの見出しと同じ(var(--color-heading))。
    末尾の字間ぶんだけ、左に寄せて、見た目の中央にそろえる */
 .workshops-label {
   margin: 0 0 18px;
@@ -4138,7 +4137,8 @@ a.global-footer-instagram:focus-visible {
 
 /* 見出しの直下に、余白を取って置く、短いリード */
 .workshops-lead {
-  margin: 22px 0 0;
+  margin: 10px 0 0;
+  text-wrap: balance;
   font-family: "Shippori Mincho", serif;
   font-size: 0.98rem;
   letter-spacing: 0.1em;
@@ -4146,29 +4146,24 @@ a.global-footer-instagram:focus-visible {
   color: #555;
 }
 
-/* 本文: 読みやすい狭めの行幅(26em)で、中央に置く。行末の「お」「。」だけが残らないよう、行の長さをそろえ、日本語は、読点(、)や句点(。)の位置で折り返す */
+/* 本文: Aboutページの本文(.story-page .home-feature-text)に合わせる。文字の大きさ(15.68px)・フォント・太さ(500)・行間(2.05)・色は、すでに同じ。文章は、中央そろえ(見出し・リードと同じ中心)。
+   行の幅は、Aboutと同じ、本文の列の幅いっぱい(狭い行幅にはしない)。 */
 .workshops-body {
-  max-width: 26em;
-  margin: 44px auto 0;
+  max-width: none;
+  margin: 44px 0 0;
 }
 
 .workshops-body p {
-  margin: 0 0 1.6em;
+  margin: 0;
   font-size: 0.98rem;
   font-weight: 500;
   line-height: 2.05;
+  text-align: center;
   color: var(--color-text);
-  text-wrap: balance;
-  word-break: keep-all;
-  overflow-wrap: break-word;
 }
-
-.workshops-body p:last-child {
-  margin-bottom: 0;
-}
-
 /* 文は、意味のまとまり(文節)ごとに、途中で折り返さない(HTMLの文字は、そのまま。文節を <span class="ph"> で包んでいる)。「ま／す。」のように、言葉の途中で切れるのを防ぐ */
-.workshops-body .ph {
+.workshops-body .ph,
+.workshops-lead .ph {
   display: inline-block;
 }
 
@@ -4211,24 +4206,45 @@ a.global-footer-instagram:focus-visible {
   }
 }
 
+/* 3つのキーワードが縦に並ぶとき(日本語は幅339px以下、ほかの言語は幅639px以下)は、言葉と言葉の間の「／」のかわりに、短い細い横線(22px・1px)を置く。
+   色は、「Recipes」の番号のわきの細線と同じ薄い茶系(#cdc7ba)。「／」の文字は、HTMLに残し(読み上げでは、もともと対象外)、見えないようにする。 */
+@media (max-width: 339px) {
+  .workshops-sep {
+    display: block;
+    width: 22px;
+    height: 1px;
+    overflow: hidden;
+    background: #cdc7ba;
+    font-size: 0;
+    line-height: 0;
+    color: transparent;
+  }
+}
+
+@media (max-width: 639px) {
+  .workshops-points:not(:lang(ja)) .workshops-sep {
+    display: block;
+    width: 22px;
+    height: 1px;
+    overflow: hidden;
+    background: #cdc7ba;
+    font-size: 0;
+    line-height: 0;
+    color: transparent;
+  }
+}
 @media (max-width: 339px) {
   .workshops-points {
     flex-direction: column;
     align-items: center;
-    gap: 4px;
+    gap: 0;
   }
 
   .workshops-sep {
-    display: none;
+    margin: 8px 0;
   }
 }
 
-.workshops-note {
-  margin: 32px 0 0;
-  font-size: 0.92rem;
-  line-height: 1.9;
-  color: var(--color-muted);
-}
 
 /* 問い合わせボタン: お問い合わせページ(contact/)へのリンク。既存のアウトラインのボタン(.home-feature-link。ホバーも既存どおり)を、そのまま使う。上の余白だけ、このページ用に調整。
    キーボードで選んだときは、はっきりした枠(アクセント色の2px)を、足す */
@@ -4279,4 +4295,28 @@ a.global-footer-instagram:focus-visible {
 .lang-current:focus-visible {
   outline: 2px solid var(--color-accent);
   outline-offset: 2px;
+}
+
+/* ---- Workshopsページ: 日本語以外の言語(ca・es・en。日本語の文章に合わせた翻訳) ----
+   本文は、行の長さをそろえて折り返す(日本語は、文節ごとの折り返しなので、対象外)。
+   3つのキーワードは、日本語より長いので、幅639px以下では、縦に並べ、区切りの「／」は隠す(幅640px以上は、1行で「／」でつなぐ)。 */
+.workshops-body p:not(:lang(ja)) {
+  text-wrap: balance;
+}
+
+/* 罫線の長さ(幅)は、日本語より長いキーワードが1行に収まるよう、広げる */
+.workshops-points:not(:lang(ja)) {
+  max-width: 40em;
+}
+
+@media (max-width: 639px) {
+  .workshops-points:not(:lang(ja)) {
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+  }
+
+  .workshops-points:not(:lang(ja)) .workshops-sep {
+    margin: 8px 0;
+  }
 }
