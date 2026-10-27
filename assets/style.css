@@ -5398,6 +5398,14 @@ button {
   text-wrap: balance;
 }
 
+/* PC(幅1000px以上): 文章が短いので、写真(右)から遠く見えた。文章を、写真のほうへ右に寄せる(Recipes と同じ考え方)。
+   寄せる量は、幅1000pxで0、広くなるほど増えて、最大 120px。 */
+@media (min-width: 1000px) {
+  .home .home-feature--whatis .home-feature-body {
+    margin-left: clamp(0px, calc((100vw - 1000px) * 0.3), 120px);
+  }
+}
+
 .home .home-feature--whatis .home-feature-media img {
   object-position: center 14%;
 }
