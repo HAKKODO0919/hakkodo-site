@@ -29,7 +29,7 @@ window.WHAT_IS_MISO_DATA = {
       docTitle: "味噌とは | HAKKODO",
       label: "Miso",
       heading: "味噌とは",
-      lead: "大豆、米麹、塩を混ぜ合わせ、発酵・熟成させて作る、\n日本の伝統的な発酵調味料です。",
+      lead: "大豆、米麹、塩を混ぜ合わせ、|発酵・熟成させて作る、\n日本の伝統的な発酵調味料です。",
       photoAlt: { miso: "お皿に盛った味噌", making: "布を敷いたトレーに広げた米" },
       sections: [
         {
@@ -58,7 +58,7 @@ window.WHAT_IS_MISO_DATA = {
           list: [
             { icon: "rice", label: "米麹づくり", text: "蒸した米に麹菌をつけて、米麹をつくる" },
             { icon: "bean", label: "大豆", text: "よく洗い、しっかり浸水。蒸して、すりつぶす。" },
-            { icon: "bowl", label: "仕込み", text: "米麹、大豆、塩を混ぜ、水分量を調整し、容器へ。" },
+            { icon: "bowl", label: "仕込み", text: "米麹、大豆、塩を混ぜ、水分量を調整し容器へ。" },
             { icon: "clock", label: "発酵・熟成", fact: "1年以上", text: "室温と湿度をつねに整えながら、じっくり発酵。" }
           ],
           closing: "味噌は、生き物。|毎回『ありがとう』と|声をかけながら|仕込んでいます。\nこの味噌が、|食べた人の次の|『ありがとう』につながりますように。",

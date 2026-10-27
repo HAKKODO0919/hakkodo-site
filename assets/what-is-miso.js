@@ -115,7 +115,7 @@ function renderMisoPage(data, siteRoot, lang) {
     <header class="mp-intro">
       <p class="mp-label">${escapeText(tr.label)}</p>
       <h1>${escapeText(tr.heading)}</h1>
-      <p class="mp-lead">${escapeText(tr.lead)}</p>
+      <p class="mp-lead">${tr.lead.split("\n").map(phrasesHtml).join("\n")}</p>
     </header>
     ${(tr.sections || []).map((s, i) => renderMisoSection(s, i, tr, images, siteRoot, linkRoot, lang)).join("")}
   `;
