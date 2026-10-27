@@ -5387,23 +5387,15 @@ button {
 /* WHATIS-HOME:BEGIN */
 /* ========================================================
    トップページの「味噌とは」の欄(2026-10-27。ヘッダーの「Miso」と同じ入口)
-   - 題名は2行(「味噌とは」/「HAKKODOの味噌づくり」)。1行目を題名の大きさ、2行目を一回り小さくする。
+   - 題名は1行(日本語「味噌のこと」)。説明文は「味噌とは何か、HAKKODOの味噌づくりまで。」(ページの2つの内容をまとめる)。
    - 写真は右・文章は左(.home-feature--reverse)。このあとの商品(左)・レシピ(右)・ワークショップ(左)と、交互に並べる。
    - 写真(皿に盛った味噌の円錐)は、味噌の先端と皿が残るよう、切り出す位置を決める。
    戻すときは、「WHATIS-HOME:BEGIN」から「WHATIS-HOME:END」までを消す(HTMLの欄も消す)。 */
-.home .home-feature-title-line {
-  display: block;
-}
 
-.home .home-feature-title-line + .home-feature-title-line {
-  margin-top: 6px;
-  font-size: 0.8em;
-  letter-spacing: 0.12em;
-}
-
-/* 日本語の説明文は、言葉の途中(「調味/料」「米/麹」)で折り返さないよう、i18n.js の \n で区切った位置で改行する */
+/* 説明文: 日本語は、i18n.js の \n(「、」のあと)で2行にする。ca・es・en は、狭い幅で2行になるとき、行の長さをそろえ、1語だけが次の行に残らないようにする。 */
 .home .home-feature--whatis .home-feature-text {
   white-space: pre-line;
+  text-wrap: balance;
 }
 
 .home .home-feature--whatis .home-feature-media img {
