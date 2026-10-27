@@ -1,0 +1,455 @@
+/* ========================================================
+   「味噌とは(What is Miso?)」ページ専用の見た目。【準備中・未公開のページ】
+   style.css の後に読み込む、このページだけのスタイルです(他のページには、読み込まれないので、影響しません)。
+   新しい色・フォントは作らず、サイトの既存のもの(--color-*、明朝体の見出し、Aboutの本文、細い罫線、アウトラインのボタン)を使います。
+   ======================================================== */
+
+.misopage {
+  padding: 0 20px;
+}
+
+/* PC(幅1000px以上): 商品ページの写真と同じ、880pxの幅まで広げ、写真と文章を2列に並べる */
+@media (min-width: 1000px) {
+  .misopage {
+    margin-right: -120px;
+    margin-left: -120px;
+    padding: 0;
+  }
+}
+
+/* 写真(や、写真が入る枠)は、すべて、同じ形で、細い角丸だけ。後から写真を入れても、枠の大きさは変わらない */
+.mp-img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 2px;
+}
+
+/* 冒頭: 小さな見出し(Miso)・H1・リード。Workshopsページと同じ、中央そろえ */
+.mp-intro {
+  padding: 0 0 8px;
+  text-align: center;
+}
+
+.mp-label,
+.mp-intro h1 {
+  margin: 0;
+  font-family: "Shippori Mincho", serif;
+  font-size: 1.2rem;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  line-height: 1.5;
+  color: var(--color-heading);
+}
+
+.mp-label {
+  margin-bottom: 18px;
+  padding-left: 0.16em;
+}
+
+@media (min-width: 800px) {
+  .mp-label,
+  .mp-intro h1 {
+    font-size: 1.35rem;
+    letter-spacing: 0.18em;
+  }
+
+  .mp-label {
+    padding-left: 0.18em;
+  }
+}
+
+.mp-lead {
+  margin: 10px 0 0;
+  font-family: "Shippori Mincho", serif;
+  font-size: 0.98rem;
+  letter-spacing: 0.1em;
+  line-height: 1.9;
+  color: #555;
+  text-wrap: balance;
+  white-space: pre-line;
+}
+
+/* 日本語のリードは、読点(、)や句点(。)の位置で折り返す。本文は、Aboutと同じ、通常の折り返し(文節ごとの指定をすると、「ま／す。」のように途中で切れる行が出るため) */
+.mp-lead:lang(ja) {
+  word-break: keep-all;
+  overflow-wrap: break-word;
+}
+
+/* 日本語のリードは、「…作る、」と「日本の伝統的な…」の2行にしたい(データの \n で改行)。タブレットの幅(640px)でも1行目が収まるよう、字間を、少しだけ詰める */
+@media (min-width: 700px) {
+  .mp-lead:lang(ja) {
+    letter-spacing: 0.08em;
+  }
+}
+
+/* セクション: 上に細い罫線。スマホ・タブレットは、見出し → 写真 → 文章の順に、縦に並べる */
+.mp-section {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 22px;
+  margin-top: 56px;
+  padding-top: 56px;
+  border-top: 1px solid var(--color-border);
+}
+
+@media (min-width: 1000px) {
+  .mp-section {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    grid-template-areas:
+      "head head"
+      "body photo";
+    column-gap: 56px;
+    row-gap: 28px;
+    align-items: center;
+  }
+
+  .mp-section.is-rev {
+    grid-template-areas:
+      "head head"
+      "photo body";
+  }
+
+  .mp-head {
+    grid-area: head;
+  }
+
+  .mp-body {
+    grid-area: body;
+  }
+
+  .mp-photo {
+    grid-area: photo;
+    align-self: center;
+  }
+}
+
+/* 見出しは、ページの幅の、まん中に置く(字間の分だけ、右にずれて見えないよう、左にも同じ余白を足す) */
+.mp-head {
+  text-align: center;
+}
+
+.mp-section h2 {
+  margin: 0;
+  padding-left: 0.16em;
+  font-family: "Shippori Mincho", serif;
+  font-size: 1.2rem;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  line-height: 1.5;
+  text-wrap: balance;
+  color: var(--color-heading);
+}
+
+@media (min-width: 800px) {
+  .mp-section h2 {
+    padding-left: 0.18em;
+    font-size: 1.35rem;
+    letter-spacing: 0.18em;
+  }
+}
+
+/* 大きな写真の枠(ページ内の写真は、4:3。スマホ・タブレットは、ページが長くなりすぎないよう、横長の16:9) */
+.mp-photo {
+  aspect-ratio: 4 / 3;
+}
+
+@media (max-width: 999px) {
+  .mp-photo {
+    aspect-ratio: 16 / 9;
+  }
+}
+
+/* 見出しのない1つ目のセクション(リードのすぐ下から、写真・原料・説明): 上の罫線は引かず、リードとの間は、少しだけ空ける */
+.mp-section.no-head {
+  margin-top: 28px;
+  padding-top: 0;
+  border-top: none;
+}
+
+/* 写真のある、見出しなしのセクション(「味噌とは」): PCでは、文章を左、写真を右に並べる(「HAKKODOの味噌づくり」は、写真が左で、左右が入れ替わる) */
+@media (min-width: 1000px) {
+  .mp-section.no-head:not(.no-photo) {
+    grid-template-areas: "body photo";
+    align-items: center;
+  }
+}
+
+/* 写真の枠のないセクション(「味噌とは」): 1列。PCでは、文章の行が長くなりすぎないよう、幅640pxで、まん中に置く(スマホ・タブレットの幅と同じ) */
+.mp-section.no-photo .mp-body {
+  width: 100%;
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+@media (min-width: 1000px) {
+  .mp-section.no-photo {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas: "body";
+  }
+}
+
+/* 本文: Aboutの本文と同じ(0.98rem・太さ500・行間2.05・色)。左そろえ */
+.mp-body p {
+  margin: 0 0 1.2em;
+  font-size: 0.98rem;
+  font-weight: 500;
+  line-height: 2.05;
+  color: var(--color-text);
+}
+
+/* ---- アイコンと、強調する短い言葉(スマホで、見て、すぐわかるように) ---- */
+.mp-icon {
+  flex: none;
+  color: var(--color-accent);
+}
+
+/* 原料(大豆・米麹・塩): アイコン+名前の3つ。細い罫線で、上下と、間を区切る */
+.mp-materials {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin: 0 0 14px;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.mp-materials li {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 18px 6px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-align: center;
+  color: var(--color-heading);
+}
+
+.mp-materials li + li {
+  border-left: 1px solid var(--color-border);
+}
+
+/* 原料の下の、小さな一文(米麹の説明)。控えめな、小さな文字で、中央に */
+.mp-body p.mp-note {
+  margin: 0 0 24px;
+  font-size: 0.9rem;
+  font-weight: 400;
+  line-height: 1.8;
+  letter-spacing: 0.02em;
+  text-align: center;
+  text-wrap: balance;
+  color: var(--color-muted);
+}
+
+/* 工程: 左に、細い丸の中のアイコン。アイコンどうしを、細い縦線でつないで、「流れ」が見えるようにする。右に、見出し(+強調する短い言葉)と、短い説明(箱では囲まない) */
+.mp-list {
+  margin: 8px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.mp-list li {
+  position: relative;
+  display: flex;
+  gap: 18px;
+  align-items: flex-start;
+  padding: 0 0 22px;
+}
+
+.mp-list li:last-child {
+  padding-bottom: 0;
+}
+
+/* 先頭の見出しの行(「米麹から仕込みまで 4日」): 小さな文字と、強調するタグを、並べる */
+.mp-list li.mp-phase-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 10px;
+  padding: 0 0 16px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  line-height: 1.7;
+  color: var(--color-heading);
+}
+
+.mp-list li:not(:last-child):not(.mp-phase-head)::before {
+  content: "";
+  position: absolute;
+  top: 46px;
+  bottom: 2px;
+  left: 22px;
+  width: 1px;
+  background: var(--color-border);
+}
+
+.mp-list-icon {
+  display: flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--color-border);
+  border-radius: 50%;
+  background: var(--color-bg, #faf8f4);
+}
+
+/* ひとまとまりの工程(4日)は、線と丸を、うすいブラウンにして、続きの工程(発酵・熟成)と、見分けられるようにする */
+.mp-list li.in-phase:not(.phase-end)::before {
+  background: rgba(181, 101, 29, 0.4);
+}
+
+.mp-list li.in-phase .mp-list-icon {
+  border-color: rgba(181, 101, 29, 0.4);
+}
+
+.mp-list-body {
+  min-width: 0;
+  padding-top: 8px;
+}
+
+.mp-body p.mp-list-label {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 10px;
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 700;
+  line-height: 1.7;
+  letter-spacing: 0.08em;
+  color: var(--color-heading);
+}
+
+.mp-body p.mp-list-text {
+  margin: 0;
+  font-size: 0.9rem;
+  font-weight: 400;
+  line-height: 1.9;
+  text-wrap: balance;
+  color: var(--color-muted);
+}
+
+/* 日本語の工程の説明は、短いので、読点(、)や句点(。)の位置で折り返す(「浸／水」「発／酵」のように、言葉の途中で切れないようにする) */
+.mp-body p.mp-list-text:lang(ja) {
+  word-break: keep-all;
+  overflow-wrap: break-word;
+}
+
+/* 強調する短い言葉(1週間・24時間以上・1年以上): 細い枠の、小さなタグ。色は、アクセント色(ブラウン) */
+.mp-fact {
+  padding: 1px 12px;
+  border: 1px solid rgba(181, 101, 29, 0.4);
+  border-radius: 999px;
+  background: rgba(181, 101, 29, 0.05);
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  line-height: 1.7;
+  /* 文字の色だけ、アクセント色より少し濃くする(小さな文字でも読みやすい、コントラスト比4.5以上にするため) */
+  color: #96501a;
+}
+
+/* 工程の下の、まとめの文(ボタンの上)。作り手の思い(「生き物」「ありがとう」)を伝える、ページで一番伝えたい文なので、文字の大きさは、本文より少し小さくして(0.94rem)、明朝体・中央そろえ・濃い色・余白で、静かに目立たせる。データの改行(\n)で、文ごとに改行する */
+.mp-closing {
+  margin: 40px 0 0;
+  font-family: "Shippori Mincho", serif;
+  font-size: 0.94rem;
+  font-weight: 500;
+  line-height: 2;
+  letter-spacing: 0.06em;
+  text-align: center;
+  text-wrap: balance;
+  white-space: pre-line;
+  color: var(--color-heading);
+}
+
+/* 日本語は、言葉のまとまり(|)の間でだけ折り返し、スマホ(幅320px以上)でも、言葉の途中で切れないようにする */
+.mp-closing:lang(ja) {
+  word-break: keep-all;
+  overflow-wrap: break-word;
+}
+
+/* 「|」で区切った言葉のまとまり(.ph)は、途中で折り返さない。まとまりの間でだけ折り返す。データの改行(\n)は、文の間だけ(PCで2行になる) */
+.mp-closing .ph {
+  display: inline-block;
+}
+
+/* 幅430px以下のスマホ: 字間を少し詰めて、1行に入る文字を増やし、行の数を減らす(幅360pxの端末でも、4行に収める) */
+@media (max-width: 430px) {
+  .mp-closing {
+    letter-spacing: 0.02em;
+  }
+}
+
+/* 幅339px以下の、とても小さなスマホ: 「『ありがとう』につながりますように。」が、1行に収まるよう、文字を少し小さくする */
+@media (max-width: 339px) {
+  .mp-closing {
+    font-size: 0.88rem;
+  }
+}
+
+/* PC(幅1000px以上): 写真・工程の2列の下に、ページのまん中で、中央そろえにする */
+@media (min-width: 1000px) {
+  .mp-closing {
+    max-width: 640px;
+    margin: 48px auto 0;
+    text-align: center;
+    text-wrap: balance;
+  }
+
+  .mp-closing:lang(ja) {
+    word-break: keep-all;
+    overflow-wrap: break-word;
+  }
+}
+
+/* ボタン(既存のアウトラインのボタン .home-feature-link を、そのまま使う)。セクションの外に出して、ページの幅の、まん中に置く(PCの2列のときも、写真と文章の列には入らない) */
+.mp-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 40px;
+}
+
+/* ページ最後の「商品の特徴を見る」ボタン: 上のまとめの文と、下のフッターの文字の、ちょうど真ん中に置く。
+   フッターの上の余白(ページ下の余白48px+フッター上の余白48px。幅800px以上は96px)が、もともと大きいので、
+   ボタンの上の余白を広げた分だけ、下の余白を負の値で詰めて、ページ全体の長さは変えない */
+.mp-actions:last-child {
+  margin-top: 68px;
+  margin-bottom: -28px;
+}
+
+@media (min-width: 800px) {
+  .mp-actions:last-child {
+    margin-top: 92px;
+    margin-bottom: -52px;
+  }
+}
+
+.mp-actions .home-feature-link {
+  position: relative;
+  margin-top: 0;
+}
+
+/* 見た目は変えずに、指で押せる範囲だけを、上下に少し広げる(スマホで押しやすくする) */
+.mp-actions .home-feature-link::after {
+  content: "";
+  position: absolute;
+  inset: -6px -4px;
+}
+
+/* 幅340px以下のごく狭い画面は、見出しの字間を少し詰めて、「づく／り」のように、言葉の途中で折れないようにする */
+@media (max-width: 340px) {
+  .mp-section h2 {
+    padding-left: 0.08em;
+    letter-spacing: 0.08em;
+  }
+}
