@@ -5416,3 +5416,46 @@ button {
   }
 }
 /* WHATIS-HOME:END */
+
+/* RECIPE-TITLE:BEGIN */
+/* ========================================================
+   レシピ一覧の、各レシピの題名(味噌ドレッシング など)の大きさ(2026-10-27)
+   これまでの問題: 題名が、ページの見出し「Recipes」と同じか、より大きかった(スマホ 18.4px 対 19.2px、PC 約27px 対 約24px)。見出しの上下が逆に見え、茶色の題名が写真と同じくらい強く見えた。
+   直し方: 題名を、見出しより一段小さくする。色(アクセントの茶色)・フォント・太さ・字間は、変えない。
+   幅(rem): PC(800px以上)1.2rem(1000px以上は、main.page の 1.12倍のあと、約21.5px。見出しは約24px)/ 480〜799px 1.15rem(18.4px)/ 479px以下 1.06rem(約17px)。
+   対象は、レシピ一覧(#recipe-list-root)だけ。商品一覧など、ほかの .recipe-card は、変えない。
+   戻すときは、「RECIPE-TITLE:BEGIN」から「RECIPE-TITLE:END」までを消す。 */
+#recipe-list-root .recipe-card .card-body h2 {
+  font-size: 1.2rem;
+}
+
+@media (max-width: 799px) {
+  #recipe-list-root .recipe-card .card-body h2 {
+    font-size: 1.15rem;
+  }
+}
+
+@media (max-width: 479px) {
+  #recipe-list-root .recipe-card .card-body h2 {
+    font-size: 1.06rem;
+  }
+}
+/* RECIPE-TITLE:END */
+
+/* PRODUCT-TITLE:BEGIN */
+/* ========================================================
+   商品ページの題名(HAKKODO MISO｜熟成赤味噌)の大きさ(2026-10-27)
+   これまでの問題: 題名が、ほかのページの見出し(Recipes・Workshops・About)より大きかった(幅700〜999pxで24px、PC 約27px。ほかのページは、19.2px・約21.6px・約24px)。
+   直し方: ほかのページの見出しと同じ大きさにそろえる(幅799px以下 1.2rem / 幅800px以上 1.35rem。1000px以上は main.page の1.12倍で、約24px)。
+   以前の「写真を小さくしたので、題名を大きくする」指定(幅700px以上の1.5rem)は、このブロックで上書きする(消してはいない)。書体・太さ・字間・色・行間は、変えない。
+   戻すときは、「PRODUCT-TITLE:BEGIN」から「PRODUCT-TITLE:END」までを消す。 */
+#product-root .product-detail-head h1 {
+  font-size: 1.2rem;
+}
+
+@media (min-width: 800px) {
+  #product-root .product-detail-head h1 {
+    font-size: 1.35rem;
+  }
+}
+/* PRODUCT-TITLE:END */

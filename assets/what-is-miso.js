@@ -120,9 +120,9 @@ function renderMisoPage(data, siteRoot, lang) {
     ${(tr.sections || []).map((s, i) => renderMisoSection(s, i, tr, images, siteRoot, linkRoot, lang)).join("")}
   `;
 
-  // Aboutと同じ、ページを開いたときの、控えめなフェードイン(assets/reveal.js)。写真の枠には、動きを足さない。
+  // Aboutと同じ、ページを開いたときの、控えめなフェードイン(assets/reveal.js)。写真(.mp-photo)も、文章と一緒に動かす(Aboutのヒーロー写真と同じ)。
   if (typeof initReveal === "function") {
-    initReveal(".mp-intro, .mp-section .mp-head, .mp-section .mp-body, .mp-closing", { includeVisible: true, startDelay: 0.25, stagger: 0.15, visibleRatio: 1 });
+    initReveal(".mp-intro, .mp-section .mp-head, .mp-section .mp-photo, .mp-section .mp-body, .mp-closing", { includeVisible: true, startDelay: 0.25, stagger: 0.15, visibleRatio: 1 });
   }
 }
 
