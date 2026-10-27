@@ -3534,8 +3534,9 @@ a.global-footer-instagram:focus-visible {
   }
 
   /* 味噌の円錐: 先端の上の余白を、できるだけ広く取るため、一番上(0%)に寄せる。元の写真には、先端の上に、上から約7%の余白があり、これが最大。26%だと、先端の上が約2%(約6px)しか残らなかった。 */
+  /* (2026-10-27 に、写真を、森を背景にした味噌の瓶(home-feature-miso-v6.jpg)に替えた。瓶は、写真の上から約27〜77%の位置。2.2:1に切り出すと、30%で、瓶の上下に余白が残る) */
   .home .home-feature .home-feature-media img[src*="home-feature-miso"] {
-    object-position: center 0%;
+    object-position: center 30%;
   }
 
   .home .home-feature .home-feature-media img[src*="home-feature-recipe"] {
@@ -3896,8 +3897,9 @@ a.global-footer-instagram:focus-visible {
   }
 
   /* 味噌の円錐: 先端が写真の上から約7%の位置にある。2.4:1に切り出すと、32%では先端が上の端で切れるため、上寄り(15%)にする */
+  /* (2026-10-27: 写真を、味噌の瓶(上から約27〜77%)に替えたため、15% → 40%。2.4:1では、下端が溶けるぶん、瓶の下が少し薄くなる) */
   .home .home-feature .home-feature-media img[src*="home-feature-miso"] {
-    object-position: center 15%;
+    object-position: center 40%;
   }
 
   .home .home-feature .home-feature-media img[src*="home-feature-recipe"] {
@@ -5381,3 +5383,36 @@ button {
   }
 }
 /* PC-RULES:END */
+
+/* WHATIS-HOME:BEGIN */
+/* ========================================================
+   トップページの「味噌とは」の欄(2026-10-27。ヘッダーの「Miso」と同じ入口)
+   - 題名は2行(「味噌とは」/「HAKKODOの味噌づくり」)。1行目を題名の大きさ、2行目を一回り小さくする。
+   - 写真は右・文章は左(.home-feature--reverse)。このあとの商品(左)・レシピ(右)・ワークショップ(左)と、交互に並べる。
+   - 写真(皿に盛った味噌の円錐)は、味噌の先端と皿が残るよう、切り出す位置を決める。
+   戻すときは、「WHATIS-HOME:BEGIN」から「WHATIS-HOME:END」までを消す(HTMLの欄も消す)。 */
+.home .home-feature-title-line {
+  display: block;
+}
+
+.home .home-feature-title-line + .home-feature-title-line {
+  margin-top: 6px;
+  font-size: 0.8em;
+  letter-spacing: 0.12em;
+}
+
+/* 日本語の説明文は、言葉の途中(「調味/料」「米/麹」)で折り返さないよう、i18n.js の \n で区切った位置で改行する */
+.home .home-feature--whatis .home-feature-text {
+  white-space: pre-line;
+}
+
+.home .home-feature--whatis .home-feature-media img {
+  object-position: center 14%;
+}
+
+@media (max-width: 599px) {
+  .home .home-feature--whatis .home-feature-media img {
+    object-position: center 22%;
+  }
+}
+/* WHATIS-HOME:END */

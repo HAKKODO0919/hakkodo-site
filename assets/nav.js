@@ -11,6 +11,9 @@
    ======================================================== */
 
 const NAV_ITEMS = [
+  // 「味噌とは」ページ(what-is-miso/)。商品の前に置く(知る → 商品 → レシピ → ワークショップの順)。
+  // currentKey は、味噌とはページの "whatismiso" と同じ。
+  { key: "whatismiso", href: "what-is-miso/index.html", i18nKey: "navMiso", fallback: "Miso" },
   // 現在は商品が1点(熟成生味噌)だけのため、「商品」の入口は
   // 一覧ページを経由せず商品詳細ページへ直接つなげている。
   // 商品一覧ページ(products/index.html)自体や商品データ・

@@ -16,7 +16,7 @@ window.PRODUCT_DATA = {
     ja: {
       name: "HAKKODO MISO｜熟成赤味噌",
       descriptionLine1: "いつもの一皿に、味噌の奥深い味わいを。",
-      tagline: "米麹から丁寧に育てる、HAKKODOの味噌。",
+      tagline: "米麹から丁寧に育てたお味噌です。",
       price: "12.50€",
       netWeight: "300g",
       heroAlt: "熟成味噌(赤味噌)のメイン写真",
@@ -99,7 +99,7 @@ window.PRODUCT_DATA = {
     ca: {
       name: "HAKKODO MISO｜Miso vermell madurat",
       descriptionLine1: "Un toc de sabor profund de miso per al plat de cada dia.",
-      tagline: "El miso de HAKKODO, elaborat amb cura a partir del koji d'arròs.",
+      tagline: "Miso elaborat amb cura a partir del koji d'arròs.",
       price: "12,50 €",
       netWeight: "300g",
       heroAlt: "Foto principal del miso vermell madurat",
@@ -173,7 +173,7 @@ window.PRODUCT_DATA = {
     es: {
       name: "HAKKODO MISO｜Miso rojo madurado",
       descriptionLine1: "Un toque de sabor profundo de miso para el plato de cada día.",
-      tagline: "El miso de HAKKODO, elaborado con esmero a partir del koji de arroz.",
+      tagline: "Miso elaborado con esmero a partir del koji de arroz.",
       price: "12,50 €",
       netWeight: "300g",
       heroAlt: "Foto principal del miso rojo madurado",
@@ -247,7 +247,7 @@ window.PRODUCT_DATA = {
     en: {
       name: "HAKKODO MISO｜Aged Red Miso",
       descriptionLine1: "A deep miso flavor for your everyday dish.",
-      tagline: "HAKKODO's miso, carefully crafted from rice koji.",
+      tagline: "Miso carefully crafted from rice koji.",
       price: "12.50€",
       netWeight: "300g",
       heroAlt: "Main photo of the aged red miso",
