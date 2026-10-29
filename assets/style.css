@@ -5459,3 +5459,58 @@ button {
   }
 }
 /* PRODUCT-TITLE:END */
+
+/* HOME-PHOTO-INSET:BEGIN */
+/* ========================================================
+   トップページ(スマホ・幅599px以下だけ): 下の4枚の写真を、画面いっぱいの写真から、左右に余白のある写真に変える(2026-10-29)
+   これまでの問題: ヒーロー(3つの瓶)も、下の4枚も、画面いっぱいの幅で、下がとけていたため、5枚とも同じ「大きな写真」に見えた。
+   直し方: 4枚を、文章と同じ幅(左右24pxの余白)・角2px・下のとけなし・縦横比1.5:1 にする。ヒーローは、画面いっぱいのまま。
+   写真と題名の間は30px。幅800px以上(iPad縦・横、PC)は、変えない。
+   (2026-10-29 追記: 適用を、幅799px以下(iPad miniの縦 744px を含む)まで広げた。幅600〜799pxは、写真が大きくなりすぎないよう、縦横比を2:1にする。)
+   戻すときは、「HOME-PHOTO-INSET:BEGIN」から「HOME-PHOTO-INSET:END」までを消す。 */
+@media (max-width: 799px) {
+  .home .home-feature-media {
+    width: calc(100% - 48px);
+    margin: 0 auto;
+    aspect-ratio: 1.5 / 1;
+    border-radius: 2px;
+    overflow: hidden;
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
+
+  .home .home-feature-body {
+    margin-top: 0;
+    padding-top: 30px;
+  }
+}
+
+@media (min-width: 600px) and (max-width: 799px) {
+  .home .home-feature-media {
+    aspect-ratio: 2 / 1;
+  }
+}
+/* HOME-PHOTO-INSET:END */
+
+/* HOME-TEXT-TIGHT:BEGIN */
+/* トップページ(スマホ・iPad miniの縦。幅799px以下だけ): 下の4つの欄の、説明文の行間を 2.1倍 → 1.9倍、説明文とボタンの間を 26px → 22px に詰める(2026-10-29)。字の大きさは変えない。戻すときは、「HOME-TEXT-TIGHT:BEGIN」から「HOME-TEXT-TIGHT:END」までを消す。 */
+@media (max-width: 799px) {
+  .home .home-feature-text {
+    line-height: 1.9;
+  }
+
+  .home .home-feature-link {
+    margin-top: 22px;
+  }
+}
+/* HOME-TEXT-TIGHT:END */
+
+/* HAKKODO-MISO-TITLE:BEGIN */
+/* トップページの商品の欄の題名「HAKKODO MISO」が、「HAKKODO」と「MISO」の2行に折り返さないようにする(2026-10-29)。
+   ブランド名が途中で切れないよう、1行に固定する(white-space: nowrap)。実際のiPadの幅(縦 810〜1032px・横 1024〜1180px)では、もともと1行に収まっている。
+   折り返しが起きたのは、横幅1133pxで縦が長い(縦向き扱いになる)確認用の画面だけで、その向きと幅の組み合わせは、実際の端末にはない。念のための指定。
+   戻すときは、「HAKKODO-MISO-TITLE:BEGIN」から「HAKKODO-MISO-TITLE:END」までを消す。 */
+.home .home-feature-title[data-i18n="homeMisoTitle"] {
+  white-space: nowrap;
+}
+/* HAKKODO-MISO-TITLE:END */
