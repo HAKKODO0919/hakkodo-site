@@ -5514,3 +5514,117 @@ button {
   white-space: nowrap;
 }
 /* HAKKODO-MISO-TITLE:END */
+
+/* PRODUCT-JUMP:BEGIN */
+/* ========================================================
+   商品ページの上の、ページ内リンク(こだわり / 保存方法 / 賞味期限)(2026-10-30)
+   押すと、下の項目へ移る。買った人が、保存方法・賞味期限へ、すぐ行けるようにする。項目は assets/product.js の PRODUCT_JUMP_ITEMS で決める。
+   見た目は、静かな文字のリンク(ボタンの「レシピを見る」と競わない)。押す場所は、高さ44px。
+   戻すときは、「PRODUCT-JUMP:BEGIN」から「PRODUCT-JUMP:END」までを消す(product.js の PRODUCT_JUMP_ITEMS も空にする)。 */
+#product-root .product-jump {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 14px auto 0;
+  padding: 0;
+}
+
+#product-root .product-jump a {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 14px;
+  font-size: 0.82rem;
+  letter-spacing: 0.06em;
+  color: var(--color-muted);
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+#product-root .product-jump a + a::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  height: 12px;
+  margin-top: -6px;
+  border-left: 1px solid #cdc7ba;
+}
+
+#product-root .product-jump a:hover,
+#product-root .product-jump a:focus-visible {
+  color: var(--color-heading);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+/* 幅479px以下(スマホ): 3つのリンクが、できるだけ1行に収まるよう、左右の余白と字間を詰める(ca・es の長い項目名のため)。収まらないときは、2行に折り返す */
+@media (max-width: 479px) {
+  #product-root .product-jump a {
+    padding: 0 11px;
+    font-size: 0.8rem;
+    letter-spacing: 0.03em;
+  }
+
+  /* 2行に折り返したとき、行の先頭に区切りの縦線が残らないよう、スマホでは縦線をなくす(余白だけで区切る) */
+  #product-root .product-jump a + a::before {
+    display: none;
+  }
+}
+/* PRODUCT-JUMP:END */
+
+/* PRODUCT-FIRSTVIEW:BEGIN */
+/* ========================================================
+   商品ページ: 最初の画面で、写真から始まる内容が、できるだけ多く見えるようにする(2026-10-30)
+   これまでの問題: ヘッダーと写真の間に、56px(PCは拡大後 約63px)の空きがあり、最初の画面に入る内容が少なかった。
+   直し方: スマホ(幅599px以下)は、ヘッダーのすぐ下から写真を始める(トップページのヒーローと同じ)。幅600px以上は、写真が画面いっぱいの幅ではない(PCは約87%)ので、ヘッダーの線に写真が接しないよう、20pxだけ空ける。
+   商品ページだけ(product.js が <main> に product-page-main を付ける)。戻すときは、「PRODUCT-FIRSTVIEW:BEGIN」から「PRODUCT-FIRSTVIEW:END」までを消す。 */
+main.product-page-main {
+  padding-top: 20px;
+}
+
+@media (max-width: 599px) {
+  main.product-page-main {
+    padding-top: 0;
+  }
+}
+/* PRODUCT-FIRSTVIEW:END */
+
+/* PRODUCT-RECIPE-BTN:BEGIN */
+/* ========================================================
+   商品ページの「レシピを見る」ボタンを、見た目だけ小さくする(2026-10-30)
+   これまでの問題: 高さ44px・幅約165pxの枠付きボタンが、すぐ下のページ内リンク(小さな文字)に比べて大きく、バランスが悪かった。
+   直し方: 見た目の高さ 44px → 38px、文字 0.85rem → 0.8rem、左右の余白 28px → 24px。押せる範囲は、目に見えない余白(::after)で、44pxのまま保つ。
+   将来、通販で、いちばん目立つボタン(「買う」)を置くときは、これは二番手のボタンになる。戻すときは、「PRODUCT-RECIPE-BTN:BEGIN」から「PRODUCT-RECIPE-BTN:END」までを消す。 */
+#product-root .product-detail-head .recipe-link .home-feature-link {
+  position: relative;
+  min-height: 38px;
+  padding: 0 24px;
+  font-size: 0.8rem;
+}
+
+#product-root .product-detail-head .recipe-link .home-feature-link::after {
+  content: "";
+  position: absolute;
+  top: -3px;
+  right: 0;
+  bottom: -3px;
+  left: 0;
+}
+/* PRODUCT-RECIPE-BTN:END */
+
+/* PRODUCT-ALLERGEN:BEGIN */
+/* ========================================================
+   商品ページ: 値段の行の下に、アレルギー表示を出す(2026-10-30)
+   アレルギーは安全に関わる情報なので、ページの下の「原材料」まで探しに行かなくても、最初の画面で見えるようにする(ページ内リンクの代わり)。
+   見た目は、内容量(.net-weight)と同じ、静かな小さな文字。文言は、原材料の欄と同じ(i18n.js の allergensLabel + data の allergens)。
+   戻すときは、「PRODUCT-ALLERGEN:BEGIN」から「PRODUCT-ALLERGEN:END」までを消す(product.js の allergenLineHtml も消す)。 */
+#product-root .allergen-line {
+  margin: 10px 0 0;
+  text-align: center;
+  font-size: 0.85rem;
+  letter-spacing: 0.04em;
+  color: var(--color-muted);
+}
+/* PRODUCT-ALLERGEN:END */

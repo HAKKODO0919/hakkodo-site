@@ -176,6 +176,34 @@ function storyHeadingHtml(block) {
   return `<svg ${STORY_ICON_ATTRS}>${icon}</svg><h3>${text}</h3>`;
 }
 
+// 商品ページの上にある、ページ内リンク(押すと、下の項目へ移る)。
+// 項目を足す・並べ替える・消すときは、この一覧だけを変える(将来、通販のページ(LP)にするときも同じ)。
+//   id: 飛び先の項目に付ける id / labelKey: assets/i18n.js の文言 / has: その項目がデータにあるときだけ、リンクを出す
+// いまは「用事のための近道」だけ(原材料=アレルギーの確認、保存方法=その下に賞味期限も続く)。
+// 物語(こだわり・作り手)は、上から順に読んでもらうので、リンクにしない。飛び先の id は、各項目に付けてある
+// (product-story・product-creator・product-best-before なども、必要になったら、ここに足せる)。
+// 2026-10-30: いまは、リンクを出さない(空)。アレルギー表示を、値段の行の下に出す(allergenLineHtml)ことで、最初の画面で見えるようにした。
+// 長いページ(将来のLPなど)で、また必要になったら、次の2行の先頭の「//」を外すだけで、リンクが出る。
+const PRODUCT_JUMP_ITEMS = [
+  // { id: "product-ingredients", labelKey: "jumpIngredients", has: (tr) => !!(tr.ingredients && tr.ingredients.length) },
+  // { id: "product-storage", labelKey: "jumpStorage", has: (tr) => !!tr.storage }
+];
+
+// ページ内リンクの押したときの動き。ゆっくり移る(「動きを減らす」設定のときは、すぐ移る)。移ったあと、読み上げのために、飛び先へフォーカスを移す。
+function initProductJump(root) {
+  const reduce = !!(window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches);
+  root.querySelectorAll(".product-jump a").forEach((link) => {
+    link.addEventListener("click", (e) => {
+      const target = root.querySelector(link.getAttribute("href"));
+      if (!target) return;
+      e.preventDefault();
+      target.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" });
+      target.setAttribute("tabindex", "-1");
+      target.focus({ preventScroll: true });
+    });
+  });
+}
+
 // siteRoot: サイトの一番上の階層への相対パス、lang: 表示する言語コード
 function renderProductContent(data, siteRoot, lang) {
   const root = document.getElementById("product-root");
@@ -191,7 +219,7 @@ function renderProductContent(data, siteRoot, lang) {
   document.title = `${tr.docName || tr.name} | ${t("titleSuffix", lang)}`;
 
   const storyHtml = (tr.story && tr.story.blocks && tr.story.blocks.length)
-    ? `<div class="section story-section">
+    ? `<div class="section story-section" id="product-story">
         <h2>${t("sectionStory", lang)}</h2>
         <div class="story-grid">
         ${tr.story.blocks
@@ -224,7 +252,7 @@ function renderProductContent(data, siteRoot, lang) {
 
   const creatorHtml = (tr.creator && tr.creator.body && tr.creator.body.length)
     ? `<div class="section creator-outer">
-        <div class="creator-card">
+        <div class="creator-card" id="product-creator">
           <h2>${t("sectionCreator", lang)}</h2>
           ${renderCreatorProfile(tr.creator, siteRoot, lang)}
         </div>
@@ -248,7 +276,7 @@ function renderProductContent(data, siteRoot, lang) {
     : "";
 
   const ingredientsHtml = (tr.ingredients && tr.ingredients.length)
-    ? `<div class="section ingredients-section">
+    ? `<div class="section ingredients-section" id="product-ingredients">
         <h2>${t("sectionIngredients", lang)}</h2>
         ${renderTagList(tr.ingredients)}
         ${tr.ingredientsNote ? `<p class="notes">${escapeText(tr.ingredientsNote)}</p>` : ""}
@@ -258,7 +286,7 @@ function renderProductContent(data, siteRoot, lang) {
 
   // 保存方法: 導入文 + アイコン付きの3項目(アイコンは飾り。見出しと説明は、普通のHTMLの文字)
   const storageHtml = tr.storage
-    ? `<div class="section storage-info">
+    ? `<div class="section storage-info" id="product-storage">
         <h2>${t("sectionStorage", lang)}</h2>
         ${tr.storage.intro ? `<p class="storage-intro">${phrasesHtml(tr.storage.intro)}</p>` : ""}
         <ul class="storage-list">
@@ -280,7 +308,7 @@ function renderProductContent(data, siteRoot, lang) {
 
   // 賞味期限: 期間を大きく見せ、その下に補足
   const bestBeforeHtml = tr.bestBeforeInfo
-    ? `<div class="section best-before">
+    ? `<div class="section best-before" id="product-best-before">
         <h2>${t("sectionBestBefore", lang)}</h2>
         <div class="best-before-main">
           ${infoIconHtml("calendar", 26)}
@@ -292,9 +320,11 @@ function renderProductContent(data, siteRoot, lang) {
       </div>`
     : "";
 
-  // ページの終わりの「次の行き先」。読み終えた人が、作り手の話(About)へ進めるようにする。
+  // ページの終わりの「次の行き先」。読み終えた人が、次の行動(体験=ワークショップ)へ進めるようにする(2026-10-30。これまでは、作り手の話 About へ)。
+  // 将来、通販を始めたら、ここを「買う」ボタンに替える(href と labelKey を変えるだけ)。About へは、メニューから行ける。
+  const PRODUCT_END_LINK = { href: "workshops/index.html", labelKey: "homeWorkshopLink" };
   const aboutHtml = `<div class="section product-about">
-        <p class="recipe-link"><a href="${escapeHtml(pageLinkRoot(siteRoot))}story/index.html" class="home-feature-link">${escapeText(t("viewAboutLink", lang))}</a></p>
+        <p class="recipe-link"><a href="${escapeHtml(pageLinkRoot(siteRoot) + PRODUCT_END_LINK.href)}" class="home-feature-link">${escapeText(t(PRODUCT_END_LINK.labelKey, lang))}</a></p>
       </div>`;
 
   const notesHtml = tr.notes
@@ -308,9 +338,21 @@ function renderProductContent(data, siteRoot, lang) {
     ? `<span class="price">${escapeText(tr.price)}</span>`
     : "";
 
+  // アレルギー表示(値段の行の下)。安全に関わる情報なので、ページの下の「原材料」まで探しに行かなくても、最初の画面で見えるようにする。
+  // 文言は、原材料の欄と同じ(allergensLabel + データの allergens)。データに無いときは、何も出さない。
+  const allergenLineHtml = (tr.allergens && tr.allergens.length)
+    ? `<p class="allergen-line">${escapeText(t("allergensLabel", lang))}${escapeText(tr.allergens.join(t("listSeparator", lang)))}</p>`
+    : "";
+
   const netWeightHtml = tr.netWeight
     ? `<span class="net-weight">${escapeText(t("netWeightLabel", lang))}${escapeText(tr.netWeight)}</span>`
     : "";
+
+  // ページ内リンク(PRODUCT_JUMP_ITEMS のうち、データにある項目だけ)。1つも無いときは、何も出さない。
+  const jumpLinks = PRODUCT_JUMP_ITEMS.filter((item) => item.has(tr))
+    .map((item) => `<a href="#${item.id}">${escapeText(t(item.labelKey, lang))}</a>`)
+    .join("");
+  const jumpHtml = jumpLinks ? `<nav class="product-jump" aria-label="${escapeHtml(t("jumpLabel", lang))}">${jumpLinks}</nav>` : "";
 
   root.innerHTML = `
     <div class="product-hero-frame">
@@ -322,7 +364,9 @@ function renderProductContent(data, siteRoot, lang) {
         ? `${tr.descriptionLine1 ? `<p class="product-catchphrase" lang="${lang}">${escapeText(tr.descriptionLine1)}</p>` : ""}${tr.descriptionLine2 ? `<p class="tagline" lang="${lang}">${escapeText(tr.descriptionLine2)}</p>` : ""}`
         : tr.tagline ? `<p class="tagline">${escapeText(tr.tagline)}</p>` : ""}
       ${(priceHtml || netWeightHtml) ? `<div class="price-row">${priceHtml}${netWeightHtml}</div>` : ""}
+      ${allergenLineHtml}
       <p class="recipe-link"><a href="${escapeHtml(pageLinkRoot(siteRoot))}recipes/index.html" class="home-feature-link">${escapeHtml(t("viewRecipesLink", lang))}</a></p>
+      ${jumpHtml}
     </div>
     ${tr.description ? `<div class="section description"><h2>${t("sectionDescription", lang)}</h2><p>${escapeText(tr.description)}</p></div>` : ""}
     ${storyHtml}
@@ -334,6 +378,10 @@ function renderProductContent(data, siteRoot, lang) {
     ${notesHtml}
     ${aboutHtml}
   `;
+  // 商品ページの <main> に印を付ける(最初の画面で、ヘッダーのすぐ下から写真を始めるための指定に使う。assets/style.css の PRODUCT-FIRSTVIEW)
+  const productMain = root.closest("main");
+  if (productMain) productMain.classList.add("product-page-main");
+  initProductJump(root);
   // トップページと同じ、スクロールに合わせた控えめなフェードイン(assets/reveal.js)。
   // 最初から画面に見えている部分(写真・商品名)は動かさず、下の欄だけが、画面に入るときに現れる。
   // reveal.js を読み込んでいないページでは何もしない(言語を切り替えて描き直したときも、ここで仕掛け直す)。
